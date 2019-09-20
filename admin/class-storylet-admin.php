@@ -52,7 +52,26 @@ class Storylet_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		add_action('admin_menu', array($this, 'add_plugin_page'));
 	}
+
+	public function add_plugin_page()
+	{
+		// This page will be under "Settings"
+		add_options_page(
+			'Storylet',
+			'Storylet',
+			'manage_options',
+			'storylet-admin',
+			array( $this, 'create_admin_page' )
+		);
+	}
+
+	public function create_admin_page()
+	{
+		?> <h1>HELLO WORLD!</h1> <?php
+	}
+
 
 	/**
 	 * Register the stylesheets for the admin area.
