@@ -23,14 +23,45 @@
 class Storylet_Deactivator {
 
 	/**
-	 * Short Description. (use period)
+	 * Drop all the plugin related db tables.
 	 *
-	 * Long Description.
 	 *
 	 * @since    1.0.0
 	 */
-	public static function deactivate() {
-
+	public static function deactivate()
+	{
+		self::removeDB();
+		self::removeVirtualPages();
 	}
 
+	private static function removeVirtualPages()
+	{
+		flush_rewrite_rules();
+	}
+
+	private static function removeDB()
+	{
+		global $wpdb;
+
+		$table = $wpdb->prefix . "story_storylet";
+		$wpdb->query("DROP TABLE IF EXISTS $table");
+
+		$table = $wpdb->prefix . "story_storylet_template";
+		$wpdb->query("DROP TABLE IF EXISTS $table");
+
+		$table = $wpdb->prefix . "story_slide";
+		$wpdb->query("DROP TABLE IF EXISTS $table");
+
+		$table = $wpdb->prefix . "story_slide_template";
+		$wpdb->query("DROP TABLE IF EXISTS $table");
+
+		$table = $wpdb->prefix . "story_component";
+		$wpdb->query("DROP TABLE IF EXISTS $table");
+
+		$table = $wpdb->prefix . "story_component_template";
+		$wpdb->query("DROP TABLE IF EXISTS $table");
+
+		$table = $wpdb->prefix . "story_theme";
+		$wpdb->query("DROP TABLE IF EXISTS $table");
+	}
 }

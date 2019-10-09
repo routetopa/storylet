@@ -30,6 +30,8 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
+require_once plugin_dir_path( __FILE__ ) . 'vendor/autoload.php';
+
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
@@ -73,10 +75,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-storylet.php';
  *
  * @since    1.0.0
  */
-function run_storylet() {
-
+function run_storylet()
+{
 	$plugin = new Storylet();
 	$plugin->run();
-
 }
+
 run_storylet();

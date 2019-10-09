@@ -122,6 +122,11 @@ class Storylet {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-storylet-public.php';
 
+		/**
+		 * STORYLET API
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'API/class-storylet-api.php';
+
 		$this->loader = new Storylet_Loader();
 
 	}
@@ -173,6 +178,13 @@ class Storylet {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		// API HOOK
+		$storylet_api = new Storylet_API();
+		$this->loader->add_action('rest_api_init', $storylet_api, 'run');
+
+
+		// VIRTUAL PAGE
+		$this->loader->add_route('storylet', 'custom');
 	}
 
 	/**

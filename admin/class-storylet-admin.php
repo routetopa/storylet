@@ -20,6 +20,9 @@
  * @subpackage Storylet/admin
  * @author     ISISLab <isislab.unisa@gmail.com>
  */
+
+require_once (plugin_dir_path( __FILE__ ) . '../model/StoryletModel.php');
+
 class Storylet_Admin {
 
 	/**
@@ -69,6 +72,8 @@ class Storylet_Admin {
 
 	public function create_admin_page()
 	{
+        var_dump(StoryletModel::all()->toArray());
+
 		?> <h1>HELLO WORLD!</h1>
            <div id="root"></div>
         <?php

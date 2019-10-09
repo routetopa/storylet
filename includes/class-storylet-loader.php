@@ -41,6 +41,8 @@ class Storylet_Loader {
 	 */
 	protected $filters;
 
+
+	protected $routes;
 	/**
 	 * Initialize the collections used to maintain the actions and filters.
 	 *
@@ -50,6 +52,7 @@ class Storylet_Loader {
 
 		$this->actions = array();
 		$this->filters = array();
+		$this->routes  = array();
 
 	}
 
@@ -81,6 +84,14 @@ class Storylet_Loader {
 		$this->filters = $this->add( $this->filters, $hook, $component, $callback, $priority, $accepted_args );
 	}
 
+	public function add_route($path, $template)
+	{
+		$this->routes[] = array(
+			'path' => $path,
+			'template' => $template
+		);
+	}
+
 	/**
 	 * A utility function that is used to register the actions and hooks into a single
 	 * collection.
@@ -95,8 +106,8 @@ class Storylet_Loader {
 	 * @param    int                  $accepted_args    The number of arguments that should be passed to the $callback.
 	 * @return   array                                  The collection of actions and filters registered with WordPress.
 	 */
-	private function add( $hooks, $hook, $component, $callback, $priority, $accepted_args ) {
-
+	private function add( $hooks, $hook, $component, $callback, $priority, $accepted_args )
+	{
 		$hooks[] = array(
 			'hook'          => $hook,
 			'component'     => $component,
@@ -106,7 +117,6 @@ class Storylet_Loader {
 		);
 
 		return $hooks;
-
 	}
 
 	/**
@@ -122,6 +132,22 @@ class Storylet_Loader {
 
 		foreach ( $this->actions as $hook ) {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
+		}
+
+		foreach ( $this->routes as $route ) {
+			add_filter( 'query_vars', function( $query_vars ) use ($route) {
+				$query_vars[] = $route['path'];
+				return $query_vars;
+			});
+
+			//$this->loader->add_action( 'template_redirect', $this, function(){
+			add_action( 'template_redirect', function() use ($route) {
+				$custom = intval(get_query_var($route['path']));
+				if ($custom) {
+					include plugin_dir_path(dirname( __FILE__ )) . "templates/".$route['template'].".php";
+					die;
+				}
+			});
 		}
 
 	}
