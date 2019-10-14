@@ -1,10 +1,10 @@
 import React from 'react'
 import StoryletStyle from '../style/layout-storylet-style'
 
-export default function LayoutStorylet({name, description, layoutClickHandler})
+export default function LayoutStorylet({name, description, layoutClickHandler, width})
 {
     return (
-        <StoryletStyle onClick={layoutClickHandler}>
+        <StoryletStyle width={width} onClick={layoutClickHandler}>
         <h3>{name} - {description}</h3>
         </StoryletStyle>
     )

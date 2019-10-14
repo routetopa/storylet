@@ -50,7 +50,7 @@ class Storylet_API extends WP_REST_Controller
 
 	public function get_storylet( $request )
 	{
-		return rest_ensure_response(['text' => 'hello', 'data' => StoryletModel::all()->toArray()]);
+		return rest_ensure_response(['status' => 'OK', 'data' => StoryletModel::all()->toArray()]);
 	}
 
 	/*function prefix_get_comment_schema() {
