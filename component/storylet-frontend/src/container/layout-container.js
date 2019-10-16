@@ -41,21 +41,18 @@ export default function LayoutContainer({layouts, searchHandler, layoutClickHand
 
     useEffect(() =>
     {
-        let layout_per_page = Math.floor(winSize.width * 0.8 / mainContext.layoutWidth);
+        let layout_per_page = Math.floor(winSize.width * mainContext.layoutContainerSpace / mainContext.layoutWidth);
         let start = ((pagination - 1) * layout_per_page);
         let end   =  Math.min(start + layout_per_page, layouts.length);
         let page_number = Math.ceil(layouts.length / layout_per_page);
         let components = [];
 
         for(let i=start; i<end; i++)
-            components.push(<LayoutStorylet key={i}
-                             name={layouts[i].name}
-                             description={layouts[i].description}
-                             layoutClickHandler={(evt) => layoutClickHandler(evt, i)}
-                             width={mainContext.layoutWidth}
-                             s_width={layouts[i].width}
-                             s_height={layouts[i].height}
-                             src={layouts[i].src}
+            components.push(<LayoutStorylet
+                key={i}
+                layoutClickHandler={(evt) => layoutClickHandler(evt, i)}
+                l_width={mainContext.layoutWidth}
+                layout={layouts[i]}
             />);
 
         setComponents(components);
@@ -63,7 +60,7 @@ export default function LayoutContainer({layouts, searchHandler, layoutClickHand
     }, [layouts, winSize, pagination]);
 
     return (
-        <LayoutContainerStyle>
+        <LayoutContainerStyle layoutContainerSpace={mainContext.layoutContainerSpace}>
             <LayoutSearch searchHandler={searchHandler}/>
             {components}
             <LayoutPagination currentPage={pagination} pageNumber={pageNumber}/>

@@ -13,7 +13,7 @@ function App()
 {
     const [layout, setLayout] = useState({ filtered : [], all : [] });
     const [selectedLayout, setSelectedLayout] = useState({});
-    const [globalInfo, /*setGlobalInfo*/] = useState({layoutWidth : 300});
+    const [globalInfo, /*setGlobalInfo*/] = useState({layoutWidth : 300, layoutContainerSpace: 0.8});
 
     const get_layouts = async () =>
     {
@@ -39,7 +39,7 @@ function App()
     const search_handler = (evt) =>
     {
         let filtered = layout.all.filter( (l) => {
-            if(l.description.toLowerCase().includes(evt.target.value.toLowerCase()))
+            if(l.name.toLowerCase().includes(evt.target.value.toLowerCase()))
                 return l;
             return null
         });
