@@ -41,7 +41,7 @@ export default function LayoutContainer({layouts, searchHandler, layoutClickHand
 
     useEffect(() =>
     {
-        let layout_per_page = Math.floor(winSize.width / mainContext.layoutWidth);
+        let layout_per_page = Math.floor(winSize.width * 0.8 / mainContext.layoutWidth);
         let start = ((pagination - 1) * layout_per_page);
         let end   =  Math.min(start + layout_per_page, layouts.length);
         let page_number = Math.ceil(layouts.length / layout_per_page);
@@ -53,6 +53,9 @@ export default function LayoutContainer({layouts, searchHandler, layoutClickHand
                              description={layouts[i].description}
                              layoutClickHandler={(evt) => layoutClickHandler(evt, i)}
                              width={mainContext.layoutWidth}
+                             s_width={layouts[i].width}
+                             s_height={layouts[i].height}
+                             src={layouts[i].src}
             />);
 
         setComponents(components);
