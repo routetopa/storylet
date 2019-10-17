@@ -8,6 +8,8 @@ const LayoutContainerStyle = styled.div`
     overflow: hidden;
     display: flex;
     flex-direction: row;
+    
+    //background-color: ${props => props.theme.main};
 `;
 
 export default LayoutContainerStyle

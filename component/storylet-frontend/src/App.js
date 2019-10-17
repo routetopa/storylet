@@ -4,16 +4,21 @@ import './App.css';
 
 import GlobalStyle from './style/global-style';
 import {MainContext} from './context/main-context'
+import {ThemeProvider} from "styled-components";
 
+import LayoutHeaderContainer from "./container/layout-header";
 import LayoutContainer from './container/layout-container';
 import LayoutDescriptionContainer from './container/layout-description-container';
-
 
 function App()
 {
     const [layout, setLayout] = useState({ filtered : [], all : [] });
     const [selectedLayout, setSelectedLayout] = useState({});
-    const [globalInfo, /*setGlobalInfo*/] = useState({layoutWidth : 300, layoutContainerSpace: 0.8});
+    const [globalInfo, /*setGlobalInfo*/] = useState({
+        layoutWidth : 300,
+        layoutContainerSpace: 0.8,
+        main: "mediumseagreen"
+    });
 
     const get_layouts = async () =>
     {
@@ -60,15 +65,18 @@ function App()
     }, []);
 
     return (
-       <>
-         <GlobalStyle/>
-         <MainContext.Provider value={globalInfo}>
-             <LayoutContainer layouts={layout.filtered}
-                              searchHandler={search_handler}
-                              layoutClickHandler={layout_click_handler} />
-             <LayoutDescriptionContainer selectedLayout={selectedLayout} />
-          </MainContext.Provider>
-       </>
+    <>
+        <ThemeProvider theme={globalInfo}>
+            <GlobalStyle/>
+            <MainContext.Provider value={globalInfo}>
+                <LayoutHeaderContainer/>
+                <LayoutContainer layouts={layout.filtered}
+                                 searchHandler={search_handler}
+                                 layoutClickHandler={layout_click_handler} />
+                <LayoutDescriptionContainer selectedLayout={selectedLayout} />
+            </MainContext.Provider>
+        </ThemeProvider>
+    </>
     );
 }
 
