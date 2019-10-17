@@ -24,3 +24,5 @@ yarn-error.log*
 
 composer.lock
 /vendor
+
+.idea/
