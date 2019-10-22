@@ -1,0 +1,24 @@
+.search {
+    display: flex;
+    flex-direction: row;
+
+    height: 32px;
+    overflow: hidden;
+}
+
+.search-icon {
+    width: 32px !important;
+    height: 32px;
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: var(--storylet-grey-200);
+    color: var(--storylet-grey-900);
+}
+
+.search-input {
+    margin: 0;
+    width: 144px !important;
+    height: 28px;
+    border: solid 1px var(--storylet-grey-200);
+    padding: 1px 8px;
+}

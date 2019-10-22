@@ -1,0 +1,13 @@
+.pagination {
+    width: 64px;
+    height: 16px;
+    padding: 8px;
+
+    text-align: center;
+
+    background-color: var(--storylet-grey-200);
+    font-weight: 700;
+    font-size: 16px;
+
+    /*color: var(--storylet-grey-400);*/
+}

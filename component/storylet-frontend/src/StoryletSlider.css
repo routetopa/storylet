@@ -1,0 +1,47 @@
+:root {
+    --storylet-primary: #2196F3;
+    --storylet-driver: #00BCD4;
+    --storylet-success: #4caf50;
+    --storylet-error: #f44336;
+    --storylet-white: #FFFFFF;
+    --storylet-orange: #FF9800;
+    --storylet-grey-50: #FAFAFA;
+    --storylet-grey-200: #EEEEEE;
+    --storylet-grey-400: #BDBDBD;
+    --storylet-grey-900: #212121;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    width: 100%;
+    height: 96px;
+    background-color: var(--storylet-primary);
+}
+
+.logo {
+    position: relative;
+    top: 8px;
+
+    width: 40%;
+    height: 80px;
+    margin: auto;
+
+    background: url("./img/logo-storylet.png") no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.split-container {
+    position: relative;
+
+    width: 100%;
+    height: calc(100vh - 96px);
+
+    font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+    font-size: 16px;
+    color: var(--storylet-grey-900);
+}
