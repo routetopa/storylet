@@ -11,10 +11,18 @@ function App()
 
     const get_data = () =>
     {
-      let data = {"text":"hello",
+      let data = {
+          "name":"hello",
+          "description":"description",
+          "owner": {},
+          "tag": {},
+          "tipo": {},
+          'theme':'css-theme',
+          "template": {width:100, height:100},
           "data": [
               {
                   "id":"1",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world from slide 1 a", x:100, y:10},
                       {"type":"text", "value":"Hello world from slide 1 b", x:100, y:40},
@@ -26,6 +34,7 @@ function App()
               },
               {
                   "id":"2",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world again by slide 2", x:20, y:20},
                       {"type":"image", "src":"https://picsum.photos/150/100", x:80, y:50}
@@ -33,6 +42,7 @@ function App()
               },
               {
                   "id":"3",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world again by slide 3", x:20, y:20},
                       {"type":"image", "src":"https://picsum.photos/150/100", x:80, y:50}
@@ -40,6 +50,7 @@ function App()
               },
               {
                   "id":"4",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world again by slide 4", x:20, y:20},
                       {"type":"image", "src":"https://picsum.photos/150/100", x:80, y:50}
@@ -47,6 +58,7 @@ function App()
               },
               {
                   "id":"5",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world again by slide 5", x:20, y:20},
                       {"type":"image", "src":"https://picsum.photos/150/100", x:80, y:50}
@@ -54,6 +66,7 @@ function App()
               },
               {
                   "id":"6",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world again by slide 6", x:20, y:20},
                       {"type":"image", "src":"https://picsum.photos/150/100", x:80, y:50}
@@ -61,6 +74,7 @@ function App()
               },
               {
                   "id":"7",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world again by slide 7", x:20, y:20},
                       {"type":"image", "src":"https://picsum.photos/150/100", x:80, y:50}
@@ -68,6 +82,7 @@ function App()
               },
               {
                   "id":"8",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world again by slide 8", x:20, y:20},
                       {"type":"image", "src":"https://picsum.photos/150/100", x:80, y:50}
@@ -75,6 +90,7 @@ function App()
               },
               {
                   "id":"9",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world again by slide 9", x:20, y:20},
                       {"type":"image", "src":"https://picsum.photos/150/100", x:80, y:50}
@@ -82,6 +98,7 @@ function App()
               },
               {
                   "id":"10",
+                  type:"",
                   "components": [
                       {"type":"text", "value":"Hello world again by slide 10", x:20, y:20},
                       {"type":"image", "src":"https://picsum.photos/150/100", x:80, y:50}
