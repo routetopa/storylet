@@ -4,14 +4,14 @@ import StageContainer from '../container/stage-container'
 import PropertiesContainer from '../container/properties-container'
 import BodyContainerStyle from '../style/body-container-style'
 
-export default function BodyContainer({slideData})
+export default function BodyContainer()
 {
     console.log('body container');
 
     return (
         <BodyContainerStyle>
 
-            <SlideContainer slideData={slideData} />
+            <SlideContainer />
 
             <StageContainer />
 

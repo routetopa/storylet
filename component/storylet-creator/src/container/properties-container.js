@@ -1,8 +1,8 @@
 import React from 'react'
 import TextProperties from '../component/properties-component/text-properties'
 import ImageProperties from '../component/properties-component/image-properties'
-import {useSelector} from 'react-redux'
 import PropertiesContainerStyle from '../style/properties-container-style'
+import {useSelector} from 'react-redux'
 
 export default function PropertiesContainer()
 {
@@ -12,7 +12,6 @@ export default function PropertiesContainer()
 
     return (
         <PropertiesContainerStyle>
-            <span>{selectedComponent && selectedComponent.type}</span>
             {
                 (() =>
                 {

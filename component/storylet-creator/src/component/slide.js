@@ -5,9 +5,19 @@ import {useDispatch} from 'react-redux'
 import componentSelected from '../actions/select-component-action'
 import SlideComponentStyle from '../style/slide-component-style'
 
-export default function Slide({components, isEditable})
+import draggableHOC from './hoc/draggable-hoc'
+
+const shouldSlideNotRender = (prevProps, nextProps) => {
+    //console.log(prevProps);
+    //console.log(nextProps);
+    return false; //always rerender
+};
+
+function Slide({components, isEditable})
 {
     const dispatch = useDispatch();
+
+    const DraggableText = draggableHOC(Text);
 
     return (
         <SlideComponentStyle>
@@ -16,10 +26,11 @@ export default function Slide({components, isEditable})
                 {
                     if (!components) return null;
                     return components.map((c, idx) => {
+                        c.key = idx;
                         switch (c.type) {
                             case 'text'  :
                                 return (<div key={idx}  onClick={isEditable ? (evt) => dispatch(componentSelected(c)) : null}>
-                                        <Text isEditable={isEditable} key={idx} x={c.x} y={c.y} value={c.value}/>
+                                         <DraggableText isEditable={isEditable} key={idx} x={c.x} y={c.y} value={c.value}/>
                                         </div>);
                             case 'image' :
                                 return (<div key={idx} onClick={isEditable ? (evt) => dispatch(componentSelected(c)) : null}>
@@ -34,3 +45,6 @@ export default function Slide({components, isEditable})
         </SlideComponentStyle>
     )
 };
+
+export default React.memo(Slide, shouldSlideNotRender);
+

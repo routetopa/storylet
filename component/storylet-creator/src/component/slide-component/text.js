@@ -8,7 +8,7 @@ import TextStyle from '../../style/text-style'
 export default function Text({isEditable, x, y, value})
 {
     //const [text, setText] = useState(value);
-    console.log('text');
+    console.log('text component');
 
     return (
         <TextStyle x={x} y={y}>
@@ -17,7 +17,7 @@ export default function Text({isEditable, x, y, value})
                 disabled={false} // use true to disable edition
                 //onChange={this.handleChange} // handle innerHTML change
             />) :
-                value
+                <span dangerouslySetInnerHTML={{ __html: value }} />
             }
         </TextStyle>
     )
