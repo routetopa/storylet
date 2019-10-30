@@ -1,7 +1,7 @@
 import React from 'react'
 import './style/preview.css';
 
-export default function Preview({selectedLayout})
+export default function Preview({selectedLayout, createCallback})
 {
     return (
         <div className="container">
@@ -11,7 +11,10 @@ export default function Preview({selectedLayout})
             <div className="d_right">
                 <div className="name">{selectedLayout.name}</div>
                 <div className="description">{selectedLayout.description}</div>
-                <div className="button">CREA!</div>
+                {selectedLayout.name ?
+                    <div className="button" onClick={createCallback}>CREA!</div> :
+                    <div className="button disabled">CREA!</div>
+                }
             </div>
         </div>
     )

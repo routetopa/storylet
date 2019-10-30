@@ -70,6 +70,7 @@ class Storylet_Activator {
 			  description varchar(255) DEFAULT '',
 			  type varchar(255) DEFAULT '',
 			  tag varchar(255) DEFAULT '',
+			  settings varchar(255) DEFAULT '',
 			  slideTemplateList varchar(255) DEFAULT '',
 			  PRIMARY KEY  (id)
 			) $charset_collate;";

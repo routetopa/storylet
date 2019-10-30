@@ -1,6 +1,7 @@
 <?php
 
 require_once (plugin_dir_path( __FILE__ ) . '../model/StoryletModel.php');
+require_once (plugin_dir_path( __FILE__ ) . '../model/StoryletTemplatetModel.php');
 
 class Storylet_API extends WP_REST_Controller
 {
@@ -9,15 +10,16 @@ class Storylet_API extends WP_REST_Controller
 
 	public function __construct() {
 		$this->namespace = 'storylet/v1';
-		$this->rest_base = 'storylet';
+		//$this->rest_base = 'storylet';
 	}
 
 	public function run()
 	{
-		register_rest_route($this->namespace, '/' . $this->rest_base, array(
+		// GET ALL STORYLET TEMPLATE
+		register_rest_route($this->namespace, '/storylet-template', array(
 			array(
 				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => array( $this, 'get_storylet' ),
+				'callback'            => array( $this, 'get_storylet_template' ),
 				'permission_callback' => array( $this, 'get_storylet_permissions_check' ),
 			),
 			/*array(
@@ -26,6 +28,23 @@ class Storylet_API extends WP_REST_Controller
 				'permission_callback' => array( $this, 'update_item_permissions_check' ),
 				'args'            => $this->get_endpoint_args_for_item_schema( false ),
 			),*/
+			'schema' => null,
+			// SCHEMA IS AVAILABLE THROUGH OPTION REQUEST TO THIS ENDPOINT
+			//'schema' => 'prefix_get_comment_schema',
+		));
+
+		register_rest_route($this->namespace, '/storylet', array(
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => array( $this, 'get_storylet' ),
+				'permission_callback' => array( $this, 'get_storylet_permissions_check' ),
+			),
+			array(
+				'methods'         => WP_REST_Server::EDITABLE,
+				'callback'        => array( $this, 'create_storylet' ),
+				//'permission_callback' => array( $this, 'update_item_permissions_check' ),
+				'args'            => $this->get_endpoint_args_for_item_schema( false ),
+			),
 			'schema' => null,
 			// SCHEMA IS AVAILABLE THROUGH OPTION REQUEST TO THIS ENDPOINT
 			//'schema' => 'prefix_get_comment_schema',
@@ -46,6 +65,38 @@ class Storylet_API extends WP_REST_Controller
 			return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot update the category resource.' ), array( 'status' => $this->authorization_status_code() ) );
 		}*/
 		return true;
+	}
+
+	public function get_storylet_template( $request )
+	{
+		$storylet_tamplates = StoryletTemplateModel::all()->toArray();
+
+		foreach ($storylet_tamplates as &$s_t)
+		{
+			$s_t = array_merge($s_t, json_decode($s_t['settings'], true));
+			$s_t['tag'] = json_decode($s_t['tag']);
+			unset($s_t['settings']);
+		}
+
+		return rest_ensure_response(['status' => 'OK', 'data' => $storylet_tamplates]);
+	}
+
+	public function create_storylet( $request )
+	{
+		try
+		{
+			$parameters       = $request->get_params();
+			$storyletTemplate = $parameters['storyletTemplate'];
+
+			$storylet             = new StoryletModel();
+			$storylet->templateId = intval( $storyletTemplate['id'] );
+			$storylet->save();
+
+			return rest_ensure_response(['status'              => 'OK',
+										 'created_storylet_id' => $storylet->ID ]);
+		} catch (Exception $e) {
+			return rest_ensure_response(['status' => 'K0', 'error' => $e->getMessage()]);
+		}
 	}
 
 	public function get_storylet( $request )

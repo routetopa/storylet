@@ -20,29 +20,23 @@ function StoryletSlider()
 
     const get_storylet = async () =>
     {
-        // let response = await axios.get('http://test.com/wp/wp-json/storylet/v1/storylet');
-        // return response.data.data;
+        let response = await axios.get('http://test.com/wp/wp-json/storylet/v1/storylet-template');
 
-        let data = {"text":"hello","data":[
-            {"id":"1", "name":"Anteprima Youtube",      "description":"La descrizione (dal latino descriptio[1], in inglese description) è l'atto di rappresentare con parole una determinata realtà[2]. Il concetto di descrizione può essere visto da un punto di vista epistemologico[3], cognitivo[4], scientifico, informatico[5], della filosofia del linguaggio[6], archivistico[7], bibliografico[8], ecc. Lo scopo di un testo descrittivo è quello di indicare al lettore o all'ascoltatore le caratteristiche di una certa realtà (persona, cosa, ecc.)[9]. La definizione scientifica invece indica la comunicazione di conoscenze che si possono interpretare in un solo modo[10].","ownerId":"0","templateId":"0","themeId":"0",  "width":"550","height":"309","src":"./img/anteprima_youtube.gif"},
-            {"id":"2", "name":"Copertina di Facebook",  "description":"description description description description","ownerId":"0","templateId":"0","themeId":"0",  "width":"550","height":"209","src":"./img/copertina_di_facebook.jpg"},
-            {"id":"3", "name":"Formato A4",             "description":"description description description description","ownerId":"0","templateId":"0","themeId":"0",  "width":"393","height":"550","src":"./img/formato_A4.jpg"},
-            {"id":"4", "name":"Grafica per Pinterest",  "description":"description description description description","ownerId":"0","templateId":"0","themeId":"0",  "width":"367","height":"550","src":"./img/grafica_per_pinterest.jpg"},
-            {"id":"5", "name":"Intestazione email",     "description":"description description description description","ownerId":"0","templateId":"0","themeId":"0",  "width":"550","height":"183","src":"./img/intestazione_email.jpg"},
-            {"id":"6", "name":"Postdi Facebook",        "description":"description description description description","ownerId":"0","templateId":"0","themeId":"0",  "width":"550","height":"461","src":"./img/post_di_facebook.jpg"},
-            {"id":"7", "name":"Postdi Instagram",       "description":"description description description description","ownerId":"0","templateId":"0","themeId":"0",  "width":"550","height":"550","src":"./img/post_di_instagram.jpg"},
-            {"id":"8", "name":"Postdi Twitter",         "description":"description description description description","ownerId":"0","templateId":"0","themeId":"0",  "width":"550","height":"275","src":"./img/post_di_twitter.jpg"},
-            {"id":"9", "name":"Poster",                 "description":"description description description description","ownerId":"0","templateId":"0","themeId":"0",  "width":"389","height":"550","src":"./img/poster.jpg"},
-            {"id":"10","name":"Titolo per blog",        "description":"description description description description","ownerId":"0","templateId":"0","themeId":"0",  "width":"550","height":"314","src":"./img/titolo_per_blog.jpg"}
-        ]};
+        if(response.data.status === 'OK')
+            return response.data.data;
 
-        return data.data
+        return [];
+
+        /*let data = {"status":"OK","data":[{"id":"1","name":"Test 1","description":"Description 1","type":"","tag":["tag1","tag2","tag10"],"slideTemplateList":"[]","width":"550","height":"209","src":"https:\/\/picsum.photos\/id\/10\/550\/209"},{"id":"2","name":"Test 2","description":"Description 2","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"393","height":"550","src":"https:\/\/picsum.photos\/id\/1002\/393\/550"},{"id":"3","name":"Test 3","description":"Description 3","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"367","height":"550","src":"https:\/\/picsum.photos\/id\/1005\/367\/550"},{"id":"4","name":"Test 4","description":"Description 4","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"550","height":"183","src":"https:\/\/picsum.photos\/id\/1012\/550\/183"},{"id":"5","name":"Test 5","description":"Description 5","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"550","height":"461","src":"https:\/\/picsum.photos\/id\/1015\/550\/461"},{"id":"6","name":"Test 6","description":"Description 6","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"550","height":"550","src":"https:\/\/picsum.photos\/id\/1016\/550\/550"},{"id":"7","name":"Test 7","description":"Description 7","type":"","tag":["tag1","tag2","tag3","facebook"],"slideTemplateList":"[]","width":"550","height":"275","src":"https:\/\/picsum.photos\/id\/1018\/550\/275"},{"id":"8","name":"Test 8","description":"Description 8","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"389","height":"550","src":"https:\/\/picsum.photos\/id\/1019\/389\/550"},{"id":"9","name":"Test 9","description":"Description 9","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"550","height":"314","src":"https:\/\/picsum.photos\/id\/1031\/550\/314"},{"id":"10","name":"Test 10","description":"Description 10","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"550","height":"209","src":"https:\/\/picsum.photos\/id\/1032\/550\/209"},{"id":"11","name":"Test 11","description":"Description 11","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"550","height":"208","src":"https:\/\/picsum.photos\/id\/1035\/550\/208"},{"id":"12","name":"Test 12","description":"Description 12","type":"","tag":["tag1","tag2","tag3"],"slideTemplateList":"[]","width":"550","height":"461","src":"https:\/\/picsum.photos\/id\/1042\/550\/461"}]};
+        return data.data*/
     };
 
     const search_handler = (evt) =>
     {
         let filtered = storyletsList.all.filter( (l) => {
-            if(l.name.toLowerCase().includes(evt.target.value.toLowerCase()))
+            if(l.name.toLowerCase().includes(evt.target.value.toLowerCase()) ||
+                l.description.toLowerCase().includes(evt.target.value.toLowerCase()) ||
+                 tag_filter(l.tag, evt.target.value.toLowerCase()))
                 return l;
             return null
         });
@@ -50,14 +44,38 @@ function StoryletSlider()
         setStoryletsList( (prevState) => { return {filtered: filtered, all: prevState.all} });
     };
 
+    const tag_filter = (tag_array, search_string) =>
+    {
+        for(const tag of tag_array)
+            if(tag.toLowerCase().includes(search_string))
+                return true;
+        return false;
+    };
+
     const storylet_click_handler = (evt, idx) =>
     {
         setSelectedStorylet(storyletsList.filtered[idx]);
     };
 
+    const createCallback = async () =>
+    {
+        console.log('CREATE');
+
+        axios.post('http://test.com/wp/wp-json/storylet/v1/storylet', {
+            storyletTemplate: selectedStorylet
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    };
+
     useEffect(() => {
         get_storylet().then((data) => {
             setStoryletsList({filtered:data, all:data});
+            setSelectedStorylet(data[0]);
         });
     }, []);
 
@@ -70,7 +88,7 @@ function StoryletSlider()
                     </div>
                     <div className="split-container">
                         <Slider storyletsList={storyletsList.filtered} storyletClickHandler={storylet_click_handler} searchHandler={search_handler} />
-                        <Preview selectedLayout={selectedStorylet} />
+                        <Preview selectedLayout={selectedStorylet} createCallback={createCallback} />
                     </div>
             </ThemeProvider>
         </MainContext.Provider>
