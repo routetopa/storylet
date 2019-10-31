@@ -4,6 +4,7 @@ import BodyContainer from './container/body-container'
 import GlobalStyle from './style/global-style'
 import {useDispatch} from 'react-redux'
 import setSlideData from './actions/set-slide-data'
+import MoveableComponent from "./component/MoveableComponent";
 
 function App()
 {
@@ -121,6 +122,7 @@ function App()
         <GlobalStyle/>
         <HeaderContainer />
         <BodyContainer />
+        <MoveableComponent/>
      </>
     );
 }

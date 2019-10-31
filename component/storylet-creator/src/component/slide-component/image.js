@@ -5,10 +5,8 @@ import ImageStyle from '../../style/image-style'
 export default function Text({x, y, src})
 {
     return (
-        <ImageStyle x={x} y={y}>
-            <div>
-                <img src={src} alt=""></img>
+            <div style={{position:'absolute', top:y, left:x}}>
+                <img  style={{position:'absolute'}} src={src} alt=""></img>
             </div>
-        </ImageStyle>
     )
 };

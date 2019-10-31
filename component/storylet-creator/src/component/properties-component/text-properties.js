@@ -20,9 +20,9 @@ export default function TextProperties()
         dispatch(setSelectedSlide(slide_mod));
 
         // REAL TIME THUMBNAIL MOD
-        let slideData_mod = JSON.parse(JSON.stringify(slideData));
-        slideData_mod[selectedSlide.key] = slide_mod;
-        dispatch(setSlideData(slideData_mod));
+        //let slideData_mod = JSON.parse(JSON.stringify(slideData));
+        //slideData_mod[selectedSlide.key] = slide_mod;
+        //dispatch(setSlideData(slideData_mod));
     };
 
     return (

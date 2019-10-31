@@ -5,19 +5,13 @@ import {useDispatch} from 'react-redux'
 import componentSelected from '../actions/select-component-action'
 import SlideComponentStyle from '../style/slide-component-style'
 
-import draggableHOC from './hoc/draggable-hoc'
-
 const shouldSlideNotRender = (prevProps, nextProps) => {
-    //console.log(prevProps);
-    //console.log(nextProps);
     return false; //always rerender
 };
 
 function Slide({components, isEditable})
 {
     const dispatch = useDispatch();
-
-    const DraggableText = draggableHOC(Text);
 
     return (
         <SlideComponentStyle>
@@ -29,11 +23,11 @@ function Slide({components, isEditable})
                         c.key = idx;
                         switch (c.type) {
                             case 'text'  :
-                                return (<div key={idx}  onClick={isEditable ? (evt) => dispatch(componentSelected(c)) : null}>
-                                         <DraggableText isEditable={isEditable} key={idx} x={c.x} y={c.y} value={c.value}/>
+                                return (<div key={idx} onClick={isEditable ? (evt) => {c.target = evt.target; dispatch(componentSelected(c))} : null}>
+                                            <Text isEditable={isEditable} key={idx} x={c.x} y={c.y} value={c.value} />
                                         </div>);
                             case 'image' :
-                                return (<div key={idx} onClick={isEditable ? (evt) => dispatch(componentSelected(c)) : null}>
+                                return (<div key={idx} onClick={isEditable ? (evt) => {c.target = evt.target; dispatch(componentSelected(c))} : null}>
                                             <Image isEditable={isEditable} key={idx} x={c.x} y={c.y} src={c.src}/>
                                         </div>);
                             default : break;
@@ -46,5 +40,5 @@ function Slide({components, isEditable})
     )
 };
 
-export default React.memo(Slide, shouldSlideNotRender);
+export default React.memo(Slide, shouldSlideNotRender)
 

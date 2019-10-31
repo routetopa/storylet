@@ -14,7 +14,7 @@ export default function SlideContainer()
         <SlideContainerStyle>
             <div className="slide-container">
             {slideData.map((slide, idx) => <div key={slide.id} onClick={(evt) => {slideData[idx].key = idx; dispatch(selectedSlide(slideData[idx]))}}>
-                                            <Slide key={slide.id} isEditable={false} components={slide.components}/>
+                                            <Slide key={idx} idx={idx} isEditable={false} components={slide.components}/>
                                            </div>)}
             </div>
         </SlideContainerStyle>
