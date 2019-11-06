@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
 const PropertiesContainerStyle = styled.div`
-    background-color: green;
-    width: 25%;  
+    width: 25%;
+    background-color: white;
 `;
 
 export default PropertiesContainerStyle

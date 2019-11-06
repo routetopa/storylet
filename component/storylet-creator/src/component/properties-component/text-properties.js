@@ -8,7 +8,7 @@ export default function TextProperties()
 {
     const selectedComponent = useSelector(state => state.selectedComponentReducer);
     const selectedSlide = useSelector(state => state.selectedSlideReducer);
-    const slideData = useSelector(state => state.slideData);
+    const slidesData = useSelector(state => state.slidesData);
     const dispatch = useDispatch();
 
     const text_mod = (modificator) =>
@@ -20,9 +20,9 @@ export default function TextProperties()
         dispatch(setSelectedSlide(slide_mod));
 
         // REAL TIME THUMBNAIL MOD
-        //let slideData_mod = JSON.parse(JSON.stringify(slideData));
-        //slideData_mod[selectedSlide.key] = slide_mod;
-        //dispatch(setSlideData(slideData_mod));
+        //let slidesData_mod = JSON.parse(JSON.stringify(slidesData));
+        //slidesData_mod[selectedSlide.key] = slide_mod;
+        //dispatch(setSlidesData(slidesData_mod));
     };
 
     return (

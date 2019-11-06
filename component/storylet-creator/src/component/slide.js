@@ -3,40 +3,39 @@ import Text from './slide-component/text'
 import Image from './slide-component/image'
 import {useDispatch} from 'react-redux'
 import componentSelected from '../actions/select-component-action'
-import SlideComponentStyle from '../style/slide-component-style'
+import SlideStyle from '../style/slide'
 
 const shouldSlideNotRender = (prevProps, nextProps) => {
     return false; //always rerender
 };
 
-function Slide({components, isEditable})
+function Slide({parameters, isEditable, onClick})
 {
     const dispatch = useDispatch();
 
     return (
-        <SlideComponentStyle>
+        <SlideStyle background={parameters.background} onClick={onClick}>
             {
                 (() =>
                 {
-                    if (!components) return null;
-                    return components.map((c, idx) => {
-                        c.key = idx;
+                    if (!parameters.components) return null;
+                    return parameters.components.map((c) => {
                         switch (c.type) {
                             case 'text'  :
-                                return (<div key={idx} onClick={isEditable ? (evt) => {c.target = evt.target; dispatch(componentSelected(c))} : null}>
-                                            <Text isEditable={isEditable} key={idx} x={c.x} y={c.y} value={c.value} />
-                                        </div>);
+                                return (
+                                    <Text x={c.x} y={c.y} value={c.value} onClick={isEditable ? (evt) => {c.target = evt.target; dispatch(componentSelected(c))} : null} />
+                                );
                             case 'image' :
-                                return (<div key={idx} onClick={isEditable ? (evt) => {c.target = evt.target; dispatch(componentSelected(c))} : null}>
-                                            <Image isEditable={isEditable} key={idx} x={c.x} y={c.y} src={c.src}/>
-                                        </div>);
+                                return (
+                                    <Image x={c.x} y={c.y} src={c.src} onClick={isEditable ? (evt) => {c.target = evt.target; dispatch(componentSelected(c))} : null}/>
+                                );
                             default : break;
                         }
                         return null;
                     })
                 })()
             }
-        </SlideComponentStyle>
+        </SlideStyle>
     )
 };
 

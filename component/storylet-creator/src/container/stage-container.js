@@ -14,7 +14,7 @@ export default function StageContainer()
             {selectedSlide ?
                 (
                     <>
-                        <Slide components={selectedSlide.components} isEditable={true} />
+                        <Slide parameters={selectedSlide} isEditable={true} />
                     </>
                 )
                 : null

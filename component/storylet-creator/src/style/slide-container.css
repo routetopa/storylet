@@ -1,0 +1,36 @@
+.slide-container {
+    width: 25%;
+    height: 100%;
+
+    overflow: auto;
+    scroll-margin: 10px;
+
+    background-color: #37474f;
+}
+
+.slide-container:hover::-webkit-scrollbar, .slide-container:hover::-webkit-scrollbar-track, .slide-container:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+
+.slide-container::-webkit-scrollbar
+{
+    visibility: hidden;
+}
+
+.slide-container::-webkit-scrollbar-track
+{
+    width: 16px;
+    background-color: transparent;
+
+    visibility: hidden;
+}
+
+.slide-container::-webkit-scrollbar-thumb
+{
+    width: 8px;
+    background-color: rgba(255,255,255,0.5);
+    border: 4px solid #37474f;
+    border-radius: 8px !important;
+
+    visibility: hidden;
+}

@@ -1,0 +1,21 @@
+:root {
+  --storylet-primary: #2196F3;
+  --storylet-driver: #00BCD4;
+  --storylet-success: #4caf50;
+  --storylet-error: #f44336;
+  --storylet-white: #FFFFFF;
+  --storylet-orange: #FF9800;
+  --storylet-grey-50: #FAFAFA;
+  --storylet-grey-200: #EEEEEE;
+  --storylet-grey-400: #BDBDBD;
+  --storylet-grey-900: #212121;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: "Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif;
+  font-size: 16px;
+  color: var(--storylet-grey-900);
+}

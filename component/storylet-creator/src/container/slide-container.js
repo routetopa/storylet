@@ -1,22 +1,25 @@
 import React from 'react'
-import Slide from '../component/slide'
-import SlideContainerStyle from '../style/slide-container-style'
 import {useDispatch, useSelector} from 'react-redux'
-import selectedSlide from '../actions/select-slide-action'
+
+// Components
+import Slide from '../component/slide'
+
+// Actions
+import selectSlide from '../actions/select-slide-action'
+
+// Style
+import '../style/slide-container.css';
 
 export default function SlideContainer()
 {
-    console.log('slide container');
-    const slideData = useSelector(state => state.slideData);
     const dispatch = useDispatch();
+    const slidesData = useSelector(state => state.slidesData);
 
     return (
-        <SlideContainerStyle>
-            <div className="slide-container">
-            {slideData.map((slide, idx) => <div key={slide.id} onClick={(evt) => {slideData[idx].key = idx; dispatch(selectedSlide(slideData[idx]))}}>
-                                            <Slide key={idx} idx={idx} isEditable={false} components={slide.components}/>
-                                           </div>)}
-            </div>
-        </SlideContainerStyle>
+        <div className="slide-container">
+            {slidesData.map((slide, idx) =>
+                <Slide parameters={slide} isEditable={false} onClick={() => {dispatch(selectSlide(slidesData[idx]))}} />
+            )}
+        </div>
     )
 };

@@ -1,12 +1,16 @@
 import React from 'react'
 
-import MenuComponentStyle from '../style/menu-component-style'
+import '../style/menu.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
 
 export default function Menu()
 {
     return (
-        <MenuComponentStyle>
-        <h1>Menu</h1>
-        </MenuComponentStyle>
+        <div className="menu">
+            <FontAwesomeIcon icon={faBars} className="icon" />
+
+        </div>
     )
 };

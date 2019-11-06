@@ -13,7 +13,7 @@ export default function Text({isEditable, x, y, value, onClick})
     return (
         <>
             {isEditable ? (
-                    <ContentEditable style={{position:'absolute', top:y, left:x}}
+                    <ContentEditable style={{position:'absolute', top:y+'%', left:x+'%'}}
                         html={value} // innerHTML of the editable div
                         disabled={false} // use true to disable edition
                         // onChange={this.handleChange} // handle innerHTML change

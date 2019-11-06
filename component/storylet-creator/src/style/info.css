@@ -1,0 +1,12 @@
+.info {
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    padding: 8px;
+}
+
+.info .icon {
+    color: var(--storylet-white);
+    font-size: 24px;
+    cursor: pointer;
+}

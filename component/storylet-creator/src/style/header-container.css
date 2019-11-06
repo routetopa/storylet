@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    height: 40px;
+    padding: 8px;
+    /*background: rgb(0,212,255);*/
+    /*background: linear-gradient(0deg, rgba(0,212,255,1) 0%, rgba(33,150,243,1) 100%);*/
+    /*background: rgb(0,212,255);*/
+    /*background: radial-gradient(circle, rgba(0,212,255,1) 0%, rgba(33,150,243,1) 100%);*/
+    /*background: rgb(33,150,243);*/
+    /*background: linear-gradient(90deg, rgba(33,150,243,1) 0%, rgba(0,212,255,1) 100%);*/
+    background: rgb(0,188,212);
+    background: linear-gradient(90deg, rgba(0,188,212,1) 0%, rgba(33,150,243,1) 50%, rgba(103,58,183,1) 100%);
+}
+
+.logo {
+      /*todo*/
+      position: relative;
+      top: 0;
+
+      width: 40%;
+      height: 40px;
+      margin: auto;
+
+      background: url("/images/logo-storylet.png") no-repeat;
+      background-size: contain;
+      background-position: center;
+}

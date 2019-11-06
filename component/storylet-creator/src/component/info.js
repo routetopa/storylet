@@ -1,12 +1,15 @@
 import React from 'react'
 
-import InfoComponentStyle from '../style/info-component-style'
+import '../style/info.css';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 
 export default function Info()
 {
     return (
-        <InfoComponentStyle>
-            <h1>Info</h1>
-        </InfoComponentStyle>
+        <div className="info">
+            <FontAwesomeIcon icon={faInfoCircle} className="icon" />
+        </div>
     )
 };

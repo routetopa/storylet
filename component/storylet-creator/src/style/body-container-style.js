@@ -5,7 +5,9 @@ const BodyContainerStyle = styled.div`
     flex-direction: row;
     position: relative;
     width: 100%;  
-    height: calc(100vh - 43px);
+    height: calc(100vh - 56px);
+    
+    background-color: #eceff1;
     
     & > *{
     overflow: hidden;

@@ -29,12 +29,12 @@ export default function MoveableComponent()
                         + "rotate(" + rotate +  "deg)";
                 }}
 
-                resizable={true}
-                onResize={({ target, width, height, dist }) => {
-                    console.log(width, height, dist);
-                    target.style.width = width + "px";
-                    target.style.height = height + "px";
-                }}
+                // resizable={true}
+                // onResize={({ target, width, height, dist }) => {
+                //     console.log(width, height, dist);
+                //     target.style.width = width + "px";
+                //     target.style.height = height + "px";
+                // }}
 
                 rotatable={true}
                 onRotate={({ target, beforeDelta, delta }) => {
