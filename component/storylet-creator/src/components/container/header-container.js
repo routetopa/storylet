@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Info from '../component/info'
-import Menu from '../component/menu'
+import Info from '../info'
+import Menu from '../menu'
 
-import '../style/header-container.css';
+import '../../style/container/header-container.css';
 
 export default function HeaderContainer()
 {

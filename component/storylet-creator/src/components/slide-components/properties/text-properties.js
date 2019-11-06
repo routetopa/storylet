@@ -1,8 +1,8 @@
 import React from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import componentSelected from '../../actions/select-component-action'
-import setSelectedSlide from '../../actions/select-slide-action'
-import setSlideData from '../../actions/set-slide-data'
+import componentSelected from '../../../reducer/actions/select-component-action'
+import setSelectedSlide from '../../../reducer/actions/select-slide-action'
+import setSlideData from '../../../reducer/actions/set-slide-data'
 
 export default function TextProperties()
 {

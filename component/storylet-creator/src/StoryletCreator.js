@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
 
-import HeaderContainer from './container/header-container'
-import BodyContainer from './container/body-container'
-import MoveableComponent from "./component/MoveableComponent";
+import HeaderContainer from './components/container/header-container'
+import BodyContainer from './components/container/body-container'
+import MoveableComponent from "./components/moveable/moveable-component";
 
-import setSlideData from './actions/set-slide-data'
+import setSlideData from './reducer/actions/set-slide-data'
 import {useDispatch} from 'react-redux'
 
 import './StoryletCreator.css';
@@ -30,8 +30,8 @@ function StoryletCreator()
                   background: '/images/backgrounds/forest.png',
                   components: [
                       {type:"text", value:"Once upon a time...", x:80, y:80, w:20, h:10, transform: ""},
-                      {type:"image", src:"/images/fantastic-characters/003-dinosaur.png", x:13, y:53, w:20, h:10, transform: ""},
-                      {type:"image", src:"/images/fantastic-characters/049-wizard.png", x:70, y:50, w:20, h:10, transform: ""}
+                      {type:"image", src:"/images/fantastic-characters/003-dinosaur.png", x:13, y:53, w:20, h:20, transform: "scale(2, 2) rotate(45deg)", keepRatio: true},
+                      {type:"image", src:"/images/fantastic-characters/049-wizard.png", x:70, y:50, w:20, h:20, transform: "scale(2)"}
                   ]
               },
               {

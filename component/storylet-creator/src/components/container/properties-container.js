@@ -1,7 +1,7 @@
 import React from 'react'
-import TextProperties from '../component/properties-component/text-properties'
-import ImageProperties from '../component/properties-component/image-properties'
-import PropertiesContainerStyle from '../style/properties-container-style'
+import TextProperties from '../slide-components/properties/text-properties'
+import ImageProperties from '../slide-components/properties/image-properties'
+import PropertiesContainerStyle from '../../style/container/properties-container-style'
 import {useSelector} from 'react-redux'
 
 export default function PropertiesContainer()

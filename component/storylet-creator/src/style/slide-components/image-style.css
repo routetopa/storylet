@@ -1,0 +1,8 @@
+.image-moveable-container {
+    position: absolute;
+}
+
+.image-moveable-container img {
+    width: 100%;
+    height: 100%;
+}

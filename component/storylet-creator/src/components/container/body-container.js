@@ -1,8 +1,8 @@
 import React from 'react'
-import SlideContainer from '../container/slide-container'
-import StageContainer from '../container/stage-container'
-import PropertiesContainer from '../container/properties-container'
-import BodyContainerStyle from '../style/body-container-style'
+import SlideContainer from './slide-container'
+import StageContainer from './stage-container'
+import PropertiesContainer from './properties-container'
+import BodyContainerStyle from '../../style/container/body-container-style'
 
 export default function BodyContainer()
 {

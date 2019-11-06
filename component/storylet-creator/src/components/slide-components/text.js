@@ -2,13 +2,13 @@ import React from 'react'
 
 import ContentEditable from "react-contenteditable";
 
-import TextStyle from '../../style/text-style'
+import TextStyle from '../../style/slide-components/text-style'
 
 
 export default function Text({isEditable, x, y, value, onClick})
 {
     //const [text, setText] = useState(value);
-    console.log('text component');
+    console.log('text components');
 
     return (
         <>

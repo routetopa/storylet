@@ -2,13 +2,13 @@ import React from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 // Components
-import Slide from '../component/slide'
-
-// Actions
-import selectSlide from '../actions/select-slide-action'
+import Slide from '../slide'
 
 // Style
-import '../style/slide-container.css';
+import '../../style/container/slide-container.css';
+
+// Actions
+import selectSlide from '../../reducer/actions/select-slide-action'
 
 export default function SlideContainer()
 {
