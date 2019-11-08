@@ -1,0 +1,5 @@
+.text-moveable-container {
+    position: absolute;
+    overflow: hidden;
+    outline: none;
+}

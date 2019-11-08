@@ -12,6 +12,8 @@ const BodyContainerStyle = styled.div`
     & > *{
     overflow: hidden;
    }
+   
+   overflow: hidden;
 `;
 
 export default BodyContainerStyle

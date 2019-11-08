@@ -9,6 +9,7 @@ import '../../style/container/slide-container.css';
 
 // Actions
 import selectSlide from '../../reducer/actions/select-slide-action'
+import componentSelected from "../../reducer/actions/select-component-action";
 
 export default function SlideContainer()
 {
@@ -18,7 +19,7 @@ export default function SlideContainer()
     return (
         <div className="slide-container">
             {slidesData.map((slide, idx) =>
-                <Slide parameters={slide} isEditable={false} onClick={() => {dispatch(selectSlide(slidesData[idx]))}} />
+                <Slide key={idx} parameters={slide} isEditable={false} onClick={() => {dispatch(componentSelected(null)); dispatch(selectSlide(slidesData[idx]))}} />
             )}
         </div>
     )

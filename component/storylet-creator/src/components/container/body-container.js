@@ -6,8 +6,6 @@ import BodyContainerStyle from '../../style/container/body-container-style'
 
 export default function BodyContainer()
 {
-    console.log('body container');
-
     return (
         <BodyContainerStyle>
 

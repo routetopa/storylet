@@ -1,5 +1,6 @@
 .image-moveable-container {
     position: absolute;
+    overflow: hidden;
 }
 
 .image-moveable-container img {

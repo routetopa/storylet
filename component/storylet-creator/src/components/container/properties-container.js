@@ -6,8 +6,6 @@ import {useSelector} from 'react-redux'
 
 export default function PropertiesContainer()
 {
-    console.log('properties container');
-
     const selectedComponent = useSelector(state => state.selectedComponentReducer);
 
     return (

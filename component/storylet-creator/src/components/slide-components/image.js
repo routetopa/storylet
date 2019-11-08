@@ -2,15 +2,17 @@ import React from 'react'
 
 import '../../style/slide-components/image-style.css';
 
-export default function Text({component, onClick})
+export default function Image({component, onClick})
 {
     return (
-        <div className="image-moveable-container" onClick={onClick} style={{
+        <div className="image-moveable-container" onClick={onClick}
+        style={{
             top:component.y+'%',
             left:component.x+'%',
             width:component.w+'%',
             height:component.h+'%',
-            transform:component.transform
+            transform:'scale(' + component.scale[0] + ',' + component.scale[1] + ') rotate(' + component.rotate + 'deg)',
+            zIndex:component.zIndex
         }}>
             <img src={component.src} alt={component.src}/>
         </div>

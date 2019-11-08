@@ -13,8 +13,6 @@ export default function TextProperties()
 
     const text_mod = (modificator) =>
     {
-        console.log('set_text_bold');
-
         let slide_mod = Object.assign({}, selectedSlide);
         slide_mod.components[selectedComponent.key].value = `<${modificator}>${slide_mod.components[selectedComponent.key].value}</${modificator}>`;
         dispatch(setSelectedSlide(slide_mod));

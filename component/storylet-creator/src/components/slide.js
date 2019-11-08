@@ -1,11 +1,14 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 
+// Components
 import Text from './slide-components/text'
 import Image from './slide-components/image'
 
+// Style
 import SlideStyle from '../style/slide'
 
+// Actions
 import componentSelected from '../reducer/actions/select-component-action'
 
 const shouldSlideNotRender = (prevProps, nextProps) => {
@@ -17,18 +20,18 @@ function Slide({parameters, isEditable, onClick})
     const dispatch = useDispatch();
 
     return (
-        <SlideStyle background={parameters.background} onClick={onClick}>
+        <SlideStyle id="selected-slide" background={parameters.background} cursor={(isEditable ? 'auto' : 'pointer')} onClick={onClick}>
             {(() => {
                         if (!parameters.components) return null;
-                        return parameters.components.map((c) => {
+                        return parameters.components.map((c, idx) => {
                             switch (c.type) {
                                 case 'text'  :
                                     return (
-                                        <Text component={c} x={c.x} y={c.y} value={c.value} onClick={isEditable ? (evt) => {c.target = evt.target; dispatch(componentSelected(c))} : null} />
+                                        <Text key={idx} isEditable={isEditable} component={c} onClick={isEditable ? (evt) => {c.target = evt.target; dispatch(componentSelected(c))} : null} />
                                     );
                                 case 'image' :
                                     return (
-                                        <Image component={c} onClick={isEditable ? (evt) => {c.target = evt.target.parentElement; dispatch(componentSelected(c))} : null}/>
+                                        <Image key={idx} component={c} onClick={isEditable ? (evt) => {c.target = evt.target.parentElement; dispatch(componentSelected(c))} : null}/>
                                     );
                                 // default : break;
                             }
