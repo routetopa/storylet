@@ -64,8 +64,10 @@ export default function MoveableComponent() {
 
                 draggable={true}
                 rotatable={true}
-                resizable={type==='image'}
-                scalable={type==='text'}
+                // resizable={type==='image'}
+                // scalable={type==='text'}
+                resizable={false}
+                scalable={true}
 
                 origin={false}
 
