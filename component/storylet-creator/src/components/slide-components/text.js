@@ -38,7 +38,8 @@ export default function Text({component, onClick, isEditable})
                 transform:'scale(' + component.scale[0] + ',' + component.scale[1] + ') rotate(' + component.rotate + 'deg)',
                 zIndex:component.zIndex,
 
-                fontSize:0.05*(isEditable ? component.fontSize : component.fontSize/2)+'vw'
+                fontSize:0.05*(isEditable ? component.fontSize : component.fontSize/2)+'vw',
+                color:component.color
         }} contentEditable={(isEditable && edit ? 'true' : 'false')} suppressContentEditableWarning={true}>{component.value}</div>
     )
 };

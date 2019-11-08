@@ -30,7 +30,7 @@ function StoryletCreator()
                   type:"",
                   background: '/images/backgrounds/forest.png',
                   components: [
-                      {index:0, type:"text", value:"Once upon a time...", x:60, y:80, w:40, h:20, scale:[1,1], rotate:0, keepRatio:true, zIndex:0, fontSize:48},
+                      {index:0, type:"text", value:"Once upon a time...", x:60, y:80, w:40, h:20, scale:[1,1], rotate:0, keepRatio:true, zIndex:0, fontSize:48, color:"#FFFFFF"},
                       {index:1, type:"image", src:"/images/fantastic-characters/003-dinosaur.png", x:13, y:53, w:20, h:20, scale:[2,2], rotate:0, keepRatio:true, zIndex:1},
                       {index:2, type:"image", src:"/images/fantastic-characters/049-wizard.png", x:70, y:50, w:20, h:20, scale:[2,2], rotate:45, keepRatio:true, zIndex:0}
                   ]
