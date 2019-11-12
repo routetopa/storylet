@@ -1,7 +1,7 @@
 .header {
     display: flex;
     flex-direction: row;
-    height: 40px;
+    height: 56px;
     padding: 8px;
     /*background: rgb(0,212,255);*/
     /*background: linear-gradient(0deg, rgba(0,212,255,1) 0%, rgba(33,150,243,1) 100%);*/
