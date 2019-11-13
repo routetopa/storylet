@@ -2,3 +2,7 @@
     justify-content: left;
     font-weight: 700;
 }
+
+label.custom-control-label::before, label.custom-control-label::after {
+    left: -0.5rem !important;
+}

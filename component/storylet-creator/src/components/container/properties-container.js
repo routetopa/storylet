@@ -12,25 +12,25 @@ export default function PropertiesContainer()
 
     return (
         <div className="properties-container">
-            <div className="col-md-12">
-                <div className="tabs">
-                    <div className="tab">Component</div>
-                    <div className="tab">Slide</div>
-                </div>
+            <div className="tabs">
+                <div className="tab selected">Component</div>
+                <div className="tab">Slide</div>
+            </div>
+            <div className="properties col-md-12">
+            {
+                (() =>
                 {
-                    (() =>
-                    {
-                        if (!selectedComponent) return null;
-                        switch (selectedComponent.type) {
-                            case 'text'  :
-                                return (<TextProperties/>);
-                            case 'image' :
-                                return (<ImageProperties/>);
-                            default : break;
-                        }
-                        return null;
-                    })()
-                }
+                    if (!selectedComponent) return null;
+                    switch (selectedComponent.type) {
+                        case 'text'  :
+                            return (<TextProperties/>);
+                        case 'image' :
+                            return (<ImageProperties/>);
+                        default : break;
+                    }
+                    return null;
+                })()
+            }
             </div>
         </div>
     )

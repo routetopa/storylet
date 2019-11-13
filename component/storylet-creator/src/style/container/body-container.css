@@ -5,7 +5,7 @@
     width: 100%;
     height: calc(100vh - 56px);
 
-    background-color: #eceff1;/*Blue Gray 50*/
+    background-color: var(--storylet-blue-grey-50);
 
     overflow: hidden;
 }

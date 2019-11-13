@@ -1,6 +1,6 @@
 .properties-container {
     width: 25%;
-    padding-top: 8px;
+    /*padding-top: 8px;*/
     height: 100%;
 
     overflow: auto;
@@ -36,9 +36,26 @@
     visibility: hidden;
 }
 
+.properties {
+    padding-top: 40px;
+}
+
 /* TABS */
+
+.tabs {
+    display: flex;
+}
 
 .tab {
     width: 50%;
     height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-weight: 700;
+    background: #eceff1;
+    cursor: pointer;
+}
+
+.tab.selected {
+    background: var(--storylet-white);
 }
