@@ -38,7 +38,7 @@ class Storylet_Activator {
 	private static function createVirtualPages()
 	{
 		add_rewrite_rule('^storylet$','index.php?storylet=1','top');
-        add_rewrite_rule('^storylet-creator$','index.php?storylet_creator=1','top');
+        add_rewrite_rule('^storylet-creator$','index.php?storylet-creator=1','top');
 		flush_rewrite_rules();
 	}
 
