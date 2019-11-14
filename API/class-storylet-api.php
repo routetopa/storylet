@@ -40,10 +40,10 @@ class Storylet_API extends WP_REST_Controller
 				'permission_callback' => array( $this, 'get_storylet_permissions_check' ),
 			),
 			array(
-				'methods'         => WP_REST_Server::EDITABLE,
-				'callback'        => array( $this, 'create_storylet' ),
-				//'permission_callback' => array( $this, 'update_item_permissions_check' ),
-				'args'            => $this->get_endpoint_args_for_item_schema( false ),
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => array( $this, 'create_storylet' ),
+				'permission_callback' => array( $this, 'insert_item_permissions_check' ),
+				'args'                => $this->get_endpoint_args_for_item_schema( false ),
 			),
 			'schema' => null,
 			// SCHEMA IS AVAILABLE THROUGH OPTION REQUEST TO THIS ENDPOINT
@@ -59,12 +59,12 @@ class Storylet_API extends WP_REST_Controller
 		return true;
 	}
 
-	public function update_storylet_permissions_check( $request )
+	public function insert_item_permissions_check( $request )
 	{
-		/*if ( ! current_user_can( 'manage_options' ) ) {
-			return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot update the category resource.' ), array( 'status' => $this->authorization_status_code() ) );
-		}*/
-		return true;
+	    return is_user_logged_in();
+        /*if(!is_user_logged_in())
+		    return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot view the category resource.' ), array() );
+        return true;*/
 	}
 
 	public function get_storylet_template( $request )
@@ -90,6 +90,7 @@ class Storylet_API extends WP_REST_Controller
 
 			$storylet             = new StoryletModel();
 			$storylet->templateId = intval( $storyletTemplate['id'] );
+			$storylet->ownerId    = get_current_user_id();
 			$storylet->save();
 
 			return rest_ensure_response(['status'              => 'OK',

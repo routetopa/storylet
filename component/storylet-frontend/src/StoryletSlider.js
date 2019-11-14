@@ -20,7 +20,7 @@ function StoryletSlider()
 
     const get_storylet = async () =>
     {
-        let response = await axios.get('http://test.com/wp/wp-json/storylet/v1/storylet-template');
+        let response = await axios.get(window.API_ENDPOINT.GET_STORYLET_TEMPLATE, { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
 
         if(response.data.status === 'OK')
             return response.data.data;
@@ -62,9 +62,9 @@ function StoryletSlider()
         console.log('CREATE');
 
         axios.post('http://test.com/wp/wp-json/storylet/v1/storylet', {
-            storyletTemplate: selectedStorylet
-        })
-        .then(function (response) {
+            storyletTemplate: selectedStorylet,
+        }, { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }
+        ).then(function (response) {
             console.log(response);
         })
         .catch(function (error) {
@@ -75,7 +75,7 @@ function StoryletSlider()
     useEffect(() => {
         get_storylet().then((data) => {
             setStoryletsList({filtered:data, all:data});
-            setSelectedStorylet(data[0]);
+            setSelectedStorylet(data ? data[0] : null);
         });
     }, []);
 
