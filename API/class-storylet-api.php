@@ -58,7 +58,7 @@ class Storylet_API extends WP_REST_Controller
 
 	public function insert_item_permissions_check( $request )
 	{
-	    return 1|| is_user_logged_in();
+	    return is_user_logged_in();
 	}
 
 	public function get_storylet_template( $request )
@@ -88,7 +88,7 @@ class Storylet_API extends WP_REST_Controller
             {
                 $storylet             = new StoryletModel();
                 $storylet->templateId = intval($storyletTemplate['id']);
-                $storylet->ownerId    = 1;//get_current_user_id();
+                $storylet->ownerId    = get_current_user_id();
                 $storylet->story      = $storylet_template['template'];
                 $storylet->save();
 
