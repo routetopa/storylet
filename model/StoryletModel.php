@@ -11,7 +11,8 @@ class StoryletModel extends EloquentWPModel {
 		'description',
 		'ownerId',
 		'templateId',
-		'themeId'
+		'themeId',
+        'story'
 	];
 
 	public $timestamps = false;

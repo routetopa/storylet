@@ -15,5 +15,7 @@ class StoryletTemplateModel extends EloquentWPModel {
 		'slideTemplateList'
 	];
 
+    protected  $primaryKey = 'id';
+
 	public $timestamps = false;
 }

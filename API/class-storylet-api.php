@@ -53,18 +53,12 @@ class Storylet_API extends WP_REST_Controller
 
 	public function get_storylet_permissions_check( $request )
 	{
-		/*if ( ! current_user_can( 'read' ) ) {
-			return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot view the category resource.' ), array( 'status' => $this->authorization_status_code() ) );
-		}*/
 		return true;
 	}
 
 	public function insert_item_permissions_check( $request )
 	{
-	    return is_user_logged_in();
-        /*if(!is_user_logged_in())
-		    return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot view the category resource.' ), array() );
-        return true;*/
+	    return 1|| is_user_logged_in();
 	}
 
 	public function get_storylet_template( $request )
@@ -85,16 +79,24 @@ class Storylet_API extends WP_REST_Controller
 	{
 		try
 		{
-			$parameters       = $request->get_params();
-			$storyletTemplate = $parameters['storyletTemplate'];
+			$parameters        = $request->get_params();
+			$storyletTemplate  = $parameters['storyletTemplate'];
 
-			$storylet             = new StoryletModel();
-			$storylet->templateId = intval( $storyletTemplate['id'] );
-			$storylet->ownerId    = get_current_user_id();
-			$storylet->save();
+            $storylet_template = StoryletTemplateModel::find(intval( $storyletTemplate['id'] ));
 
-			return rest_ensure_response(['status'              => 'OK',
-										 'created_storylet_id' => $storylet->ID ]);
+            if($storylet_template)
+            {
+                $storylet             = new StoryletModel();
+                $storylet->templateId = intval($storyletTemplate['id']);
+                $storylet->ownerId    = 1;//get_current_user_id();
+                $storylet->story      = $storylet_template['template'];
+                $storylet->save();
+
+                return rest_ensure_response(['status' => 'OK', 'created_storylet_id' => $storylet->ID]);
+            } else {
+                return rest_ensure_response(['status' => 'K0', 'error' => 'Wrong storylet template ID']);
+            }
+
 		} catch (Exception $e) {
 			return rest_ensure_response(['status' => 'K0', 'error' => $e->getMessage()]);
 		}

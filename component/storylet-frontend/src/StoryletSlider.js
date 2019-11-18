@@ -20,7 +20,8 @@ function StoryletSlider()
 
     const get_storylet = async () =>
     {
-        let response = await axios.get(window.API_ENDPOINT.GET_STORYLET_TEMPLATE, { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
+        let response = await axios.get(window.API_ENDPOINT.GET_STORYLET_TEMPLATE,
+                                    { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
 
         if(response.data.status === 'OK')
             return response.data.data;
@@ -61,11 +62,12 @@ function StoryletSlider()
     {
         console.log('CREATE');
 
-        axios.post('http://test.com/wp/wp-json/storylet/v1/storylet', {
+        axios.post(window.API_ENDPOINT.CREATE_STORYLET, {
             storyletTemplate: selectedStorylet,
         }, { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }
         ).then(function (response) {
             console.log(response);
+            window.open(`${window.API_ENDPOINT.STORYLET_CREATOR_URL}${response.data.created_storylet_id}`, "_self");
         })
         .catch(function (error) {
             console.log(error);

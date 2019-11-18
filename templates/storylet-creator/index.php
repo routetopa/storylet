@@ -1,33 +1,15 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <title>React App</title>
+<?php
+    if(!is_user_logged_in())
+        wp_redirect(wp_login_url());
 
-    <link type='text/css' media='all'
-          href="http://test.com/wp/wp-content/plugins/storylet/templates/storylet-creator/static/css/main.81b47b40.chunk.css"
-          rel="stylesheet">
-</head>
-<body>
-<noscript>You need to enable JavaScript to run this app.</noscript>
-<div id="root"></div>
-</body>
+    require_once (plugin_dir_path( __FILE__ ) . '../../model/StoryletModel.php');
 
-<script type="text/javascript">
-    window.API_ENDPOINT = {
-        GET_STORYLET_TEMPLATE: 'http://test.com/wp/wp-json/storylet/v1/storylet-template',
-    };
+    $base_path =  plugin_dir_url( __FILE__ );
+    $storylet_id = preg_replace('/\D/', '', $_SERVER['REQUEST_URI']);
 
-    window.API_NONCE = {
-        NONCE: '<?php echo wp_create_nonce( 'wp_rest' ); ?>'
-    };
-</script>
+    $storylet = StoryletModel::find(intval($storylet_id));
 
-<script type="text/javascript"
-        src="http://test.com/wp/wp-content/plugins/storylet/templates/storylet-creator/static/js/runtime-main.30fdea02.js"></script>
-<script type="text/javascript"
-        src="http://test.com/wp/wp-content/plugins/storylet/templates/storylet-creator/static/js/2.bc10c1e7.chunk.js"></script>
-<script type="text/javascript"
-        src="http://test.com/wp/wp-content/plugins/storylet/templates/storylet-creator/static/js/main.19e74318.chunk.js"></script>
-</html>
+    if($storylet)
+        require_once plugin_dir_path(dirname(__FILE__)) . '/storylet-creator/partials/storylet-creator.php';
+    else
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . '/storylet-creator/partials/error.php';
