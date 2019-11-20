@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux'
+import {useDispatch} from 'react-redux';
 
 import HeaderContainer from './components/container/header-container'
 import BodyContainer from './components/container/body-container'

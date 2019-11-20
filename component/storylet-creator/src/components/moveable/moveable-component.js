@@ -16,7 +16,7 @@ export default function MoveableComponent() {
 
     const [type, setType] = useState("text");
     const [position, setPosition] = useState([0,0]);
-    const [size, setSize] = useState([40,40]);
+    const [size, setSize] = useState([20,20]);
     const [scale, setScale] = useState([1,1]);
     const [rotate, setRotate] = useState(0);
     const [keepRatio, setKeepRatio] = useState(true);
@@ -27,8 +27,10 @@ export default function MoveableComponent() {
     let local_rotate;
 
     useEffect(()=>{
+        console.log("init movable component");
         if(!selectedComponent)
             return;
+        console.log("DONE init movable component");
 
         setSlide(document.getElementById("stage-container").children[0]);
 
@@ -41,8 +43,10 @@ export default function MoveableComponent() {
     }, [selectedComponent]);
 
     useEffect(()=>{
+        console.log("send update");
         if(!selectedSlide || !selectedComponent)
             return;
+        console.log("DONE send update");
 
         let slideIdx = selectedSlide.index;
         let componentIdx = selectedComponent.index;
@@ -64,10 +68,10 @@ export default function MoveableComponent() {
 
                 draggable={true}
                 rotatable={true}
-                // resizable={type==='image'}
-                // scalable={type==='text'}
-                resizable={false}
-                scalable={true}
+                resizable={type==='image'}
+                scalable={type==='text'}
+                // resizable={false}
+                // scalable={true}
 
                 origin={false}
 
