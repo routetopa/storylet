@@ -4,13 +4,11 @@ import cloneDeep from 'lodash/cloneDeep';
 import {Formik, Field, Form, ErrorMessage, useFormikContext} from 'formik';
 import * as Yup from 'yup';
 import debounce from 'just-debounce-it';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import {faLock, faLockOpen} from "@fortawesome/free-solid-svg-icons";
 
 import '../../../vendor/bootstrap.min.css';
 import '../../../style/slide-components/properties/image-properties.css';
-import setSlideData from "../../../reducer/actions/set-slide-data";
-import slidesData from "../../../reducer/slide-data-reducer";
+
+import setSlideData from "../../../reducer/actions/set-slides-data";
 
 const AutoSave = ({debounceMs})=>{
     const formik = useFormikContext();
@@ -27,26 +25,48 @@ const AutoSave = ({debounceMs})=>{
 };
 
 export default function ImageProperties() {
-    const selectedSlide = useSelector(state => state.selectedSlideReducer);
-    const selectedComponent = useSelector(state => state.selectedComponentReducer);
-
     const dispatch = useDispatch();
-    const slidesData = useSelector(state => state.slidesData);
 
+    const slidesData = useSelector(state => state.slidesData);
+    const selectedSlide = useSelector(state => state.selectedSlide);
+    const selectedComponent = useSelector(state => state.selectedComponent);
+
+    // Form Parameters
     const [initialValues, setInitialValues] = useState({
-        width: '20',
-        height: '20',
+        width: '0',
+        height: '0',
         top: '0',
         left: '0',
         zIndex: '0',
-        scaleX: '1',
-        scaleY: '1',
+        scaleX: '0',
+        scaleY: '0',
         keepRatio: true,
         rotate: '0'
     });
 
     useEffect(()=>{
-        if(!selectedComponent)
+        // console.log("properties slidesData");
+        // if(!slidesData || !selectedSlide || !selectedComponent)
+        //     return;
+        //
+        // debugger
+        // let component = slidesData[selectedSlide.index].components[selectedComponent.index];
+        //
+        // setInitialValues({
+        //     width: Math.round(component.w * 10) / 10,
+        //     height: Math.round(component.h * 10) / 10,
+        //     top: Math.round(component.x * 10) / 10,
+        //     left: Math.round(component.y * 10) / 10,
+        //     zIndex: component.zIndex,
+        //     scaleX: Math.round(component.scale[0] * 10) / 10,
+        //     scaleY: Math.round(component.scale[1] * 10) / 10,
+        //     keepRatio: component.keepRatio,
+        //     rotate: Math.round(component.rotate * 10) / 10
+        // });
+    }, [slidesData]);
+
+    useEffect(()=>{
+        if(!selectedComponent || selectedComponent.type !== 'image')
             return;
 
         setInitialValues({
@@ -60,8 +80,7 @@ export default function ImageProperties() {
             keepRatio: selectedComponent.keepRatio,
             rotate: Math.round(selectedComponent.rotate * 10) / 10
         });
-
-    }, [selectedComponent, slidesData]);
+    }, [selectedComponent]);
 
     return (
         <Formik
@@ -78,7 +97,7 @@ export default function ImageProperties() {
             })}
 
             onSubmit={fields => {
-                console.log("submit");
+                return
                 let slideIdx = selectedSlide.index;
                 let componentIdx = selectedComponent.index;
 

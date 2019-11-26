@@ -9,7 +9,7 @@ import Image from './slide-components/image'
 import SlideStyle from '../style/slide'
 
 // Actions
-import componentSelected from '../reducer/actions/select-component-action'
+import componentSelected from '../reducer/actions/select-component'
 
 const shouldSlideNotRender = (prevProps, nextProps) => {
     return false; //always rerender

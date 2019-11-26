@@ -8,8 +8,8 @@ import Slide from '../slide'
 import '../../style/container/slide-container.css';
 
 // Actions
-import selectSlide from '../../reducer/actions/select-slide-action'
-import componentSelected from "../../reducer/actions/select-component-action";
+import selectSlide from '../../reducer/actions/select-slide'
+import componentSelected from "../../reducer/actions/select-component";
 
 export default function SlideContainer()
 {

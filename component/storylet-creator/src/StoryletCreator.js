@@ -5,7 +5,7 @@ import HeaderContainer from './components/container/header-container'
 import BodyContainer from './components/container/body-container'
 import MoveableComponent from "./components/moveable/moveable-component";
 
-import setSlideData from './reducer/actions/set-slide-data'
+import setSlideData from './reducer/actions/set-slides-data'
 
 import './StoryletCreator.css';
 

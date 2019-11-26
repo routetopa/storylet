@@ -1,0 +1,24 @@
+#cover-container {
+    z-index: 1001;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(55,71,79,.5);
+    transition: background-color .15s linear;
+}
+
+#wordcloud-container {
+    z-index: 1000;
+    position: absolute;
+    top: 104px;
+    left: 104px;
+    width: calc(100% - 208px);
+    height: calc(100% - 208px);
+    background-color: var(--storylet-white);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}

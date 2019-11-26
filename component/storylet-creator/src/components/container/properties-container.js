@@ -8,7 +8,7 @@ import '../../style/container/properties-container.css'
 
 export default function PropertiesContainer()
 {
-    const selectedComponent = useSelector(state => state.selectedComponentReducer);
+    const selectedComponent = useSelector(state => state.selectedComponent);
 
     return (
         <div className="properties-container">

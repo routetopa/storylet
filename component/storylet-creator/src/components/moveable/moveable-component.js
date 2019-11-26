@@ -1,66 +1,73 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import cloneDeep from 'lodash/cloneDeep';
 import Moveable from 'react-moveable';
+import cloneDeep from 'lodash/cloneDeep';
 
-import setSlideData from '../../reducer/actions/set-slide-data'
+import setSlidesData from '../../reducer/actions/set-slides-data'
 
 export default function MoveableComponent() {
-    const selectedSlide = useSelector(state => state.selectedSlideReducer);
-    const selectedComponent = useSelector(state => state.selectedComponentReducer);
-
     const dispatch = useDispatch();
+
     const slidesData = useSelector(state => state.slidesData);
+    const selectedSlide = useSelector(state => state.selectedSlide);
+    const selectedComponent = useSelector(state => state.selectedComponent);
 
     const [slide, setSlide] = useState(null);
+    const [slideIdx, setSlideIdx] = useState(null);
+    const [componentIdx, setComponentIdx] = useState(null);
 
-    const [type, setType] = useState("text");
-    const [position, setPosition] = useState([0,0]);
-    const [size, setSize] = useState([20,20]);
-    const [scale, setScale] = useState([1,1]);
-    const [rotate, setRotate] = useState(0);
-    const [keepRatio, setKeepRatio] = useState(true);
-
-    let local_position;
-    let local_size;
-    let local_scale;
-    let local_rotate;
+    // Component Parameters
+    const [position, setPosition] = useState(null);
+    const [size, setSize] = useState(null);
+    const [scale, setScale] = useState(null);
+    const [rotate, setRotate] = useState(null);
 
     useEffect(()=>{
-        console.log("init movable component");
+        //todo
+    }, [slidesData]);
+
+    useEffect(()=>{
+        if(!selectedSlide)
+            return;
+
+        setSlideIdx(selectedSlide.index);
+        setSlide(document.getElementById("slide-wrapper").children[0]);
+    }, [selectedSlide]);
+
+    useEffect(()=>{
         if(!selectedComponent)
             return;
-        console.log("DONE init movable component");
 
-        setSlide(document.getElementById("stage-container").children[0]);
+        setComponentIdx(selectedComponent.index);
 
-        setType(selectedComponent.type);
         setPosition([selectedComponent.x,selectedComponent.y]);
         setSize([selectedComponent.w,selectedComponent.h]);
         setScale(selectedComponent.scale);
         setRotate(selectedComponent.rotate);
-        setKeepRatio(selectedComponent.keepRatio);
     }, [selectedComponent]);
 
-    useEffect(()=>{
-        console.log("send update");
-        if(!selectedSlide || !selectedComponent)
-            return;
-        console.log("DONE send update");
-
-        let slideIdx = selectedSlide.index;
-        let componentIdx = selectedComponent.index;
-
+    function setComponentParameters(name, value) {
         let data = cloneDeep(slidesData);
-        data[slideIdx].components[componentIdx].x = position[0];
-        data[slideIdx].components[componentIdx].y = position[1];
-        data[slideIdx].components[componentIdx].w = size[0];
-        data[slideIdx].components[componentIdx].h = size[1];
-        data[slideIdx].components[componentIdx].scale = scale;
-        data[slideIdx].components[componentIdx].rotate = rotate;
-        dispatch(setSlideData(data));
 
-    }, [position, size, scale, rotate]);
+        switch (name) {
+            case "size":
+                data[slideIdx].components[componentIdx].w = value[0];
+                data[slideIdx].components[componentIdx].h = value[1];
+                break;
+            case "position":
+                data[slideIdx].components[componentIdx].x = value[0];
+                data[slideIdx].components[componentIdx].y = value[1];
+                break;
+            case "scale":
+                data[slideIdx].components[componentIdx].scale = value;
+                break;
+            case "rotate":
+                data[slideIdx].components[componentIdx].rotate = value;
+                break;
+        }
+
+        dispatch(setSlidesData(data));
+    }
 
     return (
             <Moveable
@@ -68,81 +75,68 @@ export default function MoveableComponent() {
 
                 draggable={true}
                 rotatable={true}
-                resizable={type==='image'}
-                scalable={type==='text'}
+                resizable={selectedComponent ? selectedComponent.type ==='image' : false}
+                scalable={selectedComponent ? selectedComponent.type ==='text' : false}
                 // resizable={false}
                 // scalable={true}
 
                 origin={false}
 
-                keepRatio={keepRatio}
+                keepRatio={selectedComponent ? selectedComponent.keepRatio : true}
 
-                // Drag
-                onDragStart={(target, left, top) => {
-                    local_position = [left, top];
-                }}
+                // DRAG
                 onDrag={({target, left, top, beforeDelta}) => {
-                    local_position = [left, top];
-                    target.style.left = local_position[0] + "px";
-                    target.style.top = local_position[1] + "px";
+                    setPosition([left, top]);
+                    target.style.left = left + "px";
+                    target.style.top = top + "px";
                 }}
                 onDragEnd={() => {
-                    let x = local_position[0]/slide.offsetWidth*100;
-                    let y = local_position[1]/slide.offsetHeight*100;
-                    setPosition([x,y]);
+                    let x = position[0]/slide.offsetWidth*100;
+                    let y = position[1]/slide.offsetHeight*100;
                     selectedComponent.x = x;
                     selectedComponent.y = y;
+                    setComponentParameters("position", [x,y]);
                 }}
 
-                // Rotate
-                onRotateStart={() => {
-                    local_rotate = rotate;
-                }}
-                onRotate={({ target, beforeDelta, delta }) => {
-                    local_rotate += delta;
-                    target.style.transform
-                        = "scale(" + scale[0] +  "," + scale[1] + ") "
-                        + "rotate(" + local_rotate +  "deg)";
-                }}
-                onRotateEnd={() => {
-                    setRotate(local_rotate);
-                    selectedComponent.rotate = local_rotate;
-                }}
-
-                // Resize
-                onResizeStart={(target, width, height) => {
-                    local_size = [width, height];
-                }}
+                // RESIZE
                 onResize={({target, width, height, dist}) => {
-                    local_size = [width, height];
-                    target.style.width = local_size[0] + "px";
-                    target.style.height = local_size[1] + "px";
+                    setSize([width, height]);
+                    target.style.width = width + "px";
+                    target.style.height = height + "px";
                 }}
                 onResizeEnd={() => {
-                    let w = local_size[0]/slide.offsetWidth*100;
-                    let h = local_size[1]/slide.offsetHeight*100;
-                    setSize([w,h]);
+                    let w = size[0]/slide.offsetWidth*100;
+                    let h = size[1]/slide.offsetHeight*100;
                     selectedComponent.w = w;
                     selectedComponent.h = h;
+                    setComponentParameters('size', [w,h]);
                 }}
 
-                // Scale
-                onScaleStart={() => {
-                    local_scale = scale;
-                }}
+                // SCALE
                 onScale={({target, delta}) => {
-                    local_scale[0] *= delta[0];
-                    local_scale[1] *= delta[1];
+                    setScale([scale[0]*delta[0],scale[1]*delta[1]])
                     target.style.transform
-                        = "scale(" + local_scale[0] +  "," + local_scale[1] + ") "
+                        = "scale(" + scale[0] +  "," + scale[1] + ") "
                         + "rotate(" + rotate +  "deg)";
                 }}
                 onScaleEnd={() => {
-                    setScale(cloneDeep(local_scale));
-                    selectedComponent.scale = local_scale;
+                    selectedComponent.scale = scale;
+                    setComponentParameters("scale", scale);
                 }}
 
-                // Snappable
+                // ROTATE
+                onRotate={({ target, beforeDelta, delta }) => {
+                    setRotate(rotate + delta);
+                    target.style.transform
+                        = "scale(" + scale[0] +  "," + scale[1] + ") "
+                        + "rotate(" + rotate +  "deg)";
+                }}
+                onRotateEnd={() => {
+                    selectedComponent.rotate = rotate;
+                    setComponentParameters("rotate", rotate);
+                }}
+
+                // SNAPPABLE
                 snappable={true}
                 bounds={{ left: document.documentElement.clientWidth*0.25, top: 56, bottom: document.documentElement.clientHeight-8, right: document.documentElement.clientWidth*0.75 }}
                 verticalGuidelines={[slide ? document.documentElement.clientWidth*0.50-slide.offsetWidth/2 : null, document.documentElement.clientWidth*0.50, slide ? document.documentElement.clientWidth*0.50+slide.offsetWidth/2 : null]}

@@ -1,13 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
-import setSlideData from '../../reducer/actions/set-slide-data'
+import setSlideData from '../../reducer/actions/set-slides-data'
 
 import '../../style/slide-components/text-style.css';
+import selectedSlide from "../../reducer/selected-slide";
 
 export default function Text({component, onClick, isEditable})
 {
-    const selectedSlide = useSelector(state => state.selectedSlideReducer);
+    const selectedSlide = useSelector(state => state.selectedSlide);
 
     const dispatch = useDispatch();
     const slidesData = useSelector(state => state.slidesData);
@@ -24,7 +25,7 @@ export default function Text({component, onClick, isEditable})
 
         let data = cloneDeep(slidesData);
         data[slideIdx].components[componentIdx].value = text;
-        dispatch(setSlideData(data));
+        // dispatch(setSlideData(data));
 
     }, [text]);
 

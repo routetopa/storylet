@@ -1,12 +1,13 @@
-import selectedComponentReducer from './selected-component-reducer';
-import selectedSlideReducer from './selected-slide-reducer'
-import slidesData from './slide-data-reducer'
 import {combineReducers} from 'redux'
 
+import slidesData from './slides-data'
+import selectedSlide from './selected-slide'
+import selectedComponent from './selected-component';
+
 const reducers = combineReducers({
-    selectedComponentReducer: selectedComponentReducer,
-    selectedSlideReducer: selectedSlideReducer,
-    slidesData:slidesData
+    slidesData : slidesData,
+    selectedSlide : selectedSlide,
+    selectedComponent : selectedComponent
 });
 
 export default reducers

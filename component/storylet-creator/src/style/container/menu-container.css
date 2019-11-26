@@ -1,0 +1,34 @@
+#menu-container {
+    display: flex;
+    flex-direction: row;
+
+    background-color: #FFFFFF;
+    height: 48px;
+    box-shadow: 0 1px 0 rgba(14,19,24,.15);
+    border-right: 1px solid var(--storylet-blue-grey-50);
+
+    /*position: relative;*/
+    /*width: 100%;*/
+    /*height: calc(100vh - 56px);*/
+
+    /*background-color: var(--storylet-blue-grey-50);*/
+
+    /*overflow: hidden;*/
+}
+
+.buttons {
+    width: 75%;
+}
+
+.find-ideas {
+    display: flex;
+    width: 25%;
+    padding: 5px;
+}
+
+.find-ideas .icon {
+    font-size: 38px;
+    padding: 2px;
+    margin-right: 8px;
+    color: #FFEB3B;
+}
