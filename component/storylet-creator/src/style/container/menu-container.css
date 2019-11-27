@@ -30,5 +30,11 @@
     font-size: 38px;
     padding: 2px;
     margin-right: 8px;
+    color: var(--storylet-blue-grey-50);
+
+    cursor: pointer;
+}
+
+.find-ideas .icon:hover {
     color: #FFEB3B;
 }
