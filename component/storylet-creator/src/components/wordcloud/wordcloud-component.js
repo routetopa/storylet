@@ -4,10 +4,9 @@ import { select } from 'd3-selection';
 import ReactWordcloud from 'react-wordcloud'; // https://react-wordcloud.netlify.com/usage/options
 
 export default function WordcloudComponent(response) {
-
-    console.log("ciao, sono wc component!");
-
     useEffect(()=>{
+        if(response.words.length === 0)
+            return;
         let words = [];
         for(let i=0; i<response.words.length; i++) {
             words.push({
@@ -17,7 +16,7 @@ export default function WordcloudComponent(response) {
             });
         }
         setWords(words);
-        console.log("wc-->response");
+        console.log(words);
     }, [response]);
 
     const [words, setWords] = useState([]);
@@ -59,6 +58,9 @@ export default function WordcloudComponent(response) {
     }
 
     return (
-        <ReactWordcloud callbacks={callbacks} options={options} words={words} />
+        <>
+            {(() => {console.log('RENDER WordcloudComponent')})()}
+            <ReactWordcloud callbacks={callbacks} options={options} words={words} />
+        </>
     )
 };
