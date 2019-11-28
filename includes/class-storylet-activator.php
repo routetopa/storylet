@@ -39,6 +39,7 @@ class Storylet_Activator {
 	{
 		add_rewrite_rule('^storylet$','index.php?storylet=1','top');
         add_rewrite_rule('^storylet-creator','index.php?storylet-creator=1','top');
+        add_rewrite_rule('^storylet-viewer','index.php?storylet-viewer=1','top');
 		flush_rewrite_rules();
 	}
 
