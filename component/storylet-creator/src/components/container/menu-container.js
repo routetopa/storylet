@@ -92,11 +92,7 @@ export default function MenuContainer() {
 
         dispatch(setSlidesData(data));
         dispatch(selectSlide(data[slideIdx]));
-
-        setTimeout(function(){
-            component.target = document.getElementById("component-"+index);
-            dispatch(selectComponent(component));
-        }, 0);
+        dispatch(selectComponent(component));
     };
 
     const add_image = () =>

@@ -27,11 +27,11 @@ function Slide({parameters, isEditable, onClick})
                             switch (c.type) {
                                 case 'text'  :
                                     return (
-                                        <Text key={idx} isEditable={isEditable} component={c} onClick={isEditable ? (evt) => {c.target = evt.target; dispatch(componentSelected(c))} : null} />
+                                        <Text key={idx} isEditable={isEditable} component={c} onClick={isEditable ? () => {dispatch(componentSelected(c))} : null} />
                                     );
                                 case 'image' :
                                     return (
-                                        <Image key={idx} component={c} onClick={isEditable ? (evt) => {c.target = evt.target.parentElement; dispatch(componentSelected(c))} : null}/>
+                                        <Image key={idx} isEditable={isEditable} component={c} onClick={isEditable ? () => {dispatch(componentSelected(c))} : null}/>
                                     );
                                 // default : break;
                             }

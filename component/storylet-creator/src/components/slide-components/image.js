@@ -2,10 +2,10 @@ import React from 'react'
 
 import '../../style/slide-components/image-style.css';
 
-export default function Image({component, onClick})
+export default function Image({component, onClick, isEditable})
 {
     return (
-        <div className="image-moveable-container" onClick={onClick}
+        <div className="image-moveable-container" onClick={onClick} id={isEditable ? "component-"+component.index : ""}
         style={{
             top:component.y+'%',
             left:component.x+'%',

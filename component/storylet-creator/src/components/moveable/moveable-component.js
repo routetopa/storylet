@@ -71,7 +71,7 @@ export default function MoveableComponent() {
 
     return (
             <Moveable
-                target={selectedComponent ? selectedComponent.target : null}
+                target={selectedComponent ? document.getElementById("component-"+componentIdx) : null}
 
                 draggable={true}
                 rotatable={true}
