@@ -1,8 +1,8 @@
-const slidesData = (state = [], action) => {
+const newText = (state = [], action) => {
     switch (action.type){
-        case 'SET_SLIDES_DATA' : return action.payload;
+        case 'ADD_TEXT' : return action.payload;
         default : return state;
     }
 };
 
-export default slidesData
+export default newText

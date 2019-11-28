@@ -30,7 +30,7 @@ export default function Text({component, onClick, isEditable})
     }, [text]);
 
     return (
-        <div className="text-moveable-container" onClick={onClick} onBlur={(e) => {setText(e.target.innerText);}}
+        <div id={isEditable ? "component-"+component.index : ""} className="text-moveable-container" onClick={onClick} onBlur={(e) => {setText(e.target.innerText);}}
             style={{
                 top:component.y+'%',
                 left:component.x+'%',

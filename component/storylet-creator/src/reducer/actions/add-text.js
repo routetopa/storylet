@@ -1,8 +1,8 @@
-const selectComponent = (data) => {
+const addText = (data) => {
     return {
-        type: 'SELECT_COMPONENT',
+        type: 'ADD_TEXT',
         payload: data
     };
 };
 
-export default selectComponent
+export default addText

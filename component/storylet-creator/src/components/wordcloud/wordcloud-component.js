@@ -59,7 +59,7 @@ export default function WordcloudComponent(response) {
 
     return (
         <>
-            {(() => {console.log('RENDER WordcloudComponent')})()}
+            {/*{(() => {console.log('RENDER WordcloudComponent')})()}*/}
             <ReactWordcloud callbacks={callbacks} options={options} words={words} />
         </>
     )

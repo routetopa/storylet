@@ -6,18 +6,30 @@
     height: 48px;
     box-shadow: 0 1px 0 rgba(14,19,24,.15);
     border-right: 1px solid var(--storylet-blue-grey-50);
-
-    /*position: relative;*/
-    /*width: 100%;*/
-    /*height: calc(100vh - 56px);*/
-
-    /*background-color: var(--storylet-blue-grey-50);*/
-
-    /*overflow: hidden;*/
 }
 
 .buttons {
+    display: flex;
     width: 75%;
+    padding: 5px;
+}
+
+.buttons .icon {
+    font-size: 38px;
+    padding: 7px;
+    margin-left: 8px;
+    cursor: pointer;
+    color: var(--storylet-grey-900);
+    transition: background-color .3s linear;
+    border-radius: 4px;
+}
+
+.buttons .icon:hover {
+    background-color: var(--storylet-grey-200);
+}
+
+.buttons .icon:first-child {
+    margin-left: 16px;
 }
 
 .find-ideas {
@@ -30,9 +42,9 @@
     font-size: 38px;
     padding: 2px;
     margin-right: 8px;
-    color: var(--storylet-blue-grey-50);
-
     cursor: pointer;
+    color: var(--storylet-blue-grey-50);
+    transition: color .45s linear;
 }
 
 .find-ideas .icon:hover {
