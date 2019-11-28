@@ -8,7 +8,7 @@ if(!is_user_logged_in())
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <base href="<?php echo $base_path ?>" />
-    <title>Storylet List</title>
+    <title>Storylet Viewer</title>
     <link type='text/css' media='all' href="<?php echo $base_path ?>static/css/main.288548e1.chunk.css" rel="stylesheet">
 </head>
 <body>
@@ -19,7 +19,7 @@ if(!is_user_logged_in())
 <script type="text/javascript">
 
     window.STATIC = {
-        IMAGE_BASE_PATH: "http://test.com/wp/wp-content/plugins/storylet/templates/storylet-creator/"
+        IMAGE_BASE_PATH: "<?php echo plugins_url() ?>/storylet/templates/storylet-creator/"
     };
 
     window.API_ENDPOINT = {
