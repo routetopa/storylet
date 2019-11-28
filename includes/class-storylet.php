@@ -186,6 +186,7 @@ class Storylet {
 		// VIRTUAL PAGE
 		$this->loader->add_route('storylet', 'storylet-frontend/index');
 		$this->loader->add_route('storylet-creator', 'storylet-creator/index');
+		$this->loader->add_route('storylet-viewer', 'storylet-viewer/index');
 	}
 
 	/**

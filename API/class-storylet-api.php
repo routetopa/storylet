@@ -33,7 +33,7 @@ class Storylet_API extends WP_REST_Controller
 			//'schema' => 'prefix_get_comment_schema',
 		));
 
-		register_rest_route($this->namespace, '/storylet', array(
+		register_rest_route($this->namespace, '/storylet(?:/(?P<storyletid>\d+))?', array(
 			array(
 				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => array( $this, 'get_storylet' ),
@@ -104,7 +104,14 @@ class Storylet_API extends WP_REST_Controller
 
 	public function get_storylet( $request )
 	{
-		return rest_ensure_response(['status' => 'OK', 'data' => StoryletModel::all()->toArray()]);
+        if($request['storyletid'])
+        {
+            $storylet = StoryletModel::find($request['storyletid']);
+            if($storylet) $storylet->toArray();
+            return rest_ensure_response(['status' => 'OK', 'data' => $storylet]);
+        } else {
+            return rest_ensure_response(['status' => 'OK', 'data' => StoryletModel::all()->toArray()]);
+        }
 	}
 
 	/*function prefix_get_comment_schema() {

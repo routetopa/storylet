@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
 const SlideStyle = styled.div`
-position: absolute;
   width: 80%;
   padding-top: 80%;
   margin: 40px auto;
