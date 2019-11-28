@@ -1,0 +1,17 @@
+.parentStory
+{
+  display:flex;
+  min-width: 100%;
+}
+
+.contentParentStory
+{
+  display:flex;
+  flex-direction:row;
+  margin: 30px auto 0 auto;
+}
+
+.contentParentStory div
+{
+  margin-right: 80px;
+}
