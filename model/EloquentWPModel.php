@@ -7,14 +7,14 @@ abstract class EloquentWPModel extends \WeDevs\ORM\Eloquent\Model
 	 *
 	 * @var string
 	 */
-	protected $primaryKey = 'ID';
+	protected $primaryKey = 'id';
 
 	/**
 	 * Make ID guarded -- without this ID doesn't save.
 	 *
 	 * @var string
 	 */
-	protected $guarded = [ 'ID' ];
+	protected $guarded = [ 'id' ];
 
 	/**
 	 * Overide parent method to make sure prefixing is correct.
@@ -24,9 +24,8 @@ abstract class EloquentWPModel extends \WeDevs\ORM\Eloquent\Model
 	public function getTable()
 	{
 		if( isset( $this->table ) ){
-			$prefix =  $this->getConnection()->db->prefix;
+		    $prefix =  $this->getConnection()->db->prefix;
 			return $prefix . $this->table;
-
 		}
 
 		return parent::getTable();

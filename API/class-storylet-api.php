@@ -40,11 +40,17 @@ class Storylet_API extends WP_REST_Controller
 				'permission_callback' => array( $this, 'get_storylet_permissions_check' ),
 			),
 			array(
-				'methods'             => WP_REST_Server::EDITABLE,
+				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => array( $this, 'create_storylet' ),
 				'permission_callback' => array( $this, 'insert_item_permissions_check' ),
 				'args'                => $this->get_endpoint_args_for_item_schema( false ),
 			),
+            array(
+                'methods'             => WP_REST_Server::EDITABLE,
+                'callback'            => array( $this, 'update_storylet' ),
+                'permission_callback' => array( $this, 'insert_item_permissions_check' ),
+                'args'                => $this->get_endpoint_args_for_item_schema( false ),
+            ),
 			'schema' => null,
 			// SCHEMA IS AVAILABLE THROUGH OPTION REQUEST TO THIS ENDPOINT
 			//'schema' => 'prefix_get_comment_schema',
@@ -58,7 +64,7 @@ class Storylet_API extends WP_REST_Controller
 
 	public function insert_item_permissions_check( $request )
 	{
-	    return is_user_logged_in();
+	    return true || is_user_logged_in();
 	}
 
 	public function get_storylet_template( $request )
@@ -74,6 +80,21 @@ class Storylet_API extends WP_REST_Controller
 
 		return rest_ensure_response(['status' => 'OK', 'data' => $storylet_tamplates]);
 	}
+
+	public function update_storylet( $request )
+    {
+        try
+        {
+            $storylet = StoryletModel::find($request['storyletid']);
+            $storylet->story = json_encode($request['story']);
+            $storylet->save();
+
+            return rest_ensure_response(['status' => 'OK', 'data' => $request['storyletid']]);
+
+        } catch (Exception $e) {
+            return rest_ensure_response(['status' => 'K0', 'error' => $e->getMessage()]);
+        }
+    }
 
 	public function create_storylet( $request )
 	{

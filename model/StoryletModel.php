@@ -4,7 +4,7 @@ require_once ('EloquentWPModel.php');
 
 class StoryletModel extends EloquentWPModel {
 
-	protected $table = 'story_storylet';
+	protected $table = "story_storylet";
 
 	protected $fillable = [
 		'name',
@@ -14,6 +14,11 @@ class StoryletModel extends EloquentWPModel {
 		'themeId',
         'story'
 	];
+
+    public function getTable()
+    {
+        return $this->getConnection()->db->prefix . 'story_storylet';
+    }
 
 	public $timestamps = false;
 }
