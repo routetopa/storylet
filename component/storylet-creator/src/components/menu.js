@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import '../style/menu.css';
 
@@ -10,6 +10,7 @@ import axios from "axios";
 export default function Menu()
 {
     const [menuStatus, setMenuStatus] = useState('');
+    const [autosave, setAutosave] = useState(false);
     const slidesData = useSelector(state => state.slidesData);
 
     const toggle_sidebar = () =>
@@ -37,6 +38,16 @@ export default function Menu()
         });
     };
 
+    useEffect(() => {
+        if(autosave)
+            save_storylet();
+    }, [slidesData]);
+
+    const set_autosave = () =>
+    {
+        setAutosave(!autosave);
+    };
+
     return (
         <div className="menu">
             <FontAwesomeIcon icon={faBars} className="icon" onClick={toggle_sidebar} />
@@ -46,6 +57,8 @@ export default function Menu()
                 </div>
                 <div className="sidebarBody">
                     <div onClick={save_storylet}>SAVE</div>
+                    <label>Autosave</label>
+                    <input type="checkbox" onChange={set_autosave} value="autosave" />
                 </div>
             </div>
         </div>
