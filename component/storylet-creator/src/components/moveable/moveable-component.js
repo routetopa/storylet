@@ -70,6 +70,8 @@ export default function MoveableComponent() {
     }
 
     return (
+        <>
+            {(() => {console.log('RENDER Moveable')})()}
             <Moveable
                 target={selectedComponent ? document.getElementById("component-"+componentIdx) : null}
 
@@ -144,5 +146,6 @@ export default function MoveableComponent() {
                 snapCenter={true}
                 // elementGuidelines={[document.querySelector("#stage-container .image-moveable-container")]}
             />
+        </>
     )
 }

@@ -352,6 +352,7 @@ export default function ImageGalleryContainer({isOpened, closeGallery}) {
     }, [isOpened]);
 
 
+
     return (
         <>
             <div id="image-gallery-full" ref={full} onClick={closeGallery}>

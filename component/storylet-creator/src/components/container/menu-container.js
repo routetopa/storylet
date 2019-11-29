@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch, batch} from 'react-redux'
 import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
 
@@ -38,7 +38,6 @@ export default function MenuContainer() {
 
         setSlideIdx(selectedSlide.index);
 
-        console.log("spa")
     }, [selectedSlide]);
 
     useEffect(()=>{
@@ -93,9 +92,11 @@ export default function MenuContainer() {
 
         data[slideIdx].components.push(component);
 
-        dispatch(setSlidesData(data));
-        dispatch(selectSlide(data[slideIdx]));
-        dispatch(selectComponent(component));
+        batch(() => {
+            dispatch(setSlidesData(data));
+            dispatch(selectSlide(data[slideIdx]));
+            dispatch(selectComponent(component));
+        });
     };
 
     const open_gallery = () =>
@@ -103,8 +104,36 @@ export default function MenuContainer() {
         setIsOpened(true);
     };
 
-    const close_gallery = () =>
+    const close_gallery = (e) =>
     {
+        if(e.target.nodeName === "IMG") {
+            let data = cloneDeep(slidesData);
+
+            let index = data[slideIdx].components.length;
+            setComponentIdx(index);
+
+            let component = {
+                "index": index,
+                "type": "image",
+                "x": 0,
+                "y": 0,
+                "w": 40,
+                "h": e.target.height / e.target.width * 40,
+                "scale": [1,1],
+                "rotate": 0,
+                "keepRatio": true,
+                "zIndex": 0,
+                "src": e.target.src
+            };
+
+            data[slideIdx].components.push(component);
+
+            batch(() => {
+                dispatch(setSlidesData(data));
+                dispatch(selectSlide(data[slideIdx]));
+                dispatch(selectComponent(component));
+            });
+        }
         setIsOpened(false);
     };
 
