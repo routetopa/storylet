@@ -5,17 +5,22 @@ import WordcloudComponent from "../wordcloud/wordcloud-component";
 
 export default function WordcloudContainer(response) {
 
+    //const [words, setWords] = useState([]);
     const coverContainer = useRef(false);
 
-    useEffect(()=>{
+    useEffect(() =>
+    {
         if (response.words.length)
-            coverContainer.current.style.display = 'block';
-        else
-            coverContainer.current.style.display = 'none';
+        {
+            coverContainer.current.style.visibility = 'visible';
+            //setWords(response.words);
+        } else
+            coverContainer.current.style.visibility = 'hidden';
+
     }, [response]);
 
     function hideWordcloud() {
-        coverContainer.current.style.display = 'none';
+        coverContainer.current.style.visibility = 'hidden';
     }
 
     return (

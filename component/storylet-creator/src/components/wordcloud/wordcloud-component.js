@@ -15,8 +15,8 @@ export default function WordcloudComponent(response) {
                 color: colors[response.words[i].pos]
             });
         }
+        //console.log(words);
         setWords(words);
-        console.log(words);
     }, [response]);
 
     const [words, setWords] = useState([]);
