@@ -1,0 +1,32 @@
+#image-gallery-full {
+    display: none;
+
+    z-index: 1001;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(55,71,79,.5);
+    transition: background-color .15s linear;
+}
+
+#image-gallery {
+    z-index: 1000;
+    position: absolute;
+    top: 104px;
+    left: 25%;
+    width: 50%;
+    height: calc(100% - 208px);
+    padding: 8px;
+    background-color: var(--storylet-white);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+    overflow-x: auto;
+}
+
+#image-gallery img {
+    cursor: pointer;
+}

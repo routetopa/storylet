@@ -4,6 +4,7 @@ import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
 
 import WordcloudContainer from './wordcloud-container'
+import ImageGalleryContainer from './image-gallery-container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faImage } from '@fortawesome/free-regular-svg-icons'
 import { faFont } from '@fortawesome/free-solid-svg-icons'
@@ -28,6 +29,8 @@ export default function MenuContainer() {
 
     const [words, setWords] = useState([]);
     const searchKey = useRef(null);
+
+    const [isOpened, setIsOpened] = useState(false);
 
     useEffect(()=>{
         if(!selectedSlide)
@@ -95,9 +98,14 @@ export default function MenuContainer() {
         dispatch(selectComponent(component));
     };
 
-    const add_image = () =>
+    const open_gallery = () =>
     {
-        alert("add image")
+        setIsOpened(true);
+    };
+
+    const close_gallery = () =>
+    {
+        setIsOpened(false);
     };
 
     return (
@@ -105,7 +113,11 @@ export default function MenuContainer() {
             <div id="menu-container">
                 <div className="buttons" >
                     <FontAwesomeIcon icon={faFont} className="icon" onClick={add_text} />
-                    <FontAwesomeIcon icon={faImage} className="icon" onClick={add_image} />
+                    {/*<select className="form-control col-md-10 col-sm-10">*/}
+                    {/*    <option>Fantasia</option>*/}
+                    {/*    <option>Catalogo 2</option>*/}
+                    {/*</select>*/}
+                    <FontAwesomeIcon icon={faImage} className="icon" onClick={open_gallery} />
                 </div>
                 <div className="find-ideas">
                     <FontAwesomeIcon icon={faLightbulb} className="icon" onClick={get_words} />
@@ -114,6 +126,8 @@ export default function MenuContainer() {
             </div>
 
             <WordcloudContainer words={words} />
+
+            <ImageGalleryContainer isOpened={isOpened} closeGallery={close_gallery} />
         </>
     )
 };
