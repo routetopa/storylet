@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 
 import '../../style/container/wordcloud-container.css'
 import WordcloudComponent from "../wordcloud/wordcloud-component";
@@ -11,10 +11,8 @@ export default function WordcloudContainer(response) {
     useEffect(() =>
     {
         if (response.words.length)
-        {
             coverContainer.current.style.visibility = 'visible';
-            //setWords(response.words);
-        } else
+        else
             coverContainer.current.style.visibility = 'hidden';
 
     }, [response]);

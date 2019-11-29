@@ -7,7 +7,7 @@ import WordcloudContainer from './wordcloud-container'
 import ImageGalleryContainer from './image-gallery-container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faImage } from '@fortawesome/free-regular-svg-icons'
-import { faFont } from '@fortawesome/free-solid-svg-icons'
+import { faFont, faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
 
 import '../../vendor/bootstrap.min.css';
 import '../../style/container/menu-container.css'
@@ -108,10 +108,52 @@ export default function MenuContainer() {
         setIsOpened(false);
     };
 
+    const update_slides_index = (data, idx) =>
+    {
+        for(let i = idx; i<data.length; i++)
+            data[i].index +=1;
+    };
+
+    const add_slide = () =>
+    {
+        let data = cloneDeep(slidesData);
+
+        let slide = {
+            index:  data.length,
+            background: "",
+            components: [],
+            id: data.length,
+            type: ""
+        };
+
+        if(slideIdx !== null)
+        {
+            slide.index = slideIdx + 1;
+            update_slides_index(data, slideIdx + 1);
+            data.splice(slideIdx + 1, 0, slide);
+        } else {
+            data.push(slide);
+        }
+
+        dispatch(setSlidesData(data));
+    };
+
+    const copy_slide = () =>
+    {
+        let data = cloneDeep(slidesData);
+        let cloned_node = cloneDeep(data[slideIdx]);
+
+        update_slides_index(data, slideIdx);
+        data.splice(slideIdx, 0, cloned_node);
+        dispatch(setSlidesData(data));
+    };
+
     return (
         <>
             <div id="menu-container">
                 <div className="buttons" >
+                    <FontAwesomeIcon icon={faPlus} className="icon" onClick={add_slide} />
+                    <FontAwesomeIcon icon={faCopy} className="icon" onClick={copy_slide} />
                     <FontAwesomeIcon icon={faFont} className="icon" onClick={add_text} />
                     {/*<select className="form-control col-md-10 col-sm-10">*/}
                     {/*    <option>Fantasia</option>*/}
