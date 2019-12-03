@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useRef} from 'react';
 import 'd3-transition';
 import { select } from 'd3-selection';
-import ReactWordcloud from 'react-wordcloud'; // https://react-wordcloud.netlify.com/usage/options
+import ReactWordcloud from 'react-wordcloud';
+import axios from "axios"; // https://react-wordcloud.netlify.com/usage/options
 
 export default function WordcloudComponent(response) {
     useEffect(()=>{
@@ -27,7 +28,9 @@ export default function WordcloudComponent(response) {
         fontSizes: [20, 100],
         rotations: 3,
         rotationAngles: [0, 90],
-        padding: 1
+        // fontFamily: '"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif',
+        padding: 1,
+        transitionDuration: 1000
     };
 
     const callbacks = {
@@ -46,9 +49,25 @@ export default function WordcloudComponent(response) {
             const text = select(element);
             text
                 .on('click', () => {
-                    if (isActive) {
-                        window.open(`https://duckduckgo.com/?q=${word.text}`, '_blank');
-                    }
+                    let searchKey = word.text;
+                    axios.get('https://api.wordassociations.net/associations/v1.0/json/search?apikey=ebb2ab66-af3f-42c9-bc24-8072f0c413d5&text=' + searchKey + '&lang=it&limit=50')
+                        .then((response) => {
+                            let items = response.data.response[0].items;
+                            if(items.length === 0)
+                                return;
+                            let words = [];
+                            for(let i=0; i<items.length; i++) {
+                                words.push({
+                                    text: items[i].item,
+                                    value: items[i].weight,
+                                    color: colors[items[i].pos]
+                                });
+                            }
+                            setWords(words)
+                        }, (error) => {
+                            console.log(error);
+                        });
+
                 })
                 .transition()
                 // .attr('background', 'white')

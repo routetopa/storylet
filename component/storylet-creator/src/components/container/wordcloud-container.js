@@ -18,7 +18,7 @@ export default function WordcloudContainer(response) {
     }, [response]);
 
     function hideWordcloud() {
-        coverContainer.current.style.visibility = 'hidden';
+        // coverContainer.current.style.visibility = 'hidden';
     }
 
     return (
