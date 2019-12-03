@@ -196,7 +196,7 @@ export default function MenuContainer() {
                 </div>
             </div>
 
-            <WordcloudContainer words={words} />
+            <WordcloudContainer items={words} />
 
             <ImageGalleryContainer isOpened={isOpened} closeGallery={close_gallery} />
         </>

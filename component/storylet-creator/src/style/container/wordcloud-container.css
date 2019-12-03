@@ -1,5 +1,7 @@
 #cover-container {
-    z-index: 4001;
+    visibility: hidden;
+
+    z-index: 4000;
     position: fixed;
     top: 0;
     left: 0;
@@ -12,7 +14,7 @@
 }
 
 #wordcloud-container {
-    z-index: 4000;
+    z-index: 4001;
     position: absolute;
     top: 104px;
     left: 104px;
@@ -21,4 +23,24 @@
     background-color: var(--storylet-white);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
+
+    overflow: hidden;
+}
+
+#path {
+    height: 48px;
+    line-height: 40px;
+    padding: 5px;
+    background-color: var(--storylet-blue-grey-50);
+
+    font-weight: 700;
+}
+
+#path span {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#wordcloud {
+    height: calc(100% - 48px);
 }
