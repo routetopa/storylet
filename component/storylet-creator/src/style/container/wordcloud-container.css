@@ -28,12 +28,25 @@
 }
 
 #path {
+    display: flex;
+
     height: 48px;
     line-height: 40px;
     padding: 5px;
     background-color: var(--storylet-blue-grey-50);
 
     font-weight: 700;
+}
+
+#selected-words {
+
+}
+
+#path .icon {
+    font-size: 38px;
+    padding: 2px;
+    margin-right: 8px;
+    cursor: pointer;
 }
 
 #path span {

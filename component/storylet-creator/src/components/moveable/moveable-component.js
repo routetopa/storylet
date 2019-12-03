@@ -71,7 +71,7 @@ export default function MoveableComponent() {
 
     return (
         <>
-            {(() => {console.log('RENDER Moveable')})()}
+            {/*{(() => {console.log('RENDER Moveable')})()}*/}
             <Moveable
                 target={selectedComponent ? document.getElementById("component-"+componentIdx) : null}
 
