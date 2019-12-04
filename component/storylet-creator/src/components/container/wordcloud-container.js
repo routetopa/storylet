@@ -6,6 +6,7 @@ import axios from "axios"; // https://react-wordcloud.netlify.com/usage/options
 import ReactDOM from 'react-dom';
 
 import '../../style/container/wordcloud-container.css'
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {faLightbulb} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
@@ -20,6 +21,7 @@ export default function WordcloudContainer({startingWord}) {
     {
         if(!startingWord)
             return;
+        coverContainer.current.style.visibility = 'visible';
         setSelectedWords([startingWord]);
         wordAssociations(startingWord);
     }, [startingWord]);
@@ -31,7 +33,7 @@ export default function WordcloudContainer({startingWord}) {
 
         console.log(selectedWords);
 
-        let span = []
+        let span = [];
         for (let i = 0; i < selectedWords.length; i++) {
             span.push( <span onClick={()=>{goToWordAssociations(i)}} key={i} >{selectedWords[i]}</span> );
             span.push( ' / ' );
@@ -41,11 +43,11 @@ export default function WordcloudContainer({startingWord}) {
     }, [selectedWords]);
 
     function hideWordcloud() {
-        // coverContainer.current.style.visibility = 'hidden';
+        coverContainer.current.style.visibility = 'hidden';
     }
 
     function goToWordAssociations(i) {
-        debugger
+        //todo?
         let searchKey = selectedWords[i];
         let temp = selectedWords.slice();
         temp.splice(i+1);
@@ -65,7 +67,6 @@ export default function WordcloudContainer({startingWord}) {
         axios.get('https://api.wordassociations.net/associations/v1.0/json/search?apikey=ebb2ab66-af3f-42c9-bc24-8072f0c413d5&text=' + searchKey + '&lang=it&limit=50')
             .then((response) => {
                 let items = response.data.response[0].items;
-                // if (items && items.length) {
                     let words = [];
                     for(let i=0; i<items.length; i++) {
                         words.push({
@@ -75,11 +76,6 @@ export default function WordcloudContainer({startingWord}) {
                         });
                     }
                     setWords(words);
-
-                    coverContainer.current.style.visibility = 'visible';
-                // } else {
-                //     coverContainer.current.style.visibility = 'hidden';
-                // }
             }, (error) => {
                 console.log(error);
             });
@@ -108,36 +104,32 @@ export default function WordcloudContainer({startingWord}) {
             const isActive = callback !== 'onWordMouseOut';
             const element = event.target;
             const text = select(element);
-            text
-                .on('click', () => {
-                    debugger
-                    //todo concat
-                    selectedWords.push(word.text);
-                    let temp = selectedWords.slice();
-                    setSelectedWords(temp);
+            text.on('click', () => {
+                //todo?
+                selectedWords.push(word.text);
+                let temp = selectedWords.slice();
+                setSelectedWords(temp);
 
-                    wordAssociations(word.text);
-                })
-                // .transition()
-                // .attr('background', 'white')
-                // .attr('font-size', isActive ? '300%' : '100%')
-                .attr('text-decoration', isActive ? 'underline' : 'none');
-        };
+                wordAssociations(word.text);
+            })
+            // .transition()
+            // .attr('background', 'white')
+            .attr('text-decoration', isActive ? 'underline' : 'none');
+    };
     }
 
     return (
-        <>
-            <div id="cover-container" ref={coverContainer} onClick={hideWordcloud}>
-                <div id="wordcloud-container">
-                    <div id="path">
-                        <FontAwesomeIcon icon={faLightbulb} className="icon" />
-                        <div id="selected-words"> </div>
-                    </div>
-                    <div id="wordcloud">
-                        <ReactWordcloud callbacks={callbacks} options={options} words={words} />
-                    </div>
+        <div id="cover-container" ref={coverContainer}>
+            <div id="wordcloud-container">
+                <FontAwesomeIcon id="wordcloud-close" icon={faTimes} className="icon"  onClick={hideWordcloud} />
+                <div id="path">
+                    <FontAwesomeIcon icon={faLightbulb} className="icon" />
+                    <div id="selected-words"> </div>
+                </div>
+                <div id="wordcloud">
+                    <ReactWordcloud callbacks={callbacks} options={options} words={words} />
                 </div>
             </div>
-        </>
+        </div>
     )
 };

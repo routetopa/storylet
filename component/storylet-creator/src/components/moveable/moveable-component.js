@@ -142,7 +142,7 @@ export default function MoveableComponent() {
                 snappable={true}
                 bounds={{ left: document.documentElement.clientWidth*0.25, top: 56, bottom: document.documentElement.clientHeight-8, right: document.documentElement.clientWidth*0.75 }}
                 verticalGuidelines={[slide ? document.documentElement.clientWidth*0.50-slide.offsetWidth/2 : null, document.documentElement.clientWidth*0.50, slide ? document.documentElement.clientWidth*0.50+slide.offsetWidth/2 : null]}
-                horizontalGuidelines={[96, slide ? 96+slide.offsetHeight/2 : null, slide ? 96+slide.offsetHeight : null]}
+                horizontalGuidelines={[96+48, slide ? 96+slide.offsetHeight/2 : null, slide ? 96+48+slide.offsetHeight : null]}
                 snapCenter={true}
                 // elementGuidelines={[document.querySelector("#stage-container .image-moveable-container")]}
             />
