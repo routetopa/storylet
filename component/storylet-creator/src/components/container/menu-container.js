@@ -25,7 +25,7 @@ export default function MenuContainer() {
     const [slideIdx, setSlideIdx] = useState(null);
     const [componentIdx, setComponentIdx] = useState(null);
 
-    const [startingWord, setStartingWord] = useState(null);
+    const [startingWord, setStartingWord] = useState([]);
     const searchKey = useRef(null);
 
     const [isOpened, setIsOpened] = useState(false);
@@ -45,7 +45,7 @@ export default function MenuContainer() {
     }, [selectedComponent]);
 
     const get_words = async () => {
-        setStartingWord(searchKey.current.value);
+        setStartingWord([searchKey.current.value]);
     };
 
     const add_text = () =>  {

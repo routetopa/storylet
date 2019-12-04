@@ -10,20 +10,23 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {faLightbulb} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
+import cloneDeep from 'lodash/cloneDeep';
+
 export default function WordcloudContainer({startingWord}) {
 
     const colors = {noun:'#4CAF50',adjective:'#F44336',verb:'#FF9800',adverb:'#2196F3'};
     const coverContainer = useRef(false);
     const [words, setWords] = useState([]);
     const [selectedWords, setSelectedWords] = useState(null);
+    const [clickedWord, setClickedWord] = useState(null);
 
     useEffect(() =>
     {
-        if(!startingWord)
+        if(!startingWord || startingWord.length === 0)
             return;
         coverContainer.current.style.visibility = 'visible';
-        setSelectedWords([startingWord]);
-        wordAssociations(startingWord);
+        setSelectedWords(startingWord.slice());
+        wordAssociations(startingWord[0]);
     }, [startingWord]);
 
     useEffect(() =>
@@ -41,6 +44,19 @@ export default function WordcloudContainer({startingWord}) {
 
         ReactDOM.render(span, document.getElementById('selected-words'));
     }, [selectedWords]);
+
+    useEffect(() =>
+    {
+        if (!selectedWords || selectedWords.length === 0)
+            return;
+        console.log("clickedWord");
+
+        // selectedWords.push(word.text);
+        let temp = selectedWords.slice();
+        temp.push(clickedWord);
+        setSelectedWords(temp);
+
+    }, [clickedWord]);
 
     function hideWordcloud() {
         coverContainer.current.style.visibility = 'hidden';
@@ -105,10 +121,12 @@ export default function WordcloudContainer({startingWord}) {
             const element = event.target;
             const text = select(element);
             text.on('click', () => {
-                //todo?
-                selectedWords.push(word.text);
-                let temp = selectedWords.slice();
-                setSelectedWords(temp);
+                // //todo?
+                // selectedWords.push(word.text);
+                // let temp = selectedWords.slice();
+                // // temp.push(word.text);
+                // setSelectedWords(temp);
+                setClickedWord(word.text);
 
                 wordAssociations(word.text);
             })
