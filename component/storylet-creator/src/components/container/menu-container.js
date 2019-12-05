@@ -84,7 +84,10 @@ export default function MenuContainer() {
     };
 
     const close_gallery = (e) => {
-        if(e.target.nodeName === "IMG") {
+        if(e.target.id === "image-gallery-close") {
+            setIsOpened(false);
+        }
+        else if(e.target.nodeName === "IMG") {
             let data = cloneDeep(slidesData);
 
             let index = data[slideIdx].components.length;
@@ -111,8 +114,9 @@ export default function MenuContainer() {
                 dispatch(selectSlide(data[slideIdx]));
                 dispatch(selectComponent(component));
             });
+
+            setIsOpened(false);
         }
-        setIsOpened(false);
     };
 
     const update_slides_index = (data, idx) => {
