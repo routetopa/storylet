@@ -72,11 +72,7 @@ class Storylet_Admin {
 
 	public function create_admin_page()
 	{
-        var_dump(StoryletModel::all()->toArray());
-
-		?> <h1>HELLO WORLD!</h1>
-           <div id="root"></div>
-        <?php
+        require_once (plugin_dir_path( __FILE__ ) . './partials/storylet-admin-display.php');
 	}
 
 
@@ -99,8 +95,7 @@ class Storylet_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( 'uno', plugin_dir_url(__FILE__) . '../component/admin-area/build/static/css/2.f6c8dd44.chunk.css', array(), $this->version, 'all' );
-		wp_enqueue_style( 'due', plugin_dir_url(__FILE__) . '../component/admin-area/build/static/css/main.34de6062.chunk.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'storylet-css', plugin_dir_url(__FILE__) . '/css/storylet-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -123,9 +118,7 @@ class Storylet_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( 'pippo', plugin_dir_url(__FILE__) . '../component/admin-area/build/static/js/runtime-main.12df12ac.js', [], $this->version, true );
-		wp_enqueue_script( 'baudo', plugin_dir_url(__FILE__) . '../component/admin-area/build/static/js/2.c6c21784.chunk.js', [], $this->version, true );
-		wp_enqueue_script( 'capellone', plugin_dir_url(__FILE__) . '../component/admin-area/build/static/js/main.f498ae84.chunk.js', [], $this->version, true);
+		wp_enqueue_script( 'storylet-admin', plugin_dir_url(__FILE__) . '/js/storylet-admin.js', [], $this->version, true );
 
 	}
 

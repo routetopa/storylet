@@ -357,7 +357,7 @@ export default function ImageGalleryContainer({isOpened, closeGallery}) {
         <>
             <div id="image-gallery-full" ref={full} onClick={closeGallery}>
                 <div id="image-gallery">
-                    <Gallery photos={nature} />
+                    <Gallery photos={fantastic_characters} />
                 </div>
             </div>
         </>
