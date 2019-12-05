@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch, batch} from 'react-redux'
-import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
 
 import WordcloudContainer from './wordcloud-container'
@@ -12,7 +11,6 @@ import { faFont, faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
 import '../../vendor/bootstrap.min.css';
 import '../../style/container/menu-container.css'
 
-import addText from "../../reducer/actions/add-text";
 import setSlidesData from "../../reducer/actions/set-slides-data";
 import selectSlide from "../../reducer/actions/select-slide";
 import selectComponent from "../../reducer/actions/select-component";
@@ -27,7 +25,7 @@ export default function MenuContainer() {
     const [slideIdx, setSlideIdx] = useState(null);
     const [componentIdx, setComponentIdx] = useState(null);
 
-    const [words, setWords] = useState([]);
+    const [startingWord, setStartingWord] = useState([]);
     const searchKey = useRef(null);
 
     const [isOpened, setIsOpened] = useState(false);
@@ -37,7 +35,6 @@ export default function MenuContainer() {
             return;
 
         setSlideIdx(selectedSlide.index);
-
     }, [selectedSlide]);
 
     useEffect(()=>{
@@ -47,28 +44,11 @@ export default function MenuContainer() {
         setComponentIdx(selectedComponent.index);
     }, [selectedComponent]);
 
-    const get_words = async () =>
-    {
-        axios.get('https://api.wordassociations.net/associations/v1.0/json/search?apikey=ebb2ab66-af3f-42c9-bc24-8072f0c413d5&text=' + searchKey.current.value + '&lang=it&limit=50')
-            .then((response) => {
-                setWords(response.data.response[0].items)
-            }, (error) => {
-                console.log(error);
-            });
-
-        // {
-        //     text: 'cane',
-        //     lang: 'it', // en fr de pt ru es
-        //     type: 'response', // stimulus
-        //     limit: '50', // max 300
-        //     pos: 'noun,adjective,verb,adverb',
-        //     indent: 'yes' // no
-        // }
+    const get_words = async () => {
+        setStartingWord([searchKey.current.value]);
     };
 
-    const add_text = () =>
-    {
-        // dispatch(addText({id:Math.random()}));
+    const add_text = () =>  {
         let data = cloneDeep(slidesData);
 
         let index = data[slideIdx].components.length;
@@ -99,13 +79,11 @@ export default function MenuContainer() {
         });
     };
 
-    const open_gallery = () =>
-    {
+    const open_gallery = () => {
         setIsOpened(true);
     };
 
-    const close_gallery = (e) =>
-    {
+    const close_gallery = (e) => {
         if(e.target.nodeName === "IMG") {
             let data = cloneDeep(slidesData);
 
@@ -137,14 +115,12 @@ export default function MenuContainer() {
         setIsOpened(false);
     };
 
-    const update_slides_index = (data, idx) =>
-    {
+    const update_slides_index = (data, idx) => {
         for(let i = idx; i<data.length; i++)
             data[i].index +=1;
     };
 
-    const add_slide = () =>
-    {
+    const add_slide = () => {
         let data = cloneDeep(slidesData);
 
         let slide = {
@@ -167,8 +143,7 @@ export default function MenuContainer() {
         dispatch(setSlidesData(data));
     };
 
-    const copy_slide = () =>
-    {
+    const copy_slide = () => {
         let data = cloneDeep(slidesData);
         let cloned_node = cloneDeep(data[slideIdx]);
 
@@ -184,10 +159,6 @@ export default function MenuContainer() {
                     <FontAwesomeIcon icon={faPlus} className="icon" onClick={add_slide} />
                     <FontAwesomeIcon icon={faCopy} className="icon" onClick={copy_slide} />
                     <FontAwesomeIcon icon={faFont} className="icon" onClick={add_text} />
-                    {/*<select className="form-control col-md-10 col-sm-10">*/}
-                    {/*    <option>Fantasia</option>*/}
-                    {/*    <option>Catalogo 2</option>*/}
-                    {/*</select>*/}
                     <FontAwesomeIcon icon={faImage} className="icon" onClick={open_gallery} />
                 </div>
                 <div className="find-ideas">
@@ -196,7 +167,7 @@ export default function MenuContainer() {
                 </div>
             </div>
 
-            <WordcloudContainer words={words} />
+            <WordcloudContainer startingWord={startingWord} />
 
             <ImageGalleryContainer isOpened={isOpened} closeGallery={close_gallery} />
         </>
