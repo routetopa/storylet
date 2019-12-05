@@ -1,37 +1,63 @@
-import React from 'react';
-import logo from './logo.svg';
-//import './App.css';
+import React, {useState} from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import 'antd/dist/antd.css';
+import './index.css';
+import { Layout, Menu, Icon, Avatar } from 'antd';
+import TeacherClass from './component/teacher-class';
+import Stories from './component/stories';
 
-import { Impress, Step } from 'react-impressjs';
-// styles of react-impressjs
-import 'react-impressjs/styles/react-impressjs.css';
+const { Content, Footer, Sider } = Layout;
 
-function App() {
+function App()
+{
+    const teacher = {name:'Andrea', surname:'Petta', institution:'UNISA ISISLab'};
+
+    const [collapsed, setCollapsed] = useState(false);
+
+    const onCollapse = collapsed => {
+        setCollapsed( collapsed );
+    };
+
   return (
-    <div className="App">
+      <>
+          <Router>
+              <Layout style={{ minHeight: '100vh' }}>
 
-      <Impress
-          progress={true}
-          fallbackMessage={<p>Sorry, your <b>device or browser</b> couldn't support well.</p>}
-      >
-        <Step id={'overview'} />
-        <Step id={'any_id'} className={'class_name'} />
-        <Step className={'without_id_is_ok'}
-              data={
-                  {
-                      x:100,
-                      y:-100,
-                      scale:2
-                  }}/>
-        <Step duration={1500}>
-          <h1>Storylet !!</h1>
-          <hr />
-          <p>Nothing's gonna stop your <b>Creativity</b> !!</p>
-        </Step>
-      </Impress>
+                  <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
 
-    </div>
-  );
+                      <div style={{ width:'100%', textAlign: 'center', 'padding': '16px' }}>
+                          <div style={{color:'#ffffff', marginBottom: '8px'}}>Ciao, {`${teacher.name} ${teacher.surname}`}</div>
+                          <Avatar size={64} icon="user" />
+                      </div>
+
+                      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
+                          <Menu.Item key="1">
+                              <Icon type="team" />
+                              <span>Classi</span>
+                              <Link to="/" />
+                          </Menu.Item>
+                          <Menu.Item key="2">
+                              <Icon type="highlight" />
+                              <span>Storie pubblicate</span>
+                              <Link to="/stories" />
+                          </Menu.Item>
+                      </Menu>
+                  </Sider>
+
+                  <Layout>
+                      <Content style={{ margin: '16px' }}>
+
+                          <Route exact path="/" component={TeacherClass} />
+                          <Route       path="/stories" component={Stories} />
+
+                      </Content>
+                      <Footer style={{ textAlign: 'center' }}>Storylet Admin for {teacher.institution}</Footer>
+                  </Layout>
+
+              </Layout>
+          </Router>
+      </>
+  )
 }
 
 export default App;

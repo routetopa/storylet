@@ -1348,37 +1348,35 @@ export default function ImageGalleryContainer({isOpened, closeGallery}) {
             full.current.style.display = 'none';
     }, [isOpened]);
 
-    function hideImageGallery() {
-        full.current.style.display = 'none';
-    }
+    // function hideImageGallery() {
+    //     full.current.style.display = 'none';
+    // }
 
     function selectGallery(e) {
         setSelectedGallery(galleries[parseInt(e.currentTarget.value)]);
     }
 
     return (
-        <>
-            <div id="image-gallery-full" ref={full} onClick={closeGallery}>
-                <div id="image-gallery">
-                    <FontAwesomeIcon id="image-gallery-close" icon={faTimes} className="icon" />
-                    <div id="image-gallery-header">
-                        <select id="select-package" className="form-control col-md-4 col-sm-4" onChange={selectGallery}>
-                            <option value="0">Natura</option>
-                            <option value="1">Oggetti Fiaba</option>
-                            <option value="2">Personaggi Fantastici</option>
-                            <option value="3">Personaggi Numerici</option>
-                            <option value="4">Fumetti</option>
-                            <option value="5">Paesaggio</option>
-                            <option value="6">Marinaio Nautico</option>
-                        </select>
-                        <FontAwesomeIcon id="image-gallery-search" icon={faSearch} className="icon" />
-                        <input id="search-images" placeholder="Cerca ..." className="form-control col-md-4 col-sm-4"/>
-                    </div>
-                    <div id="image-gallery-body">
-                        <Gallery photos={selectedGallery} />
-                    </div>
+        <div id="image-gallery-full" ref={full} onClick={closeGallery}>
+            <div id="image-gallery">
+                <FontAwesomeIcon id="image-gallery-close" icon={faTimes} className="icon" />
+                <div id="image-gallery-header">
+                    <select id="select-package" className="form-control col-md-4 col-sm-4" onChange={selectGallery}>
+                        <option value="0">Natura</option>
+                        <option value="1">Oggetti Fiaba</option>
+                        <option value="2">Personaggi Fantastici</option>
+                        <option value="3">Personaggi Numerici</option>
+                        <option value="4">Fumetti</option>
+                        <option value="5">Paesaggio</option>
+                        <option value="6">Marinaio Nautico</option>
+                    </select>
+                    <FontAwesomeIcon id="image-gallery-search" icon={faSearch} className="icon" />
+                    <input id="search-images" placeholder="Cerca ..." className="form-control col-md-4 col-sm-4"/>
+                </div>
+                <div id="image-gallery-body">
+                    <Gallery photos={selectedGallery} />
                 </div>
             </div>
-        </>
+        </div>
     )
 };
