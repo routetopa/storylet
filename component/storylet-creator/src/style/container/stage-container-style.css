@@ -1,3 +1,8 @@
 #stage-container {
     width: 50%;
 }
+
+.hideSettings #stage-container
+{
+    width: 75%;
+}

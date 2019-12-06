@@ -87,3 +87,13 @@
 .remove-slide {
     right: calc(25% + 84px);
 }
+
+.hideSettings .add-slide {
+    right:4px;
+}
+.hideSettings .duplicate-slide {
+    right: 44px;
+}
+.hideSettings .remove-slide {
+    right: 84px;
+}

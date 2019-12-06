@@ -5,13 +5,13 @@ import Menu from '../menu'
 
 import '../../style/container/header-container.css';
 
-export default function HeaderContainer()
+export default function HeaderContainer({hideSettings})
 {
     return (
         <div className="header">
             <Menu />
             <div className="logo"> </div>
-            <Info />
+            <Info hideSettings={hideSettings} />
         </div>
     )
 };

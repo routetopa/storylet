@@ -5,14 +5,14 @@ import PropertiesContainer from './properties-container'
 
 import '../../style/container/body-container.css'
 
-export default function BodyContainer()
+export default function BodyContainer({isSettingVisible})
 {
     return (
-        <div className="body-container">
+        <div className={'body-container ' + (isSettingVisible ? '' : 'hideSettings')}>
 
             <SlideContainer />
 
-            <StageContainer />
+            <StageContainer isSettingVisible={isSettingVisible} />
 
             <PropertiesContainer />
 

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch} from 'react-redux';
 
 import HeaderContainer from './components/container/header-container'
@@ -14,6 +14,8 @@ function StoryletCreator()
 {
     const dispatch = useDispatch();
 
+    const [isSettingVisible, setIsSettingVisible] = useState(true);
+
     useEffect(() =>
     {
         let data = JSON.parse(window.STORY.DATA.story);
@@ -21,10 +23,14 @@ function StoryletCreator()
         dispatch(selectSlide(data[0]));
     }, []);
 
+    const hide_settings = () => {
+        setIsSettingVisible(!isSettingVisible);
+    };
+
     return (
      <>
-        <HeaderContainer />
-        <BodyContainer />
+        <HeaderContainer hideSettings={hide_settings} />
+        <BodyContainer isSettingVisible={isSettingVisible} />
         <MoveableComponent/>
      </>
     );

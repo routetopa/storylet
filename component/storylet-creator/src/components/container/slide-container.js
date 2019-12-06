@@ -19,7 +19,7 @@ export default function SlideContainer()
     return (
         <div className="slide-container">
             {slidesData.map((slide, idx) =>
-                <Slide key={idx} parameters={slide} isEditable={false} onClick={() => {dispatch(componentSelected(null)); dispatch(selectSlide(slidesData[idx]))}} />
+                <Slide isSettingVisible={true} key={idx} parameters={slide} isEditable={false} onClick={() => {dispatch(componentSelected(null)); dispatch(selectSlide(slidesData[idx]))}} />
             )}
         </div>
     )

@@ -15,12 +15,12 @@ const shouldSlideNotRender = (prevProps, nextProps) => {
     return false; //always rerender
 };
 
-function Slide({parameters, isEditable, onClick})
+function Slide({parameters, isEditable, onClick, isSettingVisible})
 {
     const dispatch = useDispatch();
 
     return (
-        <SlideStyle id="selected-slide" background={parameters.background} cursor={(isEditable ? 'auto' : 'pointer')} onClick={onClick}>
+        <SlideStyle id="selected-slide" isSettingVisible={isSettingVisible} background={parameters.background} cursor={(isEditable ? 'auto' : 'pointer')} onClick={onClick}>
             {(() => {
                         if (!parameters.components) return null;
                         return parameters.components.map((c, idx) => {

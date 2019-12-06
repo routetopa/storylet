@@ -11,7 +11,7 @@ export default function PropertiesContainer()
     const selectedComponent = useSelector(state => state.selectedComponent);
 
     return (
-        <div className="properties-container">
+        <div className={'properties-container'}>
             <div className="tabs">
                 <div className="tab selected">Component</div>
                 <div className="tab">Slide</div>

@@ -9,6 +9,12 @@
     background-color: #ffffff;
 }
 
+.hideSettings .properties-container
+{
+    width: 0;
+    display: none;
+}
+
 .properties-container:hover::-webkit-scrollbar, .properties-container:hover::-webkit-scrollbar-track, .properties-container:hover::-webkit-scrollbar-thumb {
     visibility: visible;
 }
