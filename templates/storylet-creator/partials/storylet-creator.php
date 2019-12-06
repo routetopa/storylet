@@ -32,7 +32,7 @@ if(!is_user_logged_in())
     };
 
     window.STATIC = {
-        SITE_URL: '<?php echo site_url(); ?>',
+        SITE_URL: '<?php echo site_url(); ?>/',
         IMAGE_BASE_PATH : '<?php echo plugins_url('storylet/images/') ?>'
     };
 
