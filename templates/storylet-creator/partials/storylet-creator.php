@@ -30,7 +30,7 @@ if(!is_user_logged_in())
     };
 
     window.STATIC = {
-        IMAGE_BASE_PATH : '<?php echo plugins_url('storylet/images') ?>'
+        IMAGE_BASE_PATH : '<?php echo plugins_url('storylet/images/') ?>'
     };
 
 </script>
