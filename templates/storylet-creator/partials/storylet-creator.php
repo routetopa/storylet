@@ -32,6 +32,7 @@ if(!is_user_logged_in())
     };
 
     window.STATIC = {
+        SITE_URL: '<?php echo site_url(); ?>',
         IMAGE_BASE_PATH : '<?php echo plugins_url('storylet/images/') ?>'
     };
 
@@ -39,5 +40,5 @@ if(!is_user_logged_in())
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.30fdea02.js"></script>
 <script src="<?php echo $base_path ?>static/js/2.97ce432c.chunk.js"></script>
-<script src="<?php echo $base_path ?>static/js/main.58ce7c14.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.8e97dd64.chunk.js"></script>
 </html>

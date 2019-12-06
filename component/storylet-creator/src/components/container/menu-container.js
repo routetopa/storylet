@@ -181,7 +181,7 @@ export default function MenuContainer() {
                     <FontAwesomeIcon icon={faFileVideo} className="icon add-video" />
                     <FontAwesomeIcon icon={faLink} className="icon add-link" />
                     <FontAwesomeIcon icon={faChartBar} className="icon add-datalet" />
-                    <FontAwesomeIcon icon={faPlay} onClick={() => window.open('storylet-viewer/' + window.STORY.DATA.id,'_blank')} className="icon open-preview" />
+                    <FontAwesomeIcon icon={faPlay} onClick={() => window.open(window.STATIC.SITE_URL + 'storylet-viewer/' + window.STORY.DATA.id,'_blank')} className="icon open-preview" />
                 </div>
                 <div className="find-ideas">
                     <FontAwesomeIcon icon={faLightbulb} className="icon" onClick={get_words} />
