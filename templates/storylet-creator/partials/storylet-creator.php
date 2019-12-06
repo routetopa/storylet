@@ -28,6 +28,11 @@ if(!is_user_logged_in())
     window.API_NONCE = {
         NONCE: '<?php echo wp_create_nonce( 'wp_rest' ); ?>'
     };
+
+    window.STATIC = {
+        IMAGE_BASE_PATH : '<?php echo plugins_url() ?>/images/'
+    };
+
 </script>
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.30fdea02.js"></script>
