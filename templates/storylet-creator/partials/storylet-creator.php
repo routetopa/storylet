@@ -40,6 +40,6 @@ if(!is_user_logged_in())
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.30fdea02.js"></script>
 <script src="<?php echo $base_path ?>static/js/2.97ce432c.chunk.js"></script>
-<script src="<?php echo $base_path ?>static/js/main.87b6efae.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.e89514ea.chunk.js"></script>
 </html>
 
