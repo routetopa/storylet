@@ -1,5 +1,5 @@
 import React from 'react'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 // Components
 import Text from './slide-components/text'
@@ -19,6 +19,8 @@ function Slide({parameters, isEditable, onClick, isSettingVisible})
 {
     const dispatch = useDispatch();
 
+    const selectedComponent = useSelector(state => state.selectedComponent);
+
     return (
         <SlideStyle id="selected-slide" isSettingVisible={isSettingVisible} background={parameters.background} cursor={(isEditable ? 'auto' : 'pointer')} onClick={onClick}>
             {(() => {
@@ -27,11 +29,11 @@ function Slide({parameters, isEditable, onClick, isSettingVisible})
                             switch (c.type) {
                                 case 'text'  :
                                     return (
-                                        <Text key={idx} isEditable={isEditable} component={c} onClick={isEditable ? () => {dispatch(componentSelected(c))} : null} />
+                                        <Text key={idx} isEditable={isEditable} component={c} onClick={(isEditable && (!selectedComponent || selectedComponent.index !== c.index)) ? () => {dispatch(componentSelected(c))} : null} />
                                     );
                                 case 'image' :
                                     return (
-                                        <Image key={idx} isEditable={isEditable} component={c} onClick={isEditable ? () => {dispatch(componentSelected(c))} : null}/>
+                                        <Image key={idx} isEditable={isEditable} component={c} onClick={(isEditable && (!selectedComponent || selectedComponent.index !== c.index)) ? () => {dispatch(componentSelected(c))} : null}/>
                                     );
                                 // default : break;
                             }

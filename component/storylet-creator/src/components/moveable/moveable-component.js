@@ -35,7 +35,8 @@ export default function MoveableComponent() {
     }, [selectedSlide]);
 
     useEffect(()=>{
-        if(!selectedComponent)
+        setPosition(null);
+        if(!selectedComponent || selectedComponent.index === componentIdx)
             return;
 
         setComponentIdx(selectedComponent.index);
@@ -47,6 +48,7 @@ export default function MoveableComponent() {
     }, [selectedComponent]);
 
     function setComponentParameters(name, value) {
+        debugger
         let data = cloneDeep(slidesData);
 
         switch (name) {
@@ -93,6 +95,8 @@ export default function MoveableComponent() {
                     target.style.top = top + "px";
                 }}
                 onDragEnd={() => {
+                    if(position===null)
+                        return
                     let x = position[0]/slide.offsetWidth*100;
                     let y = position[1]/slide.offsetHeight*100;
                     selectedComponent.x = x;
