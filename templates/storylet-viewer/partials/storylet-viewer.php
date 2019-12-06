@@ -39,5 +39,5 @@ if(!is_user_logged_in())
 
 <script type="text/javascript" src="<?php echo $base_path ?>static/js/runtime-main.fe2f7310.js"></script>
 <script type="text/javascript" src="<?php echo $base_path ?>static/js/2.7ee4dff4.chunk.js"></script>
-<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.ad4c1c8b.chunk.js"></script>
+<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.0f14fed7.chunk.js"></script>
 </html>

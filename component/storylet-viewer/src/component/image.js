@@ -13,7 +13,7 @@ export default function Image({component})
             zIndex:component.zIndex,
             position: 'absolute'
         }}>
-            <img style={{width:'100%', height:'100%'}} src={`${window.STATIC.IMAGE_BASE_PATH}${component.src}`} alt={component.src}/>
+            <img style={{width:'100%', height:'100%'}} src={component.src} alt={component.src}/>
         </div>
     )
 };
