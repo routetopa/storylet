@@ -4,11 +4,12 @@ import cloneDeep from 'lodash/cloneDeep';
 import {Formik, Field, Form, ErrorMessage, useFormikContext} from 'formik';
 import * as Yup from 'yup';
 import debounce from 'just-debounce-it';
-
 import '../../../vendor/bootstrap.min.css';
 import '../../../style/slide-components/properties/image-properties.css';
 
 import setSlideData from "../../../reducer/actions/set-slides-data";
+import setSelectComponent from "../../../reducer/actions/select-component";
+import setSelectSlide from "../../../reducer/actions/select-slide";
 
 const AutoSave = ({debounceMs})=>{
     const formik = useFormikContext();
@@ -24,7 +25,8 @@ const AutoSave = ({debounceMs})=>{
     return (<></>);
 };
 
-export default function ImageProperties() {
+export default function ImageProperties()
+{
     const dispatch = useDispatch();
 
     const slidesData = useSelector(state => state.slidesData);
@@ -45,24 +47,23 @@ export default function ImageProperties() {
     });
 
     useEffect(()=>{
-        // console.log("properties slidesData");
-        // if(!slidesData || !selectedSlide || !selectedComponent)
-        //     return;
-        //
-        // debugger
-        // let component = slidesData[selectedSlide.index].components[selectedComponent.index];
-        //
-        // setInitialValues({
-        //     width: Math.round(component.w * 10) / 10,
-        //     height: Math.round(component.h * 10) / 10,
-        //     top: Math.round(component.x * 10) / 10,
-        //     left: Math.round(component.y * 10) / 10,
-        //     zIndex: component.zIndex,
-        //     scaleX: Math.round(component.scale[0] * 10) / 10,
-        //     scaleY: Math.round(component.scale[1] * 10) / 10,
-        //     keepRatio: component.keepRatio,
-        //     rotate: Math.round(component.rotate * 10) / 10
-        // });
+        console.log("properties slidesData");
+        if(!slidesData || !selectedSlide || !selectedComponent)
+            return;
+
+        let component = slidesData[selectedSlide.index].components[selectedComponent.index];
+
+        setInitialValues({
+            width: Math.round(component.w * 10) / 10,
+            height: Math.round(component.h * 10) / 10,
+            top: Math.round(component.x * 10) / 10,
+            left: Math.round(component.y * 10) / 10,
+            zIndex: component.zIndex,
+            scaleX: Math.round(component.scale[0] * 10) / 10,
+            scaleY: Math.round(component.scale[1] * 10) / 10,
+            keepRatio: component.keepRatio,
+            rotate: Math.round(component.rotate * 10) / 10
+       });
     }, [slidesData]);
 
     useEffect(()=>{
@@ -82,6 +83,25 @@ export default function ImageProperties() {
         });
     }, [selectedComponent]);
 
+    const remove_component = () =>
+    {
+        let sd = cloneDeep(slidesData);
+        sd[selectedSlide.index].components.splice(selectedComponent.index,1);
+
+        for(let i=0; i<sd[selectedSlide.index].components.length; i++)
+            sd[selectedSlide.index].components[i].index = i;
+
+        let selected = cloneDeep(selectedSlide);
+        selected.components.splice(selectedComponent.index,1);
+
+        for(let i=0; i<selected.components.length; i++)
+            selected.components[i].index = i;
+
+        dispatch(setSelectSlide(selected));
+        dispatch(setSelectComponent(null));
+        dispatch(setSlideData(sd));
+    };
+
     return (
         <Formik
             enableReinitialize={true}
@@ -97,7 +117,7 @@ export default function ImageProperties() {
             })}
 
             onSubmit={fields => {
-                return
+
                 let slideIdx = selectedSlide.index;
                 let componentIdx = selectedComponent.index;
 
@@ -110,7 +130,10 @@ export default function ImageProperties() {
                 data[slideIdx].components[componentIdx].scale = [fields.scaleX,fields.scaleY];
                 data[slideIdx].components[componentIdx].keepRatio = fields.keepRatio;
                 data[slideIdx].components[componentIdx].rotate = fields.rotate;
+
                 dispatch(setSlideData(data));
+                dispatch(setSelectSlide(data[slideIdx]));
+                dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
             }}
         >
             {({ errors, status, touched }) => (
@@ -158,7 +181,8 @@ export default function ImageProperties() {
 
                     <div className="form-group col-md-4 col-sm-4">
                         {/*<button type="submit" className="btn btn-primary mr-2">Save</button>*/}
-                        <button type="reset" className="btn btn-secondary">Reset</button>
+                        <button type="reset" className="btn btn-secondary mr-2">Reset</button>
+                        <button type="button" className="btn btn-danger" onClick={remove_component}>Remove</button>
                     </div>
                 </Form>
             )}

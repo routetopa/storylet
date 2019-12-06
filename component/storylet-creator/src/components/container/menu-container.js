@@ -6,7 +6,7 @@ import WordcloudContainer from './wordcloud-container'
 import ImageGalleryContainer from './image-gallery-container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faFileImage, faFileVideo } from '@fortawesome/free-regular-svg-icons'
-import { faFont, faPlusCircle, faTrashAlt, faCopy, faLink, faChartBar } from '@fortawesome/free-solid-svg-icons'
+import { faFont, faPlusCircle, faTrashAlt, faCopy, faLink, faChartBar, faPlay } from '@fortawesome/free-solid-svg-icons'
 
 import '../../vendor/bootstrap.min.css';
 import '../../style/container/menu-container.css'
@@ -157,7 +157,6 @@ export default function MenuContainer() {
     };
 
     const remove_slide = () => {
-        debugger
         let data = cloneDeep(slidesData);
 
         // if 1 slide return
@@ -182,6 +181,7 @@ export default function MenuContainer() {
                     <FontAwesomeIcon icon={faFileVideo} className="icon add-video" />
                     <FontAwesomeIcon icon={faLink} className="icon add-link" />
                     <FontAwesomeIcon icon={faChartBar} className="icon add-datalet" />
+                    <FontAwesomeIcon icon={faPlay} onClick={() => window.open('storylet-viewer/' + window.STORY.DATA.id,'_blank')} className="icon open-preview" />
                 </div>
                 <div className="find-ideas">
                     <FontAwesomeIcon icon={faLightbulb} className="icon" onClick={get_words} />

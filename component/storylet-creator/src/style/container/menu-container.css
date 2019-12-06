@@ -38,6 +38,10 @@
 .buttons .icon.add-datalet {
     margin-left: 0px;
 }
+.buttons .icon.open-preview {
+    margin-left: 16px;
+    color: var(--storylet-primary);
+}
 
 .buttons .icon:hover {
     background-color: var(--storylet-grey-200);
