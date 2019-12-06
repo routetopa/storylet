@@ -58,6 +58,7 @@ class Storylet_Activator {
 			  ownerId mediumint(9) UNSIGNED,
 			  templateId mediumint(9) UNSIGNED,
 			  themeId mediumint(9) UNSIGNED,
+			  story text DEFAULT '',
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 
