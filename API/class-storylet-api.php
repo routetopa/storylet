@@ -113,7 +113,7 @@ class Storylet_API extends WP_REST_Controller
                 $storylet->story      = $storylet_template['template'];
                 $storylet->save();
 
-                return rest_ensure_response(['status' => 'OK', 'created_storylet_id' => $storylet->ID]);
+                return rest_ensure_response(['status' => 'OK', 'created_storylet_id' => $storylet->id]);
             } else {
                 return rest_ensure_response(['status' => 'K0', 'error' => 'Wrong storylet template ID']);
             }
