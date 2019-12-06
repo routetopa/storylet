@@ -17,8 +17,10 @@ if(!is_user_logged_in())
 <div id="root"></div>
 </body>
 <script type="text/javascript">
+
     window.API_ENDPOINT = {
         GET_STORYLET_TEMPLATE: '<?php echo rest_url() ?>/storylet/v1/storylet-template',
+        SAVE_STORYLET: '<?php echo rest_url() ?>storylet/v1/storylet',
     };
 
     window.STORY = {
