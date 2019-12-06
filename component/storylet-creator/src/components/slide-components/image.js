@@ -14,7 +14,7 @@ export default function Image({component, onClick, isEditable})
             transform:'scale(' + component.scale[0] + ',' + component.scale[1] + ') rotate(' + component.rotate + 'deg)',
             zIndex:component.zIndex
         }}>
-            <img src={component.src} alt={component.src}/>
+            <img src={`${window.STATIC.IMAGE_BASE_PATH}${component.src}`} alt={`${window.STATIC.IMAGE_BASE_PATH}${component.src}`}/>
         </div>
     )
 };

@@ -1,0 +1,16 @@
+.class-container
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.class
+{
+    height: 200px;
+    min-width: 200px;
+    background-color: #ffffff;
+    margin: 10px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    cursor: pointer;
+}
