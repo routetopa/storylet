@@ -20,7 +20,7 @@ function Slide({parameters, isEditable, onClick})
     const dispatch = useDispatch();
 
     return (
-        <SlideStyle id="selected-slide" background={`${window.STATIC.IMAGE_BASE_PATH}${parameters.background}`} cursor={(isEditable ? 'auto' : 'pointer')} onClick={onClick}>
+        <SlideStyle id="selected-slide" background={parameters.background} cursor={(isEditable ? 'auto' : 'pointer')} onClick={onClick}>
             {(() => {
                         if (!parameters.components) return null;
                         return parameters.components.map((c, idx) => {
