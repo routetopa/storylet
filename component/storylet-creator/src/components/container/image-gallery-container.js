@@ -5133,14 +5133,14 @@ export default function ImageGalleryContainer({isOpened, closeGallery}) {
             <div id="image-gallery">
                 <FontAwesomeIcon id="image-gallery-close" icon={faTimes} className="icon" />
                 <div id="image-gallery-header">
-                    <select id="select-package" className="form-control col-md-4 col-sm-4" onChange={selectGallery}>
+                    <select defaultValue={'6'} id="select-package" className="form-control col-md-4 col-sm-4" onChange={selectGallery}>
                         <option value="0">Australia</option>
                         <option value="1">Banca</option>
                         <option value="2">Macchina</option>
                         <option value="3">Bar</option>
                         <option value="4">Favola</option>
                         <option value="5">Famiglia</option>
-                        <option value="6" selected>Personaggi Fantastici</option>
+                        <option value="6">Personaggi Fantastici</option>
                         <option value="7">Pesca</option>
                         <option value="8">Case</option>
                         <option value="9">Parco giochi</option>

@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 
+import '../vendor/bootstrap.min.css';
 import '../style/menu.css';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import {useSelector} from 'react-redux'
 import axios from "axios";
+import {Field} from "formik";
 
 export default function Menu()
 {
@@ -52,13 +54,19 @@ export default function Menu()
         <div className="menu">
             <FontAwesomeIcon icon={faBars} className="icon" onClick={toggle_sidebar} />
             <div className={`sidebar ${menuStatus}`}>
-                <div className="sidebarHeader">
-                    <div onClick={toggle_sidebar}>CLOSE</div>
-                </div>
+                {/*<div className="sidebarHeader">*/}
+                {/*    <div className="sidebar-close" onClick={toggle_sidebar}> </div>*/}
+                {/*</div>*/}
                 <div className="sidebarBody">
-                    <div onClick={save_storylet}>SAVE</div>
-                    <label>Autosave</label>
-                    <input type="checkbox" onChange={set_autosave} value="autosave" />
+                    <div className="menu-item menu-btn" onClick={save_storylet}>Save</div>
+                    {/*<div className="menu-item"><label>Autosave</label><input type="checkbox" onChange={set_autosave} value="autosave" /></div>*/}
+                    <div className="menu-item custom-checkbox">
+                        <input type="checkbox" className="custom-control-input" id="menuAutosave" onChange={set_autosave} value="autosave"/>
+                        <label className="custom-control-label ddr" htmlFor="menuAutosave">Autosave</label>
+                    </div>
+                    <div className="menu-item menu-btn">Esporta come PDF</div>
+                    <div className="menu-item menu-btn">Esporta come Immagine</div>
+                    <div className="menu-item menu-btn">Copia HTML</div>
                 </div>
             </div>
         </div>

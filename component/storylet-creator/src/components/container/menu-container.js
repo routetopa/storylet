@@ -5,8 +5,8 @@ import cloneDeep from 'lodash/cloneDeep';
 import WordcloudContainer from './wordcloud-container'
 import ImageGalleryContainer from './image-gallery-container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLightbulb, faImage } from '@fortawesome/free-regular-svg-icons'
-import { faFont, faPlus, faCopy } from '@fortawesome/free-solid-svg-icons'
+import { faLightbulb, faFileImage, faFileVideo } from '@fortawesome/free-regular-svg-icons'
+import { faFont, faPlusCircle, faTrashAlt, faCopy, faLink, faChartBar } from '@fortawesome/free-solid-svg-icons'
 
 import '../../vendor/bootstrap.min.css';
 import '../../style/container/menu-container.css'
@@ -156,14 +156,32 @@ export default function MenuContainer() {
         dispatch(setSlidesData(data));
     };
 
+    const remove_slide = () => {
+        debugger
+        let data = cloneDeep(slidesData);
+
+        // if 1 slide return
+
+        //todo meglio!
+        data.splice(slideIdx, 1);
+        for(let i = 0; i< data.length; i++)
+            data[i].index = i;
+
+        dispatch(setSlidesData(data));
+    };
+
     return (
         <>
             <div id="menu-container">
                 <div className="buttons" >
-                    <FontAwesomeIcon icon={faPlus} className="icon" onClick={add_slide} />
-                    <FontAwesomeIcon icon={faCopy} className="icon" onClick={copy_slide} />
-                    <FontAwesomeIcon icon={faFont} className="icon" onClick={add_text} />
-                    <FontAwesomeIcon icon={faImage} className="icon" onClick={open_gallery} />
+                    <FontAwesomeIcon icon={faPlusCircle} className="icon slide-control add-slide" onClick={add_slide} />
+                    <FontAwesomeIcon icon={faCopy} className="icon slide-control duplicate-slide" onClick={copy_slide} />
+                    <FontAwesomeIcon icon={faTrashAlt} className="icon slide-control remove-slide" onClick={remove_slide} />
+                    <FontAwesomeIcon icon={faFont} className="icon add-text" onClick={add_text} />
+                    <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={open_gallery} />
+                    <FontAwesomeIcon icon={faFileVideo} className="icon add-video" />
+                    <FontAwesomeIcon icon={faLink} className="icon add-link" />
+                    <FontAwesomeIcon icon={faChartBar} className="icon add-datalet" />
                 </div>
                 <div className="find-ideas">
                     <FontAwesomeIcon icon={faLightbulb} className="icon" onClick={get_words} />
