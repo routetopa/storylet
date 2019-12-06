@@ -25,7 +25,7 @@ export default function Text({component, onClick, isEditable})
 
         let data = cloneDeep(slidesData);
         data[slideIdx].components[componentIdx].value = text;
-        // dispatch(setSlideData(data));
+        dispatch(setSlideData(data));
 
     }, [text]);
 
