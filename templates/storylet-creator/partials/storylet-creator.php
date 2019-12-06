@@ -9,7 +9,7 @@ if(!is_user_logged_in())
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <base href="<?php echo $base_path ?>" />
     <title>Storylet Creator</title>
-    <link href="<?php echo $base_path ?>static/css/main.88791bc0.chunk.css" rel="stylesheet">
+    <link href="<?php echo $base_path ?>static/css/main.b0221138.chunk.css" rel="stylesheet">
 
 </head>
 <body>
@@ -40,5 +40,5 @@ if(!is_user_logged_in())
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.30fdea02.js"></script>
 <script src="<?php echo $base_path ?>static/js/2.97ce432c.chunk.js"></script>
-<script src="<?php echo $base_path ?>static/js/main.8e97dd64.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.87b6efae.chunk.js"></script>
 </html>
