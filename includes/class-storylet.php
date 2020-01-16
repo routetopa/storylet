@@ -127,6 +127,11 @@ class Storylet {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'API/class-storylet-api.php';
 
+        /**
+         * ADMIN API
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'API/admin-class-api.php';
+
 		$this->loader = new Storylet_Loader();
 
 	}
@@ -182,11 +187,15 @@ class Storylet {
 		$storylet_api = new Storylet_API();
 		$this->loader->add_action('rest_api_init', $storylet_api, 'run');
 
+        $admin_api = new AdminClass_API();
+        $this->loader->add_action('rest_api_init', $admin_api, 'run');
+
 
 		// VIRTUAL PAGE
 		$this->loader->add_route('storylet', 'storylet-frontend/index');
 		$this->loader->add_route('storylet-creator', 'storylet-creator/index');
 		$this->loader->add_route('storylet-viewer', 'storylet-viewer/index');
+		$this->loader->add_route('admin-area', 'admin-area/index');
 	}
 
 	/**

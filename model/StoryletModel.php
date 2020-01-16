@@ -12,7 +12,8 @@ class StoryletModel extends EloquentWPModel {
 		'ownerId',
 		'templateId',
 		'themeId',
-        'story'
+        'story',
+        'status'
 	];
 
     public function getTable()
