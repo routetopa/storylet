@@ -1670,7 +1670,12 @@ export default function ImageGalleryContainer({isOpened, closeGallery}) {
             src: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/050-unicorn.png",
             width: 1,
             height: 1
-        }
+        },
+        // {
+        //     src: window.STATIC.IMAGE_BASE_PATH + "storylet-prof.png",
+        //     width: 0.8,
+        //     height: 1
+        // },
     ];
     const fishing = [
         {

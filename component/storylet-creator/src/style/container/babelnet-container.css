@@ -1,0 +1,25 @@
+.babelnet-container {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    overflow: auto;
+}
+
+.babelnet-table {
+    width: 25%;
+}
+
+.babelnet-wordcloud {
+    width: 75%;
+}
+
+#babelnet-gloss{
+    height: 20%;
+}
+
+#babelnet-words {
+    height: 80%;
+}

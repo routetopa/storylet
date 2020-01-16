@@ -10,6 +10,7 @@ import '../../../style/slide-components/properties/image-properties.css';
 import setSlideData from "../../../reducer/actions/set-slides-data";
 import setSelectComponent from "../../../reducer/actions/select-component";
 import setSelectSlide from "../../../reducer/actions/select-slide";
+import {translate} from "../../helpers";
 
 const AutoSave = ({debounceMs})=>{
     const formik = useFormikContext();
@@ -27,6 +28,8 @@ const AutoSave = ({debounceMs})=>{
 
 export default function TextProperties()
 {
+    const ln = useSelector(state => state.selectedLanguage);
+
     const dispatch = useDispatch();
 
     const slidesData = useSelector(state => state.slidesData);
@@ -147,17 +150,17 @@ export default function TextProperties()
                     <AutoSave debounceMs={300} />
 
                     <div className="form-group form-inline">
-                        <label className="col-md-4 col-sm-4 _left">Size</label>
-                        <label htmlFor="width" className="col-md-2 col-sm-2">Width:</label>
+                        <label className="col-md-4 col-sm-4 _left">{translate('size', ln)}</label>
+                        <label htmlFor="width" className="col-md-2 col-sm-2">{translate('width', ln)}:</label>
                         <Field name="width" type="number" className={'form-control col-md-2 col-sm-2' + (errors.width && touched.width ? ' is-invalid' : '')} />
-                        <label htmlFor="height" className="col-md-2 col-sm-2">Height:</label>
+                        <label htmlFor="height" className="col-md-2 col-sm-2">{translate('height', ln)}:</label>
                         <Field name="height" type="number" className={'form-control col-md-2 col-sm-2' + (errors.height && touched.height ? ' is-invalid' : '')} />
                         <ErrorMessage name="width" component="div" className="invalid-feedback col-md-12 col-sm-12" />
                         <ErrorMessage name="height" component="div" className="invalid-feedback col-md-12 col-sm-12" />
                     </div>
 
                     <div className="form-group form-inline">
-                        <label className="col-md-3 col-sm-3 _left">Position</label>
+                        <label className="col-md-3 col-sm-3 _left">{translate('position', ln)}</label>
                         <label htmlFor="top" className="col-md-1 col-sm-1">X:</label>
                         <Field name="top" type="number" className={'form-control col-md-2 col-sm-2' + (errors.top && touched.top ? ' is-invalid' : '')} />
                         <label htmlFor="left" className="col-md-1 col-sm-1">Y:</label>
@@ -167,38 +170,38 @@ export default function TextProperties()
                     </div>
 
                     <div className="form-group form-inline">
-                        <label className="col-md-3 col-sm-3 _left">Scale</label>
+                        <label className="col-md-3 col-sm-3 _left">{translate('scale', ln)}</label>
                         <label htmlFor="scaleX" className="col-md-1 col-sm-1">X:</label>
                         <Field name="scaleX" type="number" className={'form-control col-md-2 col-sm-2' + (errors.scale && touched.scale ? ' is-invalid' : '')} />
                         <label htmlFor="scaleY" className="col-md-1 col-sm-1">Y:</label>
                         <Field name="scaleY" type="number" className={'form-control col-md-2 col-sm-2' + (errors.scale && touched.scale ? ' is-invalid' : '')} />
                         <div className="custom-control custom-checkbox col-md-3 col-sm-3">
                             <Field name="keepRatio" type="checkbox" className="custom-control-input" id="defaultUnchecked"/>
-                            <label className="custom-control-label" htmlFor="defaultUnchecked">lock</label>
+                            <label className="custom-control-label" htmlFor="defaultUnchecked">{translate('lock', ln)}</label>
                             {/*<FontAwesomeIcon icon={faLock} className="icon" />*/}
                         </div>
                     </div>
 
                     <div className="form-group form-inline">
-                        <label className="col-md-4 col-sm-4 _left">Rotate</label>
-                        <label htmlFor="rotate" className="col-md-2 col-sm-2">Deg.:</label>
+                        <label className="col-md-4 col-sm-4 _left">{translate('rotate', ln)}</label>
+                        <label htmlFor="rotate" className="col-md-2 col-sm-2">{translate('degrees', ln)}:</label>
                         <Field name="rotate" type="number" className={'form-control col-md-2 col-sm-2' + (errors.rotate && touched.rotate ? ' is-invalid' : '')} />
                     </div>
 
                     <div className="form-group form-inline">
-                        <label className="col-md-4 col-sm-4 _left">Font</label>
-                        <label htmlFor="color" className="col-md-2 col-sm-2">Color:</label>
+                        <label className="col-md-4 col-sm-4 _left">{translate('font', ln)}</label>
+                        <label htmlFor="color" className="col-md-2 col-sm-2">{translate('color', ln)}:</label>
                         <Field name="color" type="text" className={'form-control col-md-2 col-sm-2' + (errors.color && touched.color ? ' is-invalid' : '')} />
-                        <label htmlFor="size" className="col-md-2 col-sm-2">Size:</label>
+                        <label htmlFor="size" className="col-md-2 col-sm-2">{translate('size2', ln)}:</label>
                         <Field name="size" type="number" className={'form-control col-md-2 col-sm-2' + (errors.size && touched.size ? ' is-invalid' : '')} />
                         <ErrorMessage name="color" component="div" className="invalid-feedback col-md-12 col-sm-12" />
                         <ErrorMessage name="size" component="div" className="invalid-feedback col-md-12 col-sm-12" />
                     </div>
 
-                    <div className="form-group col-md-4 col-sm-4">
-                        {/*<button type="submit" className="btn btn-primary mr-2">Save</button>*/}
-                        <button type="reset" className="btn btn-secondary mr-2">Reset</button>
-                        <button type="button" className="btn btn-danger" onClick={remove_component}>Remove</button>
+                    <div className="form-group col-md-12 col-sm-12">
+                        {/*<button type="submit" className="btn btn-primary mr-2">{translate('save', ln)}</button>*/}
+                        {/*<button type="reset" className="btn btn-secondary mr-2">{translate('reset', ln)}</button>*/}
+                        <button type="button" className="btn btn-danger" onClick={remove_component}>{translate('delete', ln)}</button>
                     </div>
                 </Form>
             )}

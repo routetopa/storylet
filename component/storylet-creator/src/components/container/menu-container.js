@@ -2,10 +2,11 @@ import React, {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch, batch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
 
-import WordcloudContainer from './wordcloud-container'
+import WordContainer from './word-container'
 import ImageGalleryContainer from './image-gallery-container'
+import BackgroundGalleryContainer from './background-gallery-container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLightbulb, faFileImage, faFileVideo } from '@fortawesome/free-regular-svg-icons'
+import { faLightbulb, faFileImage, faImage, faFileVideo } from '@fortawesome/free-regular-svg-icons'
 import { faFont, faPlusCircle, faTrashAlt, faCopy, faLink, faChartBar, faPlay } from '@fortawesome/free-solid-svg-icons'
 
 import '../../vendor/bootstrap.min.css';
@@ -29,6 +30,7 @@ export default function MenuContainer() {
     const searchKey = useRef(null);
 
     const [isOpened, setIsOpened] = useState(false);
+    const [isOpenedB, setIsOpenedB] = useState(false);
 
     useEffect(()=>{
         if(!selectedSlide)
@@ -119,6 +121,29 @@ export default function MenuContainer() {
         }
     };
 
+    const open_background_gallery = () => {
+        setIsOpenedB(true);
+    };
+
+    const close_background_gallery = (e) => {
+        if(e.target.id === "image-gallery-close") {
+            setIsOpenedB(false);
+        }
+        else if(e.target.nodeName === "IMG") {
+            let data = cloneDeep(slidesData);
+
+            debugger
+            data[slideIdx].background = e.target.src;
+
+            batch(() => {
+                dispatch(setSlidesData(data));
+                dispatch(selectSlide(data[slideIdx]));
+            });
+
+            setIsOpenedB(false);
+        }
+    };
+
     const update_slides_index = (data, idx) => {
         for(let i = idx; i<data.length; i++)
             data[i].index +=1;
@@ -178,9 +203,10 @@ export default function MenuContainer() {
                     <FontAwesomeIcon icon={faTrashAlt} className="icon slide-control remove-slide" onClick={remove_slide} />
                     <FontAwesomeIcon icon={faFont} className="icon add-text" onClick={add_text} />
                     <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={open_gallery} />
-                    <FontAwesomeIcon icon={faFileVideo} className="icon add-video" />
-                    <FontAwesomeIcon icon={faLink} className="icon add-link" />
-                    <FontAwesomeIcon icon={faChartBar} className="icon add-datalet" />
+                    <FontAwesomeIcon icon={faImage} className="icon add-image" onClick={open_background_gallery} />
+                    {/*<FontAwesomeIcon icon={faFileVideo} className="icon add-video" />*/}
+                    {/*<FontAwesomeIcon icon={faLink} className="icon add-link" />*/}
+                    {/*<FontAwesomeIcon icon={faChartBar} className="icon add-datalet" />*/}
                     <FontAwesomeIcon icon={faPlay} onClick={() => window.open(window.STATIC.SITE_URL + 'storylet-viewer/' + window.STORY.DATA.id,'_blank')} className="icon open-preview" />
                 </div>
                 <div className="find-ideas">
@@ -189,9 +215,10 @@ export default function MenuContainer() {
                 </div>
             </div>
 
-            <WordcloudContainer startingWord={startingWord} />
+            <WordContainer startingWord={startingWord} />
 
             <ImageGalleryContainer isOpened={isOpened} closeGallery={close_gallery} />
+            <BackgroundGalleryContainer isOpened={isOpenedB} closeGallery={close_background_gallery} />
         </>
     )
 };

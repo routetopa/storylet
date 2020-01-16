@@ -1,81 +1,16 @@
-#cover-container {
-    visibility: hidden;
-
-    z-index: 4000;
-    position: fixed;
-    top: 0;
-    left: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    background-color: rgba(55,71,79,.5);
-    transition: background-color .15s linear;
-}
-
-#wordcloud-container {
-    z-index: 4001;
-    position: absolute;
-    top: 104px;
-    left: 104px;
-    width: calc(100% - 208px);
-    height: calc(100% - 208px);
-    background-color: var(--storylet-white);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-
-    /*overflow: hidden;*/
-}
-
-#wordcloud-close {
-    position: absolute;
-    top: -20px;
-    right: -20px;
-
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-
-    padding: 8px;
-
-    color: var(--storylet-white);
-    background-color: var(--storylet-primary);
-    border-radius: 50%;
-
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-#wordcloud-close:hover {
-
-}
-
-
 #path {
     display: flex;
 
     height: 48px;
-    line-height: 40px;
+    line-height: 38px;
     padding: 5px;
-    background-color: var(--storylet-blue-grey-50);
+    /*border: 2px solid var(--storylet-blue-grey-50);*/
 
     font-weight: 700;
-
-    border-radius: 8px 8px 0 0;
-}
-
-#wordcloud {
-    border-radius: 0 0 8px 8px;
 }
 
 #selected-words {
 
-}
-
-#path .icon {
-    font-size: 38px;
-    padding: 2px;
-    margin-right: 8px;
-    cursor: pointer;
 }
 
 #path span {
@@ -85,4 +20,5 @@
 
 #wordcloud {
     height: calc(100% - 48px);
+    border-radius: 0 0 8px 8px;
 }

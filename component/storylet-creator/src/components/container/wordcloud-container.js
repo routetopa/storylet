@@ -6,16 +6,14 @@ import axios from "axios"; // https://react-wordcloud.netlify.com/usage/options
 import ReactDOM from 'react-dom';
 
 import '../../style/container/wordcloud-container.css'
-import {faTimes} from "@fortawesome/free-solid-svg-icons";
-import {faLightbulb} from "@fortawesome/free-regular-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-import cloneDeep from 'lodash/cloneDeep';
+import {useSelector} from "react-redux";
+import {translate} from "../helpers";
 
 export default function WordcloudContainer({startingWord}) {
 
+    const ln = useSelector(state => state.selectedLanguage);
+
     const colors = {noun:'#4CAF50',adjective:'#F44336',verb:'#FF9800',adverb:'#2196F3'};
-    const coverContainer = useRef(false);
     const [words, setWords] = useState([]);
     const [selectedWords, setSelectedWords] = useState(null);
     const [clickedWord, setClickedWord] = useState(null);
@@ -24,7 +22,6 @@ export default function WordcloudContainer({startingWord}) {
     {
         if(!startingWord || startingWord.length === 0)
             return;
-        coverContainer.current.style.visibility = 'visible';
         setSelectedWords(startingWord.slice());
         wordAssociations(startingWord[0]);
     }, [startingWord]);
@@ -34,7 +31,7 @@ export default function WordcloudContainer({startingWord}) {
         if (!selectedWords || selectedWords.length === 0)
             return;
 
-        console.log(selectedWords);
+        // console.log(selectedWords);
 
         let span = [];
         for (let i = 0; i < selectedWords.length; i++) {
@@ -49,7 +46,7 @@ export default function WordcloudContainer({startingWord}) {
     {
         if (!selectedWords || selectedWords.length === 0)
             return;
-        console.log("clickedWord");
+        // console.log("clickedWord");
 
         // selectedWords.push(word.text);
         let temp = selectedWords.slice();
@@ -57,10 +54,6 @@ export default function WordcloudContainer({startingWord}) {
         setSelectedWords(temp);
 
     }, [clickedWord]);
-
-    function hideWordcloud() {
-        coverContainer.current.style.visibility = 'hidden';
-    }
 
     function goToWordAssociations(i) {
         //todo?
@@ -80,7 +73,7 @@ export default function WordcloudContainer({startingWord}) {
         // limit: '50', // max 300
         // pos: 'noun,adjective,verb,adverb',
         // indent: 'yes' // no
-        axios.get('https://api.wordassociations.net/associations/v1.0/json/search?apikey=ebb2ab66-af3f-42c9-bc24-8072f0c413d5&text=' + searchKey + '&lang=it&limit=50')
+        axios.get('https://api.wordassociations.net/associations/v1.0/json/search?apikey=ebb2ab66-af3f-42c9-bc24-8072f0c413d5&text=' + searchKey + '&lang=' + ln + '&limit=50')
             .then((response) => {
                 let items = response.data.response[0].items;
                     let words = [];
@@ -137,17 +130,13 @@ export default function WordcloudContainer({startingWord}) {
     }
 
     return (
-        <div id="cover-container" ref={coverContainer}>
-            <div id="wordcloud-container">
-                <FontAwesomeIcon id="wordcloud-close" icon={faTimes} className="icon"  onClick={hideWordcloud} />
-                <div id="path">
-                    <FontAwesomeIcon icon={faLightbulb} className="icon" />
-                    <div id="selected-words"> </div>
-                </div>
-                <div id="wordcloud">
-                    <ReactWordcloud callbacks={callbacks} options={options} words={words} />
-                </div>
+        <>
+            <div id="path">
+                {translate('path', ln)}:&nbsp;<div id="selected-words"> </div>
             </div>
-        </div>
+            <div id="wordcloud">
+                <ReactWordcloud callbacks={callbacks} options={options} words={words} />
+            </div>
+        </>
     )
 };

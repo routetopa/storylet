@@ -48,6 +48,13 @@
 .menu-btn:hover {
     font-weight: 700;
 }
+
+.menu-select select {
+    width: 80px;
+    display: inline-block;
+    margin-left: 16px;
+}
+
 /*todo*/
 label.custom-control-label.ddr::before, label.custom-control-label.ddr::after {
     top: 20px !important;

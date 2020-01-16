@@ -1,0 +1,12 @@
+.background-gallery #image-gallery img {
+    padding: 0; /*todo remove if not icons*/
+}
+
+.background-gallery #select-package, .background-gallery #search-images, .background-gallery #image-gallery-search {
+    display: none;
+}
+
+#image-gallery-header span {
+    color: #FFFFFF;
+    font-size: 24px;
+}
