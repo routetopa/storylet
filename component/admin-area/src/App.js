@@ -10,8 +10,6 @@ const { Content, Footer, Sider } = Layout;
 
 function App()
 {
-    const teacher = {name:'Andrea', surname:'Petta', institution:'UNISA ISISLab'};
-
     const [collapsed, setCollapsed] = useState(false);
 
     const onCollapse = collapsed => {
@@ -26,7 +24,7 @@ function App()
                   <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
 
                       <div style={{ width:'100%', textAlign: 'center', 'padding': '16px' }}>
-                          <div style={{color:'#ffffff', marginBottom: '8px'}}>Ciao, {`${teacher.name} ${teacher.surname}`}</div>
+                          <div style={{color:'#ffffff', marginBottom: '8px'}}>Salve docente</div>
                           <Avatar size={64} icon="user" />
                       </div>
 
@@ -51,7 +49,7 @@ function App()
                           <Route       path="/stories" component={Stories} />
 
                       </Content>
-                      <Footer style={{ textAlign: 'center' }}>Storylet Admin for {teacher.institution}</Footer>
+                      <Footer style={{ textAlign: 'center' }}>Storylet Admin by ISISLab</Footer>
                   </Layout>
 
               </Layout>

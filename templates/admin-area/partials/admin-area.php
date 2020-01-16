@@ -33,6 +33,6 @@ if(!is_user_logged_in())
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.12df12ac.js"></script>
 <script src="<?php echo $base_path ?>static/js/2.fb79a4a3.chunk.js"></script>
-<script src="<?php echo $base_path ?>static/js/main.b614e0df.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.08027a0e.chunk.js"></script>
 
 </html>
