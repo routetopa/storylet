@@ -40,6 +40,7 @@ class Storylet_Activator {
 		add_rewrite_rule('^storylet$','index.php?storylet=1','top');
         add_rewrite_rule('^storylet-creator','index.php?storylet-creator=1','top');
         add_rewrite_rule('^storylet-viewer','index.php?storylet-viewer=1','top');
+        add_rewrite_rule('^admin-area','index.php?admin-area=1','top');
 		flush_rewrite_rules();
 	}
 
@@ -59,6 +60,7 @@ class Storylet_Activator {
 			  templateId mediumint(9) UNSIGNED,
 			  themeId mediumint(9) UNSIGNED,
 			  story text DEFAULT '',
+			  status SMALLINT UNSIGNED,
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 
@@ -81,74 +83,38 @@ class Storylet_Activator {
 
 		dbDelta($sql);
 
-		/* SLIDE */
-		$slide =  self::createTableName('slide');
+		/* CLASS */
+        $class =  self::createTableName('class');
 
-		$sql = "CREATE TABLE $slide (
+        $sql = "CREATE TABLE $class (
 			  id mediumint(9) UNSIGNED NOT NULL AUTO_INCREMENT,
-			  storyletId mediumint(9) UNSIGNED,
-			  slideTemplateId mediumint(9) UNSIGNED,
-			  HTML text DEFAULT '',
-			  PRIMARY KEY  (id)
-			) $charset_collate;";
-
-		dbDelta($sql);
-
-		/* SLIDE TEMPLATE */
-		$slide_template =  self::createTableName('slide_template');
-
-		$sql = "CREATE TABLE $slide_template (
-			  id mediumint(9) UNSIGNED NOT NULL AUTO_INCREMENT,
-			  name varchar(255) DEFAULT '',
+			  teacherId mediumint(9) UNSIGNED,
+			  class varchar(255) DEFAULT '',
+			  section varchar(255) DEFAULT '',
 			  description varchar(255) DEFAULT '',
-			  type varchar(255) DEFAULT '',			  
-			  componentTemplateList text DEFAULT '',
-			  componentPosition text DEFAULT '',
-			  impressSettings text DEFAULT '',
+			  size SMALLINT UNSIGNED,
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 
-		dbDelta($sql);
+        dbDelta($sql);
 
-		/* COMPONENT */
-		$component =  self::createTableName('component');
+        /* STUDENT */
+        $student =  self::createTableName('student');
 
-		$sql = "CREATE TABLE $component (
+        $sql = "CREATE TABLE $student (
 			  id mediumint(9) UNSIGNED NOT NULL AUTO_INCREMENT,
-			  componentTemplateId mediumint(9) UNSIGNED,
-			  slideId mediumint(9) UNSIGNED,
-			  componentValues text DEFAULT '',
+			  userId mediumint(9) UNSIGNED,
+			  teacherId mediumint(9) UNSIGNED,
+			  classId mediumint(9) UNSIGNED,
+			  username varchar(255) DEFAULT '',
+			  password varchar(255) DEFAULT '',			
+			  name varchar(255) DEFAULT '',			
+			  surname varchar(255) DEFAULT '',			
+			  status varchar(255) DEFAULT '',			
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 
-		dbDelta($sql);
-
-		/* COMPONENT TEMPLATE */
-		$component_template =  self::createTableName('component_template');
-
-		$sql = "CREATE TABLE $component_template (
-			  id mediumint(9) UNSIGNED NOT NULL AUTO_INCREMENT,
-			  name varchar(255) DEFAULT '',
-			  description varchar(255) DEFAULT '',
-			  type varchar(255) DEFAULT '',	
-			  properties text DEFAULT '',
-			  PRIMARY KEY  (id)
-			) $charset_collate;";
-
-		dbDelta($sql);
-
-		/* THEME */
-		$theme =  self::createTableName('theme');
-
-		$sql = "CREATE TABLE $theme (
-			  id mediumint(9) UNSIGNED NOT NULL AUTO_INCREMENT,
-			  name varchar(255) DEFAULT '',
-			  description varchar(255) DEFAULT '',
-			  resourcesList text DEFAULT '',
-			  PRIMARY KEY  (id)
-			) $charset_collate;";
-
-		dbDelta($sql);
+        dbDelta($sql);
 	}
 
 	private static function createTableName($table_name)

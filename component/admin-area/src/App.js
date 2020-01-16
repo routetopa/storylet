@@ -20,7 +20,7 @@ function App()
 
   return (
       <>
-          <Router>
+          <Router basename={`${window.API_ENDPOINT.SITE_URL}admin-area/`}>
               <Layout style={{ minHeight: '100vh' }}>
 
                   <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>

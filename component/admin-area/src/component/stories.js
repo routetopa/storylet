@@ -1,46 +1,56 @@
-import React from 'react';
-import { Table, Tag } from 'antd';
+import React, {useEffect, useState} from 'react';
+import { Table } from 'antd';
+import axios from "axios";
 
-export default function test1()
+export default function Stories()
 {
-    const stories = [
-        {key: '1', title: 'Lucilla e Gastone volano insieme', description: 'La storia di lucilla e gastone', username:'IAuser01', tags: ['Minor']},
-        {key: '2', title: 'Gastone il calabrone', description: 'Il calabrone', username:'IAuser01', tags: ['Medie']},
-        {key: '3', title: 'Platanina la fogliolina', description: 'La fogliolina', username:'IAuser02', tags: ['Minor']},
-        {key: '4', title: 'Un\'ape molto speciale', description: 'L\'ape', username:'IAuser02', tags: ['Minor']},
-        {key: '5', title: 'Camilla la formica', description: 'La formica', username:'IAuser03', tags: ['Junior']},
-        {key: '6', title: 'Enrico il lombrico', description: 'Il lombrico', username:'IAuser04', tags: ['Minor']},
-        {key: '7', title: 'La quercia saggia sorride felice', description: 'La quercia', username:'IAuser05', tags: ['Medie']},
-    ];
+    const [data, setData] = useState(null);
+    const [students, setStudents] = useState(null);
+
+    useEffect(() =>
+    {
+        fetch_data();
+    }, []);
+
+    const fetch_data = async () => {
+        let response = await axios.get(window.API_ENDPOINT.GET_CLASS,
+            /*{ headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+        let data = [];
+        let students = []
+
+        response.data.data.forEach((cl) => {
+            students = [...students, ...cl.students];
+            cl.stories.forEach((st) => {
+                if(parseInt(st.status) === 1)
+                    data.push(st)
+            })
+        });
+
+        setStudents(students);
+        setData(data);
+    };
 
     const stories_columns = [
-        {title: 'Titolo', dataIndex: 'title', key: 'title'},
+        {title: 'Titolo', dataIndex: 'name', key: 'name'},
         {title: 'Descrizione', dataIndex: 'description', key: 'description'},
-        {title: 'Username', dataIndex: 'username', key: 'username'},
-        {title: 'Tags', dataIndex: 'tags', key: 'tags',
-            render: tags => (
-                <span>
-                    {tags.map(tag => {
-                        let color = tag[1] === 'e' ? 'geekblue' : 'green';
-                        if (tag === 'Junior') {
-                            color = 'volcano';
-                        }
-                        return (
-                            <Tag color={color} key={tag}>
-                                {tag.toUpperCase()}
-                            </Tag>
-                        );
-                    })}
-                  </span>
-            )}
+        {title: 'Username', key: 'ownerId',
+            render: (text, record, index) =>
+            {
+                let res = students.find(
+                    (e) => (e.userId === record.ownerId)
+                );
+                return `${res.name} ${res.surname} (${res.username})`;
+            }
+        }
     ];
 
     return(
         <>
             <h1>Storie pubblicate</h1>
             <Table style={{backgroundColor:'#ffffff', padding: '16px'}}
-                   dataSource={stories}
+                   dataSource={data}
                    columns={stories_columns}
+                   rowKey='id'
             />
         </>
     )

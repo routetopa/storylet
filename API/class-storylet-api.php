@@ -51,6 +51,12 @@ class Storylet_API extends WP_REST_Controller
                 'permission_callback' => array( $this, 'insert_item_permissions_check' ),
                 'args'                => $this->get_endpoint_args_for_item_schema( false ),
             ),
+            array(
+                'methods'             => WP_REST_Server::DELETABLE,
+                'callback'            => array( $this, 'delete_storylet' ),
+                'permission_callback' => array( $this, 'insert_item_permissions_check' ),
+                'args'                => $this->get_endpoint_args_for_item_schema( false ),
+            ),
 			'schema' => null,
 			// SCHEMA IS AVAILABLE THROUGH OPTION REQUEST TO THIS ENDPOINT
 			//'schema' => 'prefix_get_comment_schema',
@@ -86,13 +92,19 @@ class Storylet_API extends WP_REST_Controller
         try
         {
             $storylet = StoryletModel::find($request['storyletid']);
-            $storylet->story = json_encode($request['story']);
+
+            if(isset($request['story']))
+                $storylet->story = json_encode($request['story']);
+
+            if(isset($request['status']))
+            $storylet->status = $request['status'];
+
             $storylet->save();
 
             return rest_ensure_response(['status' => 'OK', 'data' => $request['storyletid']]);
 
         } catch (Exception $e) {
-            return rest_ensure_response(['status' => 'K0', 'error' => $e->getMessage()]);
+            return rest_ensure_response(['status' => 'KO', 'error' => $e->getMessage()]);
         }
     }
 
@@ -115,11 +127,11 @@ class Storylet_API extends WP_REST_Controller
 
                 return rest_ensure_response(['status' => 'OK', 'created_storylet_id' => $storylet->id]);
             } else {
-                return rest_ensure_response(['status' => 'K0', 'error' => 'Wrong storylet template ID']);
+                return rest_ensure_response(['status' => 'KO', 'error' => 'Wrong storylet template ID']);
             }
 
 		} catch (Exception $e) {
-			return rest_ensure_response(['status' => 'K0', 'error' => $e->getMessage()]);
+			return rest_ensure_response(['status' => 'KO', 'error' => $e->getMessage()]);
 		}
 	}
 
@@ -134,6 +146,18 @@ class Storylet_API extends WP_REST_Controller
             return rest_ensure_response(['status' => 'OK', 'data' => StoryletModel::all()->toArray()]);
         }
 	}
+
+    public function delete_storylet( $request )
+    {
+        if($request['storyletid'])
+        {
+            $storylet = StoryletModel::find($request['storyletid']);
+            $storylet->delete();
+            return rest_ensure_response(['status' => 'OK', 'data' => $storylet]);
+        } else {
+            return rest_ensure_response(['status' => 'OK', 'data' => StoryletModel::all()->toArray()]);
+        }
+    }
 
 	/*function prefix_get_comment_schema() {
 		$schema = array(
