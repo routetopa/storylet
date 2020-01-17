@@ -5,7 +5,7 @@
     background-color: #FFFFFF;
     height: 48px;
     box-shadow: 0 1px 0 rgba(14,19,24,.15);
-    border-right: 1px solid var(--storylet-blue-grey-50);
+    /*border-right: 1px solid var(--storylet-blue-grey-50);*/
 }
 
 .buttons {
@@ -62,7 +62,8 @@
     padding: 2px;
     margin-right: 8px;
     cursor: pointer;
-    color: var(--storylet-blue-grey-50);
+    /*color: var(--storylet-blue-grey-50);*/
+    color: var(--storylet-blue-grey-800);
     transition: color .45s linear;
 }
 

@@ -83,7 +83,8 @@
 }
 
 .word-tab.selected {
-    background-color: var(--storylet-blue-grey-50);
+    background-color: var(--storylet-primary);
+    color: #FFFFFF;
 }
 
 .word-tab .icon {

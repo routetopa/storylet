@@ -48,7 +48,6 @@ export default function MoveableComponent() {
     }, [selectedComponent]);
 
     function setComponentParameters(name, value) {
-        debugger
         let data = cloneDeep(slidesData);
 
         switch (name) {

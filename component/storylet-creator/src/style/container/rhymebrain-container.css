@@ -5,3 +5,14 @@
     padding: 8px;
     overflow: auto;
 }
+
+.rhymebrain-container td {
+    font-weight: 700;
+    text-align: center;
+}
+
+.rhymebrain-container th {
+    font-weight: 700 !important;
+    text-align: center !important;
+    color: var(--storylet-primary) !important;
+}

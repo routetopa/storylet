@@ -25,12 +25,12 @@ export default function RhymebrainContainer({startingWord}) {
             key: 'score',
             sorter: (a, b) => a.score - b.score,
         },
-        {
-            title: translate('frequency', ln),
-            dataIndex: 'freq',
-            key: 'freq',
-            sorter: (a, b) => a.freq - b.freq,
-        },
+        // {
+        //     title: translate('frequency', ln),
+        //     dataIndex: 'freq',
+        //     key: 'freq',
+        //     sorter: (a, b) => a.freq - b.freq,
+        // },
         {
             title: translate('syllables', ln),
             dataIndex: 'syllables',
@@ -43,7 +43,7 @@ export default function RhymebrainContainer({startingWord}) {
     {
         if(!startingWord || startingWord.length === 0)
             return;
-        console.log("RhymebrainContainer");
+        // console.log("RhymebrainContainer");
 
         axios.get('https://rhymebrain.com/talk?function=getRhymes&word=' + startingWord + '&lang=' + ln)
             .then((response) => {

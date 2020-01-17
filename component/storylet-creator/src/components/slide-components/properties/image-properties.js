@@ -50,7 +50,7 @@ export default function ImageProperties()
     });
 
     useEffect(()=>{
-        console.log("properties slidesData");
+        // console.log("properties slidesData");
         if(!slidesData || !selectedSlide || !selectedComponent)
             return;
 

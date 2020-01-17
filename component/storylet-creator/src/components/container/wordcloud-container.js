@@ -102,7 +102,7 @@ export default function WordcloudContainer({startingWord}) {
     const callbacks = {
         getWordColor: word => (word.color),
         getWordTooltip: word =>
-            `La parola "${word.text}" ha un peso pari a ${word.value}.`,
+            `La parola "${word.text}" ha una rilevanza pari a ${word.value}.`,//todo translate
         onWordClick: getCallback('onWordClick'),
         onWordMouseOut: getCallback('onWordMouseOut'),
         onWordMouseOver: getCallback('onWordMouseOver')

@@ -6,6 +6,8 @@ const SlideStyle = styled.div`
                 case 'small' : return '5vw';
                 case 'medium': return '30vw';
                 case 'full'  : return '40vw';
+                case 'snail'  : return '700px';
+                case 'cube'  : return '700px';
                 default      : return '40vw';
             }}
           };
@@ -14,6 +16,8 @@ const SlideStyle = styled.div`
                     case 'small' : return '5vw';
                     case 'medium': return '30vw';
                     case 'full'  : return '40vw';
+                    case 'snail'  : return '700px';
+                    case 'cube'  : return '700px';
                     default      : return '40vw';
                 }}
             };

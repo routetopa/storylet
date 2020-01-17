@@ -50,7 +50,7 @@ export default function BabelnetContainer({startingWord}) {
     useEffect(() => {
         if(!startingWord || startingWord.length === 0)
             return;
-        console.log("BabelnetContainer"); // https://babelnet.org/guide
+        // console.log("BabelnetContainer"); // https://babelnet.org/guide
 
         getSenses(startingWord, lang, lang, null, source);
         // getSynset("bn:00015983n", lang);
@@ -100,7 +100,7 @@ export default function BabelnetContainer({startingWord}) {
     function getSenses(lemma, searchLang, targetLang, pos, source) {
         axios.get('https://babelnet.io/v5/getSenses?lemma=' + lemma + '&searchLang=' + searchLang + '&targetLang=' + targetLang + (pos ? '&source=' + pos : '') + (source ? '&source=' + source : '') + '&key=' + key)
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 let synsetIds = [];
                 let _dataSource = [];
                 for(let i=0; i< response.data.length; i++) {

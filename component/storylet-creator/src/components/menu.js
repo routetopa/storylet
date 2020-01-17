@@ -53,16 +53,16 @@ export default function Menu() {
     };
 
     const save_storylet = () => {
-        console.log('save');
-        console.log(window.STORY.DATA.id);
-        console.log(slidesData);
+        // console.log('save');
+        // console.log(window.STORY.DATA.id);
+        // console.log(slidesData);
 
         axios.put(window.API_ENDPOINT.SAVE_STORYLET, {
             storyletid: window.STORY.DATA.id,
             story     : slidesData,
         })
             .then((response) => {
-                console.log(response);
+                // console.log(response);
             }, (error) => {
                 console.log(error);
             });

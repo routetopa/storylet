@@ -23,3 +23,14 @@
 #babelnet-words {
     height: 80%;
 }
+
+.babelnet-table td {
+    font-weight: 700;
+    text-align: center;
+}
+
+.babelnet-table th {
+    font-weight: 700 !important;
+    text-align: center !important;
+    color: var(--storylet-primary) !important;
+}

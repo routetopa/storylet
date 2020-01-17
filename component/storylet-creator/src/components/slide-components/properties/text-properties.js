@@ -50,7 +50,7 @@ export default function TextProperties()
     });
 
     useEffect(()=>{
-        console.log("properties slidesData");
+        // console.log("properties slidesData");
         if(!slidesData || !selectedSlide || !selectedComponent)
             return;
 

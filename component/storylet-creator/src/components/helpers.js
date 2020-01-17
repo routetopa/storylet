@@ -9,6 +9,47 @@ export function translate (text, ul) {
 
 let ln = [];
 
+/******** IT ********/
+
+// SIDE MENU
+ln["save_it"] = "Salva";
+ln["autosave_it"] = "Autosave";
+ln["language_it"] = "Lingua";
+
+// WORD IDEAS
+ln["analogies_it"] = "Analogie";
+ln["synonyms_it"] = "Sinonimi";
+ln["rhymes_it"] = "Rime";
+ln["path_it"] = "PERCORSO";
+ln["fullLemma_it"] = "Lista sinonimi";
+ln["word_it"] = "Parola";
+ln["score_it"] = "Punteggio";
+ln["frequency_it"] = "Frequenza";
+ln["syllables_it"] = "Sillabe";
+
+// PROPERTIES
+ln["component_it"] = "Componente";
+ln["slide_it"] = "Scena";
+
+ln["template_it"] = "Template";
+ln["linear_it"] = "lineare";
+ln["snail_it"] = "chiocciola";
+ln["cube_it"] = "cubo";
+ln["autoplay_it"] = "Autoplay";
+
+ln["size_it"] = "Dimensione";
+ln["width_it"] = "Largh.";
+ln["height_it"] = "Altezza";
+ln["position_it"] = "Posizione";
+ln["scale_it"] = "Scala";
+ln["lock_it"] = "Blocca";
+ln["rotate_it"] = "Ruota";
+ln["degrees_it"] = "Gradi";
+ln["font_it"] = "Carattere";
+ln["color_it"] = "Colore";
+ln["size2_it"] = "Dim.";
+ln["delete_it"] = "Elimina";
+
 /******** EN ********/
 
 // SIDE MENU
@@ -30,7 +71,13 @@ ln["syllables_en"] = "Syllables";
 // PROPERTIES
 ln["component_en"] = "Component";
 ln["slide_en"] = "Slide";
-ln["delete_en"] = "Delete";
+
+ln["template_en"] = "Template";
+ln["linear_en"] = "linear";
+ln["snail_en"] = "snail";
+ln["cube_en"] = "cube";
+ln["autoplay_en"] = "Autoplay";
+
 ln["size_en"] = "Size";
 ln["width_en"] = "Width";
 ln["height_en"] = "Height";
@@ -42,41 +89,7 @@ ln["degrees_en"] = "Deg.";
 ln["font_en"] = "Font";
 ln["color_en"] = "Color";
 ln["size2_en"] = "Size";
-
-/******** IT ********/
-
-// SIDE MENU
-ln["save_it"] = "Salva";
-ln["autosave_it"] = "Autosave";
-ln["language_it"] = "Lingua";
-
-// WORD IDEAS
-ln["analogies_it"] = "Analogie";
-ln["synonyms_it"] = "Sinonimi";
-ln["rhymes_it"] = "Rime";
-ln["path_it"] = "PERCORSO";
-ln["fullLemma_it"] = "Parola";
-ln["word_it"] = "Parola";
-ln["score_it"] = "Punteggio";
-ln["frequency_it"] = "Frequenza";
-ln["syllables_it"] = "Sillabe";
-
-// PROPERTIES
-ln["component_it"] = "Componente";
-ln["slide_it"] = "Scena";
-ln["delete_it"] = "Elimina";
-ln["size_it"] = "Dimensione";
-ln["width_it"] = "Largh.";
-ln["height_it"] = "Altezza";
-ln["position_it"] = "Posizione";
-ln["scale_it"] = "Scala";
-ln["lock_it"] = "Blocca";
-ln["rotate_it"] = "Ruota";
-ln["degrees_it"] = "Gradi";
-ln["font_it"] = "Carattere";
-ln["color_it"] = "Colore";
-ln["size2_it"] = "Dim.";
-
+ln["delete_en"] = "Delete";
 
 
 

@@ -132,7 +132,6 @@ export default function MenuContainer() {
         else if(e.target.nodeName === "IMG") {
             let data = cloneDeep(slidesData);
 
-            debugger
             data[slideIdx].background = e.target.src;
 
             batch(() => {
@@ -211,7 +210,7 @@ export default function MenuContainer() {
                 </div>
                 <div className="find-ideas">
                     <FontAwesomeIcon icon={faLightbulb} className="icon" onClick={get_words} />
-                    <input id="SearchKey" ref={searchKey} className="form-control col-md-10 col-sm-10" />
+                    <input id="SearchKey" ref={searchKey} className="form-control col-md-10 col-sm-10" onKeyPress={(e)=>{if (e.key === 'Enter') get_words()}} />
                 </div>
             </div>
 

@@ -23,6 +23,7 @@ export default function WordContainer({startingWord})
     {
         if(!startingWord || startingWord.length === 0)
             return;
+        setSelectedTab(0);
         coverContainer.current.style.visibility = 'visible';
     }, [startingWord]);
 
