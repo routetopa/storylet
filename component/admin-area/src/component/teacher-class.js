@@ -20,11 +20,11 @@ export default function TeacherClass()
                 return (
                     <div>
                         <Popconfirm title="Sure to ?" onConfirm={() => showStudentDetail(record)}>
-                            <a href="/#">Edit </a>
+                            <a>Edit </a>
                         </Popconfirm>
                          |
                         <Popconfirm title="Sure to ?" onConfirm={() => deleteStudent(record)}>
-                            <a href="/#"> Delete</a>
+                            <a> Delete</a>
                         </Popconfirm>
                     </div>
                 )
@@ -49,10 +49,10 @@ export default function TeacherClass()
             {
                 return (
                     <div>
-                        <a href="/#" onClick={() => window.open(`${window.API_ENDPOINT.STORYLET_VIEWER}/${record.id}`,'_blank')}>View</a> |
-                        <a href="/#" onClick={() => togglePublishStorylet(record)}> {parseInt(record.status) === 1 ? 'Unpublish' : 'Publish'}</a> |
+                        <a onClick={() => window.open(`${window.API_ENDPOINT.STORYLET_VIEWER}/${record.id}`,'_blank')}>View</a> |
+                        <a onClick={() => togglePublishStorylet(record)}> {parseInt(record.status) === 1 ? 'Unpublish' : 'Publish'}</a> |
                         <Popconfirm title="Sure to ?" onConfirm={() => deleteStorylet(record)}>
-                            <a href="/#"> Delete</a>
+                            <a> Delete</a>
                         </Popconfirm>
                     </div>
                 )
