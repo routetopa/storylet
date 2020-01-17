@@ -87,7 +87,7 @@ class AdminClass_API extends WP_REST_Controller
             $users              = array();
 
             $class              = new ClassModel();
-            $class->teacherId   = 1;//get_current_user_id();
+            $class->teacherId   = get_current_user_id();
             $class->class       = $parameters['class'];
             $class->section     = $parameters['section'];
             $class->description = $parameters['description'];
@@ -106,7 +106,7 @@ class AdminClass_API extends WP_REST_Controller
 
                     $student            = new StudentModel();
                     $student->userId    = $user_id;
-                    $student->teacherId = 1;//get_current_user_id();
+                    $student->teacherId = get_current_user_id();
                     $student->classId   = $class->id;
                     $student->username  = $user_name;
                     $student->password  = $random_password;
@@ -172,7 +172,7 @@ class AdminClass_API extends WP_REST_Controller
     {
         try
         {
-            $teacher_id = 1;//get_current_user_id();
+            $teacher_id = get_current_user_id();
             $classes = ClassModel::where('teacherId', '=', $teacher_id)->get();
 
             foreach ($classes as &$class)
