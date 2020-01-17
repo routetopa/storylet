@@ -2,7 +2,7 @@ import Form from "antd/es/form";
 import {Input, Button} from "antd";
 import React from "react";
 
-function EditStudent ({form, handle_submit, data})
+const EditStudent = React.memo( ({form, handle_submit, data}) =>
 {
     const { getFieldDecorator } = form;
 
@@ -73,7 +73,6 @@ function EditStudent ({form, handle_submit, data})
             </Button>
         </Form>
     );
-
-}
+});
 
 export default Form.create({name:'EditStudent'})(EditStudent);

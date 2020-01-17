@@ -10,7 +10,7 @@ if(!is_user_logged_in())
     <base href="<?php echo $base_path ?>" />
     <title>Storylet Creator</title>
     <link href="<?php echo $base_path ?>static/css/2.ff8bd605.chunk.css" rel="stylesheet">
-    <link href="<?php echo $base_path ?>static/css/main.377e51c5.chunk.css" rel="stylesheet">
+    <link href="<?php echo $base_path ?>static/css/main.a44f833b.chunk.css" rel="stylesheet">
 
 </head>
 <body>
@@ -40,7 +40,7 @@ if(!is_user_logged_in())
 </script>
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.30fdea02.js"></script>
-<script src="<?php echo $base_path ?>static/js/2.d3519896.chunk.js"></script>
-<script src="<?php echo $base_path ?>static/js/main.cecdccb2.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/2.8f663036.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.317edebc.chunk.js"></script>
 </html>
 
