@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Icon, Tabs, Table, Modal, Popconfirm } from 'antd';
+import { Icon, Tabs, Table, Modal, Popconfirm, notification, Button } from 'antd';
 import axios from 'axios';
 
 import AddClassForm from '../form/add-class-form';
@@ -14,17 +14,21 @@ export default function TeacherClass()
         {title: 'Password', dataIndex: 'password', key: 'password'},
         {title: 'Nome',     dataIndex: 'name',     key: 'name'},
         {title: 'Cognome',  dataIndex: 'surname',  key: 'surname'},
-        {title: 'Action',   key: 'action',
+        {title: 'Azioni',   key: 'action',
             render: (text, record, index) =>
             {
                 return (
                     <div>
-                        <Popconfirm title="Sure to ?" onConfirm={() => showStudentDetail(record)}>
-                            <a>Edit </a>
-                        </Popconfirm>
-                         |
+                        <Icon theme="filled"
+                              style={{fontSize:'24px', cursor:'pointer', marginRight:'24px'}}
+                              type="edit"
+                              onClick={() => showStudentDetail(record)}
+                        />
                         <Popconfirm title="Sure to ?" onConfirm={() => deleteStudent(record)}>
-                            <a> Delete</a>
+                            <Icon theme="filled"
+                                  style={{fontSize:'24px', cursor:'pointer'}}
+                                  type="delete"
+                            />
                         </Popconfirm>
                     </div>
                 )
@@ -49,10 +53,17 @@ export default function TeacherClass()
             {
                 return (
                     <div>
-                        <a onClick={() => window.open(`${window.API_ENDPOINT.STORYLET_VIEWER}/${record.id}`,'_blank')}>View</a> |
-                        <a onClick={() => togglePublishStorylet(record)}> {parseInt(record.status) === 1 ? 'Unpublish' : 'Publish'}</a> |
+                        <Icon theme="filled"
+                              style={{fontSize:'24px', cursor:'pointer', marginRight:'24px'}}
+                              type="play-circle"
+                              onClick={() => window.open(`${window.API_ENDPOINT.STORYLET_VIEWER}/${record.id}`,'_blank')}
+                        />
+                        <a onClick={() => togglePublishStorylet(record)}> {parseInt(record.status) === 1 ? 'Rendi pubblica' : 'Rendi privata'}</a> |
                         <Popconfirm title="Sure to ?" onConfirm={() => deleteStorylet(record)}>
-                            <a> Delete</a>
+                            <Icon theme="filled"
+                                  style={{fontSize:'24px', cursor:'pointer'}}
+                                  type="delete"
+                            />
                         </Popconfirm>
                     </div>
                 )
@@ -74,8 +85,8 @@ export default function TeacherClass()
         let response = await axios.put(`${window.API_ENDPOINT.CRUD_STORYLET}/${data.id}`,
             {
                 status : (parseInt(data.status) === 1 ? 0 : 1)
-            }
-            /*{ headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+            },
+            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
         if(response.data.status === 'OK')
         {
             let data = await fetch_data();
@@ -89,7 +100,7 @@ export default function TeacherClass()
     {
         console.log(data);
         let response = await axios.delete(`${window.API_ENDPOINT.CRUD_STORYLET}/${data.id}`,
-            /*{ headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
         if(response.data.status === 'OK')
         {
             fetch_data();
@@ -111,7 +122,7 @@ export default function TeacherClass()
     const deleteStudent = async (data) => {
         console.log(data);
         let response = await axios.delete(`${window.API_ENDPOINT.CRUD_STUDENT}/${data.id}`,
-            /*{ headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
         if(response.data.status === 'OK')
         {
             fetch_data();
@@ -126,8 +137,8 @@ export default function TeacherClass()
                 section     : data.section,
                 description : data.description,
                 size        : data.student_number,
-            }
-            /*{ headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+            },
+            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
         if(response.data.status === 'OK')
         {
             setAddClassModalVisible(false);
@@ -143,23 +154,30 @@ export default function TeacherClass()
                 password : data.password,
                 name     : data.name,
                 surname  : data.surname,
-            }
-            /*{ headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+            },
+            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
         if(response.data.status === 'OK')
         {
-            setStudentDetailModalVisible(false);
+
             let data = await fetch_data();
             let selected_calss = Object.assign({}, data[selectedClass.idx]);
-            selected_calss.idx = selectedClass.idx
+            selected_calss.idx = selectedClass.idx;
             setSelectedClass(selected_calss);
-            setSelectedStudent(null);
+        } else {
+            notification.open({
+                message: 'Errore',
+                description: response.data.error
+            });
         }
+
+        setStudentDetailModalVisible(false);
+        setSelectedStudent(null);
     };
 
     const delete_class = async (class_id) => {
         console.log(class_id);
         let response = await axios.delete(`${window.API_ENDPOINT.CRUD_CLASS}/${class_id}`,
-            /*{ headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
         if(response.data.status === 'OK')
         {
             console.log('deleted');
@@ -173,9 +191,15 @@ export default function TeacherClass()
 
     const fetch_data = async () => {
         let response = await axios.get(window.API_ENDPOINT.GET_CLASS,
-            /*{ headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
         setClasses(response.data.data);
         return response.data.data;
+    };
+
+    const reload_story = async () => {
+        let cl = await fetch_data();
+        cl[selectedClass.idx].idx = selectedClass.idx;
+        setSelectedClass(Object.assign({}, cl[selectedClass.idx]));
     };
 
     /*const ideas = [
@@ -199,7 +223,14 @@ export default function TeacherClass()
                     return (
                         <div onClick={(e) => select_class(idx)} key={`class_${idx}`} className='class'>
                             {c.class} {c.section} - {c.description}
-                            <button onClick={(e) => delete_class(c.id)}>Delete</button>
+
+                            <Popconfirm title="Sure to ?" onConfirm={(e) => delete_class(c.id)}>
+                                <Icon theme="filled"
+                                      style={{fontSize:'24px', cursor:'pointer'}}
+                                      type="delete"
+                                />
+                            </Popconfirm>
+
                         </div>
                     );
                 })}
@@ -223,6 +254,11 @@ export default function TeacherClass()
                                    rowKey='id'
                                    columns={stories_columns}
                             />
+
+                            <Button type="primary" onClick={reload_story} loading={false}>
+                                Reload
+                            </Button>
+
                         </Tabs.TabPane>
 
                         {/*
@@ -239,7 +275,7 @@ export default function TeacherClass()
                 </div> ) : null }
 
             <Icon theme="filled"
-                  style={{fontSize:'64px', position:'absolute', bottom:'64px', right:'64px', cursor: 'pointer'}}
+                  style={{fontSize:'64px', position:'absolute', bottom:'20px', right:'64px', cursor: 'pointer'}}
                   type="plus-circle"
                   onClick={() => setAddClassModalVisible(true)}
             />

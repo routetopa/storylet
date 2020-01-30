@@ -10,4 +10,4 @@
     if ( in_array( 'um_docente', (array) $user->roles ) )
         require_once plugin_dir_path(dirname(__FILE__)) . '/admin-area/partials/admin-area.php';
     else
-        require_once plugin_dir_path(dirname(__FILE__)) . '/admin-area/partials/error.php';
+        wp_redirect( wp_login_url() );//require_once plugin_dir_path(dirname(__FILE__)) . '/admin-area/partials/error.php';

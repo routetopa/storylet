@@ -12,4 +12,4 @@
     if($storylet && get_current_user_id() == $storylet->ownerId)
         require_once plugin_dir_path(dirname(__FILE__)) . '/storylet-creator/partials/storylet-creator.php';
     else
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . '/storylet-creator/partials/error.php';
+        wp_redirect( wp_login_url() );//require_once plugin_dir_path( dirname( __FILE__ ) ) . '/storylet-creator/partials/error.php';

@@ -24,7 +24,7 @@ function App()
                   <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
 
                       <div style={{ width:'100%', textAlign: 'center', 'padding': '16px' }}>
-                          <div style={{color:'#ffffff', marginBottom: '8px'}}>Salve docente</div>
+                          <div style={{color:'#ffffff', marginBottom: '8px'}}>Ciao {`${window.USER_INFO.name} ${window.USER_INFO.surname}`}</div>
                           <Avatar size={64} icon="user" />
                       </div>
 
