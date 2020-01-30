@@ -38,17 +38,22 @@ ln["cube_it"] = "cubo";
 ln["autoplay_it"] = "Autoplay";
 
 ln["size_it"] = "Dimensione";
-ln["width_it"] = "Largh.";
-ln["height_it"] = "Altezza";
+ln["width_it"] = "L";
+ln["height_it"] = "H";
 ln["position_it"] = "Posizione";
 ln["scale_it"] = "Scala";
 ln["lock_it"] = "Blocca";
 ln["rotate_it"] = "Ruota";
-ln["degrees_it"] = "Gradi";
+ln["degrees_it"] = "°C";
 ln["font_it"] = "Carattere";
 ln["color_it"] = "Colore";
 ln["size2_it"] = "Dim.";
 ln["delete_it"] = "Elimina";
+
+// tooltip
+ln["flipH_it"] = "Specchia orizzontalente";
+ln["flipV_it"] = "Specchia verticalmente";
+ln["bringsUp_it"] = "Porta in primo piano";
 
 /******** EN ********/
 
@@ -91,6 +96,10 @@ ln["color_en"] = "Color";
 ln["size2_en"] = "Size";
 ln["delete_en"] = "Delete";
 
+// tooltip
+ln["flipH_en"] = "Flip Horizontal";
+ln["flipV_en"] = "Flip Vertical";
+ln["bringsUp_en"] = "Brings Up";
 
 
 

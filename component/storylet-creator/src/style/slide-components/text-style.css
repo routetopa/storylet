@@ -2,4 +2,6 @@
     position: absolute;
     overflow: hidden;
     outline: none;
+
+    white-space: pre;
 }

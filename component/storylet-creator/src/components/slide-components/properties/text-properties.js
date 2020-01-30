@@ -175,11 +175,11 @@ export default function TextProperties()
                         <Field name="scaleX" type="number" className={'form-control col-md-2 col-sm-2' + (errors.scale && touched.scale ? ' is-invalid' : '')} />
                         <label htmlFor="scaleY" className="col-md-1 col-sm-1">Y:</label>
                         <Field name="scaleY" type="number" className={'form-control col-md-2 col-sm-2' + (errors.scale && touched.scale ? ' is-invalid' : '')} />
-                        <div className="custom-control custom-checkbox col-md-3 col-sm-3">
-                            <Field name="keepRatio" type="checkbox" className="custom-control-input" id="defaultUnchecked"/>
-                            <label className="custom-control-label" htmlFor="defaultUnchecked">{translate('lock', ln)}</label>
-                            {/*<FontAwesomeIcon icon={faLock} className="icon" />*/}
-                        </div>
+                        {/*<div className="custom-control custom-checkbox col-md-3 col-sm-3">*/}
+                        {/*    <Field name="keepRatio" type="checkbox" className="custom-control-input" id="defaultUnchecked"/>*/}
+                        {/*    <label className="custom-control-label" htmlFor="defaultUnchecked">{translate('lock', ln)}</label>*/}
+                        {/*    /!*<FontAwesomeIcon icon={faLock} className="icon" />*!/*/}
+                        {/*</div>*/}
                     </div>
 
                     <div className="form-group form-inline">

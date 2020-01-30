@@ -101,6 +101,14 @@ export default function PropertiesContainer()
             </div>
             <div className={selectedTab === 1 ? "properties col-md-12 show" : "properties col-md-12"}>
                 <div className="property-row">
+                    <label className="template-label">{translate('title', ln)}</label>
+                </div>
+                <input className="form-control" />
+                <div className="property-row">
+                    <label className="template-label">{translate('description', ln)}</label>
+                </div>
+                <textarea className="form-control template" />
+                <div className="property-row">
                     <label className="template-label">{translate('template', ln)}</label>
                     <select className="form-control template" onChange={set_template}>
                         <option selected={template === "linear" ? "selected" : ""} value="linear">{translate('linear', ln)}</option>

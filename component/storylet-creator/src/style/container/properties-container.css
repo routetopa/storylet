@@ -79,6 +79,11 @@ label.custom-control-label.mycb::before, label.custom-control-label.mycb::after 
     cursor: pointer;
 }
 
+textarea.template {
+    margin-bottom: 16px;
+}
+
+
 /* TABS */
 
 .tabs {

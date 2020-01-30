@@ -67,7 +67,7 @@ export default function MenuContainer() {
             "scale": [1,1],
             "rotate": 0,
             "keepRatio": true,
-            "zIndex": 0,
+            "zIndex": 1,
             "fontSize": 48,
             "color": "#000000"
         };
@@ -152,10 +152,10 @@ export default function MenuContainer() {
         let data = cloneDeep(slidesData);
 
         let slide = {
+            id: Math.random().toString(36).substr(2, 8).toUpperCase(),
             index:  data.length,
             background: "",
             components: [],
-            id: data.length,
             type: ""
         };
 
@@ -168,29 +168,50 @@ export default function MenuContainer() {
             data.push(slide);
         }
 
-        dispatch(setSlidesData(data));
+        batch(() => {
+            dispatch(setSlidesData(data));
+            dispatch(selectSlide(data[slideIdx+1]));
+            dispatch(selectComponent(null));
+        });
     };
 
     const copy_slide = () => {
         let data = cloneDeep(slidesData);
         let cloned_node = cloneDeep(data[slideIdx]);
 
+        cloned_node.id = Math.random().toString(36).substr(2, 8).toUpperCase();
+
         update_slides_index(data, slideIdx);
         data.splice(slideIdx, 0, cloned_node);
-        dispatch(setSlidesData(data));
+
+        batch(() => {
+            dispatch(setSlidesData(data));
+            dispatch(selectSlide(data[slideIdx+1]));
+            dispatch(selectComponent(null));
+        });
     };
 
     const remove_slide = () => {
         let data = cloneDeep(slidesData);
 
         // if 1 slide return
+        if(data.length===1) {
+            alert('Impossibile eliminare la scena');
+            return
+        }
 
         //todo meglio!
         data.splice(slideIdx, 1);
         for(let i = 0; i< data.length; i++)
             data[i].index = i;
 
-        dispatch(setSlidesData(data));
+        let goto = slideIdx === 0 ? 0 : slideIdx-1;
+
+        batch(() => {
+            dispatch(setSlidesData(data));
+            dispatch(selectSlide(data[goto]));
+            dispatch(selectComponent(null));
+        });
     };
 
     return (

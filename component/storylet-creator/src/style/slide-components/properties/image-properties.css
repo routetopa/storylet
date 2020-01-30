@@ -19,3 +19,9 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
+
+.btn-flip {
+    width: 38px;
+    margin-left: 12px;
+    padding: 0;
+}

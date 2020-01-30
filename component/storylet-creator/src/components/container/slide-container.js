@@ -15,11 +15,12 @@ export default function SlideContainer()
 {
     const dispatch = useDispatch();
     const slidesData = useSelector(state => state.slidesData);
+    const selectedSlide = useSelector(state => state.selectedSlide);
 
     return (
         <div className="slide-container">
             {slidesData.map((slide, idx) =>
-                <Slide isSettingVisible={true} key={idx} parameters={slide} isEditable={false} onClick={() => {dispatch(componentSelected(null)); dispatch(selectSlide(slidesData[idx]))}} />
+                <Slide selected={slide.id===selectedSlide.id} isSettingVisible={true} key={idx} parameters={slide} isEditable={false} onClick={() => {dispatch(componentSelected(null)); dispatch(selectSlide(slidesData[idx]))}} />
             )}
         </div>
     )
