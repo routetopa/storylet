@@ -112,6 +112,8 @@ class Storylet_API extends WP_REST_Controller
 	{
 		try
 		{
+            $current_user = wp_get_current_user();
+
 			$parameters        = $request->get_params();
 			$storyletTemplate  = $parameters['storyletTemplate'];
 
@@ -121,7 +123,7 @@ class Storylet_API extends WP_REST_Controller
             {
                 $storylet             = new StoryletModel();
                 $storylet->templateId = intval($storyletTemplate['id']);
-                $storylet->ownerId    = get_current_user_id();
+                $storylet->ownerId    = $current_user->ID;
                 $storylet->story      = $storylet_template['template'];
                 $storylet->save();
 

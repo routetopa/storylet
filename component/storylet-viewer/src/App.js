@@ -46,7 +46,7 @@ function App()
     {
         // debugger
         let steps;
-        if(currentStory[0].template === "linear") {
+        if(!currentStory[0].template || currentStory[0].template === "linear") {
             steps = currentStory.map((slide, idx) => {
                 return (
                     <Step key={idx} duration={1500} data={{x: idx === 0 ? 0 : ((screen_width-off)*idx)}}>

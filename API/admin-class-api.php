@@ -83,21 +83,23 @@ class AdminClass_API extends WP_REST_Controller
     {
         try
         {
+            $current_user = wp_get_current_user();
+
             $parameters         = $request->get_params();
             $users              = array();
 
             $class              = new ClassModel();
-            $class->teacherId   = get_current_user_id();
+            $class->teacherId   = $current_user->ID;
             $class->class       = $parameters['class'];
             $class->section     = $parameters['section'];
             $class->description = $parameters['description'];
             $class->size        = $parameters['size'];
             $class->save();
 
-            for($i=0; $i<$parameters['size']; $i++)
+            for($i=1; $i<=$parameters['size']; $i++)
             {
                 $user_name = $parameters['class'] . "_" . $parameters['section'] . "_" . $i;
-                $user_id = username_exists( $user_name );
+                $user_id   = username_exists( $user_name );
 
                 if (!$user_id /*&& false == email_exists( $user_email )*/ )
                 {
@@ -106,7 +108,7 @@ class AdminClass_API extends WP_REST_Controller
 
                     $student            = new StudentModel();
                     $student->userId    = $user_id;
-                    $student->teacherId = get_current_user_id();
+                    $student->teacherId = $current_user->ID;
                     $student->classId   = $class->id;
                     $student->username  = $user_name;
                     $student->password  = $random_password;
@@ -172,7 +174,8 @@ class AdminClass_API extends WP_REST_Controller
     {
         try
         {
-            $teacher_id = get_current_user_id();
+            $current_user = wp_get_current_user();
+            $teacher_id = $current_user->ID;
             $classes = ClassModel::where('teacherId', '=', $teacher_id)->get();
 
             foreach ($classes as &$class)
@@ -207,15 +210,19 @@ class AdminClass_API extends WP_REST_Controller
         {
             global $wpdb;
 
-            $student           = StudentModel::find($request['studentid']);
+            $student = StudentModel::find($request['studentid']);
+
+            if($student->username != $request['username'] && username_exists($request['username']))
+                return rest_ensure_response(['status' => 'KO', 'error' => 'Username in use']);
+
             $student->username = $request['username'];
             $student->password = $request['password'];
-            $student->name     = $request['name'];
-            $student->surname  = $request['surname'];
+            $student->name = $request['name'];
+            $student->surname = $request['surname'];
             $student->save();
 
             $wpdb->update($wpdb->users, array('user_login' => $student->username), array('ID' => $student->userId));
-            wp_set_password( $student->password, $student->userId );
+            wp_set_password($student->password, $student->userId);
 
             return rest_ensure_response(['status' => 'OK', 'data' => $request['studentid']]);
         } catch (Exception $e) {

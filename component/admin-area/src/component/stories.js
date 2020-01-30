@@ -14,7 +14,7 @@ export default function Stories()
 
     const fetch_data = async () => {
         let response = await axios.get(window.API_ENDPOINT.GET_CLASS,
-            /*{ headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
         let data = [];
         let students = []
 

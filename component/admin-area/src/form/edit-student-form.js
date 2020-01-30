@@ -2,7 +2,7 @@ import Form from "antd/es/form";
 import {Input, Button} from "antd";
 import React from "react";
 
-function EditStudent ({form, handle_submit, data})
+const EditStudent = React.memo( ({form, handle_submit, data}) =>
 {
     const { getFieldDecorator } = form;
 
@@ -46,25 +46,13 @@ function EditStudent ({form, handle_submit, data})
 
             <Form.Item label={'Nome'}>
                 {getFieldDecorator('name', {
-                    initialValue : data.name,
-                    rules: [
-                        {
-                            required: true,
-                            message: 'Campo obbligatorio',
-                        },
-                    ],
+                    initialValue : data.name
                 })(<Input placeholder="placeholder" />)}
             </Form.Item>
 
             <Form.Item label={'Cognome'}>
                 {getFieldDecorator('surname', {
-                    initialValue : data.surname,
-                    rules: [
-                        {
-                            required: true,
-                            message: 'Campo obbligatorio',
-                        },
-                    ],
+                    initialValue : data.surname
                 })(<Input placeholder="placeholder" />)}
             </Form.Item>
 
@@ -73,7 +61,6 @@ function EditStudent ({form, handle_submit, data})
             </Button>
         </Form>
     );
-
-}
+});
 
 export default Form.create({name:'EditStudent'})(EditStudent);
