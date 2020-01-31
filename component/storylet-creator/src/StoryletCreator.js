@@ -19,10 +19,11 @@ function StoryletCreator()
 
     useEffect(() =>
     {
-        let data = JSON.parse(window.STORY.DATA.story);
-        dispatch(setStorylet(window.STORY.DATA.metadata));
-        dispatch(setSlideData(data));
-        dispatch(selectSlide(data[0]));
+        let data  = JSON.parse(window.STORY.DATA);
+        let story = JSON.parse(data.story);
+        dispatch(setStorylet(JSON.parse(data.metadata)));
+        dispatch(setSlideData(story));
+        dispatch(selectSlide(story[0]));
     }, []);
 
     const hide_settings = () => {
