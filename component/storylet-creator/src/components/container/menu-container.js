@@ -11,6 +11,7 @@ import { faFont, faPlusCircle, faTrashAlt, faCopy, faLink, faChartBar, faPlay } 
 
 import '../../vendor/bootstrap.min.css';
 import '../../style/container/menu-container.css'
+import '../../vendor/tooltip.css';
 
 import setSlidesData from "../../reducer/actions/set-slides-data";
 import selectSlide from "../../reducer/actions/select-slide";

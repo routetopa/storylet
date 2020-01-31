@@ -7,40 +7,62 @@ import TextProperties from '../slide-components/properties/text-properties'
 import ImageProperties from '../slide-components/properties/image-properties'
 
 import '../../style/container/properties-container.css'
-import languageSelected from "../../reducer/actions/select-language";
-import setSlidesData from "../../reducer/actions/set-slides-data";
-import selectSlide from "../../reducer/actions/select-slide";
+import setStorylet from "../../reducer/actions/set-storylet";
 
-//TODO IMPORTANT --> autoplay and template not iin slide1
+import { useDebounce } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function PropertiesContainer()
 {
     const dispatch = useDispatch();
 
     const ln = useSelector(state => state.selectedLanguage);
-    const slidesData = useSelector(state => state.slidesData);
+    const storylet = useSelector(state => state.storylet);
     const selectedComponent = useSelector(state => state.selectedComponent);
     const [selectedTab, setSelectedTab] = useState(1);
-    const [autoplay, setAutoplay] = useState(null);
-    const [template, setTemplate] = useState(null);
+    const [autoplay, setAutoplay] = useState(false);
+    const [template, setTemplate] = useState("linear");
+
+    const [name, setName] = useState("");
+    // const [endName] = useDebounce(name, 1000);
+
+    const [debouncedName] = useDebouncedCallback(
+        // function
+        (value) => {
+            set_name(value);
+        },
+        // delay in ms
+        1000
+    );
+
+    const [description, setDescription] = useState("");
+    // const [endDescription] = useDebounce(description, 1000);
+
+    const [debouncedDescription] = useDebouncedCallback(
+        // function
+        (value) => {
+            set_description(value);
+        },
+        // delay in ms
+        1000
+    );
+
 
     useEffect(() => {
-        //todo set init status
-        if(autoplay !== null) //run only one time (init)
-            return;
+        if(storylet) {
+            if(storylet.name)
+                setName(storylet.name);
 
-        if(slidesData && slidesData[0]) {
-            if(slidesData[0].autoplay)
-                setAutoplay(slidesData[0].autoplay);
-            else
-                setAutoplay(false);
+            if(storylet.description)
+                setDescription(storylet.description);
 
-            if(slidesData[0].template)
-                setTemplate(slidesData[0].template);
-            else
-                setTemplate("linear");
+            if(storylet.viewer && storylet.viewer.autoplay)
+                setAutoplay(storylet.viewer.autoplay);
+
+            if(storylet.viewer && storylet.viewer.template)
+                setTemplate(storylet.viewer.template);
         }
-    }, [slidesData]);
+    }, [storylet]);
 
     useEffect(() => {
         if(!selectedComponent)
@@ -50,27 +72,46 @@ export default function PropertiesContainer()
     }, [selectedComponent]);
 
     const set_template = (e) => {
-        let data = cloneDeep(slidesData);
+        let data = cloneDeep(storylet);
 
-        data[0].template = e.target.value;
+        data.viewer.template = e.target.value;
 
         batch(() => {
-            dispatch(setSlidesData(data));
+            dispatch(setStorylet(data));
         });
 
         setTemplate(e.target.value);
     };
 
     const set_autoplay = () => {
-        let data = cloneDeep(slidesData);
+        let data = cloneDeep(storylet);
 
-        data[0].autoplay = !autoplay;
+        data.viewer.autoplay = !autoplay;
 
         batch(() => {
-            dispatch(setSlidesData(data));
+            dispatch(setStorylet(data));
         });
 
         setAutoplay(!autoplay);
+    };
+
+    const set_name = (name) => {
+        let data = cloneDeep(storylet);
+        data.name = name;
+        setName(name);
+        batch(() => {
+            dispatch(setStorylet(data));
+        });
+    };
+
+
+    const set_description = (description) => {
+        let data = cloneDeep(storylet);
+        data.description = description;
+        setDescription(description);
+        batch(() => {
+            dispatch(setStorylet(data));
+        });
     };
 
     function selectTab(e) {
@@ -99,15 +140,15 @@ export default function PropertiesContainer()
                 })()
             }
             </div>
-            <div className={selectedTab === 1 ? "properties col-md-12 show" : "properties col-md-12"}>
+            <div className={(selectedTab === 1 ? "properties col-md-12 show" : "properties col-md-12") + " slide"}>
                 <div className="property-row">
                     <label className="template-label">{translate('title', ln)}</label>
                 </div>
-                <input className="form-control" />
+                <input className="form-control" defaultValue={name} onChange={(e) => debouncedName(e.target.value)} />
                 <div className="property-row">
                     <label className="template-label">{translate('description', ln)}</label>
                 </div>
-                <textarea className="form-control template" />
+                <textarea className="form-control template" defaultValue={description} onChange={(e) => debouncedDescription(e.target.value)} />
                 <div className="property-row">
                     <label className="template-label">{translate('template', ln)}</label>
                     <select className="form-control template" onChange={set_template}>

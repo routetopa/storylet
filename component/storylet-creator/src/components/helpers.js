@@ -33,6 +33,9 @@ ln["syllables_it"] = "Sillabe";
 ln["component_it"] = "Componente";
 ln["slide_it"] = "Scena";
 
+ln["title_it"] = "Titolo";
+ln["description_it"] = "Descrizione";
+
 ln["template_it"] = "Template";
 ln["linear_it"] = "lineare";
 ln["snail_it"] = "chiocciola";
@@ -61,7 +64,7 @@ ln["keepRatio_it"] = "Mantenere il rapporto di aspetto";
 /******** EN ********/
 
 // MENU
-ln["newText_it"] = "Nex Text";
+ln["newText_en"] = "Nex Text";
 
 // SIDE MENU
 ln["save_en"] = "Save";
@@ -82,6 +85,9 @@ ln["syllables_en"] = "Syllables";
 // PROPERTIES
 ln["component_en"] = "Component";
 ln["slide_en"] = "Slide";
+
+ln["title_en"] = "Title";
+ln["description_en"] = "Description";
 
 ln["template_en"] = "Template";
 ln["linear_en"] = "linear";
@@ -106,7 +112,7 @@ ln["delete_en"] = "Delete";
 ln["flipH_en"] = "Flip Horizontal";
 ln["flipV_en"] = "Flip Vertical";
 ln["bringsUp_en"] = "Brings Up";
-ln["keepRatio_it"] = "Keep Aspect Ratio";
+ln["keepRatio_en"] = "Keep Aspect Ratio";
 
 
 

@@ -53,6 +53,10 @@
     display: block;
 }
 
+.properties.slide {
+    padding: 15px 30px; /*todo*/
+}
+
 /* slide-properties */
 
 .property-row {
@@ -92,16 +96,29 @@ textarea.template {
 
 .tab {
     width: 50%;
-    height: 48px;
+    height: 49px;
     line-height: 48px;
     text-align: center;
     font-weight: 700;
     background: #eceff1;
     cursor: pointer;
+    font-size: 18px;
     /*color: var(--storylet-primary);*/
 }
 
+.tab:first-child {
+    border-right: 1px solid rgba(14,19,24,.15);
+}
+
 .tab.selected {
-    background: var(--storylet-white);
+    background-color: var(--storylet-white);
+    color: var(--storylet-primary);
+}
+
+.tab:not(.selected) {
+    border-bottom: 1px solid rgba(14,19,24,.15);
+}
+
+.tab:not(.selected):hover {
     color: var(--storylet-primary);
 }
