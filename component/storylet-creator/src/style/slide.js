@@ -11,7 +11,8 @@ const SlideStyle = styled.div`
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   cursor: ${(props) => props.cursor}; 
   
-  border: ${(props) => props.selected ? '2px solid var(--storylet-driver)' : '2px solid transparent'};
+  cursor: ${(props) => props.isEditable ? 'auto' : 'pointer'};
+  border: ${(props) => props.isEditable ? 'none' : (props.selected ? '2px solid var(--storylet-driver)' : '2px solid transparent')};
   background-origin: border-box;
   
   .pageCount {

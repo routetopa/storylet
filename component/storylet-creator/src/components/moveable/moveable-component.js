@@ -85,7 +85,7 @@ export default function MoveableComponent() {
 
                 origin={false}
 
-                keepRatio={selectedComponent ? selectedComponent.keepRatio : true}
+                keepRatio={selectedComponent ? selectedComponent.keepRatio : false}
 
                 // DRAG
                 onDrag={({target, left, top, beforeDelta}) => {

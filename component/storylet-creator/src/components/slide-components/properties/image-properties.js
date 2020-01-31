@@ -15,7 +15,7 @@ import setSelectSlide from "../../../reducer/actions/select-slide";
 import {translate} from "../../helpers";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faArrowsAltH, faArrowsAltV, faEye } from '@fortawesome/free-solid-svg-icons'
+import {faArrowsAltH, faArrowsAltV, faEye, faLock, faLockOpen } from '@fortawesome/free-solid-svg-icons'
 
 const AutoSave = ({debounceMs})=>{
     const formik = useFormikContext();
@@ -107,8 +107,7 @@ export default function ImageProperties()
         });
     }, [selectedComponent]);
 
-    const flip = (direction) =>
-    {
+    const flip = (direction) => {
         //todo change form value instead...
         let slideIdx = selectedSlide.index;
         let componentIdx = selectedComponent.index;
@@ -125,8 +124,7 @@ export default function ImageProperties()
         dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
     };
 
-    const bringsUp = () =>
-    {
+    const bringsUp = () => {
         //todo change form value instead...
         let slideIdx = selectedSlide.index;
         let componentIdx = selectedComponent.index;
@@ -144,8 +142,23 @@ export default function ImageProperties()
         dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
     };
 
-    const remove_component = () =>
-    {
+    const keepRatio = () => {
+        //todo change form value instead...
+        let slideIdx = selectedSlide.index;
+        let componentIdx = selectedComponent.index;
+
+        let data = cloneDeep(slidesData);
+
+        let keepRatio = !data[slideIdx].components[componentIdx].keepRatio;
+
+        data[slideIdx].components[componentIdx].keepRatio = keepRatio;
+
+        dispatch(setSlideData(data));
+        dispatch(setSelectSlide(data[slideIdx]));
+        dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
+    };
+
+    const remove_component = () => {
         // alert('remove ' + selectedComponent.src)
         let sd = cloneDeep(slidesData);
         sd[selectedSlide.index].components.splice(selectedComponent.index,1);
@@ -170,16 +183,14 @@ export default function ImageProperties()
         });
     };
 
-    const canc_remove_component = (event) =>
-    {
+    const canc_remove_component = (event) => {
         // if(!selectedComponent || selectedComponent.type !== 'image')
         //     return;
         if(event.keyCode === 46)
             remove_component();
     };
 
-    const copy_and_paste = (event) =>
-    {
+    const copy_and_paste = (event) => {
         if(!selectedComponent || selectedComponent.type !== 'image')
             return;
         let key = event.which || event.keyCode; // keyCode detection
@@ -244,6 +255,9 @@ export default function ImageProperties()
                         <Field name="width" type="number" className={'form-control col-md-2 col-sm-2' + (errors.width && touched.width ? ' is-invalid' : '')} />
                         <label htmlFor="height" className="col-md-1 col-sm-1">{translate('height', ln)}:</label>
                         <Field name="height" type="number" className={'form-control col-md-2 col-sm-2' + (errors.height && touched.height ? ' is-invalid' : '')} />
+                        <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('keepRatio', ln)} onClick={keepRatio}>
+                            <FontAwesomeIcon icon={selectedComponent.keepRatio ? faLock : faLockOpen} className="icon" />
+                        </button>
                         <ErrorMessage name="width" component="div" className="invalid-feedback col-md-12 col-sm-12" />
                         <ErrorMessage name="height" component="div" className="invalid-feedback col-md-12 col-sm-12" />
                     </div>
@@ -287,8 +301,9 @@ export default function ImageProperties()
 
                     <div className="form-group form-inline">
                         <label className="col-md-3 col-sm-3 _left">{translate('rotate', ln)}</label>
-                        <label htmlFor="rotate" className="col-md-1 col-sm-1">{translate('degrees', ln)}:</label>
+                        <label htmlFor="rotate" className="col-md-1 col-sm-1"> </label>
                         <Field name="rotate" type="number" className={'form-control col-md-2 col-sm-2' + (errors.rotate && touched.rotate ? ' is-invalid' : '')} />
+                        <label htmlFor="rotate" className="col-md-2 col-sm-2"> {translate('degrees', ln)}</label>
                     </div>
 
                     <div className="form-group col-md-12 col-sm-12">

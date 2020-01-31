@@ -5,16 +5,20 @@ import setSlideData from '../../reducer/actions/set-slides-data'
 
 import '../../style/slide-components/text-style.css';
 import selectedSlide from "../../reducer/selected-slide";
+import copyComponent from "../../reducer/actions/copy-component";
+import selectComponent from "../../reducer/actions/select-component";
+
 
 export default function Text({component, onClick, isEditable})
 {
     const selectedSlide = useSelector(state => state.selectedSlide);
+    const selectedComponent = useSelector(state => state.selectedComponent);
 
     const dispatch = useDispatch();
     const slidesData = useSelector(state => state.slidesData);
 
     const [text, setText] = useState(component.value);
-    const [edit, setEdit] = useState(true);
+    const [edit, setEdit] = useState(false);
 
     useEffect(()=>{
         if(!selectedSlide)
@@ -29,8 +33,33 @@ export default function Text({component, onClick, isEditable})
 
     }, [text]);
 
+    useEffect(()=>{
+        if(selectedComponent && edit)
+            setEdit(false);
+
+    }, [selectedComponent]);
+
+    const enableEdit = () => {
+        if(!edit) {
+            dispatch(selectComponent(null));
+            setEdit(true);
+            // select cursor
+            //border dottet
+        }
+        else if(edit && onClick) {
+            onClick();
+            setEdit(false);
+        }
+    };
+
+    const enable_movable = () => {
+        if(!edit && onClick) {
+            onClick();
+        }
+    };
+
     return (
-        <div id={isEditable ? "component-"+component.index : ""} className="text-moveable-container" onClick={onClick} onBlur={(e) => {setText(e.target.innerText);}}
+        <div id={isEditable ? "component-"+component.index : ""} className={edit ? "text-moveable-container editable" : "text-moveable-container"} onDoubleClick={enableEdit} onClick={enable_movable} onBlur={(e) => {setText(e.target.innerText);}}
             style={{
                 top:component.y+'%',
                 left:component.x+'%',

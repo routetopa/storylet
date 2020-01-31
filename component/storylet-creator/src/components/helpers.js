@@ -10,6 +10,8 @@ export function translate (text, ul) {
 let ln = [];
 
 /******** IT ********/
+// MENU
+ln["newText_it"] = "Nuovo testo";
 
 // SIDE MENU
 ln["save_it"] = "Salva";
@@ -44,7 +46,7 @@ ln["position_it"] = "Posizione";
 ln["scale_it"] = "Scala";
 ln["lock_it"] = "Blocca";
 ln["rotate_it"] = "Ruota";
-ln["degrees_it"] = "°C";
+ln["degrees_it"] = "gradi";
 ln["font_it"] = "Carattere";
 ln["color_it"] = "Colore";
 ln["size2_it"] = "Dim.";
@@ -54,8 +56,12 @@ ln["delete_it"] = "Elimina";
 ln["flipH_it"] = "Specchia orizzontalente";
 ln["flipV_it"] = "Specchia verticalmente";
 ln["bringsUp_it"] = "Porta in primo piano";
+ln["keepRatio_it"] = "Mantenere il rapporto di aspetto";
 
 /******** EN ********/
+
+// MENU
+ln["newText_it"] = "Nex Text";
 
 // SIDE MENU
 ln["save_en"] = "Save";
@@ -84,13 +90,13 @@ ln["cube_en"] = "cube";
 ln["autoplay_en"] = "Autoplay";
 
 ln["size_en"] = "Size";
-ln["width_en"] = "Width";
-ln["height_en"] = "Height";
+ln["width_en"] = "W";
+ln["height_en"] = "H";
 ln["position_en"] = "Position";
 ln["scale_en"] = "Scale";
 ln["lock_en"] = "Lock";
 ln["rotate_en"] = "Rotate";
-ln["degrees_en"] = "Deg.";
+ln["degrees_en"] = "degrees";
 ln["font_en"] = "Font";
 ln["color_en"] = "Color";
 ln["size2_en"] = "Size";
@@ -100,6 +106,7 @@ ln["delete_en"] = "Delete";
 ln["flipH_en"] = "Flip Horizontal";
 ln["flipV_en"] = "Flip Vertical";
 ln["bringsUp_en"] = "Brings Up";
+ln["keepRatio_it"] = "Keep Aspect Ratio";
 
 
 

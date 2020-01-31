@@ -85,7 +85,7 @@ export default function BabelnetContainer({startingWord}) {
                     });
                 }
                 setWords(words);
-                let glosses = 'GLOSS: ';
+                let glosses = '';//todo GLOSS: translate
                 if(response.data.glosses) {
                     for(let i=0; i<response.data.glosses.length; i++)
                         glosses += ' ' + response.data.glosses[i].gloss

@@ -22,7 +22,7 @@ function Slide({parameters, isEditable, onClick, isSettingVisible, selected})
     const selectedComponent = useSelector(state => state.selectedComponent);
 
     return (
-        <SlideStyle selected={selected} id={"slide_"+parameters.id} isSettingVisible={isSettingVisible} background={parameters.background} cursor={(isEditable ? 'auto' : 'pointer')} onClick={onClick}>
+        <SlideStyle selected={selected} id={"slide_"+parameters.id} isSettingVisible={isSettingVisible} background={parameters.background} isEditable={isEditable} onClick={onClick}>
             {(() => {
                         if (!parameters.components) return null;
                         return parameters.components.map((c, idx) => {

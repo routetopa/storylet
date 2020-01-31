@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux'
+import {useSelector, useDispatch, batch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
 import {Formik, Field, Form, ErrorMessage, useFormikContext} from 'formik';
 import * as Yup from 'yup';
@@ -11,6 +11,9 @@ import setSlideData from "../../../reducer/actions/set-slides-data";
 import setSelectComponent from "../../../reducer/actions/select-component";
 import setSelectSlide from "../../../reducer/actions/select-slide";
 import {translate} from "../../helpers";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowsAltH, faArrowsAltV, faEye, faLock, faLockOpen} from "@fortawesome/free-solid-svg-icons";
+import copyComponent from "../../../reducer/actions/copy-component";
 
 const AutoSave = ({debounceMs})=>{
     const formik = useFormikContext();
@@ -50,7 +53,19 @@ export default function TextProperties()
     });
 
     useEffect(()=>{
-        // console.log("properties slidesData");
+        document.removeEventListener('keydown', canc_remove_component);
+        document.removeEventListener("keydown", copy_and_paste);
+        if(!selectedComponent || selectedComponent.type !== 'text')
+            return;
+        document.addEventListener('keydown', canc_remove_component);
+        document.addEventListener("keydown", copy_and_paste);
+        return function cleanup() {
+            document.removeEventListener('keydown', canc_remove_component);
+            document.removeEventListener("keydown", copy_and_paste);
+        };
+    }, [selectedComponent]);
+
+    useEffect(()=>{
         if(!slidesData || !selectedSlide || !selectedComponent)
             return;
 
@@ -90,8 +105,59 @@ export default function TextProperties()
         });
     }, [selectedComponent]);
 
-    const remove_component = () =>
-    {
+    const flip = (direction) => {
+        //todo change form value instead...
+        let slideIdx = selectedSlide.index;
+        let componentIdx = selectedComponent.index;
+
+        let data = cloneDeep(slidesData);
+
+        if(direction==='H')
+            data[slideIdx].components[componentIdx].scale = [-data[slideIdx].components[componentIdx].scale[0], data[slideIdx].components[componentIdx].scale[1]];
+        else // V
+            data[slideIdx].components[componentIdx].scale = [data[slideIdx].components[componentIdx].scale[0], -data[slideIdx].components[componentIdx].scale[1]];
+
+        dispatch(setSlideData(data));
+        dispatch(setSelectSlide(data[slideIdx]));
+        dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
+    };
+
+    const bringsUp = () => {
+        //todo change form value instead...
+        let slideIdx = selectedSlide.index;
+        let componentIdx = selectedComponent.index;
+
+        let data = cloneDeep(slidesData);
+
+        let zIndex = 0;
+        for(let i=0; i<data[slideIdx].components.length; i++)
+            zIndex = Math.max(zIndex, data[slideIdx].components[i].zIndex);
+
+        data[slideIdx].components[componentIdx].zIndex = zIndex+1;
+
+        dispatch(setSlideData(data));
+        dispatch(setSelectSlide(data[slideIdx]));
+        dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
+    };
+
+    const keepRatio = () => {
+        //todo change form value instead...
+        let slideIdx = selectedSlide.index;
+        let componentIdx = selectedComponent.index;
+
+        let data = cloneDeep(slidesData);
+
+        let keepRatio = !data[slideIdx].components[componentIdx].keepRatio;
+
+        data[slideIdx].components[componentIdx].keepRatio = keepRatio;
+
+        dispatch(setSlideData(data));
+        dispatch(setSelectSlide(data[slideIdx]));
+        dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
+    };
+
+    const remove_component = () => {
+        // alert('remove ' + selectedComponent.src)
         let sd = cloneDeep(slidesData);
         sd[selectedSlide.index].components.splice(selectedComponent.index,1);
 
@@ -104,9 +170,42 @@ export default function TextProperties()
         for(let i=0; i<selected.components.length; i++)
             selected.components[i].index = i;
 
-        dispatch(setSelectSlide(selected));
-        dispatch(setSelectComponent(null));
-        dispatch(setSlideData(sd));
+        // dispatch(setSelectSlide(selected));
+        // dispatch(setSelectComponent(null));
+        // dispatch(setSlideData(sd));
+
+        batch(() => {
+            dispatch(setSlideData(sd));
+            dispatch(setSelectSlide(selected));
+            dispatch(setSelectComponent(null));
+        });
+    };
+
+    const canc_remove_component = (event) => {
+        // if(!selectedComponent || selectedComponent.type !== 'text')
+        //     return;
+        if(event.keyCode === 46)
+            remove_component();
+    };
+
+    const copy_and_paste = (event) => {
+        if(!selectedComponent || selectedComponent.type !== 'text')
+            return;
+        let key = event.which || event.keyCode; // keyCode detection
+        let ctrl = event.ctrlKey ? event.ctrlKey : key === 17; // ctrl detection
+
+        // if ( key === 86 && ctrl ) {
+        // console.log("Ctrl + V Pressed !");
+        // } else
+        if ( key === 67 && ctrl ) {
+            let copiedComponent = cloneDeep(selectedComponent);
+            // copiedComponent.id = Math.random().toString(36).substr(2, 8).toUpperCase();
+            copiedComponent.index = null;
+            copiedComponent.x = 0;
+            copiedComponent.y = 0;
+            dispatch(copyComponent(copiedComponent));
+            // console.log("Ctrl + C Pressed !");
+        }
     };
 
     return (
@@ -142,7 +241,8 @@ export default function TextProperties()
 
                 dispatch(setSlideData(data));
                 dispatch(setSelectSlide(data[slideIdx]));
-                dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
+                // todo?
+                // dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
             }}
         >
             {({ errors, status, touched }) => (
@@ -150,11 +250,14 @@ export default function TextProperties()
                     <AutoSave debounceMs={300} />
 
                     <div className="form-group form-inline">
-                        <label className="col-md-4 col-sm-4 _left">{translate('size', ln)}</label>
-                        <label htmlFor="width" className="col-md-2 col-sm-2">{translate('width', ln)}:</label>
+                        <label className="col-md-3 col-sm-3 _left">{translate('size', ln)}</label>
+                        <label htmlFor="width" className="col-md-1 col-sm-1">{translate('width', ln)}:</label>
                         <Field name="width" type="number" className={'form-control col-md-2 col-sm-2' + (errors.width && touched.width ? ' is-invalid' : '')} />
-                        <label htmlFor="height" className="col-md-2 col-sm-2">{translate('height', ln)}:</label>
+                        <label htmlFor="height" className="col-md-1 col-sm-1">{translate('height', ln)}:</label>
                         <Field name="height" type="number" className={'form-control col-md-2 col-sm-2' + (errors.height && touched.height ? ' is-invalid' : '')} />
+                        <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('keepRatio', ln)} onClick={keepRatio}>
+                            <FontAwesomeIcon icon={selectedComponent.keepRatio ? faLock : faLockOpen} className="icon" />
+                        </button>
                         <ErrorMessage name="width" component="div" className="invalid-feedback col-md-12 col-sm-12" />
                         <ErrorMessage name="height" component="div" className="invalid-feedback col-md-12 col-sm-12" />
                     </div>
@@ -165,8 +268,15 @@ export default function TextProperties()
                         <Field name="top" type="number" className={'form-control col-md-2 col-sm-2' + (errors.top && touched.top ? ' is-invalid' : '')} />
                         <label htmlFor="left" className="col-md-1 col-sm-1">Y:</label>
                         <Field name="left" type="number" className={'form-control col-md-2 col-sm-2' + (errors.left && touched.left ? ' is-invalid' : '')} />
+                    </div>
+
+                    <div className="form-group form-inline">
+                        <label className="col-md-3 col-sm-3 _left"> </label>
                         <label htmlFor="zIndex" className="col-md-1 col-sm-1">Z:</label>
                         <Field name="zIndex" type="number" className={'form-control col-md-2 col-sm-2' + (errors.zIndex && touched.zIndex ? ' is-invalid' : '')} />
+                        <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('bringsUp', ln)} onClick={bringsUp}>
+                            <FontAwesomeIcon icon={faEye} className="icon" />
+                        </button>
                     </div>
 
                     <div className="form-group form-inline">
@@ -180,16 +290,24 @@ export default function TextProperties()
                         {/*    <label className="custom-control-label" htmlFor="defaultUnchecked">{translate('lock', ln)}</label>*/}
                         {/*    /!*<FontAwesomeIcon icon={faLock} className="icon" />*!/*/}
                         {/*</div>*/}
+                        <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('flipH', ln)} onClick={()=>flip('H')}>
+                            <FontAwesomeIcon icon={faArrowsAltH} className="icon" />
+                        </button>
+                        <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('flipV', ln)} onClick={()=>flip('V')}>
+                            <FontAwesomeIcon icon={faArrowsAltV} className="icon" />
+                        </button>
+
                     </div>
 
                     <div className="form-group form-inline">
-                        <label className="col-md-4 col-sm-4 _left">{translate('rotate', ln)}</label>
-                        <label htmlFor="rotate" className="col-md-2 col-sm-2">{translate('degrees', ln)}:</label>
+                        <label className="col-md-3 col-sm-3 _left">{translate('rotate', ln)}</label>
+                        <label htmlFor="rotate" className="col-md-1 col-sm-1"> </label>
                         <Field name="rotate" type="number" className={'form-control col-md-2 col-sm-2' + (errors.rotate && touched.rotate ? ' is-invalid' : '')} />
+                        <label htmlFor="rotate" className="col-md-2 col-sm-2"> {translate('degrees', ln)}</label>
                     </div>
 
                     <div className="form-group form-inline">
-                        <label className="col-md-4 col-sm-4 _left">{translate('font', ln)}</label>
+                        <label className="col-md-3 col-sm-3 _left">{translate('font', ln)}</label>
                         <label htmlFor="color" className="col-md-2 col-sm-2">{translate('color', ln)}:</label>
                         <Field name="color" type="text" className={'form-control col-md-2 col-sm-2' + (errors.color && touched.color ? ' is-invalid' : '')} />
                         <label htmlFor="size" className="col-md-2 col-sm-2">{translate('size2', ln)}:</label>

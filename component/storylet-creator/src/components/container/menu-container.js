@@ -16,7 +16,11 @@ import setSlidesData from "../../reducer/actions/set-slides-data";
 import selectSlide from "../../reducer/actions/select-slide";
 import selectComponent from "../../reducer/actions/select-component";
 
+import {translate} from "../helpers";
+
 export default function MenuContainer() {
+    const ln = useSelector(state => state.selectedLanguage);
+
     const dispatch = useDispatch();
 
     const slidesData = useSelector(state => state.slidesData);
@@ -59,16 +63,16 @@ export default function MenuContainer() {
         let component = {
             "index": index,
             "type": "text",
-            "value": "nuovo testo",
+            "value": translate('newText', ln),
             "x": 0,
             "y": 0,
             "w": 40,
             "h": 20,
             "scale": [1,1],
             "rotate": 0,
-            "keepRatio": true,
+            "keepRatio": false,
             "zIndex": 1,
-            "fontSize": 48,
+            "fontSize": 32,
             "color": "#000000"
         };
 
