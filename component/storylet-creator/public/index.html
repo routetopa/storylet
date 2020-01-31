@@ -33,7 +33,69 @@
     };
 
     window.STORY = {
-      DATA: {"id":"27","name":"","description":"","ownerId":"1","templateId":"1","themeId":null,"story":"[{\"index\":0,\"id\":\"1\",\"type\":\"\",\"background\":\"http://www.isislab.it:19984/wp-content/plugins/storylet/images/backgrounds/forest.png\",\"components\":[{\"index\":0,\"type\":\"text\",\"value\":\"Once upon a time...\",\"x\":60,\"y\":80,\"w\":40,\"h\":20,\"scale\":[1,1],\"rotate\":0,\"keepRatio\":true,\"zIndex\":0,\"fontSize\":48,\"color\":\"#FFFFFF\"},{\"index\":1,\"type\":\"image\",\"src\":\"http://www.isislab.it:19984/wp-content/plugins/storylet/images/fantastic-characters/003-dinosaur.png\",\"x\":13,\"y\":45,\"w\":20,\"h\":20,\"scale\":[2,2],\"rotate\":0,\"keepRatio\":true,\"zIndex\":1},{\"index\":2,\"type\":\"image\",\"src\":\"http://www.isislab.it:19984/wp-content/plugins/storylet/images/fantastic-characters/049-wizard.png\",\"x\":70,\"y\":50,\"w\":20,\"h\":20,\"scale\":[1.5,1.5],\"rotate\":45,\"keepRatio\":true,\"zIndex\":0}]}]"}
+      // DATA: {"id":"27","ownerId":"1","templateId":"1","themeId":null,"metadata":{"language":"en","autosave":true,"name":"nome","description":"descrizione","viewer":{"template":"snail", "autoplay":true}},"story":"[{\"index\":0,\"id\":\"1\",\"type\":\"\",\"background\":\"./images/backgrounds/forest.png\",\"autoplay\":true,\"template\":\"snail\",\"components\":[{\"index\":0,\"type\":\"text\",\"value\":\"Once upon a time...\",\"x\":0,\"y\":0,\"w\":40,\"h\":20,\"scale\":[1,1],\"rotate\":0,\"keepRatio\":true,\"zIndex\":0,\"fontSize\":48,\"color\":\"#FFFFFF\"},{\"index\":1,\"type\":\"image\",\"src\":\"./images/fantastic-characters/003-dinosaur.png\",\"x\":13,\"y\":45,\"w\":20,\"h\":20,\"scale\":[2,2],\"rotate\":0,\"keepRatio\":true,\"zIndex\":1},{\"index\":2,\"type\":\"image\",\"src\":\"./images/fantastic-characters/049-wizard.png\",\"x\":70,\"y\":50,\"w\":20,\"h\":20,\"scale\":[1.5,1.5],\"rotate\":45,\"keepRatio\":true,\"zIndex\":0}]}]"}
+      DATA: {"id":"27","ownerId":"1","templateId":"1","themeId":null,"metadata":{"language":"en","autosave":true,"name":"nome","description":"descrizione","viewer":{"template":"snail", "autoplay":true}},"story":[
+          {
+            "index": 0,
+            "id": "1",
+            "type": "",
+            "background": "./images/backgrounds/forest.png",
+            "autoplay": true,
+            "template": "snail",
+            "components": [
+              {
+                "index": 0,
+                "type": "text",
+                "value": "Once upon a time...",
+                "x": 0,
+                "y": 0,
+                "w": 40,
+                "h": 20,
+                "scale": [
+                  1,
+                  1
+                ],
+                "rotate": 0,
+                "keepRatio": true,
+                "zIndex": 0,
+                "fontSize": 48,
+                "color": "#FFFFFF"
+              },
+              {
+                "index": 1,
+                "type": "image",
+                "src": "./images/fantastic-characters/003-dinosaur.png",
+                "x": 13,
+                "y": 45,
+                "w": 20,
+                "h": 20,
+                "scale": [
+                  2,
+                  2
+                ],
+                "rotate": 0,
+                "keepRatio": true,
+                "zIndex": 1
+              },
+              {
+                "index": 2,
+                "type": "image",
+                "src": "./images/fantastic-characters/049-wizard.png",
+                "x": 70,
+                "y": 50,
+                "w": 20,
+                "h": 20,
+                "scale": [
+                  1.5,
+                  1.5
+                ],
+                "rotate": 45,
+                "keepRatio": true,
+                "zIndex": 0
+              }
+            ]
+          }
+        ]}
     };
 
     window.API_NONCE = {
@@ -42,7 +104,7 @@
 
     window.STATIC = {
       SITE_URL: 'http://localhost:3000/',
-      IMAGE_BASE_PATH : 'http://www.isislab.it:19984/wp-content/plugins/storylet/images/'
+      IMAGE_BASE_PATH : './images/'
     };
 
 
