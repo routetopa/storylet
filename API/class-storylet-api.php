@@ -93,11 +93,14 @@ class Storylet_API extends WP_REST_Controller
         {
             $storylet = StoryletModel::find($request['storyletid']);
 
+            if(isset($request['metadata']))
+                $storylet->metadata = json_encode($request['metadata']);
+
             if(isset($request['story']))
                 $storylet->story = json_encode($request['story']);
 
             if(isset($request['status']))
-            $storylet->status = $request['status'];
+                $storylet->status = $request['status'];
 
             $storylet->save();
 
@@ -125,6 +128,7 @@ class Storylet_API extends WP_REST_Controller
                 $storylet->templateId = intval($storyletTemplate['id']);
                 $storylet->ownerId    = $current_user->ID;
                 $storylet->story      = $storylet_template['template'];
+                $storylet->metadata   = $storylet_template['metadata'];
                 $storylet->save();
 
                 return rest_ensure_response(['status' => 'OK', 'created_storylet_id' => $storylet->id]);

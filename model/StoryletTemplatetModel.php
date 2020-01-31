@@ -12,7 +12,8 @@ class StoryletTemplateModel extends EloquentWPModel {
 		'type',
 		'tag',
 		'settings',
-		'slideTemplateList'
+		'template',
+		'metadata'
 	];
 
     protected  $primaryKey = 'id';

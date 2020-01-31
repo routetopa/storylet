@@ -37,8 +37,17 @@ export default function TeacherClass()
     ];
 
     const stories_columns = [
-        {title: 'Titolo', dataIndex: 'name', key: 'name'},
-        {title: 'Descrizione', dataIndex: 'description', key: 'description'},
+        {title: 'Titolo', key: 'name',
+            render: (text, record, index) => {
+                let metadata = JSON.parse(record.metadata);
+                return metadata.name
+            }
+        },
+        {title: 'Descrizione', key: 'description',
+            render: (text, record, index) => {
+                let metadata = JSON.parse(record.metadata);
+                return metadata.description
+            }},
         {title: 'Username', key: 'ownerId',
             render: (text, record, index) =>
             {

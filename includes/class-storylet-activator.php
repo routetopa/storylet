@@ -54,12 +54,10 @@ class Storylet_Activator {
 
 		$sql = "CREATE TABLE $storylet (
 			  id mediumint(9) UNSIGNED NOT NULL AUTO_INCREMENT,
-			  name varchar(255) DEFAULT '',
-			  description varchar(255) DEFAULT '',
 			  ownerId mediumint(9) UNSIGNED,
 			  templateId mediumint(9) UNSIGNED,
-			  themeId mediumint(9) UNSIGNED,
 			  story text DEFAULT '',
+			  metadata text DEFAULT '',
 			  status SMALLINT UNSIGNED,
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
@@ -77,7 +75,7 @@ class Storylet_Activator {
 			  tag varchar(255) DEFAULT '',
 			  settings varchar(255) DEFAULT '',
 			  template text DEFAULT '',
-			  slideTemplateList varchar(255) DEFAULT '',
+			  metadata text DEFAULT '',
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 
