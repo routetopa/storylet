@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Icon, Tabs, Table, Modal, Popconfirm, notification, Button } from 'antd';
+import { Icon, Tabs, Table, Modal, Popconfirm, notification, Button, Tooltip } from 'antd';
 import axios from 'axios';
 
 import AddClassForm from '../form/add-class-form';
@@ -67,7 +67,13 @@ export default function TeacherClass()
                               type="play-circle"
                               onClick={() => window.open(`${window.API_ENDPOINT.STORYLET_VIEWER}/${record.id}`,'_blank')}
                         />
-                        <a onClick={() => togglePublishStorylet(record)}> {parseInt(record.status) === 1 ? 'Rendi pubblica' : 'Rendi privata'}</a> |
+                        <Tooltip placement="top" title={record.status === null || parseInt(record.status) === 0 ? 'Rendi pubblica' : 'Rendi privata'}>
+                        <Icon theme="filled"
+                              style={{fontSize:'24px', cursor:'pointer', marginRight:'24px'}}
+                              type={record.status === null || parseInt(record.status) === 0 ? 'eye' : 'eye-invisible'}
+                              onClick={() => togglePublishStorylet(record)}
+                        />
+                        </Tooltip>
                         <Popconfirm title="Sure to ?" onConfirm={() => deleteStorylet(record)}>
                             <Icon theme="filled"
                                   style={{fontSize:'24px', cursor:'pointer'}}
@@ -231,15 +237,24 @@ export default function TeacherClass()
                 {classes && classes.map((c, idx) => {
                     return (
                         <div onClick={(e) => select_class(idx)} key={`class_${idx}`} className='class'>
-                            {c.class} {c.section} - {c.description}
+                            <div style={{width:'100%', textAlign:'center'}}>
+                                <div>
+                                    <Icon theme="filled"
+                                          style={{fontSize:'64px', cursor:'pointer', marginBottom:'10px'}}
+                                          type="bank"
+                                    />
+                                </div>
 
-                            <Popconfirm title="Sure to ?" onConfirm={(e) => delete_class(c.id)}>
-                                <Icon theme="filled"
-                                      style={{fontSize:'24px', cursor:'pointer'}}
-                                      type="delete"
-                                />
-                            </Popconfirm>
+                                <div>{c.class} {c.section}</div>
+                                <div>{c.description}</div>
 
+                                <Popconfirm title="Sure to ?" onConfirm={(e) => delete_class(c.id)}>
+                                    <Icon theme="filled"
+                                          style={{fontSize:'18px', cursor:'pointer', position:'absolute', bottom:'12px', right:'12px'}}
+                                          type="delete"
+                                    />
+                                </Popconfirm>
+                            </div>
                         </div>
                     );
                 })}

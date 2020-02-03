@@ -15,7 +15,7 @@ $current_user = wp_get_current_user();
     <meta name="description" content="Web site created using create-react-app"/>
     <title>React App</title>
     <link href="<?php echo $base_path ?>static/css/2.7f669fb7.chunk.css" rel="stylesheet">
-    <link href="<?php echo $base_path ?>static/css/main.8ab70d19.chunk.css" rel="stylesheet">
+    <link href="<?php echo $base_path ?>static/css/main.5323d8a2.chunk.css" rel="stylesheet">
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -45,6 +45,6 @@ $current_user = wp_get_current_user();
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.12df12ac.js"></script>
 <script src="<?php echo $base_path ?>static/js/2.8cb20095.chunk.js"></script>
-<script src="<?php echo $base_path ?>static/js/main.6e450e2f.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.0666b75b.chunk.js"></script>
 
 </html>

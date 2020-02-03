@@ -73,7 +73,14 @@ class Storylet_API extends WP_REST_Controller
 	    return true || is_user_logged_in();
 	}
 
-	public function get_storylet_template( $request )
+    private function get_current_user()
+    {
+        //return (object) array ('ID' => 100);
+        return wp_get_current_user();
+    }
+
+
+    public function get_storylet_template( $request )
 	{
 		$storylet_tamplates = StoryletTemplateModel::all()->toArray();
 
@@ -115,7 +122,7 @@ class Storylet_API extends WP_REST_Controller
 	{
 		try
 		{
-            $current_user = wp_get_current_user();
+            $current_user = $this->get_current_user();
 
 			$parameters        = $request->get_params();
 			$storyletTemplate  = $parameters['storyletTemplate'];
