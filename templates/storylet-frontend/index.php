@@ -1,6 +1,6 @@
 <?php
     if(!is_user_logged_in())
-        wp_redirect(wp_login_url());
+        wp_redirect(wp_login_url() . "/?redirect_to=" .  get_site_url() . "/storylet");
 
     $base_path =  plugin_dir_url( __FILE__ );
 ?>
