@@ -2,12 +2,8 @@ import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
 import setSlideData from '../../reducer/actions/set-slides-data'
-
-import '../../style/slide-components/text-style.css';
-import selectedSlide from "../../reducer/selected-slide";
-import copyComponent from "../../reducer/actions/copy-component";
 import selectComponent from "../../reducer/actions/select-component";
-
+import '../../style/slide-components/text-style.css';
 
 export default function Text({component, onClick, isEditable})
 {
@@ -21,30 +17,16 @@ export default function Text({component, onClick, isEditable})
     const [edit, setEdit] = useState(false);
 
     useEffect(()=>{
-        if(!selectedSlide)
-            return;
-
-        let slideIdx = selectedSlide.index;
-        let componentIdx = component.index;
-
-        let data = cloneDeep(slidesData);
-        data[slideIdx].components[componentIdx].value = text;
-        dispatch(setSlideData(data));
-
-    }, [text]);
-
-    useEffect(()=>{
         if(selectedComponent && edit)
             setEdit(false);
 
     }, [selectedComponent]);
 
-    const enableEdit = () => {
+
+    const enable_edit = () => {
         if(!edit) {
             dispatch(selectComponent(null));
             setEdit(true);
-            // select cursor
-            //border dottet
         }
         else if(edit && onClick) {
             onClick();
@@ -58,8 +40,26 @@ export default function Text({component, onClick, isEditable})
         }
     };
 
+    const update_text = (e) => {
+        if(text === e.target.innerText)
+            return;
+
+        setText(e.target.innerText);
+
+        let slideIdx = selectedSlide.index;
+        let componentIdx = component.index;
+
+        // console.log("********");
+        // console.log(slideIdx, componentIdx, text);
+
+        let data = cloneDeep(slidesData);
+        data[slideIdx].components[componentIdx].value = e.target.innerText;
+        dispatch(setSlideData(data));
+    };
+
     return (
-        <div id={isEditable ? "component-"+component.index : ""} className={edit ? "text-moveable-container editable" : "text-moveable-container"} onDoubleClick={enableEdit} onClick={enable_movable} onBlur={(e) => {setText(e.target.innerText);}}
+        <div id={isEditable ? "component-"+component.index : ""} className={edit ? "text-moveable-container editable" : "text-moveable-container"}
+             onDoubleClick={enable_edit} onClick={enable_movable} onBlur={update_text}
             style={{
                 top:component.y+'%',
                 left:component.x+'%',

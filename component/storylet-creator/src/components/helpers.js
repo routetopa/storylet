@@ -56,7 +56,7 @@ ln["size2_it"] = "Dim.";
 ln["delete_it"] = "Elimina";
 
 // tooltip
-ln["flipH_it"] = "Specchia orizzontalente";
+ln["flipH_it"] = "Specchia orizzontalmente";
 ln["flipV_it"] = "Specchia verticalmente";
 ln["bringsUp_it"] = "Porta in primo piano";
 ln["keepRatio_it"] = "Mantenere il rapporto di aspetto";
