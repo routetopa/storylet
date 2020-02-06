@@ -11,6 +11,7 @@ function App()
     const [slideSize, setSlideSize]       = useState('full');
     const [parentStory, setParentStory]   = useState(null);
     const [currentStory, setCurrentStory] = useState(null);
+    const [currentStoryMetadata, setCurrentStoryMetadata] = useState(null);
 
     const navigate_link = async (storylet_id) =>
     {
@@ -23,7 +24,8 @@ function App()
     };
 
     useEffect(() => {
-        setCurrentStory(window.STORY.DATA);
+        setCurrentStory(JSON.parse(window.STORY.DATA.story));
+        setCurrentStoryMetadata(JSON.parse(window.STORY.DATA.metadata));
     }, []);
 
     const print_parent_story = () =>
@@ -46,7 +48,7 @@ function App()
     {
         // debugger
         let steps;
-        if(!currentStory[0].template || currentStory[0].template === "linear") {
+        if(!currentStoryMetadata.viewer || currentStoryMetadata.viewer.template === "linear") {
             steps = currentStory.map((slide, idx) => {
                 return (
                     <Step key={idx} duration={1500} data={{x: idx === 0 ? 0 : ((screen_width-off)*idx)}}>
@@ -55,7 +57,7 @@ function App()
                 )
             })
         }
-        else if(currentStory[0].template === "snail") {
+        else if(currentStoryMetadata.viewer.template === "snail") {
             steps = currentStory.map((slide, idx) => {
                 if(idx < 13)
                     return (
@@ -73,7 +75,7 @@ function App()
                 return el != null;
             });
         }
-        else if(currentStory[0].template === "cube") {
+        else if(currentStoryMetadata.viewer.template === "cube") {
             steps = currentStory.map((slide, idx) => {
                 if(idx < 6 )
                     return (

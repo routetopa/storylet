@@ -29,7 +29,7 @@ if(!is_user_logged_in())
     };
 
     window.STORY = {
-        DATA:<?php echo $storylet['story'] ?>
+        DATA: <?php echo $storylet ?>
     };
 
     window.API_NONCE = {
@@ -38,6 +38,6 @@ if(!is_user_logged_in())
 </script>
 
 <script type="text/javascript" src="<?php echo $base_path ?>static/js/runtime-main.fe2f7310.js"></script>
-<script type="text/javascript" src="<?php echo $base_path ?>static/js/2.5b89846d.chunk.js"></script>
-<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.536fe109.chunk.js"></script>
+<script type="text/javascript" src="<?php echo $base_path ?>static/js/2.9dce518f.chunk.js"></script>
+<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.aeda1619.chunk.js"></script>
 </html>

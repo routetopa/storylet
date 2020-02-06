@@ -79,11 +79,17 @@ class AdminClass_API extends WP_REST_Controller
         ));
     }
 
+    private function get_current_user()
+    {
+        //return (object) array ('ID' => 100);
+        return wp_get_current_user();
+    }
+
     public function create_class( $request )
     {
         try
         {
-            $current_user = wp_get_current_user();
+            $current_user = $this->get_current_user();
 
             $parameters         = $request->get_params();
             $users              = array();
@@ -174,7 +180,7 @@ class AdminClass_API extends WP_REST_Controller
     {
         try
         {
-            $current_user = wp_get_current_user();
+            $current_user = $this->get_current_user();
             $teacher_id = $current_user->ID;
             $classes = ClassModel::where('teacherId', '=', $teacher_id)->get();
 

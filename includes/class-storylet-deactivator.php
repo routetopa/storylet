@@ -30,7 +30,7 @@ class Storylet_Deactivator {
 	 */
 	public static function deactivate()
 	{
-		//self::removeDB();
+		self::removeDB();
 		self::removeVirtualPages();
 	}
 

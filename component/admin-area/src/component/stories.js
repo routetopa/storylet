@@ -16,7 +16,7 @@ export default function Stories()
         let response = await axios.get(window.API_ENDPOINT.GET_CLASS,
             { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
         let data = [];
-        let students = []
+        let students = [];
 
         response.data.data.forEach((cl) => {
             students = [...students, ...cl.students];
@@ -31,8 +31,18 @@ export default function Stories()
     };
 
     const stories_columns = [
-        {title: 'Titolo', dataIndex: 'name', key: 'name'},
-        {title: 'Descrizione', dataIndex: 'description', key: 'description'},
+        {title: 'Titolo', key: 'name',
+            render: (text, record, index) => {
+                let metadata = JSON.parse(record.metadata);
+                return metadata.name
+            }
+        },
+        {title: 'Descrizione', key: 'description',
+            render: (text, record, index) => {
+                let metadata = JSON.parse(record.metadata);
+                return metadata.description
+            }
+        },
         {title: 'Username', key: 'ownerId',
             render: (text, record, index) =>
             {
