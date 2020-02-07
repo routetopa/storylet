@@ -97,7 +97,7 @@ export default function Menu() {
             metadata  : storylet
         })
             .then((response) => {
-                if(exit)
+                if(exit === true) //save end exit
                     window.location.href = window.STATIC.EXIT_URL;
                 if(!autosave)
                     openNotificationWithIcon('success');
@@ -147,7 +147,7 @@ export default function Menu() {
             <FontAwesomeIcon icon={faBars} className="icon" onClick={toggle_sidebar} />
             <div className={`sidebar ${menuStatus}`}>
                 <div className="sidebarBody">
-                    <div className="menu-item menu-btn" onClick={save_storylet}>{translate('save', selectedLanguage)}</div>
+                    <div className="menu-item menu-btn" onClick={()=>save_storylet()}>{translate('save', selectedLanguage)}</div>
                     <div className="menu-item property-row custom-checkbox">
                         <input checked={autosave ? "checked" : ""} type="checkbox" className="custom-control-input" id="menuAutosave" onChange={set_autosave} value="autosave"/>
                         <label className="custom-control-label ddr" htmlFor="menuAutosave">{translate('autosave', language)}</label>
