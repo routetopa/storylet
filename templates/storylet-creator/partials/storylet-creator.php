@@ -10,7 +10,7 @@ if(!is_user_logged_in())
     <base href="<?php echo $base_path ?>" />
     <title>Storylet Creator</title>
     <link href="<?php echo $base_path ?>static/css/2.ff8bd605.chunk.css" rel="stylesheet">
-    <link href="<?php echo $base_path ?>static/css/main.7ff06e9b.chunk.css" rel="stylesheet">
+    <link href="<?php echo $base_path ?>static/css/main.8595a6c0.chunk.css" rel="stylesheet">
 
 </head>
 <body>
@@ -34,13 +34,14 @@ if(!is_user_logged_in())
 
     window.STATIC = {
         SITE_URL: '<?php echo site_url(); ?>/',
-        IMAGE_BASE_PATH : '<?php echo plugins_url('storylet/images/') ?>'
+        IMAGE_BASE_PATH : '<?php echo plugins_url('storylet/images/') ?>',
+        EXIT_URL: '<?php echo site_url(); ?>/my-storylet'
     };
 
 </script>
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.30fdea02.js"></script>
-<script src="<?php echo $base_path ?>static/js/2.42f1233a.chunk.js"></script>
-<script src="<?php echo $base_path ?>static/js/main.38815686.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/2.ae5e5750.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.f992d1c2.chunk.js"></script>
 </html>
 
