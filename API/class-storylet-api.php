@@ -15,25 +15,35 @@ class Storylet_API extends WP_REST_Controller
 
 	public function run()
 	{
-		// GET ALL STORYLET TEMPLATE
-		register_rest_route($this->namespace, '/storylet-template', array(
-			array(
-				'methods'             => WP_REST_Server::READABLE,
-				'callback'            => array( $this, 'get_storylet_template' ),
-				'permission_callback' => array( $this, 'get_storylet_permissions_check' ),
-			),
-			/*array(
-				'methods'         => WP_REST_Server::EDITABLE,
-				'callback'        => array( $this, 'update_item' ),
-				'permission_callback' => array( $this, 'update_item_permissions_check' ),
-				'args'            => $this->get_endpoint_args_for_item_schema( false ),
-			),*/
-			'schema' => null,
-			// SCHEMA IS AVAILABLE THROUGH OPTION REQUEST TO THIS ENDPOINT
-			//'schema' => 'prefix_get_comment_schema',
-		));
+        // GET ALL STORYLET TEMPLATE
+        register_rest_route($this->namespace, '/storylet-template', array(
+            array(
+                'methods'             => WP_REST_Server::READABLE,
+                'callback'            => array( $this, 'get_storylet_template' ),
+                'permission_callback' => array( $this, 'get_storylet_permissions_check' ),
+            ),
+            /*array(
+                'methods'         => WP_REST_Server::EDITABLE,
+                'callback'        => array( $this, 'update_item' ),
+                'permission_callback' => array( $this, 'update_item_permissions_check' ),
+                'args'            => $this->get_endpoint_args_for_item_schema( false ),
+            ),*/
+            'schema' => null,
+            // SCHEMA IS AVAILABLE THROUGH OPTION REQUEST TO THIS ENDPOINT
+            //'schema' => 'prefix_get_comment_schema',
+        ));
 
-		register_rest_route($this->namespace, '/storylet(?:/(?P<storyletid>\d+))?', array(
+        // GET MY STORYLET
+        register_rest_route($this->namespace, '/my-storylet', array(
+            array(
+                'methods'             => WP_REST_Server::READABLE,
+                'callback'            => array( $this, 'get_storylet_by_user' ),
+            ),
+            'schema' => null
+        ));
+
+
+        register_rest_route($this->namespace, '/storylet(?:/(?P<storyletid>\d+))?', array(
 			array(
 				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => array( $this, 'get_storylet' ),
@@ -75,7 +85,7 @@ class Storylet_API extends WP_REST_Controller
 
     private function get_current_user()
     {
-        //return (object) array ('ID' => 100);
+        //return (object) array ('ID' => 187);
         return wp_get_current_user();
     }
 
@@ -159,6 +169,18 @@ class Storylet_API extends WP_REST_Controller
             return rest_ensure_response(['status' => 'OK', 'data' => StoryletModel::all()->toArray()]);
         }
 	}
+
+    public function get_storylet_by_user( $request )
+    {
+        $current_user = $this->get_current_user();
+
+        $storylet = StoryletModel::where('ownerId', '=', $current_user->ID)->get();
+
+        if($storylet) $storylet->toArray();
+
+        return rest_ensure_response(['status' => 'OK', 'data' => $storylet]);
+
+    }
 
     public function delete_storylet( $request )
     {

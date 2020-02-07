@@ -41,27 +41,18 @@ class Storylet_Deactivator {
 
 	private static function removeDB()
 	{
-		global $wpdb;
+		/*global $wpdb;
 
-		$table = $wpdb->prefix . "story_storylet";
+		$table = $wpdb->prefix . "story_class";
 		$wpdb->query("DROP TABLE IF EXISTS $table");
 
-		$table = $wpdb->prefix . "story_storylet_template";
-		$wpdb->query("DROP TABLE IF EXISTS $table");
+        $table = $wpdb->prefix . "story_storylet";
+        $wpdb->query("DROP TABLE IF EXISTS $table");
 
-		$table = $wpdb->prefix . "story_slide";
-		$wpdb->query("DROP TABLE IF EXISTS $table");
+        $table = $wpdb->prefix . "story_storylet_template";
+        $wpdb->query("DROP TABLE IF EXISTS $table");
 
-		$table = $wpdb->prefix . "story_slide_template";
-		$wpdb->query("DROP TABLE IF EXISTS $table");
-
-		$table = $wpdb->prefix . "story_component";
-		$wpdb->query("DROP TABLE IF EXISTS $table");
-
-		$table = $wpdb->prefix . "story_component_template";
-		$wpdb->query("DROP TABLE IF EXISTS $table");
-
-		$table = $wpdb->prefix . "story_theme";
-		$wpdb->query("DROP TABLE IF EXISTS $table");
+        $table = $wpdb->prefix . "story_storylet_student";
+        $wpdb->query("DROP TABLE IF EXISTS $table");*/
 	}
 }
