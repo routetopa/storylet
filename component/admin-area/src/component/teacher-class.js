@@ -57,11 +57,11 @@ export default function TeacherClass()
                 return `${res.name} ${res.surname} (${res.username})`;
             }
         },
-        {title: 'Action',   key: 'action',
+        {title: 'Azioni',   key: 'action',
             render: (text, record, index) =>
             {
                 return (
-                    <div>
+                    <>
                         <Icon theme="filled"
                               style={{fontSize:'24px', cursor:'pointer', marginRight:'24px'}}
                               type="play-circle"
@@ -80,7 +80,7 @@ export default function TeacherClass()
                                   type="delete"
                             />
                         </Popconfirm>
-                    </div>
+                    </>
                 )
             }
         }

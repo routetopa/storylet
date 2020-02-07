@@ -196,6 +196,7 @@ class Storylet {
 		$this->loader->add_route('storylet-creator', 'storylet-creator/index');
 		$this->loader->add_route('storylet-viewer', 'storylet-viewer/index');
 		$this->loader->add_route('admin-area', 'admin-area/index');
+		$this->loader->add_route('my-storylet', 'my-storylet/index');
 	}
 
 	/**
