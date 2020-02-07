@@ -22,9 +22,9 @@ $current_user = wp_get_current_user();
 <script type="text/javascript">
 
     window.API_ENDPOINT = {
-        GET_MY_STORY     : "<?php echo rest_url() ?>/storylet/v1/my-storylet",
-        STORYLET_VIEWER  : '<?php echo site_url(); ?>/storylet-viewer',
-        STORYLET_CREATOR : '<?php echo site_url(); ?>/storylet-creator',
+        GET_MY_STORY     : "<?php echo rest_url() ?>storylet/v1/my-storylet",
+        STORYLET_VIEWER  : '<?php echo site_url(); ?>storylet-viewer',
+        STORYLET_CREATOR : '<?php echo site_url(); ?>storylet-creator',
         CRUD_STORYLET    : '<?php echo rest_url() ?>storylet/v1/storylet',
         SITE_URL: "/wp/"
     };
