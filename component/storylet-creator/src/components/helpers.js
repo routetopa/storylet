@@ -12,11 +12,32 @@ let ln = [];
 /******** IT ********/
 // MENU
 ln["newText_it"] = "Nuovo testo";
+ln["keyword_it"] = "Parola chiave";
+
+// tooltip
+ln["addText_it"] = "Aggiungi testo";
+ln["addBackground_it"] = "Aggiungi sfondo";
+ln["addImage_it"] = "Aggiungi immagine";
+ln["playStoryPreview_it"] = "Riproduci anteprima storia";
+ln["fantasyHelper_it"] = "Aiuta la tua fantasia!";
+
+ln["moveUpSlide_it"] = "Sposta su scena";
+ln["moveDownSlide_it"] = "Sposta giù scena";
+ln["removeSlide_it"] = "Rimuovi scena";
+ln["duplicateSlide_it"] = "Duplica scena";
+ln["addSlide_it"] = "Aggiungi scena";
 
 // SIDE MENU
 ln["save_it"] = "Salva";
 ln["autosave_it"] = "Autosave";
 ln["language_it"] = "Lingua";
+ln["exit_it"] = "Esci";
+
+ln["saveBeforeExit_it"] = "Salva prima di uscire?";
+ln["yes_it"] = "Si";
+ln["no_it"] = "No";
+ln["saved_it"] = "Salvataggio riuscito!";
+ln["hasBeenSuccessfullySaved_it"] = "La storia è stata salvata con successo!";
 
 // WORD IDEAS
 ln["analogies_it"] = "Analogie";
@@ -65,11 +86,32 @@ ln["keepRatio_it"] = "Mantenere il rapporto di aspetto";
 
 // MENU
 ln["newText_en"] = "Nex Text";
+ln["keyword_en"] = "Keyword";
+
+// tooltip
+ln["addText_en"] = "Add Text";
+ln["addBackground_en"] = "Add Background";
+ln["addImage_en"] = "Add Image";
+ln["playStoryPreview_en"] = "Play Story Preview";
+ln["fantasyHelper_en"] = "Help your Imagination!";
+
+ln["moveUpSlide_en"] = "Move Up Slide";
+ln["moveDownSlide_en"] = "Move Down Slide";
+ln["removeSlide_en"] = "Remove Slide";
+ln["duplicateSlide_en"] = "Duplicate Slide";
+ln["addSlide_en"] = "Add Slide";
 
 // SIDE MENU
 ln["save_en"] = "Save";
 ln["autosave_en"] = "Autosave";
 ln["language_en"] = "Language";
+ln["exit_en"] = "Exit";
+
+ln["saveBeforeExit_en"] = "Save before exit?";
+ln["yes_en"] = "Yes";
+ln["no_en"] = "No";
+ln["saved_en"] = "Saving successful!";
+ln["hasBeenSuccessfullySaved_en"] = "The Story has been successfully saved!";
 
 // WORD IDEAS
 ln["analogies_en"] = "Analogies";

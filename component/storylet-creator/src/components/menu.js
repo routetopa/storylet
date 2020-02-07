@@ -15,6 +15,7 @@ import '../style/menu.css';
 import languageSelected from "../reducer/actions/select-language";
 import storylet from "../reducer/storylet";
 import setStorylet from "../reducer/actions/set-storylet";
+import { notification, Popconfirm } from 'antd';
 
 export default function Menu() {
     const dispatch = useDispatch();
@@ -25,6 +26,13 @@ export default function Menu() {
     const selectedLanguage = useSelector(state => state.selectedLanguage);
     const slidesData = useSelector(state => state.slidesData);
     const storylet = useSelector(state => state.storylet);
+
+    const openNotificationWithIcon = type => {
+        notification[type]({
+            message: translate('saved', language),
+            description: translate('hasBeenSuccessfullySaved', language)
+        });
+    };
 
     // useEffect(() => {
     //     let url_string = window.location.href;
@@ -82,16 +90,17 @@ export default function Menu() {
             setMenuStatus('');
     };
 
-    const save_storylet = () => {
-        console.log("******** AUTOSAVE ********");
-        console.log(slidesData);
-        console.log(storylet);
+    const save_storylet = (exit=false) => {
         axios.put(window.API_ENDPOINT.SAVE_STORYLET, {
             storyletid: window.STORY.DATA.id,
             story     : slidesData,
             metadata  : storylet
         })
             .then((response) => {
+                if(exit)
+                    window.location.href = window.STATIC.EXIT_URL;
+                if(!autosave)
+                    openNotificationWithIcon('success');
                 // console.log(response);
             }, (error) => {
                 console.log(error);
@@ -124,23 +133,25 @@ export default function Menu() {
         dispatch(languageSelected(e.target.value));
     };
 
+    function confirm(e) {
+        save_storylet(true);
+        // console.log(e);
+    }
+
+    function cancel(e) {
+        // console.log(e);
+    }
+
     return (
         <div className="menu">
             <FontAwesomeIcon icon={faBars} className="icon" onClick={toggle_sidebar} />
             <div className={`sidebar ${menuStatus}`}>
                 <div className="sidebarBody">
                     <div className="menu-item menu-btn" onClick={save_storylet}>{translate('save', selectedLanguage)}</div>
-                    {/*<div className="menu-item custom-checkbox">*/}
-                    {/*    <input type="checkbox" checked={autosave ? "checked" : ""} className="custom-control-input" id="menuAutosave" onChange={set_autosave} value="autosave"/>*/}
-                    {/*    <label className="custom-control-label ddr" htmlFor="menuAutosave">{translate('autosave', selectedLanguage)}</label>*/}
-                    {/*</div>*/}
-                    <div className="property-row custom-checkbox">
+                    <div className="menu-item property-row custom-checkbox">
                         <input checked={autosave ? "checked" : ""} type="checkbox" className="custom-control-input" id="menuAutosave" onChange={set_autosave} value="autosave"/>
                         <label className="custom-control-label ddr" htmlFor="menuAutosave">{translate('autosave', language)}</label>
                     </div>
-                    {/*<div className="menu-item menu-btn">Esporta come PDF</div>*/}
-                    {/*<div className="menu-item menu-btn">Esporta come Immagine</div>*/}
-                    {/*<div className="menu-item menu-btn">Copia HTML</div>*/}
                     <div className="menu-item menu-select">
                         {translate('language', selectedLanguage)}
                         <select class="form-control" onChange={set_language}>
@@ -151,6 +162,20 @@ export default function Menu() {
                             <option selected={language === "de" ? "selected" : ""} value="de">DE</option>
                         </select>
                     </div>
+
+                        <div className="menu-item menu-btn">
+                            <Popconfirm
+                                placement="right"
+                                title={translate('saveBeforeExit', language)}
+                                onConfirm={confirm}
+                                onCancel={cancel}
+                                okText={translate('yes', language)}
+                                cancelText={translate('no', language)}
+                            >
+                                <div className="inner-btn">{translate('exit', language)}</div>
+                            </Popconfirm>
+                        </div>
+
                 </div>
             </div>
         </div>

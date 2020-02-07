@@ -22,6 +22,10 @@ body {
   color: var(--storylet-grey-900);
 }
 
+#root {
+  overflow: hidden;
+}
+
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */

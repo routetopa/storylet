@@ -7,7 +7,8 @@ import ImageGalleryContainer from './image-gallery-container'
 import BackgroundGalleryContainer from './background-gallery-container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faFileImage, faImage, faFileVideo } from '@fortawesome/free-regular-svg-icons'
-import { faFont, faPlusCircle, faTrashAlt, faCopy, faLink, faChartBar, faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faFont, faPlusCircle, faTrashAlt, faCopy, faLink, faChartBar, faPlay,  faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons'
+import { notification, Popconfirm } from 'antd';
 
 import '../../vendor/bootstrap.min.css';
 import '../../style/container/menu-container.css'
@@ -50,6 +51,18 @@ export default function MenuContainer() {
 
         setComponentIdx(selectedComponent.index);
     }, [selectedComponent]);
+
+    const play_story = async () => {
+        window.open(window.STATIC.SITE_URL + 'storylet-viewer/' + window.STORY.DATA.id,'_blank')
+    };
+
+    function confirm(e) {
+        play_story();
+    }
+
+    function cancel(e) {
+        play_story()
+    }
 
     const get_words = async () => {
         setStartingWord([searchKey.current.value]);
@@ -201,7 +214,7 @@ export default function MenuContainer() {
 
         // if 1 slide return
         if(data.length===1) {
-            alert('Impossibile eliminare la scena');
+            alert('Impossibile eliminare la scena');//todo localization
             return
         }
 
@@ -219,24 +232,100 @@ export default function MenuContainer() {
         });
     };
 
+    const move_up = () => {
+        let data = cloneDeep(slidesData);
+
+        if(slideIdx===0)
+            return;
+
+        data[slideIdx].index -= 1;
+        data[slideIdx-1].index += 1;
+
+        let tmp = data[slideIdx];
+        data[slideIdx] = data[slideIdx-1];
+        data[slideIdx-1] = tmp;
+
+        let goto = slideIdx-1;
+
+        batch(() => {
+            dispatch(setSlidesData(data));
+            dispatch(selectSlide(data[goto]));
+            dispatch(selectComponent(null));
+        });
+    };
+
+    const move_down = () => {
+        let data = cloneDeep(slidesData);
+
+        if(slideIdx===data.length-1)
+            return;
+
+        data[slideIdx].index += 1;
+        data[slideIdx+1].index -= 1;
+
+        let tmp = data[slideIdx];
+        data[slideIdx] = data[slideIdx+1];
+        data[slideIdx+1] = tmp;
+
+        let goto = slideIdx+1;
+
+        batch(() => {
+            dispatch(setSlidesData(data));
+            dispatch(selectSlide(data[goto]));
+            dispatch(selectComponent(null));
+        });    };
+
     return (
         <>
             <div id="menu-container">
-                <div className="buttons" >
-                    <FontAwesomeIcon icon={faPlusCircle} className="icon slide-control add-slide" onClick={add_slide} />
-                    <FontAwesomeIcon icon={faCopy} className="icon slide-control duplicate-slide" onClick={copy_slide} />
-                    <FontAwesomeIcon icon={faTrashAlt} className="icon slide-control remove-slide" onClick={remove_slide} />
-                    <FontAwesomeIcon icon={faFont} className="icon add-text" onClick={add_text} />
-                    <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={open_gallery} />
-                    <FontAwesomeIcon icon={faImage} className="icon add-image" onClick={open_background_gallery} />
-                    {/*<FontAwesomeIcon icon={faFileVideo} className="icon add-video" />*/}
-                    {/*<FontAwesomeIcon icon={faLink} className="icon add-link" />*/}
-                    {/*<FontAwesomeIcon icon={faChartBar} className="icon add-datalet" />*/}
-                    <FontAwesomeIcon icon={faPlay} onClick={() => window.open(window.STATIC.SITE_URL + 'storylet-viewer/' + window.STORY.DATA.id,'_blank')} className="icon open-preview" />
+                <div className="component-buttons-container" >
+                    <div data-tooltip={translate('addText', ln)}>
+                        <FontAwesomeIcon icon={faFont} className="icon add-text" onClick={add_text} />
+                    </div>
+                    <div data-tooltip={translate('addBackground', ln)}>
+                        <FontAwesomeIcon icon={faImage} className="icon add-image" onClick={open_background_gallery} />
+                    </div>
+                    <div data-tooltip={translate('addImage', ln)}>
+                        <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={open_gallery} />
+                    </div>
+                    <div data-tooltip={translate('playStoryPreview', ln)}>
+                        <FontAwesomeIcon icon={faPlay} className="icon open-preview" onClick={play_story} />
+                        {/*<Popconfirm*/}
+                        {/*    placement="right"*/}
+                        {/*    title={translate('saveBeforePlay', ln)}*/}
+                        {/*    onConfirm={confirm}*/}
+                        {/*    onCancel={cancel}*/}
+                        {/*    okText={translate('yes', ln)}*/}
+                        {/*    cancelText={translate('no', ln)}*/}
+                        {/*>*/}
+                        {/*    <FontAwesomeIcon icon={faPlay} className="icon open-preview" />*/}
+                        {/*</Popconfirm>*/}
+                    </div>
                 </div>
+
+                <div className="slide-buttons-container">
+                    <div data-tooltip={translate('moveUpSlide', ln)}>
+                        <FontAwesomeIcon icon={faArrowAltCircleUp} className="icon move-up-slide" onClick={move_up} />
+                    </div>
+                    <div data-tooltip={translate('moveDownSlide', ln)}>
+                        <FontAwesomeIcon icon={faArrowAltCircleDown} className="icon move-down-slide" onClick={move_down} />
+                    </div>
+                    <div data-tooltip={translate('removeSlide', ln)}>
+                        <FontAwesomeIcon icon={faTrashAlt} className="icon remove-slide" onClick={remove_slide} />
+                    </div>
+                    <div data-tooltip={translate('duplicateSlide', ln)}>
+                        <FontAwesomeIcon icon={faCopy} className="icon duplicate-slide" onClick={copy_slide} />
+                    </div>
+                    <div data-tooltip={translate('addSlide', ln)}>
+                        <FontAwesomeIcon icon={faPlusCircle} className="icon add-slide" onClick={add_slide} />
+                    </div>
+                </div>
+
                 <div className="find-ideas">
-                    <FontAwesomeIcon icon={faLightbulb} className="icon" onClick={get_words} />
-                    <input id="SearchKey" ref={searchKey} className="form-control col-md-10 col-sm-10" onKeyPress={(e)=>{if (e.key === 'Enter') get_words()}} />
+                    <div data-tooltip={translate('fantasyHelper', ln)}>
+                        <FontAwesomeIcon icon={faLightbulb} className="icon" onClick={get_words} />
+                    </div>
+                    <input placeholder={translate('keyword', ln)} id="SearchKey" ref={searchKey} className="form-control col-md-10 col-sm-10" onKeyPress={(e)=>{if (e.key === 'Enter') get_words()}} />
                 </div>
             </div>
 

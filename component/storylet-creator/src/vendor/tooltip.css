@@ -10,6 +10,7 @@
 [data-tooltip]:after,
 .tooltip:before,
 .tooltip:after {
+    text-align: center; /*ddr*/
     position: absolute;
     visibility: hidden;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";

@@ -55,16 +55,16 @@ export default function ImageProperties()
     });
 
     useEffect(()=>{
-        console.log('remove');
+        // console.log('remove');
         document.removeEventListener('keydown', canc_remove_component);
         document.removeEventListener("keydown", copy_and_paste);
         if(!selectedComponent || selectedComponent.type !== 'image')
             return;
-        console.log('add');
+        // console.log('add');
         document.addEventListener('keydown', canc_remove_component);
         document.addEventListener("keydown", copy_and_paste);
         return function cleanup() {
-            console.log('cleanup');
+            // console.log('cleanup');
             document.removeEventListener('keydown', canc_remove_component);
             document.removeEventListener("keydown", copy_and_paste);
         };
