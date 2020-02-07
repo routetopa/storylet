@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 // Components
@@ -16,6 +16,15 @@ export default function SlideContainer()
     const dispatch = useDispatch();
     const slidesData = useSelector(state => state.slidesData);
     const selectedSlide = useSelector(state => state.selectedSlide);
+
+    // useEffect(()=>{
+    //     if(!selectedSlide)
+    //         return;
+    //
+    //     let slide = document.getElementById("slide_"+selectedSlide.id);
+    //     slide.scrollIntoView(true);
+    //
+    // }, [selectedSlide]);
 
     return (
         <div className="slide-container">

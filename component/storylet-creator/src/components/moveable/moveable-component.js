@@ -35,20 +35,23 @@ export default function MoveableComponent() {
     }, [selectedSlide]);
 
     useEffect(()=>{
-        setPosition(null);
         if(!selectedComponent || selectedComponent.index === componentIdx)
             return;
 
         setComponentIdx(selectedComponent.index);
 
-        setPosition([selectedComponent.x,selectedComponent.y]);
-        setSize([selectedComponent.w,selectedComponent.h]);
+        setPosition(null);
+        setSize(null);
+        // setPosition([selectedComponent.x,selectedComponent.y]);
+        // setSize([selectedComponent.w,selectedComponent.h]);
         setScale(selectedComponent.scale);
         setRotate(selectedComponent.rotate);
     }, [selectedComponent]);
 
     function setComponentParameters(name, value) {
         let data = cloneDeep(slidesData);
+
+        console.log(name, value)
 
         switch (name) {
             case "size":
@@ -95,7 +98,7 @@ export default function MoveableComponent() {
                 }}
                 onDragEnd={() => {
                     if(position===null)
-                        return
+                        return;
                     let x = position[0]/slide.offsetWidth*100;
                     let y = position[1]/slide.offsetHeight*100;
                     selectedComponent.x = x;
@@ -110,6 +113,8 @@ export default function MoveableComponent() {
                     target.style.height = height + "px";
                 }}
                 onResizeEnd={() => {
+                    if(size===null)
+                        return;
                     let w = size[0]/slide.offsetWidth*100;
                     let h = size[1]/slide.offsetHeight*100;
                     selectedComponent.w = w;

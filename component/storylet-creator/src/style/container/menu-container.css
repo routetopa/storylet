@@ -5,51 +5,67 @@
     background-color: #FFFFFF;
     height: 48px;
     box-shadow: 0 1px 0 rgba(14,19,24,.15);
-    /*border-right: 1px solid var(--storylet-blue-grey-50);*/
 }
 
-.buttons {
-    display: flex;
+.component-buttons-container .icon, .slide-buttons-container .icon {
+    font-size: 38px;
+    padding: 7px;
+    cursor: pointer;
+    color: var(--storylet-grey-900);
+}
+
+/* COMPONENT BUTTONS */
+
+.component-buttons-container {
     width: 75%;
     padding: 5px;
 }
 
-.buttons .icon {
-    font-size: 38px;
-    padding: 7px;
-    margin-left: 8px;
-    cursor: pointer;
-    color: var(--storylet-grey-900);
+.component-buttons-container > div {
+    display: inline-block;
+    width: 48px;
+    text-align: center;
     transition: background-color .3s linear;
     border-radius: 4px;
 }
 
-.buttons .icon.add-image  {
-    padding: 5px;
-    margin-left: 3px;
-}
-.buttons .icon.add-video {
-    padding: 5px;
-}
-.buttons .icon.add-link {
-    padding: 9px;
-    margin-left: 3px;
-}
-.buttons .icon.add-datalet {
-    margin-left: 0px;
-}
-.buttons .icon.open-preview {
-    margin-left: 16px;
-    color: var(--storylet-primary);
+.component-buttons-container > div:hover {
+    background-color: var(--storylet-grey-200) !important;
 }
 
-.buttons .icon:hover {
-    background-color: var(--storylet-grey-200);
+.component-buttons-container .icon.add-image  {
+    padding: 5px;
+}
+.component-buttons-container .icon.open-preview {
+    color: var(--storylet-primary) !important;
 }
 
-.buttons .icon:first-child {
-    margin-left: 16px;
+/* SLIDE BUTTONS */
+
+.slide-buttons-container {
+    position: fixed;
+    bottom: 4px;
+    right:calc(25% + 4px);
+    z-index: 999;
 }
+
+.hideSettings .slide-buttons-container {
+    right: 4px;
+}
+
+.slide-buttons-container > div {
+    display: inline-block;
+}
+
+.slide-buttons-container .icon {
+    margin: 0 !important;
+    opacity: 0.5;
+}
+.slide-buttons-container .icon:hover {
+    opacity: 1;
+}
+
+/* FIND IDEAS */
 
 .find-ideas {
     display: flex;
@@ -60,9 +76,8 @@
 .find-ideas .icon {
     font-size: 38px;
     padding: 2px;
-    margin-right: 8px;
+    /*margin-right: 8px;*/
     cursor: pointer;
-    /*color: var(--storylet-blue-grey-50);*/
     color: var(--storylet-blue-grey-800);
     transition: color .45s linear;
 }
@@ -70,31 +85,7 @@
 .find-ideas .icon:hover {
     color: #FFEB3B;
 }
-.slide-control {
-    position: fixed;
-    bottom: 4px;
-    opacity: 0.5;
-}
-.slide-control:hover {
-    opacity: 1;
-}
 
-.add-slide {
-    right:calc(25% + 4px);
-}
-.duplicate-slide {
-    right: calc(25% + 44px);
-}
-.remove-slide {
-    right: calc(25% + 84px);
-}
-
-.hideSettings .add-slide {
-    right:4px;
-}
-.hideSettings .duplicate-slide {
-    right: 44px;
-}
-.hideSettings .remove-slide {
-    right: 84px;
+.find-ideas input {
+    margin-left: 8px;
 }
