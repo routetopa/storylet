@@ -97,7 +97,7 @@ export default function Menu() {
             metadata  : storylet
         })
             .then((response) => {
-                if(exit === true) //save end exit
+                if(exit === true) //save and exit
                     window.location.href = window.STATIC.EXIT_URL;
                 if(!autosave)
                     openNotificationWithIcon('success');
@@ -139,6 +139,7 @@ export default function Menu() {
     }
 
     function cancel(e) {
+        window.location.href = window.STATIC.EXIT_URL;
         // console.log(e);
     }
 
