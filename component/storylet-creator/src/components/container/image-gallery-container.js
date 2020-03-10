@@ -1671,11 +1671,11 @@ export default function ImageGalleryContainer({isOpened, closeGallery}) {
             width: 1,
             height: 1
         },
-        // {
-        //     src: window.STATIC.IMAGE_BASE_PATH + "storylet-prof.png",
-        //     width: 0.8,
-        //     height: 1
-        // },
+        {
+            src: window.STATIC.IMAGE_BASE_PATH + "storylet-prof.png",
+            width: 0.8,
+            height: 1
+        },
     ];
     const fishing = [
         {
@@ -5163,7 +5163,7 @@ export default function ImageGalleryContainer({isOpened, closeGallery}) {
                         <option value="21">Wild West</option>
                     </select>
                     <FontAwesomeIcon id="image-gallery-search" icon={faSearch} className="icon" />
-                    <input id="search-images" placeholder="Cerca ..." className="form-control col-md-4 col-sm-4"/>
+                    <input id="search-images" className="search-bg-images" placeholder="Cerca ..." className="form-control col-md-4 col-sm-4"/>
                 </div>
                 <div id="image-gallery-body">
                     <Gallery photos={selectedGallery} />

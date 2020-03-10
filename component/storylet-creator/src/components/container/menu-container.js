@@ -10,7 +10,7 @@ import { faLightbulb, faFileImage, faImage, faFileVideo } from '@fortawesome/fre
 import { faFont, faPlusCircle, faTrashAlt, faCopy, faLink, faChartBar, faPlay,  faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons'
 import { notification, Popconfirm } from 'antd';
 
-import '../../vendor/bootstrap.min.css';
+// import '../../vendor/bootstrap.min.css';
 import '../../style/container/menu-container.css'
 import '../../vendor/tooltip.css';
 

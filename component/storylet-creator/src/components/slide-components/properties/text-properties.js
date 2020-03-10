@@ -1,33 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch, batch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
-import {Formik, Field, Form, ErrorMessage, useFormikContext} from 'formik';
-import * as Yup from 'yup';
-import debounce from 'just-debounce-it';
-import '../../../vendor/bootstrap.min.css';
-import '../../../style/slide-components/properties/image-properties.css';
+import { Form, Input, InputNumber, Select, Upload, Switch, Checkbox, Button, notification, Tabs, Row, Col, Divider, Tooltip, Typography } from 'antd';
+import { LockOutlined, UnlockOutlined, EyeOutlined, RotateRightOutlined, FontColorsOutlined, BgColorsOutlined } from '@ant-design/icons';
+import { SketchPicker } from 'react-color';
+import {translate} from "../../helpers";
+
+import 'antd/dist/antd.css';
 
 import setSlideData from "../../../reducer/actions/set-slides-data";
 import setSelectComponent from "../../../reducer/actions/select-component";
 import setSelectSlide from "../../../reducer/actions/select-slide";
-import {translate} from "../../helpers";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowsAltH, faArrowsAltV, faEye, faLock, faLockOpen} from "@fortawesome/free-solid-svg-icons";
 import copyComponent from "../../../reducer/actions/copy-component";
-
-const AutoSave = ({debounceMs})=>{
-    const formik = useFormikContext();
-    const debouncedSubmit = React.useCallback (
-        debounce(() => formik.submitForm(), debounceMs),
-        [debounceMs, formik.submitForm]
-    );
-
-    React.useEffect(()=>{
-        debouncedSubmit();
-    }, [debouncedSubmit, formik.values]);
-
-    return (<></>);
-};
 
 export default function TextProperties()
 {
@@ -208,123 +192,301 @@ export default function TextProperties()
         }
     };
 
+    const layout = {
+        labelCol: {
+            span: 6,
+        },
+        wrapperCol: {
+            span: 16,
+        },
+    };
+    const tailLayout = {
+        wrapperCol: {
+            offset: 6,
+            span: 16,
+        },
+    };
+
+    const onFinish = values => {
+        console.log('Success:', values);
+    };
+
+    const onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo);
+    };
+
+    const handleClick = () => {
+        this.setState({ displayColorPicker: !this.state.displayColorPicker })
+    };
+
+    const handleClose = () => {
+        this.setState({ displayColorPicker: false })
+    };
+
+    const handleChange = (color) => {
+        setColor(color.rgb);
+        setTextColor('rgba(0,255,255,1)');
+    };
+
+
+
+    const [textColor, setTextColor] = useState('rgba(21,21,21,0.5)');
+    const [displayColorPicker, setDisplayColorPicker] = useState(false);
+    const [color, setColor] = useState(
+        {
+            r: 51,
+            g: 51,
+            b: 51,
+            a: 1,
+        });
+
+    const choseTextColor = () => {
+        setDisplayColorPicker(true);
+    };
+
+    const size = "medium"; //todo --> according to size
+    const { Title } = Typography;
+
     return (
-        <Formik
-            enableReinitialize={true}
-            initialValues={initialValues}
-
-            validationSchema={Yup.object().shape({
-                width: Yup.number()
-                    .min(0, 'Width must be at least 1% of slide width')
-                    .max(100, 'Width must be at most 100% of slide width'),
-                height: Yup.number()
-                    .min(0, 'Width must be at least 1% of slide width')
-                    .max(100, 'Width must be at most 100% of slide width')
-            })}
-
-            onSubmit={fields => {
-
-                let slideIdx = selectedSlide.index;
-                let componentIdx = selectedComponent.index;
-
-                let data = cloneDeep(slidesData);
-                data[slideIdx].components[componentIdx].w = fields.width;
-                data[slideIdx].components[componentIdx].h = fields.height;
-                data[slideIdx].components[componentIdx].color = fields.color;
-                data[slideIdx].components[componentIdx].fontSize = fields.size;
-                data[slideIdx].components[componentIdx].x = fields.top;
-                data[slideIdx].components[componentIdx].y = fields.left;
-                data[slideIdx].components[componentIdx].zIndex = fields.zIndex;
-                data[slideIdx].components[componentIdx].scale = [fields.scaleX,fields.scaleY];
-                data[slideIdx].components[componentIdx].keepRatio = fields.keepRatio;
-                data[slideIdx].components[componentIdx].rotate = fields.rotate;
-
-                dispatch(setSlideData(data));
-                dispatch(setSelectSlide(data[slideIdx]));
-                // todo?
-                // dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
-            }}
+        <Form
+            // name="basic"
+            // initialValues={{
+            //     remember: true,
+            // }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            // layout={"inline"}
         >
-            {({ errors, status, touched }) => (
-                <Form>
-                    <AutoSave debounceMs={300} />
 
-                    <div className="form-group form-inline">
-                        <label className="col-md-3 col-sm-3 _left">{translate('size', ln)}</label>
-                        <label htmlFor="width" className="col-md-1 col-sm-1">{translate('width', ln)}:</label>
-                        <Field name="width" type="number" className={'form-control col-md-2 col-sm-2' + (errors.width && touched.width ? ' is-invalid' : '')} />
-                        <label htmlFor="height" className="col-md-1 col-sm-1">{translate('height', ln)}:</label>
-                        <Field name="height" type="number" className={'form-control col-md-2 col-sm-2' + (errors.height && touched.height ? ' is-invalid' : '')} />
-                        <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('keepRatio', ln)} onClick={keepRatio}>
-                            <FontAwesomeIcon icon={selectedComponent.keepRatio ? faLock : faLockOpen} className="icon" />
-                        </button>
-                        <ErrorMessage name="width" component="div" className="invalid-feedback col-md-12 col-sm-12" />
-                        <ErrorMessage name="height" component="div" className="invalid-feedback col-md-12 col-sm-12" />
-                    </div>
+            {/*<Title level={4}>{translate('size', ln)}</Title>*/}
+            <Divider orientation={"left"}>{translate('size', ln)}</Divider>
+            <Row>
+                <Col span={10}>
+                    <Form.Item label={translate('width', ln)} >
+                        <InputNumber min={0} max={100} defaultValue={0} size={size} />
+                    </Form.Item>
+                </Col>
+                <Col span={10}>
+                    <Form.Item label={translate('height', ln)} >
+                        <InputNumber min={0} max={100} defaultValue={0} size={size} />
+                    </Form.Item>
+                </Col>
+                <Col span={4}>
+                    <Tooltip title={translate('keepRatio', ln)}>
+                        <Switch style={{marginTop:5}}
+                            checkedChildren={<LockOutlined />}
+                            unCheckedChildren={<UnlockOutlined />}
+                            defaultChecked
+                            onChange={keepRatio}
+                        />
+                    </Tooltip>
+                </Col>
+            </Row>
 
-                    <div className="form-group form-inline">
-                        <label className="col-md-3 col-sm-3 _left">{translate('position', ln)}</label>
-                        <label htmlFor="top" className="col-md-1 col-sm-1">X:</label>
-                        <Field name="top" type="number" className={'form-control col-md-2 col-sm-2' + (errors.top && touched.top ? ' is-invalid' : '')} />
-                        <label htmlFor="left" className="col-md-1 col-sm-1">Y:</label>
-                        <Field name="left" type="number" className={'form-control col-md-2 col-sm-2' + (errors.left && touched.left ? ' is-invalid' : '')} />
-                    </div>
+            <Divider orientation={"left"} style={{marginTop:0}}>{translate('position', ln)}</Divider>
+            <Row>
+                <Col span={10}>
+                    <Form.Item label={translate('top', ln)}>
+                        <InputNumber min={0} max={100} defaultValue={0} size={size} />
+                    </Form.Item>
+                </Col>
+                <Col span={10}>
+                    <Form.Item label={translate('left', ln)}>
+                        <InputNumber min={0} max={100} defaultValue={0} size={size} />
+                    </Form.Item>
+                </Col>
+            </Row>
+            <Row>
+                <Col span={24}>
+                    <Form.Item label={translate('zIndex', ln)}>
+                        <Input.Group compact>
+                            <InputNumber min={0} max={8} defaultValue={0} size={size} />
+                            <Tooltip title={translate('bringsUp', ln)}>
+                                <Button type="primary" icon={<EyeOutlined />} shape={"circle"} size={size} onClick={bringsUp} />
+                            </Tooltip>
+                        </Input.Group>
+                    </Form.Item>
+                </Col>
+            </Row>
 
-                    <div className="form-group form-inline">
-                        <label className="col-md-3 col-sm-3 _left"> </label>
-                        <label htmlFor="zIndex" className="col-md-1 col-sm-1">Z:</label>
-                        <Field name="zIndex" type="number" className={'form-control col-md-2 col-sm-2' + (errors.zIndex && touched.zIndex ? ' is-invalid' : '')} />
-                        <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('bringsUp', ln)} onClick={bringsUp}>
-                            <FontAwesomeIcon icon={faEye} className="icon" />
-                        </button>
-                    </div>
+            <Divider orientation={"left"} style={{marginTop:0}}>{translate('scale', ln)}</Divider>
+            <Row>
+                <Col span={10}>
+                    <Form.Item label={translate('scaleX', ln)}>
+                        <Input.Group compact>
+                            <InputNumber min={0} max={8} defaultValue={0} size={size} />
+                            <Tooltip title={translate('flipH', ln)}>
+                                <Button type="primary" icon={<RotateRightOutlined style={{fontSize: '24px'}} />} size={size} onClick={()=>flip('H')} />
+                            </Tooltip>
+                        </Input.Group>
+                    </Form.Item>
+                </Col>
+                <Col span={10}>
+                    <Form.Item label={translate('scaleY', ln)}>
+                        <Input.Group compact>
+                            <InputNumber min={0} max={8} defaultValue={0} size={size} />
+                            <Tooltip title={translate('flipV', ln)}>
+                                <Button type="primary" icon={<RotateRightOutlined style={{fontSize: '24px'}} rotate={90} />} size={size} onClick={()=>flip('V')} />
+                            </Tooltip>
+                        </Input.Group>
+                    </Form.Item>
+                </Col>
+            </Row>
 
-                    <div className="form-group form-inline">
-                        <label className="col-md-3 col-sm-3 _left">{translate('scale', ln)}</label>
-                        <label htmlFor="scaleX" className="col-md-1 col-sm-1">X:</label>
-                        <Field name="scaleX" type="number" className={'form-control col-md-2 col-sm-2' + (errors.scale && touched.scale ? ' is-invalid' : '')} />
-                        <label htmlFor="scaleY" className="col-md-1 col-sm-1">Y:</label>
-                        <Field name="scaleY" type="number" className={'form-control col-md-2 col-sm-2' + (errors.scale && touched.scale ? ' is-invalid' : '')} />
-                        {/*<div className="custom-control custom-checkbox col-md-3 col-sm-3">*/}
-                        {/*    <Field name="keepRatio" type="checkbox" className="custom-control-input" id="defaultUnchecked"/>*/}
-                        {/*    <label className="custom-control-label" htmlFor="defaultUnchecked">{translate('lock', ln)}</label>*/}
-                        {/*    /!*<FontAwesomeIcon icon={faLock} className="icon" />*!/*/}
-                        {/*</div>*/}
-                        <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('flipH', ln)} onClick={()=>flip('H')}>
-                            <FontAwesomeIcon icon={faArrowsAltH} className="icon" />
-                        </button>
-                        <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('flipV', ln)} onClick={()=>flip('V')}>
-                            <FontAwesomeIcon icon={faArrowsAltV} className="icon" />
-                        </button>
+            <Divider orientation={"left"} style={{marginTop:0}}>{translate('rotate', ln)}</Divider>
+            <Row>
+                <Col span={24}>
+                    <Form.Item label={translate('deg', ln)}>
+                        <InputNumber min={-180} max={180} defaultValue={0} size={size} />
+                    </Form.Item>
+                </Col>
+            </Row>
 
-                    </div>
+            <Divider style={{marginTop:0}}><Title level={4}>{translate('font', ln)}</Title></Divider>
 
-                    <div className="form-group form-inline">
-                        <label className="col-md-3 col-sm-3 _left">{translate('rotate', ln)}</label>
-                        <label htmlFor="rotate" className="col-md-1 col-sm-1"> </label>
-                        <Field name="rotate" type="number" className={'form-control col-md-2 col-sm-2' + (errors.rotate && touched.rotate ? ' is-invalid' : '')} />
-                        <label htmlFor="rotate" className="col-md-2 col-sm-2"> {translate('degrees', ln)}</label>
-                    </div>
+            <Form.Item label={translate('color', ln)}>
+                <Button icon={<FontColorsOutlined style={{color:textColor}} />} onClick={choseTextColor} />
+                {/*<Button icon={<BgColorsOutlined style={{color: 'red'}} />}/>*/}
+                popover instead of div
+                { displayColorPicker ? <div style={{position:'absolute', bottom:0, left:38, zIndex:1}}> <SketchPicker color={color} onChange={handleChange} /> </div> : null }
+            </Form.Item>
 
-                    <div className="form-group form-inline">
-                        <label className="col-md-3 col-sm-3 _left">{translate('font', ln)}</label>
-                        <label htmlFor="color" className="col-md-2 col-sm-2">{translate('color', ln)}:</label>
-                        <Field name="color" type="text" className={'form-control col-md-2 col-sm-2' + (errors.color && touched.color ? ' is-invalid' : '')} />
-                        <label htmlFor="size" className="col-md-2 col-sm-2">{translate('size2', ln)}:</label>
-                        <Field name="size" type="number" className={'form-control col-md-2 col-sm-2' + (errors.size && touched.size ? ' is-invalid' : '')} />
-                        <ErrorMessage name="color" component="div" className="invalid-feedback col-md-12 col-sm-12" />
-                        <ErrorMessage name="size" component="div" className="invalid-feedback col-md-12 col-sm-12" />
-                    </div>
+            background color
+            font size
+            font family
+            font alignmentcos
 
-                    <div className="form-group col-md-12 col-sm-12">
-                        {/*<button type="submit" className="btn btn-primary mr-2">{translate('save', ln)}</button>*/}
-                        {/*<button type="reset" className="btn btn-secondary mr-2">{translate('reset', ln)}</button>*/}
-                        <button type="button" className="btn btn-danger" onClick={remove_component}>{translate('delete', ln)}</button>
-                    </div>
-                </Form>
-            )}
-        </Formik>
-    )};
+            {/*<Form.Item label={translate('color', ln)}>*/}
+            {/*    <Button icon={<FontColorsOutlined style={{color: 'red'}} />}/>*/}
+            {/*</Form.Item>*/}
 
-// FORMIK + YUP --> https://jasonwatmore.com/post/2019/04/10/react-formik-form-validation-example
-// AUTOSAVE --> https://github.com/jaredpalmer/formik/blob/e51f09a318cba216a1ba3932da0906202df0b979/examples/DebouncedAutoSave.js#L18
+            {/*<Form.Item label={translate('size', ln)}>*/}
+            {/*    <Input size={"small"} />*/}
+            {/*</Form.Item>*/}
+
+            <Form.Item>
+                <Button type="primary" htmlType="submit">
+                    Submit
+                </Button>
+                <Button>
+                    Reset
+                </Button>
+            </Form.Item>
+        </Form>
+    );
+
+
+
+    // return (
+    //     <Formik
+    //         enableReinitialize={true}
+    //         initialValues={initialValues}
+    //
+    //         validationSchema={Yup.object().shape({
+    //             width: Yup.number()
+    //                 .min(0, 'Width must be at least 1% of slide width')
+    //                 .max(100, 'Width must be at most 100% of slide width'),
+    //             height: Yup.number()
+    //                 .min(0, 'Width must be at least 1% of slide width')
+    //                 .max(100, 'Width must be at most 100% of slide width')
+    //         })}
+    //
+    //         onSubmit={fields => {
+    //
+    //             let slideIdx = selectedSlide.index;
+    //             let componentIdx = selectedComponent.index;
+    //
+    //             let data = cloneDeep(slidesData);
+    //             data[slideIdx].components[componentIdx].w = fields.width;
+    //             data[slideIdx].components[componentIdx].h = fields.height;
+    //             data[slideIdx].components[componentIdx].color = fields.color;
+    //             data[slideIdx].components[componentIdx].fontSize = fields.size;
+    //             data[slideIdx].components[componentIdx].x = fields.top;
+    //             data[slideIdx].components[componentIdx].y = fields.left;
+    //             data[slideIdx].components[componentIdx].zIndex = fields.zIndex;
+    //             data[slideIdx].components[componentIdx].scale = [fields.scaleX,fields.scaleY];
+    //             data[slideIdx].components[componentIdx].keepRatio = fields.keepRatio;
+    //             data[slideIdx].components[componentIdx].rotate = fields.rotate;
+    //
+    //             dispatch(setSlideData(data));
+    //             dispatch(setSelectSlide(data[slideIdx]));
+    //             // todo?
+    //             // dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
+    //         }}
+    //     >
+    //         {({ errors, status, touched }) => (
+    //             <Form>
+    //                 <AutoSave debounceMs={300} />
+    //
+    //                 <div className="form-group form-inline">
+    //                     <label className="col-md-3 col-sm-3 _left">{translate('size', ln)}</label>
+    //                     <label htmlFor="width" className="col-md-1 col-sm-1">{translate('width', ln)}:</label>
+    //                     <Field name="width" type="number" className={'form-control col-md-2 col-sm-2' + (errors.width && touched.width ? ' is-invalid' : '')} />
+    //                     <label htmlFor="height" className="col-md-1 col-sm-1">{translate('height', ln)}:</label>
+    //                     <Field name="height" type="number" className={'form-control col-md-2 col-sm-2' + (errors.height && touched.height ? ' is-invalid' : '')} />
+    //                     <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('keepRatio', ln)} onClick={keepRatio}>
+    //                         <FontAwesomeIcon icon={selectedComponent.keepRatio ? faLock : faLockOpen} className="icon" />
+    //                     </button>
+    //                     <ErrorMessage name="width" component="div" className="invalid-feedback col-md-12 col-sm-12" />
+    //                     <ErrorMessage name="height" component="div" className="invalid-feedback col-md-12 col-sm-12" />
+    //                 </div>
+    //
+    //                 <div className="form-group form-inline">
+    //                     <label className="col-md-3 col-sm-3 _left">{translate('position', ln)}</label>
+    //                     <label htmlFor="top" className="col-md-1 col-sm-1">X:</label>
+    //                     <Field name="top" type="number" className={'form-control col-md-2 col-sm-2' + (errors.top && touched.top ? ' is-invalid' : '')} />
+    //                     <label htmlFor="left" className="col-md-1 col-sm-1">Y:</label>
+    //                     <Field name="left" type="number" className={'form-control col-md-2 col-sm-2' + (errors.left && touched.left ? ' is-invalid' : '')} />
+    //                 </div>
+    //
+    //                 <div className="form-group form-inline">
+    //                     <label className="col-md-3 col-sm-3 _left"> </label>
+    //                     <label htmlFor="zIndex" className="col-md-1 col-sm-1">Z:</label>
+    //                     <Field name="zIndex" type="number" className={'form-control col-md-2 col-sm-2' + (errors.zIndex && touched.zIndex ? ' is-invalid' : '')} />
+    //                     <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('bringsUp', ln)} onClick={bringsUp}>
+    //                         <FontAwesomeIcon icon={faEye} className="icon" />
+    //                     </button>
+    //                 </div>
+    //
+    //                 <div className="form-group form-inline">
+    //                     <label className="col-md-3 col-sm-3 _left">{translate('scale', ln)}</label>
+    //                     <label htmlFor="scaleX" className="col-md-1 col-sm-1">X:</label>
+    //                     <Field name="scaleX" type="number" className={'form-control col-md-2 col-sm-2' + (errors.scale && touched.scale ? ' is-invalid' : '')} />
+    //                     <label htmlFor="scaleY" className="col-md-1 col-sm-1">Y:</label>
+    //                     <Field name="scaleY" type="number" className={'form-control col-md-2 col-sm-2' + (errors.scale && touched.scale ? ' is-invalid' : '')} />
+    //                     <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('flipH', ln)} onClick={()=>flip('H')}>
+    //                         <FontAwesomeIcon icon={faArrowsAltH} className="icon" />
+    //                     </button>
+    //                     <button type="button" className="btn btn-primary btn-flip" data-tooltip={translate('flipV', ln)} onClick={()=>flip('V')}>
+    //                         <FontAwesomeIcon icon={faArrowsAltV} className="icon" />
+    //                     </button>
+    //
+    //                 </div>
+    //
+    //                 <div className="form-group form-inline">
+    //                     <label className="col-md-3 col-sm-3 _left">{translate('rotate', ln)}</label>
+    //                     <label htmlFor="rotate" className="col-md-1 col-sm-1"> </label>
+    //                     <Field name="rotate" type="number" className={'form-control col-md-2 col-sm-2' + (errors.rotate && touched.rotate ? ' is-invalid' : '')} />
+    //                     <label htmlFor="rotate" className="col-md-2 col-sm-2"> {translate('degrees', ln)}</label>
+    //                 </div>
+    //
+    //                 <div className="form-group form-inline">
+    //                     <label className="col-md-3 col-sm-3 _left">{translate('font', ln)}</label>
+    //                     <label htmlFor="color" className="col-md-2 col-sm-2">{translate('color', ln)}:</label>
+    //                     <Field name="color" type="text" className={'form-control col-md-2 col-sm-2' + (errors.color && touched.color ? ' is-invalid' : '')} />
+    //                     <label htmlFor="size" className="col-md-2 col-sm-2">{translate('size2', ln)}:</label>
+    //                     <Field name="size" type="number" className={'form-control col-md-2 col-sm-2' + (errors.size && touched.size ? ' is-invalid' : '')} />
+    //                     <ErrorMessage name="color" component="div" className="invalid-feedback col-md-12 col-sm-12" />
+    //                     <ErrorMessage name="size" component="div" className="invalid-feedback col-md-12 col-sm-12" />
+    //                 </div>
+    //
+    //                 <div className="form-group col-md-12 col-sm-12">
+    //                     {/*<button type="submit" className="btn btn-primary mr-2">{translate('save', ln)}</button>*/}
+    //                     {/*<button type="reset" className="btn btn-secondary mr-2">{translate('reset', ln)}</button>*/}
+    //                     <button type="button" className="btn btn-danger" onClick={remove_component}>{translate('delete', ln)}</button>
+    //                 </div>
+    //             </Form>
+    //         )}
+    //     </Formik>
+    // )
+};

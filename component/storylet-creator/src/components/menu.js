@@ -8,7 +8,7 @@ import cloneDeep from 'lodash/cloneDeep';
 
 
 // Style
-import '../vendor/bootstrap.min.css';
+// import '../vendor/bootstrap.min.css';
 import '../style/menu.css';
 
 // Actions
@@ -91,6 +91,8 @@ export default function Menu() {
     };
 
     const save_storylet = (exit=false) => {
+        return
+        // debugger
         axios.put(window.API_ENDPOINT.SAVE_STORYLET, {
             storyletid: window.STORY.DATA.id,
             story     : slidesData,
@@ -155,12 +157,12 @@ export default function Menu() {
                     </div>
                     <div className="menu-item menu-select">
                         {translate('language', selectedLanguage)}
-                        <select class="form-control" onChange={set_language}>
-                            <option selected={language === "it" ? "selected" : ""} value="it">IT</option>
-                            <option selected={language === "en" ? "selected" : ""} value="en">EN</option>
-                            <option selected={language === "es" ? "selected" : ""} value="es">ES</option>
-                            <option selected={language === "fr" ? "selected" : ""} value="fr">FR</option>
-                            <option selected={language === "de" ? "selected" : ""} value="de">DE</option>
+                        <select value={language} className="form-control" onChange={set_language}>
+                            <option value="it">IT</option>
+                            <option value="en">EN</option>
+                            <option value="es">ES</option>
+                            <option value="fr">FR</option>
+                            <option value="de">DE</option>
                         </select>
                     </div>
 

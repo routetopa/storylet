@@ -4,7 +4,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import {Formik, Field, Form, ErrorMessage, useFormikContext} from 'formik';
 import * as Yup from 'yup';
 import debounce from 'just-debounce-it';
-import '../../../vendor/bootstrap.min.css';
+// import '../../../vendor/bootstrap.min.css';
 import '../../../vendor/tooltip.css';
 import '../../../style/slide-components/properties/image-properties.css';
 

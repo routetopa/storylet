@@ -151,10 +151,10 @@ export default function PropertiesContainer()
                 <textarea className="form-control template" defaultValue={description} onChange={(e) => debouncedDescription(e.target.value)} />
                 <div className="property-row">
                     <label className="template-label">{translate('template', ln)}</label>
-                    <select className="form-control template" onChange={set_template}>
-                        <option selected={template === "linear" ? "selected" : ""} value="linear">{translate('linear', ln)}</option>
-                        <option selected={template === "snail" ? "selected" : ""} value="snail">{translate('snail', ln)}</option>
-                        <option selected={template === "cube" ? "selected" : ""} value="cube">{translate('cube', ln)}</option>
+                    <select value={template} className="form-control template" onChange={set_template}>
+                        <option value="linear">{translate('linear', ln)}</option>
+                        <option value="snail">{translate('snail', ln)}</option>
+                        <option value="cube">{translate('cube', ln)}</option>
                     </select>
                 </div>
                 <div className="property-row custom-checkbox">

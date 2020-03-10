@@ -174,7 +174,7 @@ export default function BackgroundGalleryContainer({isOpened, closeGallery}) {
                         <option value="0">Sfondi</option>
                     </select>
                     <FontAwesomeIcon id="image-gallery-search" icon={faSearch} className="icon" />
-                    <input id="search-images" placeholder="Cerca ..." className="form-control col-md-4 col-sm-4"/>
+                    <input id="search-bg-images" className="search-bg-images" placeholder="Cerca ..." className="form-control col-md-4 col-sm-4"/>
                 </div>
                 <div id="image-gallery-body">
                     <Gallery photos={selectedGallery} />
