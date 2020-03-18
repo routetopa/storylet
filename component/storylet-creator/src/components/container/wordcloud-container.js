@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import 'd3-transition';
 import { select } from 'd3-selection';
 import ReactWordcloud from 'react-wordcloud';

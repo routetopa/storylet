@@ -41,46 +41,8 @@ export default function MoveableComponent() {
         }
     }, [slidesData, selectedSlide, selectedComponent]);
 
-    // useEffect(()=>{
-    //     if(!slidesData || slideIdx === null || componentIdx === null)
-    //         return;
-    //
-    //     setTarget(null);
-    //     setTimeout(()=>{setTarget(document.getElementById("component-"+componentIdx));}, 0);
-    //
-    // }, [slidesData]);
-
-    // useEffect(()=>{
-    //     if(!selectedSlide)
-    //         return;
-    //
-    //     setSlideIdx(selectedSlide.index);
-    //     setSlide(document.getElementById("slide-wrapper").children[0]);
-    // }, [selectedSlide]);
-    //
-    // useEffect(()=>{
-    //     if(!selectedComponent) {
-    //         setTarget(null);
-    //         setSlide(null);
-    //         setSlideIdx(null);
-    //         setComponentIdx(null);
-    //         return;
-    //     }
-    //     else if(selectedComponent.index === componentIdx) {
-    //         return;
-    //     }
-    //
-    //     setComponentIdx(selectedComponent.index);
-    //
-    //     setPosition(null);
-    //     setSize(null);
-    //     setScale(selectedComponent.scale);
-    //     setRotate(selectedComponent.rotate);
-    //
-    //     setTarget(document.getElementById("component-"+selectedComponent.index));
-    // }, [selectedComponent]);
-
     //todo check range here and in dom
+    //todo normalize rotate
     function setComponentParameters(name, value) {
         let data = cloneDeep(slidesData);
 

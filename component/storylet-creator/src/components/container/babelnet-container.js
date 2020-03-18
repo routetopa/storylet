@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import ReactWordcloud from "react-wordcloud";
 import 'antd/dist/antd.css';
@@ -15,7 +15,7 @@ export default function BabelnetContainer({startingWord}) {
 
     const source = null;
 
-    const [synsetIds, setSynsetIds] = useState(null);
+    // const [synsetIds, setSynsetIds] = useState(null);
     const key = '91373219-3631-4c81-8c7b-5f8ae29776ee';
     const lang = ln;
 

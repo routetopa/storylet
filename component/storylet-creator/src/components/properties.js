@@ -26,6 +26,8 @@ export default function Properties() {
     const selectedSlide = useSelector(state => state.selectedSlide);
     const selectedComponent = useSelector(state => state.selectedComponent);
 
+    // const [keepRatio, setKeepRatio] = useState(true);
+
     const [form] = Form.useForm();
     const size = window.screen.width <= 1280 ? "small" : "middle "; //todo large?
     const top = window.screen.width <= 1280 ? 4 : 0; //todo large?
@@ -36,47 +38,18 @@ export default function Properties() {
 
         let component = slidesData[selectedSlide.index].components[selectedComponent.index];
 
-        form.setFieldsValue({
-            width: Math.round(component.w * 10) / 10,
-            height: Math.round(component.h * 10) / 10,
-            top: Math.round(component.x * 10) / 10,
-            left: Math.round(component.y * 10) / 10,
-            zIndex: component.zIndex,
-            scaleX: Math.round(component.scale[0] * 10) / 10,
-            scaleY: Math.round(component.scale[1] * 10) / 10,
-            rotate: Math.round(component.rotate * 10) / 10
-
-            // keepRatio: selectedComponent.keepRatio,
-            // color: selectedComponent.color,
-            // size: selectedComponent.fontSize,
-        });
+        setProperties(component);
 
     }, [slidesData]);
 
     useEffect(()=>{
-        //todo accorpa con useEffect[slidesData] ?
-
         document.removeEventListener("keydown", copyAnPaste);
         document.removeEventListener('keydown', canc);
 
         if(!selectedComponent)
             return;
 
-        //todo remove duplicate code
-        form.setFieldsValue({
-            width: Math.round(selectedComponent.w * 10) / 10,
-            height: Math.round(selectedComponent.h * 10) / 10,
-            top: Math.round(selectedComponent.x * 10) / 10,
-            left: Math.round(selectedComponent.y * 10) / 10,
-            zIndex: selectedComponent.zIndex,
-            scaleX: Math.round(selectedComponent.scale[0] * 10) / 10,
-            scaleY: Math.round(selectedComponent.scale[1] * 10) / 10,
-            rotate: Math.round(selectedComponent.rotate * 10) / 10
-
-            // keepRatio: selectedComponent.keepRatio,
-            // color: selectedComponent.color,
-            // size: selectedComponent.fontSize,
-        });
+        setProperties(selectedComponent);
 
         document.addEventListener("keydown", copyAnPaste);
         document.addEventListener('keydown', canc);
@@ -85,6 +58,23 @@ export default function Properties() {
             document.removeEventListener('keydown', canc);
         };
     }, [selectedComponent]);
+
+    const setProperties = (component) => {
+        form.setFieldsValue({
+            width: Math.round(component.w * 10) / 10,
+            height: Math.round(component.h * 10) / 10,
+            keepRatio: selectedComponent.keepRatio,
+            top: Math.round(component.x * 10) / 10,
+            left: Math.round(component.y * 10) / 10,
+            zIndex: component.zIndex,
+            scaleX: Math.round(component.scale[0] * 10) / 10,
+            scaleY: Math.round(component.scale[1] * 10) / 10,
+            rotate: Math.round(component.rotate * 10) / 10,
+
+            // color: selectedComponent.color,
+            // size: selectedComponent.fontSize,
+        });
+    };
 
     // Miscellaneous
 
@@ -129,23 +119,33 @@ export default function Properties() {
         });
     };
 
-    const keepRatio = () => {
-        //todo scale and size
+    const switchKeepRatio = () => {
+        let changedFields = {keepRatio: !slidesData[selectedSlide.index].components[selectedComponent.index].keepRatio};
+
+        onValuesChange(changedFields, changedFields);
     };
 
-    const flip = (direction) => {
+    const flip = (direction) => {debugger
+        let changedFields;
 
+        let scale =  slidesData[selectedSlide.index].components[selectedComponent.index].scale;
+        if(direction==='H')
+            changedFields = {scaleX: -scale[0], scaleY: scale[1]};
+        else // V
+            changedFields = {scaleX: scale[0], scaleY: -scale[1]};
+
+        form.setFieldsValue(changedFields);
+        onValuesChange(changedFields, changedFields);
     };
 
     const bringsUp = () => {
-        let zIndex = 0;
+        let maxIndex = 0;
         for(let i=0; i<slidesData[selectedSlide.index].components.length; i++)
-            zIndex = Math.max(zIndex, slidesData[selectedSlide.index].components[i].zIndex);
+            maxIndex = Math.max(maxIndex, slidesData[selectedSlide.index].components[i].zIndex);
 
-        form.setFieldsValue({
-            zIndex: zIndex + 1
-        });
-        // onValuesChange()
+        let changedFields = {zIndex: maxIndex+1};
+        form.setFieldsValue(changedFields);
+        onValuesChange(changedFields);
     };
 
     // Color Picker
@@ -164,41 +164,66 @@ export default function Properties() {
 
     // Form
     const onValuesChange = (changedFields, allFields) => {
-        if(isNaN(allFields.width) || allFields.width < 5 || allFields.width > 100)
-            return;
-        if(isNaN(allFields.height) || allFields.height < 5 || allFields.height > 100)
-            return;
-        if(isNaN(allFields.top) || allFields.top < 0 || allFields.top > 100)
-            return;
-        if(isNaN(allFields.left) || allFields.left < 0 || allFields.left > 100)
-            return;
-        if(isNaN(allFields.zIndex) || allFields.zIndex < 0 || allFields.zIndex > 10)
-            return;
-        if(isNaN(allFields.scaleX) || allFields.scaleX < -3 || allFields.scaleX > 3 || (allFields.scaleX < 0.5 && allFields.scaleX > -0.5))
-            return;
-        if(isNaN(allFields.scaleY) || allFields.scaleY < -3 || allFields.scaleY > 3 || (allFields.scaleY < 0.5 && allFields.scaleY > -0.5))
-            return;
-        if(isNaN(allFields.rotate) || allFields.rotate < -180 || allFields.rotate > 180)
-            return;
-
+        let _dispatch = false;
         let slideIdx = selectedSlide.index;
         let componentIdx = selectedComponent.index;
-
         let data = cloneDeep(slidesData);
-        data[slideIdx].components[componentIdx].w = allFields.width;
-        data[slideIdx].components[componentIdx].h = allFields.height;
-        data[slideIdx].components[componentIdx].x = allFields.top;
-        data[slideIdx].components[componentIdx].y = allFields.left;
-        data[slideIdx].components[componentIdx].zIndex = allFields.zIndex;
-        data[slideIdx].components[componentIdx].scale = [allFields.scaleX,allFields.scaleY];
-        // data[slideIdx].components[componentIdx].keepRatio = allFields.keepRatio;
-        data[slideIdx].components[componentIdx].rotate = allFields.rotate;
 
-        batch(() => {
-            dispatch(setSlideData(data));
-            dispatch(setSelectSlide(data[slideIdx]));
-            dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
-        });
+        if(changedFields.width !== undefined && !isNaN(changedFields.width) && changedFields.width >= 5 && changedFields.width <= 100) {
+            if(selectedComponent.keepRatio) {
+                let ratio = changedFields.width / data[slideIdx].components[componentIdx].w;
+                data[slideIdx].components[componentIdx].w = changedFields.width;
+                data[slideIdx].components[componentIdx].h *= ratio;
+            }
+            else
+                data[slideIdx].components[componentIdx].w = changedFields.width;
+            _dispatch = true;
+        }
+        if(changedFields.height !== undefined && !isNaN(changedFields.height) && changedFields.height >= 5 && changedFields.height <= 100) {
+            if(selectedComponent.keepRatio) {
+                let ratio = changedFields.height / data[slideIdx].components[componentIdx].h;
+                data[slideIdx].components[componentIdx].h = changedFields.height;
+                data[slideIdx].components[componentIdx].w *= ratio;
+            }
+            else
+                data[slideIdx].components[componentIdx].h = changedFields.height;
+            _dispatch = true;
+        }
+        if(changedFields.top !== undefined && !isNaN(changedFields.top) && changedFields.top >= 0 && changedFields.top <= 100) {
+            data[slideIdx].components[componentIdx].x = changedFields.top;
+            _dispatch = true;
+        }
+        if(changedFields.left !== undefined && !isNaN(changedFields.left) && changedFields.left >= 0 && changedFields.left <= 100) {
+            data[slideIdx].components[componentIdx].y = changedFields.left;
+            _dispatch = true;
+        }
+        if(changedFields.zIndex !== undefined && !isNaN(changedFields.zIndex) && changedFields.zIndex >= 0 && changedFields.zIndex <= 10) {
+            data[slideIdx].components[componentIdx].zIndex = changedFields.zIndex;
+            _dispatch = true;
+        }
+        if(changedFields.scaleX !== undefined && !isNaN(changedFields.scaleX) && ((changedFields.scaleX >= -2 && changedFields.scaleX <= -0.5) || (changedFields.scaleX <= 2 && changedFields.scaleX >= 0.5))){
+            data[slideIdx].components[componentIdx].scale = [changedFields.scaleX,allFields.scaleY];
+            _dispatch = true;
+        }
+        if(changedFields.scaleY !== undefined && !isNaN(changedFields.scaleY) && ((changedFields.scaleY >= -2 && changedFields.scaleY <= -0.5) || (changedFields.scaleY <= 2 && changedFields.scaleY >= 0.5))){
+            data[slideIdx].components[componentIdx].scale = [allFields.scaleX,changedFields.scaleY];
+            _dispatch = true;
+        }
+        if(changedFields.rotate !== undefined && !isNaN(changedFields.rotate) && changedFields.rotate >= -180 || changedFields.rotate <= 180){
+            data[slideIdx].components[componentIdx].rotate = changedFields.rotate;
+            _dispatch = true;
+        }
+        if(changedFields.keepRatio !== undefined && typeof changedFields.keepRatio === "boolean"){
+            data[slideIdx].components[componentIdx].keepRatio = changedFields.keepRatio;
+            _dispatch = true;
+        }
+
+        if(_dispatch)
+            batch(() => {
+                dispatch(setSlideData(data));
+                dispatch(setSelectSlide(data[slideIdx]));
+                dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
+            });
     };
 
     return (
@@ -282,7 +307,7 @@ export default function Properties() {
                                 <InputNumber min={5} max={100} defaultValue={20} size={size} />
                             </Form.Item>
                             <Tooltip title={translate('keepRatio', ln)}>
-                                <Button style={{top:top}} type="primary" icon={<LockOutlined />} size={size} onClick={keepRatio} />
+                                <Button style={{top:top}} type="primary" icon={selectedComponent.keepRatio ? <LockOutlined /> : <UnlockOutlined />} size={size} onClick={switchKeepRatio} />
                             </Tooltip>
                         </Input.Group>
                     </Form.Item>
