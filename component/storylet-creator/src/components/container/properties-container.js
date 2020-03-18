@@ -3,13 +3,14 @@ import {batch, useDispatch, useSelector} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
 
 import {translate} from "../helpers";
-import TextProperties from '../slide-components/properties/text-properties'
-import ImageProperties from '../slide-components/properties/image-properties'
+// import TextProperties from '../slide-components/properties/text-properties'
+// import ImageProperties from '../slide-components/properties/image-properties'
+import Properties from '../properties'
 
 import '../../style/container/properties-container.css'
 import setStorylet from "../../reducer/actions/set-storylet";
 
-import { useDebounce } from 'use-debounce';
+// import { useDebounce } from 'use-debounce';
 import { useDebouncedCallback } from 'use-debounce';
 
 export default function PropertiesContainer()
@@ -131,9 +132,9 @@ export default function PropertiesContainer()
                     if (!selectedComponent) return null;
                     switch (selectedComponent.type) {
                         case 'text'  :
-                            return (<TextProperties/>);
+                            return (<Properties/>);
                         case 'image' :
-                            return (<ImageProperties/>);
+                            return (<Properties/>);
                         default : break;
                     }
                     return null;

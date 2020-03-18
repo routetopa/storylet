@@ -1,0 +1,23 @@
+.ant-popover-inner-content {
+    padding: 0; /*todo*/
+}
+
+.ant-form-item .ant-form-item {
+    margin-bottom: 0;
+}
+
+.text-properties button {
+    border: none;
+    box-shadow: none;
+}
+
+.text-properties .h-divider {
+    display: inline-block;
+    position: relative;
+    bottom: -4px;
+    height: 20px;
+    border-left: 1px solid #f0f0f0;
+    margin: 0 4px;
+}
+
+/*todo rename to be confident*/

@@ -137,30 +137,28 @@ ln["snail_en"] = "snail";
 ln["cube_en"] = "cube";
 ln["autoplay_en"] = "Autoplay";
 
+ln["text_en"] = "Text";
 ln["size_en"] = "Size";
+ln["position_en"] = "Position";
+ln["scale_en"] = "Scale";
+ln["rotate_en"] = "Rotate";
 ln["width_en"] = "W";
 ln["height_en"] = "H";
 ln["top_en"] = "X";
 ln["left_en"] = "Y";
 ln["zIndex_en"] = "Z";
-ln["position_en"] = "Position";
-ln["scale_en"] = "Scale";
 ln["scaleX_en"] = "X";
 ln["scaleY_en"] = "Y";
-ln["lock_en"] = "Lock";
-ln["rotate_en"] = "Rotate";
-ln["deg_en"] = "Deg.";
-ln["degrees_en"] = "degrees";
-ln["font_en"] = "Font";
-ln["color_en"] = "Color";
-ln["size2_en"] = "Size";
+ln["degrees_en"] = "Deg.";
+
+//buttons
 ln["delete_en"] = "Delete";
 
 // tooltip
+ln["keepRatio_en"] = "Keep Aspect Ratio";
+ln["bringsUp_en"] = "Brings Up";
 ln["flipH_en"] = "Flip Horizontal";
 ln["flipV_en"] = "Flip Vertical";
-ln["bringsUp_en"] = "Brings Up";
-ln["keepRatio_en"] = "Keep Aspect Ratio";
 
 
 

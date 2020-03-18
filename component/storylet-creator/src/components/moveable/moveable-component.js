@@ -12,6 +12,7 @@ export default function MoveableComponent() {
     const selectedSlide = useSelector(state => state.selectedSlide);
     const selectedComponent = useSelector(state => state.selectedComponent);
 
+    const [target, setTarget] = useState(null);
     const [slide, setSlide] = useState(null);
     const [slideIdx, setSlideIdx] = useState(null);
     const [componentIdx, setComponentIdx] = useState(null);
@@ -23,35 +24,65 @@ export default function MoveableComponent() {
     const [rotate, setRotate] = useState(null);
 
     useEffect(()=>{
-        //todo
-    }, [slidesData]);
+        console.log('moveable effect');
+        setTarget(null);
+        if(selectedSlide && selectedComponent) {
+            setSlideIdx(selectedSlide.index);
+            setComponentIdx(selectedComponent.index);
+            setPosition(null);
+            setSize(null);
+            setScale(selectedComponent.scale);
+            setRotate(selectedComponent.rotate);
+            setSlide(document.getElementById("slide-wrapper").children[0]);
+            setTimeout(()=>{setTarget(document.getElementById("component-"+selectedComponent.index));}, 0);
+        } else {
+            setSlideIdx(null);
+            setComponentIdx(null);
+        }
+    }, [slidesData, selectedSlide, selectedComponent]);
 
-    useEffect(()=>{
-        if(!selectedSlide)
-            return;
+    // useEffect(()=>{
+    //     if(!slidesData || slideIdx === null || componentIdx === null)
+    //         return;
+    //
+    //     setTarget(null);
+    //     setTimeout(()=>{setTarget(document.getElementById("component-"+componentIdx));}, 0);
+    //
+    // }, [slidesData]);
 
-        setSlideIdx(selectedSlide.index);
-        setSlide(document.getElementById("slide-wrapper").children[0]);
-    }, [selectedSlide]);
+    // useEffect(()=>{
+    //     if(!selectedSlide)
+    //         return;
+    //
+    //     setSlideIdx(selectedSlide.index);
+    //     setSlide(document.getElementById("slide-wrapper").children[0]);
+    // }, [selectedSlide]);
+    //
+    // useEffect(()=>{
+    //     if(!selectedComponent) {
+    //         setTarget(null);
+    //         setSlide(null);
+    //         setSlideIdx(null);
+    //         setComponentIdx(null);
+    //         return;
+    //     }
+    //     else if(selectedComponent.index === componentIdx) {
+    //         return;
+    //     }
+    //
+    //     setComponentIdx(selectedComponent.index);
+    //
+    //     setPosition(null);
+    //     setSize(null);
+    //     setScale(selectedComponent.scale);
+    //     setRotate(selectedComponent.rotate);
+    //
+    //     setTarget(document.getElementById("component-"+selectedComponent.index));
+    // }, [selectedComponent]);
 
-    useEffect(()=>{
-        if(!selectedComponent || selectedComponent.index === componentIdx)
-            return;
-
-        setComponentIdx(selectedComponent.index);
-
-        setPosition(null);
-        setSize(null);
-        // setPosition([selectedComponent.x,selectedComponent.y]);
-        // setSize([selectedComponent.w,selectedComponent.h]);
-        setScale(selectedComponent.scale);
-        setRotate(selectedComponent.rotate);
-    }, [selectedComponent]);
-
+    //todo check range here and in dom
     function setComponentParameters(name, value) {
         let data = cloneDeep(slidesData);
-
-        console.log(name, value)
 
         switch (name) {
             case "size":
@@ -74,86 +105,83 @@ export default function MoveableComponent() {
     }
 
     return (
-        <>
-            {/*{(() => {console.log('RENDER Moveable')})()}*/}
-            <Moveable
-                target={selectedComponent ? document.getElementById("component-"+componentIdx) : null}
+        <Moveable
+            target={target}
 
-                draggable={true}
-                rotatable={true}
-                // resizable={selectedComponent ? selectedComponent.type ==='image' : false}
-                // scalable={selectedComponent ? selectedComponent.type ==='text' : false}
-                resizable={true}
-                scalable={false}
+            draggable={true}
+            rotatable={true}
+            // resizable={selectedComponent ? selectedComponent.type ==='image' : false}
+            // scalable={selectedComponent ? selectedComponent.type ==='text' : false}
+            resizable={true}
+            scalable={false}
 
-                origin={false}
+            origin={false}
 
-                keepRatio={selectedComponent ? selectedComponent.keepRatio : false}
+            keepRatio={selectedComponent ? selectedComponent.keepRatio : false}
 
-                // DRAG
-                onDrag={({target, left, top, beforeDelta}) => {
-                    setPosition([left, top]);
-                    target.style.left = left + "px";
-                    target.style.top = top + "px";
-                }}
-                onDragEnd={() => {
-                    if(position===null)
-                        return;
-                    let x = position[0]/slide.offsetWidth*100;
-                    let y = position[1]/slide.offsetHeight*100;
-                    selectedComponent.x = x;
-                    selectedComponent.y = y;
-                    setComponentParameters("position", [x,y]);
-                }}
+            // DRAG
+            onDrag={({target, left, top, beforeDelta}) => {
+                setPosition([left, top]);
+                target.style.left = left + "px";
+                target.style.top = top + "px";
+            }}
+            onDragEnd={() => {
+                if(position===null)
+                    return;
+                let x = position[0]/slide.offsetWidth*100;
+                let y = position[1]/slide.offsetHeight*100;
+                selectedComponent.x = x;
+                selectedComponent.y = y;
+                setComponentParameters("position", [x,y]);
+            }}
 
-                // RESIZE
-                onResize={({target, width, height, dist}) => {
-                    setSize([width, height]);
-                    target.style.width = width + "px";
-                    target.style.height = height + "px";
-                }}
-                onResizeEnd={() => {
-                    if(size===null)
-                        return;
-                    let w = size[0]/slide.offsetWidth*100;
-                    let h = size[1]/slide.offsetHeight*100;
-                    selectedComponent.w = w;
-                    selectedComponent.h = h;
-                    setComponentParameters('size', [w,h]);
-                }}
+            // RESIZE
+            onResize={({target, width, height, dist}) => {
+                setSize([width, height]);
+                target.style.width = width + "px";
+                target.style.height = height + "px";
+            }}
+            onResizeEnd={() => {
+                if(size===null)
+                    return;
+                let w = size[0]/slide.offsetWidth*100;
+                let h = size[1]/slide.offsetHeight*100;
+                selectedComponent.w = w;
+                selectedComponent.h = h;
+                setComponentParameters('size', [w,h]);
+            }}
 
-                // SCALE
-                onScale={({target, delta}) => {
-                    setScale([scale[0]*delta[0],scale[1]*delta[1]])
-                    target.style.transform
-                        = "scale(" + scale[0] +  "," + scale[1] + ") "
-                        + "rotate(" + rotate +  "deg)";
-                }}
-                onScaleEnd={() => {
-                    selectedComponent.scale = scale;
-                    setComponentParameters("scale", scale);
-                }}
+            // SCALE
+            onScale={({target, delta}) => {
+                setScale([scale[0]*delta[0],scale[1]*delta[1]])
+                target.style.transform
+                    = "scale(" + scale[0] +  "," + scale[1] + ") "
+                    + "rotate(" + rotate +  "deg)";
+            }}
+            onScaleEnd={() => {
+                selectedComponent.scale = scale;
+                setComponentParameters("scale", scale);
+            }}
 
-                // ROTATE
-                onRotate={({ target, beforeDelta, delta }) => {
-                    setRotate(rotate + delta);
-                    target.style.transform
-                        = "scale(" + scale[0] +  "," + scale[1] + ") "
-                        + "rotate(" + rotate +  "deg)";
-                }}
-                onRotateEnd={() => {
-                    selectedComponent.rotate = rotate;
-                    setComponentParameters("rotate", rotate);
-                }}
+            // ROTATE
+            onRotate={({ target, beforeDelta, delta }) => {
+                setRotate(rotate + delta);
+                target.style.transform
+                    = "scale(" + scale[0] +  "," + scale[1] + ") "
+                    + "rotate(" + rotate +  "deg)";
+            }}
+            onRotateEnd={() => {
+                selectedComponent.rotate = rotate;
+                setComponentParameters("rotate", rotate);
+            }}
 
-                // SNAPPABLE
-                snappable={true}
-                bounds={{ left: document.documentElement.clientWidth*0.25, top: 56, bottom: document.documentElement.clientHeight-8, right: document.documentElement.clientWidth*0.75 }}
-                verticalGuidelines={[slide ? document.documentElement.clientWidth*0.50-slide.offsetWidth/2 : null, document.documentElement.clientWidth*0.50, slide ? document.documentElement.clientWidth*0.50+slide.offsetWidth/2 : null]}
-                horizontalGuidelines={[96+48, slide ? 96+slide.offsetHeight/2 : null, slide ? 96+48+slide.offsetHeight : null]}
-                snapCenter={true}
-                // elementGuidelines={[document.querySelector("#stage-container .image-moveable-container")]}
-            />
-        </>
+            // SNAPPABLE
+            snappable={true}
+            bounds={{ left: document.documentElement.clientWidth*0.25, top: 56, bottom: document.documentElement.clientHeight-8, right: document.documentElement.clientWidth*0.75 }}
+            verticalGuidelines={[slide ? document.documentElement.clientWidth*0.50-slide.offsetWidth/2 : null, document.documentElement.clientWidth*0.50, slide ? document.documentElement.clientWidth*0.50+slide.offsetWidth/2 : null]}
+            horizontalGuidelines={[96+48, slide ? 96+slide.offsetHeight/2 : null, slide ? 96+48+slide.offsetHeight : null]}
+            snapCenter={true}
+            // elementGuidelines={[document.querySelector("#stage-container .image-moveable-container")]}
+        />
     )
 }
