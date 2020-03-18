@@ -137,6 +137,7 @@ ln["snail_en"] = "snail";
 ln["cube_en"] = "cube";
 ln["autoplay_en"] = "Autoplay";
 
+/*todo*/
 ln["text_en"] = "Text";
 ln["size_en"] = "Size";
 ln["position_en"] = "Position";
@@ -159,8 +160,7 @@ ln["keepRatio_en"] = "Keep Aspect Ratio";
 ln["bringsUp_en"] = "Brings Up";
 ln["flipH_en"] = "Flip Horizontal";
 ln["flipV_en"] = "Flip Vertical";
-
-
+/*end todo*/
 
 
 

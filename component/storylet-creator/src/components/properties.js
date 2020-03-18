@@ -19,6 +19,11 @@ import setSelectComponent from "../reducer/actions/select-component";
 import setSelectSlide from "../reducer/actions/select-slide";
 import copyComponent from "../reducer/actions/copy-component";
 
+//todo buttons visual feedback
+//todo clean
+//todo text align
+// todo text fumetto? : border radius, border color, border widht, before position
+//backgrounds e fumetti
 export default function Properties() {
     const dispatch = useDispatch();
     const ln = useSelector(state => state.selectedLanguage);
@@ -71,8 +76,15 @@ export default function Properties() {
             scaleY: Math.round(component.scale[1] * 10) / 10,
             rotate: Math.round(component.rotate * 10) / 10,
 
-            // color: selectedComponent.color,
-            // size: selectedComponent.fontSize,
+            textValue: component.value,
+            fontFamily: selectedComponent.fontFamily,
+            fontSize: selectedComponent.fontSize,
+            color: selectedComponent.color,
+            fontWeight: selectedComponent.fontWeight,
+            fontStyle: selectedComponent.fontStyle,
+            textDecoration: selectedComponent.textDecoration,
+            textAlign: selectedComponent.textAlign,
+            backgroundColor: selectedComponent.backgroundColor
         });
     };
 
@@ -119,6 +131,47 @@ export default function Properties() {
         });
     };
 
+    const setTextProperties = (prop, val) => {
+        let slideIdx = selectedSlide.index;
+        let componentIdx = selectedComponent.index;
+
+        let data = cloneDeep(slidesData);
+
+        if(prop==='fontWeight') {
+            if (selectedComponent.fontWeight === undefined || selectedComponent.fontWeight === 'normal')
+                data[slideIdx].components[componentIdx].fontWeight = 'bold';
+            else
+                data[slideIdx].components[componentIdx].fontWeight = 'normal';
+        } else if(prop==='fontStyle') {
+            if(selectedComponent.fontStyle === undefined || selectedComponent.fontStyle === 'normal')
+                data[slideIdx].components[componentIdx].fontStyle = 'italic';
+            else
+                data[slideIdx].components[componentIdx].fontStyle = 'normal';
+        } else if(prop==='textDecoration') {
+            if(selectedComponent.textDecoration === undefined || selectedComponent.textDecoration === 'none')
+                data[slideIdx].components[componentIdx].textDecoration = 'underline';
+            else
+                data[slideIdx].components[componentIdx].textDecoration = 'none';
+        } else if(prop==='textAlign') {
+                data[slideIdx].components[componentIdx].textAlign = val;
+        } else if(prop==='clear') {
+            data[slideIdx].components[componentIdx].fontFamily = 'Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif';
+            data[slideIdx].components[componentIdx].fontSize = 24;
+            data[slideIdx].components[componentIdx].color = undefined;
+            data[slideIdx].components[componentIdx].backgroundColor = undefined;
+            data[slideIdx].components[componentIdx].fontWeight = undefined;
+            data[slideIdx].components[componentIdx].fontStyle = undefined;
+            data[slideIdx].components[componentIdx].textDecoration = undefined;
+            data[slideIdx].components[componentIdx].textAlign = undefined;
+        }
+
+        batch(() => {
+            dispatch(setSlideData(data));
+            dispatch(setSelectSlide(data[slideIdx]));
+            dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
+        });
+    };
+
     const switchKeepRatio = () => {
         let changedFields = {keepRatio: !slidesData[selectedSlide.index].components[selectedComponent.index].keepRatio};
 
@@ -149,18 +202,18 @@ export default function Properties() {
     };
 
     // Color Picker
-    const [color, setColor] = useState(
-        {
-            r: 21,
-            g: 21,
-            b: 21,
-            a: 1
-        });
-
-    const handleChange = (color) => {
-        setColor(color.rgb);
-        // setTextColor('rgba('+color.rgb.r+','+color.rgb.g+','+color.rgb.b+','+color.rgb.a+')');
-    };
+    // const [color, setColor] = useState(
+    //     {
+    //         r: 21,
+    //         g: 21,
+    //         b: 21,
+    //         a: 1
+    //     });
+    //
+    // const handleChange = (color) => {
+    //     setColor(color.rgb);
+    //     // setTextColor('rgba('+color.rgb.r+','+color.rgb.g+','+color.rgb.b+','+color.rgb.a+')');
+    // };
 
     // Form
     const onValuesChange = (changedFields, allFields) => {
@@ -179,7 +232,7 @@ export default function Properties() {
                 data[slideIdx].components[componentIdx].w = changedFields.width;
             _dispatch = true;
         }
-        if(changedFields.height !== undefined && !isNaN(changedFields.height) && changedFields.height >= 5 && changedFields.height <= 100) {
+        else if(changedFields.height !== undefined && !isNaN(changedFields.height) && changedFields.height >= 5 && changedFields.height <= 100) {
             if(selectedComponent.keepRatio) {
                 let ratio = changedFields.height / data[slideIdx].components[componentIdx].h;
                 data[slideIdx].components[componentIdx].h = changedFields.height;
@@ -189,32 +242,52 @@ export default function Properties() {
                 data[slideIdx].components[componentIdx].h = changedFields.height;
             _dispatch = true;
         }
-        if(changedFields.top !== undefined && !isNaN(changedFields.top) && changedFields.top >= 0 && changedFields.top <= 100) {
+        else if(changedFields.top !== undefined && !isNaN(changedFields.top) && changedFields.top >= 0 && changedFields.top <= 100) {
             data[slideIdx].components[componentIdx].x = changedFields.top;
             _dispatch = true;
         }
-        if(changedFields.left !== undefined && !isNaN(changedFields.left) && changedFields.left >= 0 && changedFields.left <= 100) {
+        else if(changedFields.left !== undefined && !isNaN(changedFields.left) && changedFields.left >= 0 && changedFields.left <= 100) {
             data[slideIdx].components[componentIdx].y = changedFields.left;
             _dispatch = true;
         }
-        if(changedFields.zIndex !== undefined && !isNaN(changedFields.zIndex) && changedFields.zIndex >= 0 && changedFields.zIndex <= 10) {
+        else if(changedFields.zIndex !== undefined && !isNaN(changedFields.zIndex) && changedFields.zIndex >= 0 && changedFields.zIndex <= 10) {
             data[slideIdx].components[componentIdx].zIndex = changedFields.zIndex;
             _dispatch = true;
         }
-        if(changedFields.scaleX !== undefined && !isNaN(changedFields.scaleX) && ((changedFields.scaleX >= -2 && changedFields.scaleX <= -0.5) || (changedFields.scaleX <= 2 && changedFields.scaleX >= 0.5))){
+        else if(changedFields.scaleX !== undefined && !isNaN(changedFields.scaleX) && ((changedFields.scaleX >= -2 && changedFields.scaleX <= -0.5) || (changedFields.scaleX <= 2 && changedFields.scaleX >= 0.5))){
             data[slideIdx].components[componentIdx].scale = [changedFields.scaleX,allFields.scaleY];
             _dispatch = true;
         }
-        if(changedFields.scaleY !== undefined && !isNaN(changedFields.scaleY) && ((changedFields.scaleY >= -2 && changedFields.scaleY <= -0.5) || (changedFields.scaleY <= 2 && changedFields.scaleY >= 0.5))){
+        else if(changedFields.scaleY !== undefined && !isNaN(changedFields.scaleY) && ((changedFields.scaleY >= -2 && changedFields.scaleY <= -0.5) || (changedFields.scaleY <= 2 && changedFields.scaleY >= 0.5))){
             data[slideIdx].components[componentIdx].scale = [allFields.scaleX,changedFields.scaleY];
             _dispatch = true;
         }
-        if(changedFields.rotate !== undefined && !isNaN(changedFields.rotate) && changedFields.rotate >= -180 || changedFields.rotate <= 180){
+        else if(changedFields.rotate !== undefined && !isNaN(changedFields.rotate) && changedFields.rotate >= -180 || changedFields.rotate <= 180){
             data[slideIdx].components[componentIdx].rotate = changedFields.rotate;
             _dispatch = true;
         }
-        if(changedFields.keepRatio !== undefined && typeof changedFields.keepRatio === "boolean"){
+        else if(changedFields.keepRatio !== undefined && typeof changedFields.keepRatio === "boolean"){
             data[slideIdx].components[componentIdx].keepRatio = changedFields.keepRatio;
+            _dispatch = true;
+        }
+        else if(changedFields.textValue !== undefined) {
+            data[slideIdx].components[componentIdx].value = changedFields.textValue;
+            _dispatch = true;
+        }
+        else if(changedFields.fontFamily !== undefined) {
+            data[slideIdx].components[componentIdx].fontFamily = changedFields.fontFamily;
+            _dispatch = true;
+        }
+        else if(changedFields.fontSize !== undefined) {
+            data[slideIdx].components[componentIdx].fontSize = changedFields.fontSize;
+            _dispatch = true;
+        }
+        else if(changedFields.color !== undefined) {
+            data[slideIdx].components[componentIdx].color = 'rgba('+changedFields.color.rgb.r+','+changedFields.color.rgb.g+','+changedFields.color.rgb.b+','+changedFields.color.rgb.a+')';
+            _dispatch = true;
+        }
+        else if(changedFields.backgroundColor !== undefined) {
+            data[slideIdx].components[componentIdx].backgroundColor = 'rgba('+changedFields.backgroundColor.rgb.r+','+changedFields.backgroundColor.rgb.g+','+changedFields.backgroundColor.rgb.b+','+changedFields.backgroundColor.rgb.a+')';
             _dispatch = true;
         }
 
@@ -228,71 +301,78 @@ export default function Properties() {
 
     return (
         <Form form={form} onValuesChange={onValuesChange}>
-            <Divider orientation={"left"}>{translate('text', ln)}</Divider>
-            <Row>
-                <Col span={18}>
-                    <Form.Item>
-                        <Select style={{width:'90%'}} defaultValue={0} size={size}>
-                            <Select.Option value={0}>"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif</Select.Option>
-                            <Select.Option value={1}>Georgia, serif</Select.Option>
-                            <Select.Option value={2}>"Palatino Linotype", "Book Antiqua", Palatino, serif</Select.Option>
-                            <Select.Option value={3}>"Times New Roman", Times, serif</Select.Option>
-                            <Select.Option value={4}>Arial, Helvetica, sans-serif</Select.Option>
-                            <Select.Option value={5}>"Arial Black", Gadget, sans-serif</Select.Option>
-                            <Select.Option value={6}>"Comic Sans MS", cursive, sans-serif</Select.Option>
-                            <Select.Option value={7}>Impact, Charcoal, sans-serif</Select.Option>
-                            <Select.Option value={8}>"Lucida Sans Unicode", "Lucida Grande", sans-serif</Select.Option>
-                            <Select.Option value={9}>Tahoma, Geneva, sans-serif</Select.Option>
-                            <Select.Option value={10}>"Trebuchet MS", Helvetica, sans-serif</Select.Option>
-                            <Select.Option value={11}>Verdana, Geneva, sans-serif</Select.Option>
-                            <Select.Option value={12}>"Courier New", Courier, monospace</Select.Option>
-                            <Select.Option value={13}>"Lucida Console", Monaco, monospace</Select.Option>
-                        </Select>
-                    </Form.Item>
-                </Col>
-                <Col span={6}>
-                    <Form.Item>
-                        <Select style={{width:'100%'}} defaultValue={16} size={size}>
-                            <Select.Option value={8}>8</Select.Option>
-                            <Select.Option value={9}>9</Select.Option>
-                            <Select.Option value={10}>10</Select.Option>
-                            <Select.Option value={11}>11</Select.Option>
-                            <Select.Option value={12}>12</Select.Option>
-                            <Select.Option value={14}>14</Select.Option>
-                            <Select.Option value={16}>16</Select.Option>
-                            <Select.Option value={18}>18</Select.Option>
-                            <Select.Option value={24}>24</Select.Option>
-                            <Select.Option value={30}>30</Select.Option>
-                            <Select.Option value={36}>36</Select.Option>
-                            <Select.Option value={48}>48</Select.Option>
-                            <Select.Option value={60}>60</Select.Option>
-                            <Select.Option value={72}>72</Select.Option>
-                        </Select>
-                    </Form.Item>
-                </Col>
-            </Row>
-            <Row className={"text-properties"}>
-                <Col span={24}>
-                    <Button icon={<BoldOutlined />} size={size} />
-                    <Button icon={<ItalicOutlined />} size={size} />
-                    <Button icon={<UnderlineOutlined />} size={size} />
-                    <Popover content={(<SketchPicker color={color} onChange={handleChange} />)} trigger="click">
-                        <Button icon={<FontColorsOutlined /*style={{color:textColor}}*/ />} size={size} />
-                    </Popover>
-                    <Button icon={<HighlightOutlined />} size={size} />
-                    <Button icon={<ClearOutlined />} size={size} />
-                    <div className={"h-divider"}> </div>
-                    <Button icon={<AlignLeftOutlined />} size={size} />
-                    <Button icon={<AlignCenterOutlined />} size={size} />
-                    <Button icon={<AlignRightOutlined />} size={size} />
-                    <Button icon={<BgColorsOutlined />} size={size} />
-                </Col>
-            </Row>
-            <Row>
-                <Col span={24}>
-                    <Input.TextArea rows={4} />
-                </Col>
-            </Row>
+            {selectedComponent.type === 'text' ?
+                <>
+                    <Divider orientation={"left"}>{translate('text', ln)}</Divider>
+                    <Row>
+                        <Col span={18}>
+                            <Form.Item name={"fontFamily"}>
+                                <Select style={{width:'90%'}} defaultValue={0} size={size}>
+                                    <Select.Option value={'"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif'}>"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif</Select.Option>
+                                    <Select.Option value={'Georgia, serif'}>Georgia, serif</Select.Option>
+                                    <Select.Option value={'"Palatino Linotype", "Book Antiqua", Palatino, serif'}>"Palatino Linotype", "Book Antiqua", Palatino, serif</Select.Option>
+                                    <Select.Option value={'"Times New Roman", Times, serif'}>"Times New Roman", Times, serif</Select.Option>
+                                    <Select.Option value={'Arial, Helvetica, sans-serif'}>Arial, Helvetica, sans-serif</Select.Option>
+                                    <Select.Option value={'"Arial Black", Gadget, sans-serif'}>"Arial Black", Gadget, sans-serif</Select.Option>
+                                    <Select.Option value={'"Comic Sans MS", cursive, sans-serif'}>"Comic Sans MS", cursive, sans-serif</Select.Option>
+                                    <Select.Option value={'Impact, Charcoal, sans-serif'}>Impact, Charcoal, sans-serif</Select.Option>
+                                    <Select.Option value={'"Lucida Sans Unicode", "Lucida Grande", sans-serif'}>"Lucida Sans Unicode", "Lucida Grande", sans-serif</Select.Option>
+                                    <Select.Option value={'Tahoma, Geneva, sans-serif'}>Tahoma, Geneva, sans-serif</Select.Option>
+                                    <Select.Option value={'"Trebuchet MS", Helvetica, sans-serif'}>"Trebuchet MS", Helvetica, sans-serif</Select.Option>
+                                    <Select.Option value={'Verdana, Geneva, sans-serif'}>Verdana, Geneva, sans-serif</Select.Option>
+                                    <Select.Option value={'"Courier New", Courier, monospace'}>"Courier New", Courier, monospace</Select.Option>
+                                    <Select.Option value={'"Lucida Console", Monaco, monospace'}>"Lucida Console", Monaco, monospace</Select.Option>
+                                </Select>
+                            </Form.Item>
+                        </Col>
+                        <Col span={6}>
+                            <Form.Item name={"fontSize"}>
+                                <Select style={{width:'100%'}} defaultValue={16} size={size}>
+                                    <Select.Option value={8}>8</Select.Option>
+                                    <Select.Option value={9}>9</Select.Option>
+                                    <Select.Option value={10}>10</Select.Option>
+                                    <Select.Option value={11}>11</Select.Option>
+                                    <Select.Option value={12}>12</Select.Option>
+                                    <Select.Option value={14}>14</Select.Option>
+                                    <Select.Option value={16}>16</Select.Option>
+                                    <Select.Option value={18}>18</Select.Option>
+                                    <Select.Option value={24}>24</Select.Option>
+                                    <Select.Option value={30}>30</Select.Option>
+                                    <Select.Option value={36}>36</Select.Option>
+                                    <Select.Option value={48}>48</Select.Option>
+                                    <Select.Option value={60}>60</Select.Option>
+                                    <Select.Option value={72}>72</Select.Option>
+                                </Select>
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                    <Row className={"text-properties"}>
+                        <Col span={24}>
+                            <Button icon={<BoldOutlined />} size={size} onClick={()=>{setTextProperties('fontWeight')}} />
+                            <Button icon={<ItalicOutlined />} size={size} onClick={()=>{setTextProperties('fontStyle')}} />
+                            <Button icon={<UnderlineOutlined />} size={size} onClick={()=>{setTextProperties('textDecoration')}} />
+                            <Popover content={(<Form.Item name={"color"}><SketchPicker color={selectedComponent.color} /></Form.Item>)} trigger="click">
+                                <Button icon={<FontColorsOutlined />} size={size} />
+                            </Popover>
+                            <Button icon={<ClearOutlined />} size={size} onClick={()=>{setTextProperties('clear')}} />
+                            <div className={"h-divider"}> </div>
+                            <Button icon={<AlignLeftOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'left')}} />
+                            <Button icon={<AlignCenterOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'center')}} />
+                            <Button icon={<AlignRightOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'right')}} />
+                            <Popover content={(<Form.Item name={"backgroundColor"}><SketchPicker color={selectedComponent.backgroundColor} /></Form.Item>)} trigger="click">
+                                <Button icon={<BgColorsOutlined />} size={size} />
+                            </Popover>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24}>
+                            <Form.Item name={"textValue"} style={{marginBottom:8}}>
+                                <Input.TextArea rows={4} />
+                            </Form.Item>
+                        </Col>
+                    </Row>
+                </> : null
+            }
             <Divider orientation={"left"}>{translate('size', ln)}</Divider>
             <Row>
                 <Col span={12}>
