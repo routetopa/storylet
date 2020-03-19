@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { Icon, Tabs, Table, Modal, Popconfirm, notification, Button, Tooltip } from 'antd';
-import axios from 'axios';
+import { Icon, Tabs, Table, Modal, Popconfirm, notification, Button, Tooltip, Divider, Empty, List, Card } from 'antd';
+import {API_CALL} from '../api/api';
 
 import AddClassForm from '../form/add-class-form';
 import EditStudentForm from '../form/edit-student-form';
@@ -97,11 +97,8 @@ export default function TeacherClass()
     const togglePublishStorylet = async (data) =>
     {
         console.log(data);
-        let response = await axios.put(`${window.API_ENDPOINT.CRUD_STORYLET}/${data.id}`,
-            {
-                status : (parseInt(data.status) === 1 ? 0 : 1)
-            },
-            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
+        let response = await API_CALL.put(`${window.API_ENDPOINT.CRUD_STORYLET}/${data.id}`, {status : (parseInt(data.status) === 1 ? 0 : 1)})
+
         if(response.data.status === 'OK')
         {
             let data = await fetch_data();
@@ -114,46 +111,51 @@ export default function TeacherClass()
     const deleteStorylet = async (data) =>
     {
         console.log(data);
-        let response = await axios.delete(`${window.API_ENDPOINT.CRUD_STORYLET}/${data.id}`,
-            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
+        let response = await API_CALL.delete(`${window.API_ENDPOINT.CRUD_STORYLET}/${data.id}`);
+
         if(response.data.status === 'OK')
         {
             fetch_data();
         }
     };
 
-    const select_class = (idx) => {
+    const select_class = (idx) =>
+    {
         classes[idx].idx = idx;
         setSelectedClass(Object.assign({}, classes[idx]));
     };
 
-    const showStudentDetail = (data) => {
+    const showStudentDetail = (data) =>
+    {
         console.log('show student detail');
         console.log(data);
         setSelectedStudent(Object.assign({}, data));
         setStudentDetailModalVisible(true);
     };
 
-    const deleteStudent = async (data) => {
+    const deleteStudent = async (data) =>
+    {
         console.log(data);
-        let response = await axios.delete(`${window.API_ENDPOINT.CRUD_STUDENT}/${data.id}`,
-            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
+        let response = await API_CALL.delete(`${window.API_ENDPOINT.CRUD_STUDENT}/${data.id}`);
+
         if(response.data.status === 'OK')
         {
             fetch_data();
         }
     };
 
-    const add_class_form_submit = async (data) => {
+    const add_class_form_submit = async (data) =>
+    {
         console.log(data);
-        let response = await axios.post(window.API_ENDPOINT.CRUD_CLASS,
+        let response = await API_CALL.post(window.API_ENDPOINT.CRUD_CLASS,
             {
-                class       : data.class,
-                section     : data.section,
-                description : data.description,
-                size        : data.student_number,
-            },
-            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
+                    class       : data.class,
+                    section     : data.section,
+                    description : data.description,
+                    size        : data.student_number
+                }
+            );
+
         if(response.data.status === 'OK')
         {
             setAddClassModalVisible(false);
@@ -161,19 +163,20 @@ export default function TeacherClass()
         }
     };
 
-    const edit_user_submit = async (data) => {
+    const edit_user_submit = async (data) =>
+    {
         console.log(data);
-        let response = await axios.put(`${window.API_ENDPOINT.CRUD_STUDENT}/${selectedStudent.id}`,
+        let response = await API_CALL.put(`${window.API_ENDPOINT.CRUD_STUDENT}/${selectedStudent.id}`,
             {
-                username : data.username,
-                password : data.password,
-                name     : data.name,
-                surname  : data.surname,
-            },
-            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
+                    username : data.username,
+                    password : data.password,
+                    name     : data.name,
+                    surname  : data.surname,
+                }
+            );
+
         if(response.data.status === 'OK')
         {
-
             let data = await fetch_data();
             let selected_calss = Object.assign({}, data[selectedClass.idx]);
             selected_calss.idx = selectedClass.idx;
@@ -189,10 +192,11 @@ export default function TeacherClass()
         setSelectedStudent(null);
     };
 
-    const delete_class = async (class_id) => {
+    const delete_class = async (class_id) =>
+    {
         console.log(class_id);
-        let response = await axios.delete(`${window.API_ENDPOINT.CRUD_CLASS}/${class_id}`,
-            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
+        let response = await API_CALL.delete(`${window.API_ENDPOINT.CRUD_CLASS}/${class_id}`);
+
         if(response.data.status === 'OK')
         {
             console.log('deleted');
@@ -204,9 +208,10 @@ export default function TeacherClass()
         fetch_data();
     }, []);
 
-    const fetch_data = async () => {
-        let response = await axios.get(window.API_ENDPOINT.GET_CLASS,
-            { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } });
+    const fetch_data = async () =>
+    {
+        let response = await API_CALL.get(window.API_ENDPOINT.GET_CLASS);
+
         setClasses(response.data.data);
         return response.data.data;
     };
@@ -231,7 +236,7 @@ export default function TeacherClass()
 
     return (
         <>
-            <h1>Le tue classi</h1>
+            <Divider orientation={"left"}>Le tue classi</Divider>
 
             <div className='class-container'>
                 {classes && classes.map((c, idx) => {
@@ -258,7 +263,12 @@ export default function TeacherClass()
                         </div>
                     );
                 })}
+                <div className='add-class-container'>
+                    <Icon theme="filled" className='add-button' type="plus-circle" onClick={() => setAddClassModalVisible(true)}/>
+                </div>
             </div>
+
+            <Divider>Info</Divider>
 
             {selectedClass ? (
                 <div className='class-detail'>
@@ -285,6 +295,18 @@ export default function TeacherClass()
 
                         </Tabs.TabPane>
 
+                        <Tabs.TabPane tab={<span><Icon type="file-image" />Immagini</span>} key="3">
+                            <List
+                                grid={{ gutter: 8, column: 5 }}
+                                dataSource={[{title:'a'}]}
+                                renderItem={item => (
+                                    <List.Item>
+                                        <Card title={item.title}>Card content</Card>
+                                    </List.Item>
+                                )}
+                            />
+                        </Tabs.TabPane>
+
                         {/*
                             <Tabs.TabPane tab={<span><Icon type="bulb"/>Idee</span>} key="3">
                                 <Table style={{backgroundColor: '#ffffff', padding: '16px'}}
@@ -296,13 +318,7 @@ export default function TeacherClass()
 
 
                     </Tabs>
-                </div> ) : null }
-
-            <Icon theme="filled"
-                  style={{fontSize:'64px', position:'absolute', bottom:'20px', right:'64px', cursor: 'pointer'}}
-                  type="plus-circle"
-                  onClick={() => setAddClassModalVisible(true)}
-            />
+                </div> ) : <Empty description={false} >Seleziona una classe per accedere alle relative informazioni</Empty> }
 
             <Modal
                 title="Aggiungi classe"

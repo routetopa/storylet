@@ -81,8 +81,8 @@ class AdminClass_API extends WP_REST_Controller
 
     private function get_current_user()
     {
-        //return (object) array ('ID' => 100);
-        return wp_get_current_user();
+        return (object) array ('ID' => 100);
+        //return wp_get_current_user();
     }
 
     public function create_class( $request )
@@ -251,6 +251,10 @@ class AdminClass_API extends WP_REST_Controller
         }
     }
 
+    public function upload_image ($request)
+    {
+
+    }
 
     public function get_class_permissions_check( $request )
     {

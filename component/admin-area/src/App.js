@@ -43,7 +43,7 @@ function App()
                   </Sider>
 
                   <Layout>
-                      <Content style={{ margin: '16px' }}>
+                      <Content className="site-layout-background" style={{margin: '24px 16px', padding: 24}}>
 
                           <Route exact path="/" component={TeacherClass} />
                           <Route       path="/stories" component={Stories} />
