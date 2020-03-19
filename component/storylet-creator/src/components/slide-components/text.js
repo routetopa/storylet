@@ -24,7 +24,8 @@ export default function Text({component, onClick, isEditable})
                 backgroundColor:component.backgroundColor
             }}
         >
-            {component.value}
+            <div dangerouslySetInnerHTML={{__html: component.value}} />
+            {/*{component.value}*/}
         </div>
     )
 };

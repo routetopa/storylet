@@ -19,11 +19,10 @@ import setSelectComponent from "../reducer/actions/select-component";
 import setSelectSlide from "../reducer/actions/select-slide";
 import copyComponent from "../reducer/actions/copy-component";
 
-//todo buttons visual feedback
-//todo clean
-//todo text align
-// todo text fumetto? : border radius, border color, border widht, before position
-//backgrounds e fumetti
+// todo buttons visual feedback
+// todo text fumetto --> border: thickness, color, type, radius, fumetto
+// https://codepen.io/JoeHastings/pen/gPrPMo
+//todo improve "selected text"
 export default function Properties() {
     const dispatch = useDispatch();
     const ln = useSelector(state => state.selectedLanguage);
@@ -31,7 +30,7 @@ export default function Properties() {
     const selectedSlide = useSelector(state => state.selectedSlide);
     const selectedComponent = useSelector(state => state.selectedComponent);
 
-    // const [keepRatio, setKeepRatio] = useState(true);
+    const [selectedText, setSelectedText] = useState({startIndex:0, length:0});
 
     const [form] = Form.useForm();
     const size = window.screen.width <= 1280 ? "small" : "middle "; //todo large?
@@ -76,7 +75,8 @@ export default function Properties() {
             scaleY: Math.round(component.scale[1] * 10) / 10,
             rotate: Math.round(component.rotate * 10) / 10,
 
-            textValue: component.value,
+            // textValue: component.value,
+            textValue: component.value ? component.value.replace(/<\/?[^>]+(>|$)/g, "") : null,
             fontFamily: selectedComponent.fontFamily,
             fontSize: selectedComponent.fontSize,
             color: selectedComponent.color,
@@ -137,7 +137,16 @@ export default function Properties() {
 
         let data = cloneDeep(slidesData);
 
-        if(prop==='fontWeight') {
+        if(selectedText.length > 0) {
+            let value = data[slideIdx].components[componentIdx].value;
+            if(prop==='fontWeight')
+                data[slideIdx].components[componentIdx].value = formatSelected(value, 'font-weight:bold;');
+            else if(prop==='fontStyle')
+                data[slideIdx].components[componentIdx].value = formatSelected(value, 'font-style:italic;');
+            else if(prop==='textDecoration')
+                data[slideIdx].components[componentIdx].value = formatSelected(value, 'text-decoration:underline;');
+        }
+        else if(prop==='fontWeight') {
             if (selectedComponent.fontWeight === undefined || selectedComponent.fontWeight === 'normal')
                 data[slideIdx].components[componentIdx].fontWeight = 'bold';
             else
@@ -155,6 +164,7 @@ export default function Properties() {
         } else if(prop==='textAlign') {
                 data[slideIdx].components[componentIdx].textAlign = val;
         } else if(prop==='clear') {
+            data[slideIdx].components[componentIdx].value = data[slideIdx].components[componentIdx].value.replace(/<\/?[^>]+(>|$)/g, "");
             data[slideIdx].components[componentIdx].fontFamily = 'Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif';
             data[slideIdx].components[componentIdx].fontSize = 24;
             data[slideIdx].components[componentIdx].color = undefined;
@@ -170,6 +180,15 @@ export default function Properties() {
             dispatch(setSelectSlide(data[slideIdx]));
             dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
         });
+    };
+
+    const formatSelected = (value, style) => {
+            let str = value.replace(/<\/?[^>]+(>|$)/g, "");
+            let firstPart = str.substr(0,selectedText.startIndex);
+            let selectedPart = str.substr(selectedText.startIndex,selectedText.length);
+            let lastPart = str.substr(selectedText.startIndex+selectedText.length,str.length);
+
+            return firstPart + "<span style='" + style + "'>" + selectedPart + "</span>" + lastPart;
     };
 
     const switchKeepRatio = () => {
@@ -283,11 +302,17 @@ export default function Properties() {
             _dispatch = true;
         }
         else if(changedFields.color !== undefined) {
-            data[slideIdx].components[componentIdx].color = 'rgba('+changedFields.color.rgb.r+','+changedFields.color.rgb.g+','+changedFields.color.rgb.b+','+changedFields.color.rgb.a+')';
+            if(selectedText.length > 0)
+                data[slideIdx].components[componentIdx].value = formatSelected(data[slideIdx].components[componentIdx].value, 'color:rgba('+changedFields.color.rgb.r+','+changedFields.color.rgb.g+','+changedFields.color.rgb.b+','+changedFields.color.rgb.a+')');
+            else
+                data[slideIdx].components[componentIdx].color = 'rgba('+changedFields.color.rgb.r+','+changedFields.color.rgb.g+','+changedFields.color.rgb.b+','+changedFields.color.rgb.a+')';
             _dispatch = true;
         }
         else if(changedFields.backgroundColor !== undefined) {
-            data[slideIdx].components[componentIdx].backgroundColor = 'rgba('+changedFields.backgroundColor.rgb.r+','+changedFields.backgroundColor.rgb.g+','+changedFields.backgroundColor.rgb.b+','+changedFields.backgroundColor.rgb.a+')';
+            if(selectedText.length > 0)
+                data[slideIdx].components[componentIdx].value = formatSelected(data[slideIdx].components[componentIdx].value, 'background-color:rgba('+changedFields.backgroundColor.rgb.r+','+changedFields.backgroundColor.rgb.g+','+changedFields.backgroundColor.rgb.b+','+changedFields.backgroundColor.rgb.a+')');
+            else
+                data[slideIdx].components[componentIdx].backgroundColor = 'rgba('+changedFields.backgroundColor.rgb.r+','+changedFields.backgroundColor.rgb.g+','+changedFields.backgroundColor.rgb.b+','+changedFields.backgroundColor.rgb.a+')';
             _dispatch = true;
         }
 
@@ -367,10 +392,12 @@ export default function Properties() {
                     <Row>
                         <Col span={24}>
                             <Form.Item name={"textValue"} style={{marginBottom:8}}>
-                                <Input.TextArea rows={4} />
+                                <Input.TextArea rows={4} onBlur={(e)=>{setSelectedText({startIndex: e.target.selectionStart, length: window.getSelection().toString().length})}} />
                             </Form.Item>
                         </Col>
                     </Row>
+                    <Divider orientation={"left"}>{translate('todo', ln)}</Divider>
+                    todo: Balloon Cloud None + select BL BR TL TR
                 </> : null
             }
             <Divider orientation={"left"}>{translate('size', ln)}</Divider>
