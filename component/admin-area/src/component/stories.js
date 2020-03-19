@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Table } from 'antd';
+import {Divider, Table} from 'antd';
 import axios from "axios";
 
 export default function Stories()
@@ -56,7 +56,7 @@ export default function Stories()
 
     return(
         <>
-            <h1>Storie pubblicate</h1>
+            <Divider orientation={"left"}>Storie pubblicate</Divider>
             <Table style={{backgroundColor:'#ffffff', padding: '16px'}}
                    dataSource={data}
                    columns={stories_columns}
