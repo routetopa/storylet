@@ -4,6 +4,7 @@ import {API_CALL} from '../api/api';
 
 import AddClassForm from '../form/add-class-form';
 import EditStudentForm from '../form/edit-student-form';
+import AddImageForm from '../form/add-image-form'
 
 import '../css/teacher-class.css'
 
@@ -93,6 +94,7 @@ export default function TeacherClass()
 
     const [addClassModalVisible, setAddClassModalVisible] = useState(false);
     const [studentDetailModalVisible, setStudentDetailModalVisible] = useState(false);
+    const [addImageModalVisible, setAddImageModalVisible] = useState(false);
 
     const togglePublishStorylet = async (data) =>
     {
@@ -161,6 +163,25 @@ export default function TeacherClass()
             setAddClassModalVisible(false);
             fetch_data();
         }
+    };
+
+    const add_image_form_submit = async (data) =>
+    {
+        const formData = new FormData();
+        data.file.forEach((file) => {
+            formData.append('files[]', file);
+        });
+        formData.append('name', data.name);
+        formData.append('description', data.description);
+        formData.append('classId', selectedClass.id);
+
+        let response = await API_CALL.post(window.API_ENDPOINT.ADD_IMAGE, formData);
+
+        if(response.data.status === 'OK')
+        {
+            setAddImageModalVisible(false);
+        }
+
     };
 
     const edit_user_submit = async (data) =>
@@ -264,7 +285,9 @@ export default function TeacherClass()
                     );
                 })}
                 <div className='add-class-container'>
-                    <Icon theme="filled" className='add-button' type="plus-circle" onClick={() => setAddClassModalVisible(true)}/>
+                    <Button onClick={() => setAddClassModalVisible(true)} type="primary" className='add-button'>
+                        <Icon type='plus' /> Aggiungi classe
+                    </Button>
                 </div>
             </div>
 
@@ -275,16 +298,14 @@ export default function TeacherClass()
                     <Tabs tabPosition='top' animated={false}>
 
                         <Tabs.TabPane tab={<span><Icon type="team" />Studenti</span>} key="1">
-                            <Table style={{backgroundColor:'#ffffff', padding: '16px'}}
-                                   dataSource={selectedClass.students}
+                            <Table dataSource={selectedClass.students}
                                    rowKey='id'
                                    columns={student_columns}
                             />
                         </Tabs.TabPane>
 
                         <Tabs.TabPane tab={<span><Icon type="highlight" />Storie</span>} key="2">
-                            <Table style={{backgroundColor:'#ffffff', padding: '16px'}}
-                                   dataSource={selectedClass.stories}
+                            <Table dataSource={selectedClass.stories}
                                    rowKey='id'
                                    columns={stories_columns}
                             />
@@ -296,6 +317,9 @@ export default function TeacherClass()
                         </Tabs.TabPane>
 
                         <Tabs.TabPane tab={<span><Icon type="file-image" />Immagini</span>} key="3">
+                            <Button onClick={()=>setAddImageModalVisible(true)} type="primary" style={{marginBottom: 16}}>
+                                <Icon type='plus' /> Aggiungi immagine
+                            </Button>
                             <List
                                 grid={{ gutter: 8, column: 5 }}
                                 dataSource={[{title:'a'}]}
@@ -338,6 +362,16 @@ export default function TeacherClass()
                 cancelButtonProps={{ style: { display: 'none' } }}
             >
                 {selectedStudent ? (<EditStudentForm handle_submit={edit_user_submit} data={selectedStudent} />) : null}
+            </Modal>
+
+            <Modal
+                title="Aggiungi immagine"
+                visible={addImageModalVisible}
+                onCancel={() => setAddImageModalVisible(false)}
+                okButtonProps={{ style: { display: 'none' } }}
+                cancelButtonProps={{ style: { display: 'none' } }}
+            >
+                <AddImageForm handle_submit={add_image_form_submit} />
             </Modal>
         </>
     )

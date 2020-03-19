@@ -114,6 +114,22 @@ class Storylet_Activator {
 			) $charset_collate;";
 
         dbDelta($sql);
+
+
+        /* IMAGES */
+        $image =  self::createTableName('image');
+
+        $sql = "CREATE TABLE $image (
+			  id mediumint(9) UNSIGNED NOT NULL AUTO_INCREMENT,
+			  classId mediumint(9) UNSIGNED,
+			  teacherId mediumint(9) UNSIGNED,
+			  name varchar(255) DEFAULT '',			
+			  description varchar(255) DEFAULT '',			
+			  path varchar(255) DEFAULT '',			
+			  PRIMARY KEY  (id)
+			) $charset_collate;";
+
+        dbDelta($sql);
 	}
 
 	private static function createTableName($table_name)
