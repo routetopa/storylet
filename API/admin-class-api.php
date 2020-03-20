@@ -201,6 +201,7 @@ class AdminClass_API extends WP_REST_Controller
                 $students = StudentModel::where('classId', '=', $class->id);
                 $class->setStudents($students->get());
                 $class->setStories(StoryletModel::whereIn('ownerId', $students->pluck('userId')->toArray())->get());
+                $class->setImages(ImageModel::where('classId', '=', $class->id)->get());
             }
 
             return rest_ensure_response(['status' => 'OK', 'data' => $classes]);

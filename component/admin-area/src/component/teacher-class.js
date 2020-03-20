@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { Icon, Tabs, Table, Modal, Popconfirm, notification, Button, Tooltip, Divider, Empty, List, Card } from 'antd';
+import { Icon, Tabs, Table, Modal, Popconfirm, notification, Button, Tooltip, Divider, Empty, List, Card, Row, Col } from 'antd';
 import {API_CALL} from '../api/api';
 
 import AddClassForm from '../form/add-class-form';
 import EditStudentForm from '../form/edit-student-form';
 import AddImageForm from '../form/add-image-form'
+import ClassSettings from "../form/class-settings";
 
 import '../css/teacher-class.css'
 
@@ -213,17 +214,6 @@ export default function TeacherClass()
         setSelectedStudent(null);
     };
 
-    const delete_class = async (class_id) =>
-    {
-        console.log(class_id);
-        let response = await API_CALL.delete(`${window.API_ENDPOINT.CRUD_CLASS}/${class_id}`);
-
-        if(response.data.status === 'OK')
-        {
-            console.log('deleted');
-        }
-    };
-
     useEffect(() =>
     {
         fetch_data();
@@ -274,12 +264,6 @@ export default function TeacherClass()
                                 <div>{c.class} {c.section}</div>
                                 <div>{c.description}</div>
 
-                                <Popconfirm title="Sure to ?" onConfirm={(e) => delete_class(c.id)}>
-                                    <Icon theme="filled"
-                                          style={{fontSize:'18px', cursor:'pointer', position:'absolute', bottom:'12px', right:'12px'}}
-                                          type="delete"
-                                    />
-                                </Popconfirm>
                             </div>
                         </div>
                     );
@@ -291,7 +275,7 @@ export default function TeacherClass()
                 </div>
             </div>
 
-            <Divider>Info</Divider>
+            <Divider>Info {selectedClass ? `${selectedClass.class} - ${selectedClass.section}` : ''}</Divider>
 
             {selectedClass ? (
                 <div className='class-detail'>
@@ -322,13 +306,20 @@ export default function TeacherClass()
                             </Button>
                             <List
                                 grid={{ gutter: 8, column: 5 }}
-                                dataSource={[{title:'a'}]}
+                                dataSource={selectedClass.images}
                                 renderItem={item => (
                                     <List.Item>
-                                        <Card title={item.title}>Card content</Card>
+                                        <Card title={item.name} bodyStyle={{height:'200px'}}>
+                                            <img src={item.path} style={{height:'calc(100% - 20px)', width:'100%', objectFit:'contain'}} />
+                                            {item.description}
+                                        </Card>
                                     </List.Item>
                                 )}
                             />
+                        </Tabs.TabPane>
+
+                        <Tabs.TabPane tab={<span><Icon type="setting" />Preferenze</span>} key="4">
+                            <ClassSettings classData={selectedClass} />
                         </Tabs.TabPane>
 
                         {/*
