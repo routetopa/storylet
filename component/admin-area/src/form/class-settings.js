@@ -10,10 +10,24 @@ function ClassSettings({classData, form})
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        form.validateFields((err, values) => {
+        form.validateFields( async (err, values) =>
+        {
             if(!err)
+            {
                 console.log(values);
-                //handle_submit({...values, file});
+
+                const formData = new FormData();
+                file && file.forEach((f) => {
+                    formData.append('files[]', f);
+                });
+                formData.append('class', values.class);
+                formData.append('section', values.section);
+                formData.append('description', values.description);
+                formData.append('classId', classData.id);
+
+                let response = await API_CALL.post(window.API_ENDPOINT.UPDATE_CLASS, formData);
+                console.log(response);
+            }
         });
     };
 
@@ -96,13 +110,7 @@ function ClassSettings({classData, form})
                             {getFieldDecorator('image', {
                                 initialValue: [],
                                 valuePropName: 'fileList',
-                                getValueFromEvent: normFile,
-                                rules: [
-                                    {
-                                        required: true,
-                                        message: 'Campo obbligatorio',
-                                    },
-                                ],
+                                getValueFromEvent: normFile
                             })(<Upload customRequest={dummy_request} beforeUpload={handle_upload} listType="picture" name='image'>
                                 <Button>
                                     <Icon type="upload" /> Click to upload

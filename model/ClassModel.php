@@ -15,7 +15,8 @@ class ClassModel extends EloquentWPModel {
         'teacherId',
         'class',
         'section',
-        'description'
+        'description',
+        'imagePath'
     ];
 
     public function setStudents($data)

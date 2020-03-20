@@ -92,6 +92,7 @@ class Storylet_Activator {
 			  section varchar(255) DEFAULT '',
 			  description varchar(255) DEFAULT '',
 			  size SMALLINT UNSIGNED,
+			  imagePath varchar(255) DEFAULT '',
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 

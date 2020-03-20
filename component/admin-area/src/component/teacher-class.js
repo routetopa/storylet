@@ -253,16 +253,20 @@ export default function TeacherClass()
                 {classes && classes.map((c, idx) => {
                     return (
                         <div onClick={(e) => select_class(idx)} key={`class_${idx}`} className='class'>
-                            <div style={{width:'100%', textAlign:'center'}}>
-                                <div>
-                                    <Icon theme="filled"
-                                          style={{fontSize:'64px', cursor:'pointer', marginBottom:'10px'}}
-                                          type="bank"
-                                    />
-                                </div>
+                            <div style={{width:'100%', textAlign:'center', background: `url(${c.imagePath})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', height:'100%'}}>
+                                {!c.imagePath &&
+                                    (<div>
+                                        <Icon theme="filled"
+                                              style={{fontSize: '64px', cursor: 'pointer'}}
+                                              type="bank"
+                                        />
+                                    </div>)
+                                }
 
-                                <div>{c.class} {c.section}</div>
-                                <div>{c.description}</div>
+                                <div style={{position:'absolute', bottom:'10px', width:'calc(100% - 16px)'}}>
+                                    <div>{c.class} {c.section}</div>
+                                    <div>{c.description}</div>
+                                </div>
 
                             </div>
                         </div>
@@ -289,15 +293,15 @@ export default function TeacherClass()
                         </Tabs.TabPane>
 
                         <Tabs.TabPane tab={<span><Icon type="highlight" />Storie</span>} key="2">
+
+                            <Button type="primary" onClick={reload_story} loading={false} style={{marginBottom:'16px'}}>
+                                <Icon type='reload' /> Aggiorna
+                            </Button>
+
                             <Table dataSource={selectedClass.stories}
                                    rowKey='id'
                                    columns={stories_columns}
                             />
-
-                            <Button type="primary" onClick={reload_story} loading={false}>
-                                Reload
-                            </Button>
-
                         </Tabs.TabPane>
 
                         <Tabs.TabPane tab={<span><Icon type="file-image" />Immagini</span>} key="3">

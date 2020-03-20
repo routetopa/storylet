@@ -41,7 +41,7 @@ class Storylet_Deactivator {
 
 	private static function removeDB()
 	{
-		/*global $wpdb;
+		global $wpdb;
 
 		$table = $wpdb->prefix . "story_class";
 		$wpdb->query("DROP TABLE IF EXISTS $table");
@@ -53,6 +53,6 @@ class Storylet_Deactivator {
         $wpdb->query("DROP TABLE IF EXISTS $table");
 
         $table = $wpdb->prefix . "story_storylet_student";
-        $wpdb->query("DROP TABLE IF EXISTS $table");*/
+        $wpdb->query("DROP TABLE IF EXISTS $table");
 	}
 }
