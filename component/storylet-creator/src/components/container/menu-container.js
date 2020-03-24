@@ -88,7 +88,9 @@ export default function MenuContainer() {
             "zIndex": 1,
             "fontSize": 24,
             "color": "#000000",
-            "fontFamily": '"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif'
+            "fontFamily": '"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif',
+            "baloon": "",
+            "placement": 'BL',
         };
 
         data[slideIdx].components.push(component);

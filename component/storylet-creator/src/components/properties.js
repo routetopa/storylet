@@ -226,29 +226,6 @@ export default function Properties() {
         onValuesChange(changedFields);
     };
 
-    // const balloon = (value) => {
-    //     let slideIdx = selectedSlide.index;
-    //     let componentIdx = selectedComponent.index;
-    //
-    //     let data = cloneDeep(slidesData);
-    //
-    //     if(value === 'none')
-    //         data[slideIdx].components[componentIdx].classes = '';
-    //     else
-    //         data[slideIdx].components[componentIdx].classes = 'balloon top_right ' + value;
-    //
-    //
-    //     batch(() => {
-    //         dispatch(setSlideData(data));
-    //         dispatch(setSelectSlide(data[slideIdx]));
-    //         dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
-    //     });
-    // };
-    //
-    // const balloonPos = (value) => {
-    //
-    // }
-
     // Form
     const onValuesChange = (changedFields, allFields) => {
         let _dispatch = false;

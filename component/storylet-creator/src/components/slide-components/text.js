@@ -30,6 +30,7 @@ export default function Text({component, onClick, isEditable})
             border:             ${(isEditable ? 0.5 : 0.25)+'vw solid #212121'};
             padding:            ${(isEditable ? 0.5 : 0.25)+'vw'};
             border-radius:      ${(isEditable ? 1.5 : 0.75)+'vw'};
+            background-color:    ${props => (props.backgroundColor ? props.backgroundColor : '#fff')};
             overflow: visible;
         }
         
@@ -51,7 +52,7 @@ export default function Text({component, onClick, isEditable})
             left:               ${(isEditable ? 1.9 : 0.95)+'vw'};
             bottom:             ${-(isEditable ? 1.4 : 0.7)+'vw'};
             border:             ${(isEditable ? 0.75 : 0.375)+'vw solid'};
-            border-color:       ${props => (props.backgroundColor ? props.backgroundColor : 'transparent') + ' transparent transparent ' + (props.backgroundColor ? props.backgroundColor : 'transparent')};
+            border-color:       ${props => (props.backgroundColor ? props.backgroundColor : '#fff') + ' transparent transparent ' + (props.backgroundColor ? props.backgroundColor : '#fff')};
         }
         
         &.balloon.speech.BR:before {
@@ -63,7 +64,7 @@ export default function Text({component, onClick, isEditable})
         &.balloon.speech.BR:after {
             left:               initial
             right:              ${(isEditable ? 1.9 : 0.95)+'vw'};
-            border-color:       ${props => (props.backgroundColor ? (props.backgroundColor + ' ' + props.backgroundColor) : 'transparent transparent') + ' transparent transparent'};
+            border-color:       ${props => (props.backgroundColor ? (props.backgroundColor + ' ' + props.backgroundColor) : '#fff #fff') + ' transparent transparent'};
         }
         
         &.balloon.speech.TL:before {
@@ -75,7 +76,7 @@ export default function Text({component, onClick, isEditable})
         &.balloon.speech.TL:after {
             bottom:             initial
             top:                ${-(isEditable ? 1.4 : 0.7)+'vw'};
-            border-color:       ${props =>  ' transparent transparent ' + (props.backgroundColor ? (props.backgroundColor + ' ' + props.backgroundColor) : 'transparent transparent')};
+            border-color:       ${props =>  ' transparent transparent ' + (props.backgroundColor ? (props.backgroundColor + ' ' + props.backgroundColor) : '#fff #fff')};
         }
         
         &.balloon.speech.TR:before {
@@ -91,7 +92,7 @@ export default function Text({component, onClick, isEditable})
             right:              ${(isEditable ? 1.9 : 0.95)+'vw'};
             bottom:             initial
             top:                ${-(isEditable ? 1.4 : 0.7)+'vw'};
-            border-color:       ${props => 'transparent ' + (props.backgroundColor ? (props.backgroundColor + ' ' + props.backgroundColor) : 'transparent transparent') + ' transparent'};
+            border-color:       ${props => 'transparent ' + (props.backgroundColor ? (props.backgroundColor + ' ' + props.backgroundColor) : '#fff #fff') + ' transparent'};
         }
         
         &.balloon.thought {
