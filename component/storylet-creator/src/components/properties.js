@@ -23,6 +23,10 @@ import copyComponent from "../reducer/actions/copy-component";
 // todo text fumetto --> border: thickness, color, type, radius, fumetto
 // https://codepen.io/JoeHastings/pen/gPrPMo
 //todo improve "selected text"
+//todo ln
+
+//todo rename balloonnn set properties on select component
+
 export default function Properties() {
     const dispatch = useDispatch();
     const ln = useSelector(state => state.selectedLanguage);
@@ -84,7 +88,9 @@ export default function Properties() {
             fontStyle: selectedComponent.fontStyle,
             textDecoration: selectedComponent.textDecoration,
             textAlign: selectedComponent.textAlign,
-            backgroundColor: selectedComponent.backgroundColor
+            backgroundColor: selectedComponent.backgroundColor,
+            balloon: selectedComponent.balloon,
+            placement: selectedComponent.placement
         });
     };
 
@@ -165,7 +171,7 @@ export default function Properties() {
                 data[slideIdx].components[componentIdx].textAlign = val;
         } else if(prop==='clear') {
             data[slideIdx].components[componentIdx].value = data[slideIdx].components[componentIdx].value.replace(/<\/?[^>]+(>|$)/g, "");
-            data[slideIdx].components[componentIdx].fontFamily = 'Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif';
+            data[slideIdx].components[componentIdx].fontFamily = '"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif';
             data[slideIdx].components[componentIdx].fontSize = 24;
             data[slideIdx].components[componentIdx].color = undefined;
             data[slideIdx].components[componentIdx].backgroundColor = undefined;
@@ -220,19 +226,28 @@ export default function Properties() {
         onValuesChange(changedFields);
     };
 
-    // Color Picker
-    // const [color, setColor] = useState(
-    //     {
-    //         r: 21,
-    //         g: 21,
-    //         b: 21,
-    //         a: 1
-    //     });
+    // const balloon = (value) => {
+    //     let slideIdx = selectedSlide.index;
+    //     let componentIdx = selectedComponent.index;
     //
-    // const handleChange = (color) => {
-    //     setColor(color.rgb);
-    //     // setTextColor('rgba('+color.rgb.r+','+color.rgb.g+','+color.rgb.b+','+color.rgb.a+')');
+    //     let data = cloneDeep(slidesData);
+    //
+    //     if(value === 'none')
+    //         data[slideIdx].components[componentIdx].classes = '';
+    //     else
+    //         data[slideIdx].components[componentIdx].classes = 'balloon top_right ' + value;
+    //
+    //
+    //     batch(() => {
+    //         dispatch(setSlideData(data));
+    //         dispatch(setSelectSlide(data[slideIdx]));
+    //         dispatch(setSelectComponent(data[slideIdx].components[componentIdx]));
+    //     });
     // };
+    //
+    // const balloonPos = (value) => {
+    //
+    // }
 
     // Form
     const onValuesChange = (changedFields, allFields) => {
@@ -315,6 +330,14 @@ export default function Properties() {
                 data[slideIdx].components[componentIdx].backgroundColor = 'rgba('+changedFields.backgroundColor.rgb.r+','+changedFields.backgroundColor.rgb.g+','+changedFields.backgroundColor.rgb.b+','+changedFields.backgroundColor.rgb.a+')';
             _dispatch = true;
         }
+        else if(changedFields.balloon !== undefined) {
+            data[slideIdx].components[componentIdx].balloon = changedFields.balloon;
+            _dispatch = true;
+        }
+        else if(changedFields.placement !== undefined) {
+            data[slideIdx].components[componentIdx].placement = changedFields.placement;
+            _dispatch = true;
+        }
 
         if(_dispatch)
             batch(() => {
@@ -328,7 +351,7 @@ export default function Properties() {
         <Form form={form} onValuesChange={onValuesChange}>
             {selectedComponent.type === 'text' ?
                 <>
-                    <Divider orientation={"left"}>{translate('text', ln)}</Divider>
+                    <Divider orientation={"left"} style={{marginTop:0}}>{translate('text', ln)}</Divider>
                     <Row>
                         <Col span={18}>
                             <Form.Item name={"fontFamily"}>
@@ -391,16 +414,36 @@ export default function Properties() {
                     </Row>
                     <Row>
                         <Col span={24}>
-                            <Form.Item name={"textValue"} style={{marginBottom:8}}>
+                            <Form.Item name={"textValue"}>
                                 <Input.TextArea rows={4} onBlur={(e)=>{setSelectedText({startIndex: e.target.selectionStart, length: window.getSelection().toString().length})}} />
                             </Form.Item>
                         </Col>
                     </Row>
-                    <Divider orientation={"left"}>{translate('todo', ln)}</Divider>
-                    todo: Balloon Cloud None + select BL BR TL TR
+                    <Divider orientation={"left"} style={{marginTop:0}}>{translate('balloon', ln)}</Divider>
+                    <Row>
+                        <Col span={12}>
+                            <Form.Item labelCol={{span:8}} wrapperCol={{span:14}} name={"balloon"} label={translate('balloonType', ln)}>
+                                <Select defaultValue={'none'} size={size}>
+                                    <Select.Option value={''}>{translate('noneOpt', ln)}</Select.Option>
+                                    <Select.Option value={'balloon speech'}>{translate('speechOpt', ln)}</Select.Option>
+                                    <Select.Option value={'balloon thought'}>{translate('thoughtOpt', ln)}</Select.Option>
+                                </Select>
+                            </Form.Item>
+                        </Col>
+                        <Col span={12}>
+                            <Form.Item labelCol={{span:8}} wrapperCol={{span:14}} name={"placement"} label={translate('balloonPlacement', ln)}>
+                                <Select size={size} defaultValue={'BL'}>
+                                    <Select.Option value={'BL'}>{translate('BL', ln)}</Select.Option>
+                                    <Select.Option value={'BR'}>{translate('BR', ln)}</Select.Option>
+                                    <Select.Option value={'TL'}>{translate('TL', ln)}</Select.Option>
+                                    <Select.Option value={'TR'}>{translate('TR', ln)}</Select.Option>
+                                </Select>
+                            </Form.Item>
+                        </Col>
+                    </Row>
                 </> : null
             }
-            <Divider orientation={"left"}>{translate('size', ln)}</Divider>
+            <Divider orientation={"left"} style={{marginTop:0}}>{translate('size', ln)}</Divider>
             <Row>
                 <Col span={12}>
                     <Form.Item name={"width"} label={translate('width', ln)} >
@@ -482,7 +525,7 @@ export default function Properties() {
                     </Form.Item>
                 </Col>
             </Row>
-            <Divider style={{marginTop:0}}>
+            <Divider style={{margin:0}}>
                 <Button type="primary" danger onClick={removeComponent}>{translate('delete', ln)}</Button>
             </Divider>
         </Form>
