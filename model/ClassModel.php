@@ -5,16 +5,18 @@ require_once ('EloquentWPModel.php');
 class ClassModel extends EloquentWPModel {
 
     protected $table = 'story_class';
-    protected $appends = array('students', 'stories');
+    protected $appends = array('students', 'stories', 'images');
 
     public $students = null;
-    public $stories = null;
+    public $stories  = null;
+    public $images   = null;
 
     protected $fillable = [
         'teacherId',
         'class',
         'section',
-        'description'
+        'description',
+        'imagePath'
     ];
 
     public function setStudents($data)
@@ -27,6 +29,11 @@ class ClassModel extends EloquentWPModel {
         $this->stories = $data;
     }
 
+    public function setImages($data)
+    {
+        $this->images = $data;
+    }
+
     public function getStudentsAttribute()
     {
         return $this->students;
@@ -35,6 +42,11 @@ class ClassModel extends EloquentWPModel {
     public function getStoriesAttribute()
     {
         return $this->stories;
+    }
+
+    public function getImagesAttribute()
+    {
+        return $this->images;
     }
 
     public function getTable()

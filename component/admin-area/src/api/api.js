@@ -14,6 +14,10 @@ export const API_CALL =
         return axios.put(endpoint, data/*, { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
     },
 
+    patch : (endpoint, data) => {
+        return axios.patch(endpoint, data/*, { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
+    },
+
     delete : (endpoint) => {
         return axios.delete(endpoint/*, { headers: { 'X-WP-Nonce': window.API_NONCE.NONCE } }*/);
     }

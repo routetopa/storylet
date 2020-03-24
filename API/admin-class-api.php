@@ -3,6 +3,7 @@
 require_once (plugin_dir_path( __FILE__ ) . '../model/ClassModel.php');
 require_once (plugin_dir_path( __FILE__ ) . '../model/StudentModel.php');
 require_once (plugin_dir_path( __FILE__ ) . '../model/StoryletModel.php');
+require_once (plugin_dir_path( __FILE__ ) . '../model/ImageModel.php');
 require_once (ABSPATH.'wp-admin/includes/user.php');
 
 class AdminClass_API extends WP_REST_Controller
@@ -30,14 +31,19 @@ class AdminClass_API extends WP_REST_Controller
                 'permission_callback' => array( $this, 'insert_class_permissions_check' ),
             ),
             array(
-                'methods'             => WP_REST_Server::EDITABLE,
-                'callback'            => array( $this, 'update_class' ),
+                'methods'             => WP_REST_Server::DELETABLE,
+                'callback'            => array( $this, 'delete_class' ),
                 'permission_callback' => array( $this, 'insert_class_permissions_check' ),
                 'args'                => $this->get_endpoint_args_for_item_schema( false ),
             ),
+            'schema' => null
+        ));
+
+        // HANDLE UPDATE CLASS
+        register_rest_route($this->namespace, '/update-class', array(
             array(
-                'methods'             => WP_REST_Server::DELETABLE,
-                'callback'            => array( $this, 'delete_class' ),
+                'methods'             => WP_REST_Server::CREATABLE,
+                'callback'            => array( $this, 'update_class' ),
                 'permission_callback' => array( $this, 'insert_class_permissions_check' ),
                 'args'                => $this->get_endpoint_args_for_item_schema( false ),
             ),
@@ -72,6 +78,17 @@ class AdminClass_API extends WP_REST_Controller
             array(
                 'methods'             => WP_REST_Server::DELETABLE,
                 'callback'            => array( $this, 'delete_student' ),
+                'permission_callback' => array( $this, 'insert_class_permissions_check' ),
+                'args'                => $this->get_endpoint_args_for_item_schema( false ),
+            ),
+            'schema' => null
+        ));
+
+        // HANDLE IMAGES
+        register_rest_route($this->namespace, '/add-image', array(
+            array(
+                'methods'             => WP_REST_Server::EDITABLE,
+                'callback'            => array( $this, 'add_image' ),
                 'permission_callback' => array( $this, 'insert_class_permissions_check' ),
                 'args'                => $this->get_endpoint_args_for_item_schema( false ),
             ),
@@ -138,17 +155,35 @@ class AdminClass_API extends WP_REST_Controller
     {
         try
         {
-            if(isset($request['classid']))
+            $parameters         = $request->get_params();
+
+            if(isset($parameters['classId']))
             {
-                $class = ClassModel::find($request['classid']);
-                $class->class = $request['class'];
-                $class->section = $request['section'];
-                $class->description = $request['description'];
+                $user = $this->get_current_user();
+
+                $class = ClassModel::find($parameters['classId']);
+                $class->class = $parameters['class'];
+                $class->section = $parameters['section'];
+                $class->description = $parameters['description'];
+
+                if (isset($_FILES['files']) || isset($_FILES['files']['tmp_name']))
+                {
+                    $uploaddir     = plugin_dir_path(__FILE__) . '../images/custom/' . $user->ID .'/'. $parameters['classId'] . '/';
+                    $userfile_tmp  = $_FILES['files']['tmp_name'][0];
+                    $userfile_name = $_FILES['files']['name'][0];
+
+                    if (!file_exists($uploaddir))
+                        mkdir($uploaddir, 0777, true);
+
+                    if (move_uploaded_file($userfile_tmp, $uploaddir . $userfile_name))
+                        $class->imagePath = str_replace('/API', '', plugin_dir_url( __FILE__ )) . 'images/custom/' . $user->ID .'/'. $parameters['classId'] . '/'. $userfile_name;
+                }
+
                 $class->save();
 
                 return rest_ensure_response(['status' => 'OK', 'data' => $class]);
             } else {
-                return rest_ensure_response(['status' => 'KO', 'error' => 'classid param required']);
+                return rest_ensure_response(['status' => 'KO', 'error' => 'classId param required']);
             }
 
         } catch (Exception $e) {
@@ -189,6 +224,7 @@ class AdminClass_API extends WP_REST_Controller
                 $students = StudentModel::where('classId', '=', $class->id);
                 $class->setStudents($students->get());
                 $class->setStories(StoryletModel::whereIn('ownerId', $students->pluck('userId')->toArray())->get());
+                $class->setImages(ImageModel::where('classId', '=', $class->id)->get());
             }
 
             return rest_ensure_response(['status' => 'OK', 'data' => $classes]);
@@ -251,9 +287,40 @@ class AdminClass_API extends WP_REST_Controller
         }
     }
 
-    public function upload_image ($request)
+    public function add_image ($request)
     {
+        try
+        {
+            if (!isset($_FILES['files']) || !isset($_FILES['files']['tmp_name'])) {
+                return rest_ensure_response(['status' => 'KO', 'error' => 'No file attached']);
+            }
 
+            $user          = $this->get_current_user();
+            $uploaddir     = plugin_dir_path(__FILE__) . '../images/custom/' . $user->ID .'/'. $request['classId'] . '/';
+            $userfile_tmp  = $_FILES['files']['tmp_name'][0];
+            $userfile_name = $_FILES['files']['name'][0];
+
+            if (!file_exists($uploaddir))
+                mkdir($uploaddir, 0777, true);
+
+            if (move_uploaded_file($userfile_tmp, $uploaddir . $userfile_name))
+            {
+                $image              = new ImageModel();
+                $image->classId     = $request['classId'];
+                $image->teacherId   = $user->ID;
+                $image->name        = $request['name'];
+                $image->description = $request['description'];
+                $image->path        = str_replace('/API', '', plugin_dir_url( __FILE__ )) . 'images/custom/' . $user->ID .'/'. $request['classId'] . '/'. $userfile_name;
+
+                $image->save();
+
+                return rest_ensure_response(['status' => 'OK', 'message' => 'File successfully created']);
+            }else{
+                return rest_ensure_response(['status' => 'KO', 'error' => 'Can\'t create the file']);
+            }
+        } catch (Exception $e) {
+            return rest_ensure_response(['status' => 'KO', 'error' => $e->getMessage()]);
+        }
     }
 
     public function get_class_permissions_check( $request )

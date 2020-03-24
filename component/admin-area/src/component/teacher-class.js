@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { Icon, Tabs, Table, Modal, Popconfirm, notification, Button, Tooltip, Divider, Empty, List, Card } from 'antd';
+import { Icon, Tabs, Table, Modal, Popconfirm, notification, Button, Tooltip, Divider, Empty, List, Card, Row, Col } from 'antd';
 import {API_CALL} from '../api/api';
 
 import AddClassForm from '../form/add-class-form';
 import EditStudentForm from '../form/edit-student-form';
+import AddImageForm from '../form/add-image-form'
+import ClassSettings from "../form/class-settings";
 
 import '../css/teacher-class.css'
 
@@ -93,6 +95,7 @@ export default function TeacherClass()
 
     const [addClassModalVisible, setAddClassModalVisible] = useState(false);
     const [studentDetailModalVisible, setStudentDetailModalVisible] = useState(false);
+    const [addImageModalVisible, setAddImageModalVisible] = useState(false);
 
     const togglePublishStorylet = async (data) =>
     {
@@ -163,6 +166,25 @@ export default function TeacherClass()
         }
     };
 
+    const add_image_form_submit = async (data) =>
+    {
+        const formData = new FormData();
+        data.file.forEach((file) => {
+            formData.append('files[]', file);
+        });
+        formData.append('name', data.name);
+        formData.append('description', data.description);
+        formData.append('classId', selectedClass.id);
+
+        let response = await API_CALL.post(window.API_ENDPOINT.ADD_IMAGE, formData);
+
+        if(response.data.status === 'OK')
+        {
+            setAddImageModalVisible(false);
+        }
+
+    };
+
     const edit_user_submit = async (data) =>
     {
         console.log(data);
@@ -190,17 +212,6 @@ export default function TeacherClass()
 
         setStudentDetailModalVisible(false);
         setSelectedStudent(null);
-    };
-
-    const delete_class = async (class_id) =>
-    {
-        console.log(class_id);
-        let response = await API_CALL.delete(`${window.API_ENDPOINT.CRUD_CLASS}/${class_id}`);
-
-        if(response.data.status === 'OK')
-        {
-            console.log('deleted');
-        }
     };
 
     useEffect(() =>
@@ -242,69 +253,77 @@ export default function TeacherClass()
                 {classes && classes.map((c, idx) => {
                     return (
                         <div onClick={(e) => select_class(idx)} key={`class_${idx}`} className='class'>
-                            <div style={{width:'100%', textAlign:'center'}}>
-                                <div>
-                                    <Icon theme="filled"
-                                          style={{fontSize:'64px', cursor:'pointer', marginBottom:'10px'}}
-                                          type="bank"
-                                    />
+                            <div style={{width:'100%', textAlign:'center', background: `url(${c.imagePath})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', height:'100%'}}>
+                                {!c.imagePath &&
+                                    (<div>
+                                        <Icon theme="filled"
+                                              style={{fontSize: '64px', cursor: 'pointer'}}
+                                              type="bank"
+                                        />
+                                    </div>)
+                                }
+
+                                <div style={{position:'absolute', bottom:'10px', width:'calc(100% - 16px)'}}>
+                                    <div>{c.class} {c.section}</div>
+                                    <div>{c.description}</div>
                                 </div>
 
-                                <div>{c.class} {c.section}</div>
-                                <div>{c.description}</div>
-
-                                <Popconfirm title="Sure to ?" onConfirm={(e) => delete_class(c.id)}>
-                                    <Icon theme="filled"
-                                          style={{fontSize:'18px', cursor:'pointer', position:'absolute', bottom:'12px', right:'12px'}}
-                                          type="delete"
-                                    />
-                                </Popconfirm>
                             </div>
                         </div>
                     );
                 })}
                 <div className='add-class-container'>
-                    <Icon theme="filled" className='add-button' type="plus-circle" onClick={() => setAddClassModalVisible(true)}/>
+                    <Button onClick={() => setAddClassModalVisible(true)} type="primary" className='add-button'>
+                        <Icon type='plus' /> Aggiungi classe
+                    </Button>
                 </div>
             </div>
 
-            <Divider>Info</Divider>
+            <Divider>Info {selectedClass ? `${selectedClass.class} - ${selectedClass.section}` : ''}</Divider>
 
             {selectedClass ? (
                 <div className='class-detail'>
                     <Tabs tabPosition='top' animated={false}>
 
                         <Tabs.TabPane tab={<span><Icon type="team" />Studenti</span>} key="1">
-                            <Table style={{backgroundColor:'#ffffff', padding: '16px'}}
-                                   dataSource={selectedClass.students}
+                            <Table dataSource={selectedClass.students}
                                    rowKey='id'
                                    columns={student_columns}
                             />
                         </Tabs.TabPane>
 
                         <Tabs.TabPane tab={<span><Icon type="highlight" />Storie</span>} key="2">
-                            <Table style={{backgroundColor:'#ffffff', padding: '16px'}}
-                                   dataSource={selectedClass.stories}
+
+                            <Button type="primary" onClick={reload_story} loading={false} style={{marginBottom:'16px'}}>
+                                <Icon type='reload' /> Aggiorna
+                            </Button>
+
+                            <Table dataSource={selectedClass.stories}
                                    rowKey='id'
                                    columns={stories_columns}
                             />
-
-                            <Button type="primary" onClick={reload_story} loading={false}>
-                                Reload
-                            </Button>
-
                         </Tabs.TabPane>
 
                         <Tabs.TabPane tab={<span><Icon type="file-image" />Immagini</span>} key="3">
+                            <Button onClick={()=>setAddImageModalVisible(true)} type="primary" style={{marginBottom: 16}}>
+                                <Icon type='plus' /> Aggiungi immagine
+                            </Button>
                             <List
                                 grid={{ gutter: 8, column: 5 }}
-                                dataSource={[{title:'a'}]}
+                                dataSource={selectedClass.images}
                                 renderItem={item => (
                                     <List.Item>
-                                        <Card title={item.title}>Card content</Card>
+                                        <Card title={item.name} bodyStyle={{height:'200px'}}>
+                                            <img src={item.path} style={{height:'calc(100% - 20px)', width:'100%', objectFit:'contain'}} />
+                                            {item.description}
+                                        </Card>
                                     </List.Item>
                                 )}
                             />
+                        </Tabs.TabPane>
+
+                        <Tabs.TabPane tab={<span><Icon type="setting" />Preferenze</span>} key="4">
+                            <ClassSettings classData={selectedClass} />
                         </Tabs.TabPane>
 
                         {/*
@@ -338,6 +357,16 @@ export default function TeacherClass()
                 cancelButtonProps={{ style: { display: 'none' } }}
             >
                 {selectedStudent ? (<EditStudentForm handle_submit={edit_user_submit} data={selectedStudent} />) : null}
+            </Modal>
+
+            <Modal
+                title="Aggiungi immagine"
+                visible={addImageModalVisible}
+                onCancel={() => setAddImageModalVisible(false)}
+                okButtonProps={{ style: { display: 'none' } }}
+                cancelButtonProps={{ style: { display: 'none' } }}
+            >
+                <AddImageForm handle_submit={add_image_form_submit} />
             </Modal>
         </>
     )

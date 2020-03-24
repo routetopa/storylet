@@ -92,6 +92,7 @@ class Storylet_Activator {
 			  section varchar(255) DEFAULT '',
 			  description varchar(255) DEFAULT '',
 			  size SMALLINT UNSIGNED,
+			  imagePath varchar(255) DEFAULT '',
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 
@@ -110,6 +111,22 @@ class Storylet_Activator {
 			  name varchar(255) DEFAULT '',			
 			  surname varchar(255) DEFAULT '',			
 			  status varchar(255) DEFAULT '',			
+			  PRIMARY KEY  (id)
+			) $charset_collate;";
+
+        dbDelta($sql);
+
+
+        /* IMAGES */
+        $image =  self::createTableName('image');
+
+        $sql = "CREATE TABLE $image (
+			  id mediumint(9) UNSIGNED NOT NULL AUTO_INCREMENT,
+			  classId mediumint(9) UNSIGNED,
+			  teacherId mediumint(9) UNSIGNED,
+			  name varchar(255) DEFAULT '',			
+			  description varchar(255) DEFAULT '',			
+			  path varchar(255) DEFAULT '',			
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 
