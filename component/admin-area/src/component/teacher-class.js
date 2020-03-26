@@ -97,6 +97,14 @@ export default function TeacherClass()
     const [studentDetailModalVisible, setStudentDetailModalVisible] = useState(false);
     const [addImageModalVisible, setAddImageModalVisible] = useState(false);
 
+    const reload_data = async () =>
+    {
+        let data = await fetch_data();
+        let selected_calss = Object.assign({}, data[selectedClass.idx]);
+        selected_calss.idx = selectedClass.idx;
+        setSelectedClass(selected_calss);
+    };
+
     const togglePublishStorylet = async (data) =>
     {
         console.log(data);
@@ -104,10 +112,7 @@ export default function TeacherClass()
 
         if(response.data.status === 'OK')
         {
-            let data = await fetch_data();
-            let selected_calss = Object.assign({}, data[selectedClass.idx]);
-            selected_calss.idx = selectedClass.idx;
-            setSelectedClass(selected_calss);
+            reload_data();
         }
     };
 
@@ -143,7 +148,7 @@ export default function TeacherClass()
 
         if(response.data.status === 'OK')
         {
-            fetch_data();
+            reload_data();
         }
     };
 
@@ -181,6 +186,7 @@ export default function TeacherClass()
         if(response.data.status === 'OK')
         {
             setAddImageModalVisible(false);
+            reload_data();
         }
 
     };
@@ -199,10 +205,7 @@ export default function TeacherClass()
 
         if(response.data.status === 'OK')
         {
-            let data = await fetch_data();
-            let selected_calss = Object.assign({}, data[selectedClass.idx]);
-            selected_calss.idx = selectedClass.idx;
-            setSelectedClass(selected_calss);
+            reload_data();
         } else {
             notification.open({
                 message: 'Errore',

@@ -10,8 +10,10 @@ function AddImage ({form, handle_submit}) {
     const handleSubmit = (e) => {
         e.preventDefault();
         form.validateFields((err, values) => {
-            if(!err)
+            if(!err) {
+                form.resetFields();
                 handle_submit({...values, file});
+            }
         });
     };
 
