@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import ReactWordcloud from "react-wordcloud";
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 import {Table} from 'antd';
 import '../../style/container/babelnet-container.css'
 import {useSelector} from "react-redux";

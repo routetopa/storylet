@@ -11,7 +11,7 @@ import {
 import { SketchPicker } from 'react-color';
 import {translate} from "./helpers";
 
-import 'antd/dist/antd.css';
+// import 'antd/dist/antd.css';
 import '../style/properties.css';
 
 import setSlideData from "../reducer/actions/set-slides-data";

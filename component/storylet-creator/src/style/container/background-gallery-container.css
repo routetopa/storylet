@@ -1,12 +1,113 @@
-.background-gallery #image-gallery img {
-    padding: 0; /*todo remove if not icons*/
+/*.ant-modal-mask, .ant-modal-wrap {*/
+/*    z-index: 3001 !important;*/
+/*}*/
+
+/*not here*/
+.moveable-control-box {
+    z-index: 1000 !important;
 }
 
-.background-gallery #select-package, .background-gallery .search-images, .background-gallery #image-gallery-search {
+.ant-popover-inner-content {
+    padding: 0 !important;
+}
+
+.sketch-picker {
+    box-shadow: none !important;
+}
+/*not here*/
+
+
+.ant-grid-input .ant-select-selection-item-remove {
     display: none;
 }
 
-#image-gallery-header span {
+.ant-image-grid {
+    margin: 0 !important;/*?*/
+    user-select: none;
+}
+
+.ant-image-grid .ant-col {
+    background: transparent;
+    border: 0;
+}
+
+.ant-image-grid .ant-col > div {
+    position: relative;
+    padding-top: calc(100% - 2px);
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.ant-image-grid .ant-col > div.selected {
+    border-color: #52c41a !important;
+}
+
+.ant-image-grid .ant-col > div .check {
+    display: none;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 32px;
+    color: #52c41a;
+}
+
+.ant-image-grid .ant-col > div.selected .check {
+    display: block;
+}
+
+.ant-image-grid .ant-col div.name {
+    position: absolute;
+    width: 100%;
+    font-size: 16px;
     color: #FFFFFF;
-    font-size: 24px;
+    /*text-shadow: 2px 2px 3px #333;*/
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0 4px;
+    bottom: 0;
+    /*font-weight: 700;*/
+}
+
+/* upload */
+
+.ant-upload-list-picture-card-container,
+.ant-upload-list-picture-card .ant-upload-list-item,
+.ant-upload-container,
+.ant-upload.ant-upload-select.ant-upload-select-picture-card {
+    position: absolute;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.ant-upload.ant-upload-select-picture-card {
+    border: none !important;
+}
+
+/* color */
+
+.select-color-label {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    top: calc(50% - 20px);
+    text-align: center;
+}
+
+/* select */
+
+.ant-modal-footer .ant-select {
+    margin-right: 8px;
+    width: 120px !important;
 }

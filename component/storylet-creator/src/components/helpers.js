@@ -63,24 +63,48 @@ ln["snail_it"] = "chiocciola";
 ln["cube_it"] = "cubo";
 ln["autoplay_it"] = "Autoplay";
 
-ln["size_it"] = "Dimensione";
-ln["width_it"] = "L";
+ln["text_it"] = "Text";
+ln["size_it"] = "Size";
+ln["position_it"] = "Position";
+ln["scale_it"] = "Scale";
+ln["rotate_it"] = "Rotate";
+ln["balloon_it"] = "Balloon";
+ln["balloonType_it"] = "Type";
+ln["balloonPlacement_it"] = "Pos.";
+ln["BL_it"] = "BL";
+ln["BR_it"] = "BR";
+ln["TL_it"] = "TL";
+ln["TR_it"] = "TR";
+ln["noneOpt_it"] = "No";
+ln["speechOpt_it"] = "Speech";
+ln["thoughtOpt_it"] = "Thought";
+ln["width_it"] = "W";
 ln["height_it"] = "H";
-ln["position_it"] = "Posizione";
-ln["scale_it"] = "Scala";
-ln["lock_it"] = "Blocca";
-ln["rotate_it"] = "Ruota";
-ln["degrees_it"] = "gradi";
-ln["font_it"] = "Carattere";
-ln["color_it"] = "Colore";
-ln["size2_it"] = "Dim.";
-ln["delete_it"] = "Elimina";
+ln["top_it"] = "X";
+ln["left_it"] = "Y";
+ln["zIndex_it"] = "Z";
+ln["scaleX_it"] = "X";
+ln["scaleY_it"] = "Y";
+ln["degrees_it"] = "Deg.";
+
+//buttons
+ln["delete_it"] = "Delete";
 
 // tooltip
-ln["flipH_it"] = "Specchia orizzontalmente";
-ln["flipV_it"] = "Specchia verticalmente";
-ln["bringsUp_it"] = "Porta in primo piano";
-ln["keepRatio_it"] = "Mantenere il rapporto di aspetto";
+ln["keepRatio_it"] = "Keep Aspect Ratio";
+ln["bringsUp_it"] = "Brings Up";
+ln["flipH_it"] = "Flip Horizontal";
+ln["flipV_it"] = "Flip Vertical";
+
+// SELECT IMAGES
+ln["selectBackground_it"] = "Seleziona sfondo";
+ln["uploadImage_it"] = "Carica immagine";
+ln["selectColor_it"] = "Seleziona colore";
+ln["buttonOk_it"] = "Ok";
+ln["buttonCancel_it"] = "Chiudi";
+ln["optionUploads_it"] = "Consigliate";
+ln["optionBG1_it"] = "Sfondi 1";
+ln["optionBG2_it"] = "Sfondi 2";
 
 /******** EN ********/
 
@@ -137,7 +161,6 @@ ln["snail_en"] = "snail";
 ln["cube_en"] = "cube";
 ln["autoplay_en"] = "Autoplay";
 
-/*todo*/
 ln["text_en"] = "Text";
 ln["size_en"] = "Size";
 ln["position_en"] = "Position";
@@ -170,24 +193,15 @@ ln["keepRatio_en"] = "Keep Aspect Ratio";
 ln["bringsUp_en"] = "Brings Up";
 ln["flipH_en"] = "Flip Horizontal";
 ln["flipV_en"] = "Flip Vertical";
-/*end todo*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ln["selectBackground_en"] = "Select background";
+ln["uploadImage_en"] = "Upload image";
+ln["selectColor_en"] = "Select color";
+ln["buttonOk_en"] = "Ok";
+ln["buttonCancel_en"] = "Close";
+ln["optionUploads_en"] = "Recommended ";
+ln["optionBG1_en"] = "Backgrounds 1";
+ln["optionBG2_en"] = "Backgrounds 2";
 
 /******** ES ********/
 

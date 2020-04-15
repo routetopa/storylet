@@ -146,14 +146,30 @@ export default function MenuContainer() {
         setIsOpenedB(true);
     };
 
-    const close_background_gallery = (e) => {
-        if(e.target.id === "image-gallery-close") {
+    const close_background_gallery = (item, color) => {
+        if(item._id === '@close') {
             setIsOpenedB(false);
         }
-        else if(e.target.nodeName === "IMG") {
+        else if(item._id === '@color') {
             let data = cloneDeep(slidesData);
 
-            data[slideIdx].background = e.target.src;
+            data[slideIdx].background = undefined;
+            data[slideIdx].backgroundColor = color;
+
+            batch(() => {
+                dispatch(setSlidesData(data));
+                dispatch(selectSlide(data[slideIdx]));
+            });
+
+            setIsOpenedB(false);
+        }
+        else if(item._id === '@upload') {
+            alert('Aloha Andrea!')
+        }
+        else {
+            let data = cloneDeep(slidesData);
+
+            data[slideIdx].background = item.path;
 
             batch(() => {
                 dispatch(setSlidesData(data));

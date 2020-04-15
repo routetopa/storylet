@@ -8,8 +8,9 @@ import MoveableComponent from "./components/moveable/moveable-component";
 import setSlideData from './reducer/actions/set-slides-data'
 import setStorylet from './reducer/actions/set-storylet'
 
-import './StoryletCreator.css';
 import selectSlide from "./reducer/actions/select-slide";
+import './StoryletCreator.css';
+import 'antd/dist/antd.css';
 
 function StoryletCreator()
 {
