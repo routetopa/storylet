@@ -3,14 +3,11 @@ import {useSelector, useDispatch, batch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
 
 import WordContainer from './word-container'
-import ImageGalleryContainer from './image-gallery-container'
 import BackgroundGalleryContainer from './background-gallery-container'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLightbulb, faFileImage, faImage, faFileVideo } from '@fortawesome/free-regular-svg-icons'
-import { faFont, faPlusCircle, faTrashAlt, faCopy, faLink, faChartBar, faPlay,  faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons'
-import { notification, Popconfirm } from 'antd';
+import { faLightbulb, faFileImage, faImage } from '@fortawesome/free-regular-svg-icons'
+import { faFont, faPlusCircle, faTrashAlt, faCopy, faPlay, faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons'
 
-// import '../../vendor/bootstrap.min.css';
 import '../../style/container/menu-container.css'
 import '../../vendor/tooltip.css';
 
@@ -36,7 +33,7 @@ export default function MenuContainer() {
     const searchKey = useRef(null);
 
     const [isOpened, setIsOpened] = useState(false);
-    const [isOpenedB, setIsOpenedB] = useState(false);
+    const [imagesType, setImagesType] = useState(false);
 
     useEffect(()=>{
         if(!selectedSlide)
@@ -102,53 +99,14 @@ export default function MenuContainer() {
         });
     };
 
-    const open_gallery = () => {
+    const open_background_gallery = (type) => {
+        setImagesType(type);
         setIsOpened(true);
     };
 
-    const close_gallery = (e) => {
-        if(e.target.id === "image-gallery-close") {
-            setIsOpened(false);
-        }
-        else if(e.target.nodeName === "IMG") {
-            let data = cloneDeep(slidesData);
-
-            let index = data[slideIdx].components.length;
-            setComponentIdx(index);
-
-            let component = {
-                "index": index,
-                "type": "image",
-                "x": 0,
-                "y": 0,
-                "w": 40,
-                "h": e.target.height / e.target.width * 40,
-                "scale": [1,1],
-                "rotate": 0,
-                "keepRatio": true,
-                "zIndex": 0,
-                "src": e.target.src
-            };
-
-            data[slideIdx].components.push(component);
-
-            batch(() => {
-                dispatch(setSlidesData(data));
-                dispatch(selectSlide(data[slideIdx]));
-                dispatch(selectComponent(component));
-            });
-
-            setIsOpened(false);
-        }
-    };
-
-    const open_background_gallery = () => {
-        setIsOpenedB(true);
-    };
-
-    const close_background_gallery = (item, color) => {
+    const close_background_gallery = (item, color, type) => {
         if(item._id === '@close') {
-            setIsOpenedB(false);
+            setIsOpened(false);
         }
         else if(item._id === '@color') {
             let data = cloneDeep(slidesData);
@@ -161,12 +119,13 @@ export default function MenuContainer() {
                 dispatch(selectSlide(data[slideIdx]));
             });
 
-            setIsOpenedB(false);
+            setIsOpened(false);
         }
         else if(item._id === '@upload') {
+            //todo background or image?
             alert('Aloha Andrea!')
         }
-        else {
+        else if(type === 'background') {
             let data = cloneDeep(slidesData);
 
             data[slideIdx].background = item.path;
@@ -176,7 +135,38 @@ export default function MenuContainer() {
                 dispatch(selectSlide(data[slideIdx]));
             });
 
-            setIsOpenedB(false);
+            setIsOpened(false);
+        }
+        else if(type === 'image') {
+            let data = cloneDeep(slidesData);
+
+            let index = data[slideIdx].components.length;
+            setComponentIdx(index);
+
+            let component = {
+                "index": index,
+                "type": "image",
+                "x": 0,
+                "y": 0,
+                "w": 40,
+                // "h": e.target.height / e.target.width * 40,
+                "h": 40,
+                "scale": [1,1],
+                "rotate": 0,
+                "keepRatio": true,
+                "zIndex": 0,
+                "src": item.path
+            };
+
+            data[slideIdx].components.push(component);
+
+            batch(() => {
+                dispatch(setSlidesData(data));
+                dispatch(selectSlide(data[slideIdx]));
+                dispatch(selectComponent(component));
+            });
+
+            setIsOpened(false);
         }
     };
 
@@ -302,10 +292,10 @@ export default function MenuContainer() {
                         <FontAwesomeIcon icon={faFont} className="icon add-text" onClick={add_text} />
                     </div>
                     <div data-tooltip={translate('addBackground', ln)}>
-                        <FontAwesomeIcon icon={faImage} className="icon add-image" onClick={open_background_gallery} />
+                        <FontAwesomeIcon icon={faImage} className="icon add-image" onClick={()=>open_background_gallery('background')} />
                     </div>
                     <div data-tooltip={translate('addImage', ln)}>
-                        <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={open_gallery} />
+                        <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={()=>open_background_gallery('image')} />
                     </div>
                     <div data-tooltip={translate('playStoryPreview', ln)}>
                         <FontAwesomeIcon icon={faPlay} className="icon open-preview" onClick={play_story} />
@@ -350,8 +340,7 @@ export default function MenuContainer() {
 
             <WordContainer startingWord={startingWord} />
 
-            <ImageGalleryContainer isOpened={isOpened} closeGallery={close_gallery} />
-            <BackgroundGalleryContainer isOpened={isOpenedB} closeGallery={close_background_gallery} />
+            <BackgroundGalleryContainer isOpened={isOpened} closeGallery={close_background_gallery} type={imagesType} />
         </>
     )
 };

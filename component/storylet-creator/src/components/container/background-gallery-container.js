@@ -8,17 +8,15 @@ import { AntUpload } from "../CustomFormInput/AntUpload";
 
 import '../../style/container/background-gallery-container.css'
 
-export default function BackgroundGalleryContainer({isOpened, closeGallery}) {
+export default function BackgroundGalleryContainer({isOpened, closeGallery, type}) {
     const ln = useSelector(state => state.selectedLanguage);
 
     const bg1 = [
         {
             path: window.STATIC.IMAGE_BASE_PATH + "backgrounds/forest.png",
-            _id:'forest'
         },
         {
             path: window.STATIC.IMAGE_BASE_PATH + "backgrounds/sky.png",
-            _id:'sky'
         },
         {
             path: window.STATIC.IMAGE_BASE_PATH + "backgrounds/anchor-156720_960_720.png",
@@ -125,38 +123,370 @@ export default function BackgroundGalleryContainer({isOpened, closeGallery}) {
         }
     ];
 
-    const [backgrounds, setBackgrounds] = useState([]);
+    const fantastic_characters = [
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/001-centaur.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/002-kraken.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/003-dinosaur.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/004-tree-1.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/005-hand.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/006-echidna.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/007-robot.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/008-mushroom.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/009-harpy.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/010-phoenix.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/011-dragon-1.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/012-devil.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/013-troll.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/014-alien.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/015-minotaur.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/016-madre-monte.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/017-satyr.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/018-karakasakozou.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/019-pirate.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/020-werewolf.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/021-scarecrow.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/022-valkyrie.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/023-curupira.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/024-loch-ness-monster.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/025-tree.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/026-cerberus.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/027-gryphon.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/028-mermaid.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/029-vampire.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/030-goblin.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/031-yeti.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/032-leprechaun.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/033-medusa.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/034-chimera.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/035-elf.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/036-hydra.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/037-cyclops.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/038-pegasus.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/039-narwhal.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/040-woodcutter.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/041-zombie.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/042-dragon.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/043-frankenstein.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/044-witch.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/045-fairy.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/046-genie.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/047-pinocchio.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/048-ghost.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/049-wizard.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "fantastic-characters/050-unicorn.png"
+        },
+        // {
+        //     path: window.STATIC.IMAGE_BASE_PATH + "storylet-prof.png"
+        // }
+    ];
+    const sea_life = [
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/001-octopus.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/002-crab.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/003-oyster.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/004-dolphin.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/005-starfish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/006-flounder.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/007-shark.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/008-whale.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/009-fish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/010-swordfish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/011-turtle.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/012-jellyfish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/013-seahorse.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/014-puffer-fish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/015-sea-cow.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/016-orca.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/017-squid.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/018-coral.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/019-manta-ray.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/020-lobster.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/021-clam.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/022-seaweed.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/023-tuna.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/024-stingray.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/025-seal.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/026-eel.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/027-seagull.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/028-shrimp.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/029-anglerfish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/030-beluga.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/031-walrus.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/032-narwhal.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/033-diver.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/034-penguin.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/035-hammerhead-fish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/036-hermit-crab.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/037-clownfish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/038-surgeon-fish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/039-angelfish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/040-sunfish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/041-sea-anemone.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/042-coral-1.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/043-fish-1.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/044-fish-2.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/045-cod.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/046-cuttlefish.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/047-nautilus.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/048-puffin.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/049-mussel.png"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "sea-life/050-sea-urchin.png"
+        }
+    ];
+
+    const [images, setImages] = useState([]);
     const [selectedGallery, setSelectedGallery] = useState([]);
     const [selectedColor, setSelectedColor] = useState('#fafafa');
     const [selectedImg, setSelectedImg] = useState({});
 
     useEffect(()=>{
+        if(!type)
+            return;
         const uploads = [];
 
         if(window.RESOURCES && window.RESOURCES.IMAGES)
             for(let i=0; i<window.RESOURCES.IMAGES.length; i++)
-                uploads.push(window.RESOURCES.IMAGES[i])
+                if(window.RESOURCES.IMAGES[i].type === type)
+                    uploads.push(window.RESOURCES.IMAGES[i]);
 
-        backgrounds[0] = uploads;
-        backgrounds[1] = bg1;
-        backgrounds[2] = bg2;
+        images[0] = uploads;
+        if(type === 'background') {
+            images[1] = bg1;
+            images[2] = bg2;
+        } else if(type === 'image') {
+            images[1] = fantastic_characters;
+            images[2] = sea_life;
+        }
 
-        setBackgrounds(backgrounds);
-        setSelectedGallery(uploads.length ? backgrounds[0] :  backgrounds[1]);
-    }, []);
+        setImages(images);
+        setSelectedGallery(uploads.length ? images[0] :  images[1]);
+    }, [type]);
 
     function selectGallery(idx) {
-        setSelectedGallery(backgrounds[idx]);
+        setSelectedGallery(images[idx]);
     }
 
+    const getOptions = () => {
+        let options = [];
+        if(hasUploads())
+            options.push(<Option key={0} value="0">{translate('optionUploads', ln)}</Option>)
+        if(type === 'background') {
+            options.push(<Option key={1} value="1">{translate('optionBG1', ln)}</Option>)
+            options.push(<Option key={2} value="2">{translate('optionBG2', ln)}</Option>)
+        } else if(type === 'image') {
+            options.push(<Option key={1} value="1">{translate('fantasticCharacters', ln)}</Option>)
+            options.push(<Option key={2} value="2">{translate('seaLife', ln)}</Option>)
+        }
+        return options;
+    };
+
     const hasUploads = () => {
-        return backgrounds[0] && backgrounds[0].length;
+        return images[0] && images[0].length;
     };
 
     const { Option } = Select;
 
     const isSelected = (id) => {
-        return selectedImg._id === id;
+        if(selectedImg._id)
+            return selectedImg._id === id;
+        return selectedImg.path === id;
     };
 
     const handleItemClick = (item) => {
@@ -170,46 +500,46 @@ export default function BackgroundGalleryContainer({isOpened, closeGallery}) {
     return (
         <Modal title={translate('selectBackground', ln)} visible={isOpened} width={'60vw'}
             bodyStyle={{maxHeight:'60vh', overflowX:'auto', backgroundColor:'transparent', padding:8}}
-            onOk={() => closeGallery(selectedImg, selectedColor)}
+            onOk={() => closeGallery(selectedImg, selectedColor, type)}
             onCancel={() => closeGallery({_id:'@close'})}
 
             footer={[
                 <Select key="select" defaultValue={hasUploads() ? "0" : "1"} onChange={selectGallery}>
-                    {hasUploads() ? <Option value="0">{translate('optionUploads', ln)}</Option> : ''}
-                    <Option value="1">{translate('optionBG1', ln)}</Option>
-                    <Option value="2">{translate('optionBG2', ln)}</Option>
+                    {getOptions()}
                 </Select>,
                 <Button key="cancel" onClick={() => closeGallery({_id:'@close'})}>{translate('buttonCancel', ln)}</Button>,
-                <Button key="ok" type="primary" onClick={() => closeGallery(selectedImg, selectedColor)}>{translate('buttonOk', ln)}</Button>
+                <Button key="ok" type="primary" onClick={() => closeGallery(selectedImg, selectedColor, type)}>{translate('buttonOk', ln)}</Button>
             ]}
         >
             <Row className={'ant-image-grid'} gutter={[8, 8]}>
                 <Col key={'@upload'} span={8}>
-                    <div className={'upload' + (isSelected('item._id') ? ' selected' : '')}
+                    <div className={'upload' + (isSelected('@upload') ? ' selected' : '')}
                          onClick={()=>handleItemClick({_id:'@upload'})}
                     >
                         <AntUpload max={1} />
                         <CheckOutlined className={'check'} />
                     </div>
                 </Col>
-                <Col key={'@color'} span={8}>
-                    <Popover content={(<SketchPicker color={selectedColor} onChangeComplete={handleChangeComplete} />)} trigger="click">
+
+                {type === 'background' ? <Col key={'@color'} span={8}>
+                    <Popover content={(<SketchPicker color={selectedColor} onChangeComplete={handleChangeComplete}/>)}
+                             trigger="click">
                         <div className={'select-color' + (isSelected('@color') ? ' selected' : '')}
-                             onClick={()=>handleItemClick({_id:'@color'})}
-                             style={{backgroundColor:selectedColor}}
+                             onClick={() => handleItemClick({_id: '@color'})}
+                             style={{backgroundColor: selectedColor}}
                         >
                             <div className={'select-color-label'}>
-                                <BgColorsOutlined />
+                                <BgColorsOutlined/>
                                 <div>{translate('selectColor', ln)}</div>
                             </div>
-                            <CheckOutlined className={'check'} />
+                            <CheckOutlined className={'check'}/>
                         </div>
                     </Popover>
-                </Col>
+                </Col> : ''}
                 {selectedGallery.map(function(item, idx){
                     return (
-                        <Col key={item._id} span={8}>
-                            <div className={'img-preview' + (isSelected(item._id) ? ' selected' : '')}
+                        <Col key={idx} span={8}>
+                            <div className={'img-preview' + (isSelected(item._id || item.path) ? ' selected' : '')}
                                  style={{backgroundImage: 'url(' + item.path + ')'}}
                                  onClick={()=>handleItemClick(item)}
                             >
