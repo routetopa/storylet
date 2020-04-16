@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
-import {translate} from "../helpers";
+import {translate} from "./helpers";
 import { Button, Select, Modal, Row, Col, Popover } from 'antd';
 import { CheckOutlined, BgColorsOutlined } from '@ant-design/icons';
 import { SketchPicker } from 'react-color';
-import { AntUpload } from "../CustomFormInput/AntUpload";
+import { AntUpload } from "./CustomFormInput/AntUpload";
 
-import '../../style/container/background-gallery-container.css'
+import '../style/image-gallery.css'
 
-export default function BackgroundGalleryContainer({isOpened, closeGallery, type}) {
+export default function ImageGallery({isOpened, closeGallery, type}) {
     const ln = useSelector(state => state.selectedLanguage);
 
     const bg1 = [
@@ -498,7 +498,8 @@ export default function BackgroundGalleryContainer({isOpened, closeGallery, type
     };
 
     return (
-        <Modal title={translate('selectBackground', ln)} visible={isOpened} width={'60vw'}
+        <Modal title={type==='image' ? translate('selectImage', ln) : translate('selectBackground', ln)}
+            visible={isOpened} width={'60vw'}
             bodyStyle={{maxHeight:'60vh', overflowX:'auto', backgroundColor:'transparent', padding:8}}
             onOk={() => closeGallery(selectedImg, selectedColor, type)}
             onCancel={() => closeGallery({_id:'@close'})}

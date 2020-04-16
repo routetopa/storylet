@@ -3,7 +3,7 @@ import {useSelector, useDispatch, batch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
 
 import WordContainer from './word-container'
-import BackgroundGalleryContainer from './background-gallery-container'
+import ImageGallery from '../image-gallery'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faFileImage, faImage } from '@fortawesome/free-regular-svg-icons'
 import { faFont, faPlusCircle, faTrashAlt, faCopy, faPlay, faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons'
@@ -99,12 +99,12 @@ export default function MenuContainer() {
         });
     };
 
-    const open_background_gallery = (type) => {
+    const open_gallery = (type) => {
         setImagesType(type);
         setIsOpened(true);
     };
 
-    const close_background_gallery = (item, color, type) => {
+    const close_gallery = (item, color, type) => {
         if(item._id === '@close') {
             setIsOpened(false);
         }
@@ -292,10 +292,10 @@ export default function MenuContainer() {
                         <FontAwesomeIcon icon={faFont} className="icon add-text" onClick={add_text} />
                     </div>
                     <div data-tooltip={translate('addBackground', ln)}>
-                        <FontAwesomeIcon icon={faImage} className="icon add-image" onClick={()=>open_background_gallery('background')} />
+                        <FontAwesomeIcon icon={faImage} className="icon add-image" onClick={()=>open_gallery('background')} />
                     </div>
                     <div data-tooltip={translate('addImage', ln)}>
-                        <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={()=>open_background_gallery('image')} />
+                        <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={()=>open_gallery('image')} />
                     </div>
                     <div data-tooltip={translate('playStoryPreview', ln)}>
                         <FontAwesomeIcon icon={faPlay} className="icon open-preview" onClick={play_story} />
@@ -340,7 +340,7 @@ export default function MenuContainer() {
 
             <WordContainer startingWord={startingWord} />
 
-            <BackgroundGalleryContainer isOpened={isOpened} closeGallery={close_background_gallery} type={imagesType} />
+            <ImageGallery isOpened={isOpened} type={imagesType} closeGallery={close_gallery}  />
         </>
     )
 };

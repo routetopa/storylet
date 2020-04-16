@@ -98,13 +98,18 @@ ln["flipV_it"] = "Flip Vertical";
 
 // SELECT IMAGES
 ln["selectBackground_it"] = "Seleziona sfondo";
+ln["selectImage_it"] = "Seleziona immagine";
 ln["uploadImage_it"] = "Carica immagine";
 ln["selectColor_it"] = "Seleziona colore";
 ln["buttonOk_it"] = "Ok";
 ln["buttonCancel_it"] = "Chiudi";
 ln["optionUploads_it"] = "Consigliate";
+
+// image categories
 ln["optionBG1_it"] = "Sfondi 1";
 ln["optionBG2_it"] = "Sfondi 2";
+ln["fantasticCharacters_it"] = "Personaggi fantastici";
+ln["seaLife_it"] = "Mondo marino";
 
 /******** EN ********/
 
@@ -195,13 +200,18 @@ ln["flipH_en"] = "Flip Horizontal";
 ln["flipV_en"] = "Flip Vertical";
 
 ln["selectBackground_en"] = "Select background";
+ln["selectImage_en"] = "Select image";
 ln["uploadImage_en"] = "Upload image";
 ln["selectColor_en"] = "Select color";
 ln["buttonOk_en"] = "Ok";
 ln["buttonCancel_en"] = "Close";
 ln["optionUploads_en"] = "Recommended ";
+
+// image categories
 ln["optionBG1_en"] = "Backgrounds 1";
 ln["optionBG2_en"] = "Backgrounds 2";
+ln["fantasticCharacters_en"] = "Fantastic Characters";
+ln["seaLife_en"] = "Sea Life";
 
 /******** ES ********/
 
