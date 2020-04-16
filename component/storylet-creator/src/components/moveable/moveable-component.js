@@ -24,7 +24,6 @@ export default function MoveableComponent() {
     const [rotate, setRotate] = useState(null);
 
     useEffect(()=>{
-        console.log('moveable effect');
         setTarget(null);
         if(selectedSlide && selectedComponent) {
             setSlideIdx(selectedSlide.index);

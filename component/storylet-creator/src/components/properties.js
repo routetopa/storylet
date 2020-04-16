@@ -11,21 +11,12 @@ import {
 import { SketchPicker } from 'react-color';
 import {translate} from "./helpers";
 
-// import 'antd/dist/antd.css';
 import '../style/properties.css';
 
 import setSlideData from "../reducer/actions/set-slides-data";
 import setSelectComponent from "../reducer/actions/select-component";
 import setSelectSlide from "../reducer/actions/select-slide";
 import copyComponent from "../reducer/actions/copy-component";
-
-// todo buttons visual feedback
-// todo text fumetto --> border: thickness, color, type, radius, fumetto
-// https://codepen.io/JoeHastings/pen/gPrPMo
-//todo improve "selected text"
-//todo ln
-
-//todo rename balloonnn set properties on select component
 
 export default function Properties() {
     const dispatch = useDispatch();

@@ -13,7 +13,6 @@ import '../style/menu.css';
 
 // Actions
 import languageSelected from "../reducer/actions/select-language";
-import storylet from "../reducer/storylet";
 import setStorylet from "../reducer/actions/set-storylet";
 import { notification, Popconfirm } from 'antd';
 
@@ -70,7 +69,7 @@ export default function Menu() {
             if(storylet.autosave)
                 setAutosave(storylet.autosave);
         }
-    }, [storylet]);
+    }, [storylet, dispatch]);
 
     // useEffect(() => {
     //     if(!selectedLanguage)

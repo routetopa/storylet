@@ -27,7 +27,7 @@ export default function MenuContainer() {
     const selectedComponent = useSelector(state => state.selectedComponent);
 
     const [slideIdx, setSlideIdx] = useState(null);
-    const [componentIdx, setComponentIdx] = useState(null);
+    // const [componentIdx, setComponentIdx] = useState(null);
 
     const [startingWord, setStartingWord] = useState([]);
     const searchKey = useRef(null);
@@ -46,20 +46,20 @@ export default function MenuContainer() {
         if(!selectedComponent)
             return;
 
-        setComponentIdx(selectedComponent.index);
+        // setComponentIdx(selectedComponent.index);
     }, [selectedComponent]);
 
     const play_story = async () => {
         window.open(window.STATIC.SITE_URL + 'storylet-viewer/' + window.STORY.DATA.id,'_blank')
     };
 
-    function confirm(e) {
-        play_story();
-    }
-
-    function cancel(e) {
-        play_story()
-    }
+    // function confirm(e) {
+    //     play_story();
+    // }
+    //
+    // function cancel(e) {
+    //     play_story()
+    // }
 
     const get_words = async () => {
         setStartingWord([searchKey.current.value]);
@@ -69,7 +69,7 @@ export default function MenuContainer() {
         let data = cloneDeep(slidesData);
 
         let index = data[slideIdx].components.length;
-        setComponentIdx(index);
+        // setComponentIdx(index);
 
         let component = {
             "index": index,
@@ -141,7 +141,7 @@ export default function MenuContainer() {
             let data = cloneDeep(slidesData);
 
             let index = data[slideIdx].components.length;
-            setComponentIdx(index);
+            // setComponentIdx(index);
 
             let component = {
                 "index": index,
