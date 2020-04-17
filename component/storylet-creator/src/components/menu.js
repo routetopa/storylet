@@ -91,21 +91,20 @@ export default function Menu() {
 
     const save_storylet = (exit=false) => {
         return
-        // debugger
-        axios.put(window.API_ENDPOINT.SAVE_STORYLET, {
-            storyletid: window.STORY.DATA.id,
-            story     : slidesData,
-            metadata  : storylet
-        })
-            .then((response) => {
-                if(exit === true) //save and exit
-                    window.location.href = window.STATIC.EXIT_URL;
-                if(!autosave)
-                    openNotificationWithIcon('success');
-                // console.log(response);
-            }, (error) => {
-                console.log(error);
-            });
+        // axios.put(window.API_ENDPOINT.SAVE_STORYLET, {
+        //     storyletid: window.STORY.DATA.id,
+        //     story     : slidesData,
+        //     metadata  : storylet
+        // })
+        //     .then((response) => {
+        //         if(exit === true) //save and exit
+        //             window.location.href = window.STATIC.EXIT_URL;
+        //         if(!autosave)
+        //             openNotificationWithIcon('success');
+        //         // console.log(response);
+        //     }, (error) => {
+        //         console.log(error);
+        //     });
     };
 
     const set_autosave = () => {

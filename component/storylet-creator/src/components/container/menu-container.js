@@ -16,6 +16,7 @@ import selectSlide from "../../reducer/actions/select-slide";
 import selectComponent from "../../reducer/actions/select-component";
 
 import {translate} from "../helpers";
+import copyComponent from "../../reducer/actions/copy-component";
 
 export default function MenuContainer() {
     const ln = useSelector(state => state.selectedLanguage);
@@ -34,6 +35,7 @@ export default function MenuContainer() {
 
     const [isOpened, setIsOpened] = useState(false);
     const [imagesType, setImagesType] = useState(false);
+    const [undoPointer, setUndoPointer] = useState(0);
 
     useEffect(()=>{
         if(!selectedSlide)
@@ -283,6 +285,70 @@ export default function MenuContainer() {
             dispatch(selectSlide(data[goto]));
             dispatch(selectComponent(null));
         });    };
+
+    /*ctrl-z*/
+    useEffect(()=>{
+        // console.log('pointer: ' + undoPointer);
+        document.removeEventListener("keydown", undo_redo);
+        document.addEventListener("keydown", undo_redo);
+        return function cleanup() {
+            document.removeEventListener("keydown", undo_redo);
+        };
+    }, [undoPointer]);
+
+    useEffect(() => {
+        if(!slidesData || slidesData.length===0)
+            return;
+
+        if(selectedComponent !== 0) { // not if undo
+            let data = cloneDeep(slidesData);
+            let history = cloneDeep(window.HISTORY.DATA);
+            window.HISTORY.DATA = history.slice(0, undoPointer+1);
+
+            window.HISTORY.DATA.push(
+                {
+                    slidesData: data,
+                    slideIdx: slideIdx || data[0].index,
+                }
+            );
+            setUndoPointer(window.HISTORY.DATA.length-1);
+        }
+
+        // console.log(window.HISTORY.DATA.length + ' elementi');
+
+    }, [slidesData]);
+
+    const undo_redo = (event) => {
+        let key = event.which || event.keyCode; // keyCode detection
+        let ctrl = event.ctrlKey ? event.ctrlKey : key === 17; // ctrl detection
+
+        if ( key === 90 && ctrl ) {
+            if(undoPointer === 0)
+                return;
+            // console.log('UNDO '+(undoPointer-1));
+            let data = cloneDeep(window.HISTORY.DATA[undoPointer-1]);
+            setUndoPointer(undoPointer => undoPointer-1);
+
+            batch(() => {
+                dispatch(setSlidesData(data.slidesData));
+                dispatch(selectSlide(data.slidesData[data.slideIdx]));
+                dispatch(selectComponent(0));
+            });
+        }
+        else if ( key === 89 && ctrl ) {
+            if(undoPointer === window.HISTORY.DATA.length-1)
+                return;
+            // console.log('REDO '+(undoPointer+1));
+            let data = cloneDeep(window.HISTORY.DATA[undoPointer+1]);
+            setUndoPointer(undoPointer => undoPointer+1);
+
+            batch(() => {
+                dispatch(setSlidesData(data.slidesData));
+                dispatch(selectSlide(data.slidesData[data.slideIdx]));
+                dispatch(selectComponent(0));
+            });
+        }
+    };
 
     return (
         <>
