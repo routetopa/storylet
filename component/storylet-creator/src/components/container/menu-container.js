@@ -311,6 +311,10 @@ export default function MenuContainer() {
                     slideIdx: slideIdx || data[0].index,
                 }
             );
+
+            if(window.HISTORY.DATA.length > 11) // limit 10 undo
+                window.HISTORY.DATA.shift();
+
             setUndoPointer(window.HISTORY.DATA.length-1);
         }
 
