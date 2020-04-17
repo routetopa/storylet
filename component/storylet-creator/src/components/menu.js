@@ -156,7 +156,7 @@ export default function Menu() {
                     <div className="menu-item menu-btn" onClick={()=>save_storylet()}>{translate('save', selectedLanguage)}</div>
                     <div className="menu-item">
                         {translate('autosave', language)}
-                        <Switch checked={autosave ? "checked" : ""} size={'small'} onChange={set_autosave}></Switch>
+                        <Switch checked={autosave} size={'small'} onChange={set_autosave}/>
                     </div>
 
                     <div className="menu-item">

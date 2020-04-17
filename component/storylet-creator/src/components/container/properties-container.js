@@ -161,7 +161,7 @@ export default function PropertiesContainer()
                 </Select>
                 <div className="property-row">
                     <label className="template-label">{translate('autoplay', ln)}</label>
-                    <Switch style={{marginLeft:8}} checked={autoplay ? "checked" : ""} size={'small'} onChange={set_autoplay}></Switch>
+                    <Switch style={{marginLeft:8}} checked={autoplay} size={'small'} onChange={set_autoplay}/>
                 </div>
             </div>
         </div>
