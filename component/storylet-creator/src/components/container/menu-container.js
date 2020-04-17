@@ -312,7 +312,7 @@ export default function MenuContainer() {
                 }
             );
 
-            if(window.HISTORY.DATA.length > 11) // limit 10 undo
+            if(window.HISTORY.DATA.length > 11) // todo limit 10 undo
                 window.HISTORY.DATA.shift();
 
             setUndoPointer(window.HISTORY.DATA.length-1);
