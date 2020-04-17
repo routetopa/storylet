@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import cloneDeep from 'lodash/cloneDeep';
 
-
 // Style
 // import '../vendor/bootstrap.min.css';
 import '../style/menu.css';
@@ -14,7 +13,7 @@ import '../style/menu.css';
 // Actions
 import languageSelected from "../reducer/actions/select-language";
 import setStorylet from "../reducer/actions/set-storylet";
-import { notification, Popconfirm } from 'antd';
+import { Select, Switch, notification, Popconfirm } from 'antd';
 
 export default function Menu() {
     const dispatch = useDispatch();
@@ -27,11 +26,17 @@ export default function Menu() {
     const storylet = useSelector(state => state.storylet);
 
     const openNotificationWithIcon = type => {
-        notification[type]({
-            message: translate('saved', language),
-            description: translate('hasBeenSuccessfullySaved', language)
-        });
-    };
+        if(type==='success')
+            notification[type]({
+                message: translate('saved', language),
+                description: translate('hasBeenSuccessfullySaved', language)
+            });
+        else if(type==='error')
+            notification[type]({
+                message: translate('error', language),
+                // description: translate('hasBeenSuccessfullySaved', language)
+            });
+        };
 
     // useEffect(() => {
     //     let url_string = window.location.href;
@@ -90,21 +95,21 @@ export default function Menu() {
     };
 
     const save_storylet = (exit=false) => {
-        return
-        // axios.put(window.API_ENDPOINT.SAVE_STORYLET, {
-        //     storyletid: window.STORY.DATA.id,
-        //     story     : slidesData,
-        //     metadata  : storylet
-        // })
-        //     .then((response) => {
-        //         if(exit === true) //save and exit
-        //             window.location.href = window.STATIC.EXIT_URL;
-        //         if(!autosave)
-        //             openNotificationWithIcon('success');
-        //         // console.log(response);
-        //     }, (error) => {
-        //         console.log(error);
-        //     });
+        axios.put(window.API_ENDPOINT.SAVE_STORYLET, {
+            storyletid: window.STORY.DATA.id,
+            story     : slidesData,
+            metadata  : storylet
+        })
+            .then((response) => {
+                if(exit === true) //save and exit
+                    window.location.href = window.STATIC.EXIT_URL;
+                if(!autosave)
+                    openNotificationWithIcon('success');
+                // console.log(response);
+            }, (error) => {
+                openNotificationWithIcon('error');
+                console.log(error);
+            });
     };
 
     const set_autosave = () => {
@@ -122,15 +127,15 @@ export default function Menu() {
         }
     };
 
-    const set_language = (e) => {
+    const set_language = (value) => {
         let data = cloneDeep(storylet);
-        data.language = e.target.value;
+        data.language = value;
 
         batch(() => {
             dispatch(setStorylet(data));
         });
 
-        dispatch(languageSelected(e.target.value));
+        dispatch(languageSelected(value));
     };
 
     function confirm(e) {
@@ -149,19 +154,20 @@ export default function Menu() {
             <div className={`sidebar ${menuStatus}`}>
                 <div className="sidebarBody">
                     <div className="menu-item menu-btn" onClick={()=>save_storylet()}>{translate('save', selectedLanguage)}</div>
-                    <div className="menu-item property-row custom-checkbox">
-                        <input checked={autosave ? "checked" : ""} type="checkbox" className="custom-control-input" id="menuAutosave" onChange={set_autosave} value="autosave"/>
-                        <label className="custom-control-label ddr" htmlFor="menuAutosave">{translate('autosave', language)}</label>
+                    <div className="menu-item">
+                        {translate('autosave', language)}
+                        <Switch checked={autosave ? "checked" : ""} size={'small'} onChange={set_autosave}></Switch>
                     </div>
-                    <div className="menu-item menu-select">
+
+                    <div className="menu-item">
                         {translate('language', selectedLanguage)}
-                        <select value={language} className="form-control" onChange={set_language}>
-                            <option value="it">IT</option>
-                            <option value="en">EN</option>
-                            <option value="es">ES</option>
-                            <option value="fr">FR</option>
-                            <option value="de">DE</option>
-                        </select>
+                        <Select value={language} onChange={set_language}>
+                            <Select.Option value="it">IT</Select.Option>
+                            <Select.Option value="en">EN</Select.Option>
+                            <Select.Option value="es">ES</Select.Option>
+                            <Select.Option value="fr">FR</Select.Option>
+                            <Select.Option value="de">DE</Select.Option>
+                        </Select>
                     </div>
 
                         <div className="menu-item menu-btn">
@@ -173,7 +179,7 @@ export default function Menu() {
                                 okText={translate('yes', language)}
                                 cancelText={translate('no', language)}
                             >
-                                <div className="inner-btn">{translate('exit', language)}</div>
+                                <div className="">{translate('exit', language)}</div>
                             </Popconfirm>
                         </div>
 

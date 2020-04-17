@@ -12,7 +12,7 @@
 }
 
 .sidebar {
-    width: 12.5%;
+    width: 25%;
     position: fixed;
     top: 56px;
     left: 0;
@@ -49,20 +49,6 @@
     font-weight: 700;
 }
 
-/*.inner-btn {*/
-/*    width: 60%;*/
-/*    margin: auto;*/
-/*}*/
-
-.menu-select select {
-    width: 80px;
-    display: inline-block;
-    margin-left: 16px;
-}
-
-/*todo*/
-label.custom-control-label.ddr::before, label.custom-control-label.ddr::after {
-    top: 20px !important;
-    left: 74px !important;
-    cursor: pointer;
+.sidebar .ant-select, .sidebar .ant-switch {
+    margin-left: 8px;
 }

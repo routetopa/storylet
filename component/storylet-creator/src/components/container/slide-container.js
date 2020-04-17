@@ -1,5 +1,5 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import {batch, useDispatch, useSelector} from 'react-redux'
 
 // Components
 import Slide from '../slide'
@@ -20,7 +20,7 @@ export default function SlideContainer()
     return (
         <div className="slide-container">
             {slidesData.map((slide, idx) =>
-                <Slide selected={slide.id===selectedSlide.id} isSettingVisible={true} key={idx} parameters={slide} isEditable={false} onClick={() => {dispatch(componentSelected(null)); dispatch(selectSlide(slidesData[idx]))}} />
+                <Slide selected={slide.id===selectedSlide.id} isSettingVisible={true} key={idx} parameters={slide} isEditable={false} onClick={() => { batch(() => {dispatch(componentSelected(null)); dispatch(selectSlide(slidesData[idx]))});}} />
             )}
         </div>
     )

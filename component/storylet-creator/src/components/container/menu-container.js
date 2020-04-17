@@ -1,12 +1,13 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch, batch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
+import { Input } from 'antd';
 
 import WordContainer from './word-container'
 import ImageGallery from '../image-gallery'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLightbulb, faFileImage, faImage } from '@fortawesome/free-regular-svg-icons'
-import { faFont, faPlusCircle, faTrashAlt, faCopy, faPlay, faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons'
+import { faFont, faPlusCircle, faTrashAlt, faCopy, faPlay, faArrowAltCircleUp, faArrowAltCircleDown, faUndo, faRedo } from '@fortawesome/free-solid-svg-icons'
 
 import '../../style/container/menu-container.css'
 import '../../vendor/tooltip.css';
@@ -16,7 +17,7 @@ import selectSlide from "../../reducer/actions/select-slide";
 import selectComponent from "../../reducer/actions/select-component";
 
 import {translate} from "../helpers";
-import copyComponent from "../../reducer/actions/copy-component";
+// import copyComponent from "../../reducer/actions/copy-component";
 
 export default function MenuContainer() {
     const ln = useSelector(state => state.selectedLanguage);
@@ -326,7 +327,7 @@ export default function MenuContainer() {
         let key = event.which || event.keyCode; // keyCode detection
         let ctrl = event.ctrlKey ? event.ctrlKey : key === 17; // ctrl detection
 
-        if ( key === 90 && ctrl ) {
+        if (event === '@undo' || (key === 90 && ctrl)) {
             if(undoPointer === 0)
                 return;
             // console.log('UNDO '+(undoPointer-1));
@@ -339,7 +340,7 @@ export default function MenuContainer() {
                 dispatch(selectComponent(0));
             });
         }
-        else if ( key === 89 && ctrl ) {
+        else if (event === '@redo' || (key === 89 && ctrl)) {
             if(undoPointer === window.HISTORY.DATA.length-1)
                 return;
             // console.log('REDO '+(undoPointer+1));
@@ -361,12 +362,20 @@ export default function MenuContainer() {
                     <div data-tooltip={translate('addText', ln)}>
                         <FontAwesomeIcon icon={faFont} className="icon add-text" onClick={add_text} />
                     </div>
-                    <div data-tooltip={translate('addBackground', ln)}>
-                        <FontAwesomeIcon icon={faImage} className="icon add-image" onClick={()=>open_gallery('background')} />
-                    </div>
                     <div data-tooltip={translate('addImage', ln)}>
                         <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={()=>open_gallery('image')} />
                     </div>
+                    <div data-tooltip={translate('addBackground', ln)}>
+                        <FontAwesomeIcon icon={faImage} className="icon add-bg" onClick={()=>open_gallery('background')} />
+                    </div>
+                    <div className={'menu-separator'}> </div>
+                    <div data-tooltip={translate('undo', ln)}>
+                        <FontAwesomeIcon icon={faUndo} className="icon undo" onClick={()=>undo_redo('@undo')} />
+                    </div>
+                    <div data-tooltip={translate('redo', ln)}>
+                        <FontAwesomeIcon icon={faRedo} className="icon undo" onClick={()=>undo_redo('@redo')} />
+                    </div>
+                    <div className={'menu-separator'}> </div>
                     <div data-tooltip={translate('playStoryPreview', ln)}>
                         <FontAwesomeIcon icon={faPlay} className="icon open-preview" onClick={play_story} />
                         {/*<Popconfirm*/}
@@ -404,7 +413,9 @@ export default function MenuContainer() {
                     <div data-tooltip={translate('fantasyHelper', ln)}>
                         <FontAwesomeIcon icon={faLightbulb} className="icon" onClick={get_words} />
                     </div>
-                    <input placeholder={translate('keyword', ln)} id="SearchKey" ref={searchKey} className="form-control col-md-10 col-sm-10" onKeyPress={(e)=>{if (e.key === 'Enter') get_words()}} />
+                    <Input placeholder={translate('keyword', ln)}
+                           id="SearchKey" ref={searchKey}
+                           onKeyPress={(e)=>{if (e.key === 'Enter') get_words()}} />
                 </div>
             </div>
 

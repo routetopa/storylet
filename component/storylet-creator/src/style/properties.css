@@ -1,5 +1,10 @@
 .ant-popover-inner-content {
-    padding: 0; /*todo*/
+    padding: 6px 8px !important; /*todo not here*/
+    /*padding: 0 !important;*/
+}
+
+.ant-popover-inner-content .ant-row.ant-form-item {
+    margin: 0;
 }
 
 .ant-form-item .ant-form-item {

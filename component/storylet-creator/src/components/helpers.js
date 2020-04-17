@@ -18,6 +18,8 @@ ln["keyword_it"] = "Parola chiave";
 ln["addText_it"] = "Aggiungi testo";
 ln["addBackground_it"] = "Aggiungi sfondo";
 ln["addImage_it"] = "Aggiungi immagine";
+ln["undo_it"] = "Annulla (Ctrl+Z)";
+ln["redo_it"] = "Ripeti (Ctrl+Y)";
 ln["playStoryPreview_it"] = "Riproduci anteprima storia";
 ln["fantasyHelper_it"] = "Aiuta la tua fantasia!";
 
@@ -38,6 +40,7 @@ ln["yes_it"] = "Si";
 ln["no_it"] = "No";
 ln["saved_it"] = "Salvataggio riuscito!";
 ln["hasBeenSuccessfullySaved_it"] = "La storia è stata salvata con successo!";
+ln["error_it"] = "Qualcosa è andato storto :(";
 
 // WORD IDEAS
 ln["analogies_it"] = "Analogie";
@@ -121,6 +124,8 @@ ln["keyword_en"] = "Keyword";
 ln["addText_en"] = "Add Text";
 ln["addBackground_en"] = "Add Background";
 ln["addImage_en"] = "Add Image";
+ln["undo_en"] = "Undo (Ctrl+Z)";
+ln["redo_en"] = "Redo (Ctrl+Y)";
 ln["playStoryPreview_en"] = "Play Story Preview";
 ln["fantasyHelper_en"] = "Help your Imagination!";
 
@@ -141,6 +146,7 @@ ln["yes_en"] = "Yes";
 ln["no_en"] = "No";
 ln["saved_en"] = "Saving successful!";
 ln["hasBeenSuccessfullySaved_en"] = "The Story has been successfully saved!";
+ln["error_en"] = "Something went wrong :(";
 
 // WORD IDEAS
 ln["analogies_en"] = "Analogies";

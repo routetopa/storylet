@@ -23,10 +23,17 @@
 
 .component-buttons-container > div {
     display: inline-block;
-    width: 48px;
+    width: 38px;
     text-align: center;
     transition: background-color .3s linear;
     border-radius: 4px;
+}
+
+.component-buttons-container > div.menu-separator {
+    width: 2px;
+    height: 28px;
+    margin: 0 4px;
+    background-color: rgba(14,19,24,.15);
 }
 
 .component-buttons-container > div:hover {
@@ -35,6 +42,12 @@
 
 .component-buttons-container .icon.add-image  {
     padding: 5px;
+}
+.component-buttons-container .icon.add-bg  {
+    /*padding: 5px;*/
+}
+.component-buttons-container .icon.undo  {
+    padding: 10px;
 }
 .component-buttons-container .icon.open-preview {
     color: var(--storylet-primary) !important;

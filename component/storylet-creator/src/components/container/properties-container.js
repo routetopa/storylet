@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {batch, useDispatch, useSelector} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
+import { Input, Select, Switch } from 'antd';
 
 import {translate} from "../helpers";
 // import TextProperties from '../slide-components/properties/text-properties'
@@ -72,16 +73,16 @@ export default function PropertiesContainer()
         setSelectedTab(0);
     }, [selectedComponent]);
 
-    const set_template = (e) => {
+    const set_template = (value) => {
         let data = cloneDeep(storylet);
 
-        data.viewer.template = e.target.value;
+        data.viewer.template = value;
 
         batch(() => {
             dispatch(setStorylet(data));
         });
 
-        setTemplate(e.target.value);
+        setTemplate(value);
     };
 
     const set_autoplay = () => {
@@ -145,22 +146,22 @@ export default function PropertiesContainer()
                 <div className="property-row">
                     <label className="template-label">{translate('title', ln)}</label>
                 </div>
-                <input className="form-control" defaultValue={name} onChange={(e) => debouncedName(e.target.value)} />
+                <Input defaultValue={name} onChange={(value) => debouncedName(value)} />
                 <div className="property-row">
                     <label className="template-label">{translate('description', ln)}</label>
                 </div>
-                <textarea className="form-control template" defaultValue={description} onChange={(e) => debouncedDescription(e.target.value)} />
+                <Input.TextArea defaultValue={description} onChange={(value) => debouncedDescription(value)} />
                 <div className="property-row">
                     <label className="template-label">{translate('template', ln)}</label>
-                    <select value={template} className="form-control template" onChange={set_template}>
-                        <option value="linear">{translate('linear', ln)}</option>
-                        <option value="snail">{translate('snail', ln)}</option>
-                        <option value="cube">{translate('cube', ln)}</option>
-                    </select>
                 </div>
-                <div className="property-row custom-checkbox">
-                    <input checked={autoplay ? "checked" : ""} type="checkbox" className="custom-control-input" id="menuAutoplay" onChange={set_autoplay} value="autoplay"/>
-                    <label className="custom-control-label mycb" htmlFor="menuAutoplay">{translate('autoplay', ln)}</label>
+                <Select style={{width:'100%'}} value={template} onChange={set_template}>
+                    <Select.Option value="linear">{translate('linear', ln)}</Select.Option>
+                    <Select.Option value="snail">{translate('snail', ln)}</Select.Option>
+                    <Select.Option value="cube">{translate('cube', ln)}</Select.Option>
+                </Select>
+                <div className="property-row">
+                    <label className="template-label">{translate('autoplay', ln)}</label>
+                    <Switch style={{marginLeft:8}} checked={autoplay ? "checked" : ""} size={'small'} onChange={set_autoplay}></Switch>
                 </div>
             </div>
         </div>

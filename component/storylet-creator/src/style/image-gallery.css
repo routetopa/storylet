@@ -1,21 +1,12 @@
-/*.ant-modal-mask, .ant-modal-wrap {*/
-/*    z-index: 3001 !important;*/
-/*}*/
-
-/*not here*/
+/*todo not here*/
 .moveable-control-box {
     z-index: 1000 !important;
-}
-
-.ant-popover-inner-content {
-    padding: 0 !important;
 }
 
 .sketch-picker {
     box-shadow: none !important;
 }
 /*not here*/
-
 
 .ant-grid-input .ant-select-selection-item-remove {
     display: none;

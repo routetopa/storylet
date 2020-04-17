@@ -41,6 +41,7 @@ function Slide({parameters, isEditable, onClick, isSettingVisible, selected})
                         })
                     }
             )()}
+            {console.log('render slide')}
             {isEditable ? "" : (<div className={"pageCount"}>{parameters.index+1}</div>)}
         </SlideStyle>
     )

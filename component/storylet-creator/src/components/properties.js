@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch, batch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
-import { Form, Input, InputNumber, Select, Upload, Switch, Checkbox, Button, notification, Tabs, Row, Col, Divider, Tooltip, Typography, Popover } from 'antd';
+import { Form, Input, InputNumber, Select, Button, Row, Col, Divider, Tooltip, Popover } from 'antd';
 import {
     LockOutlined, UnlockOutlined, EyeOutlined, RotateRightOutlined,
     BoldOutlined, ItalicOutlined, UnderlineOutlined, ClearOutlined,
