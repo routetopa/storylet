@@ -12,6 +12,7 @@ let ln = [];
 /******** IT ********/
 // MENU
 ln["newText_it"] = "Nuovo testo";
+ln["newSpeech_it"] = "Bla bla bla...";
 ln["keyword_it"] = "Parola chiave";
 
 // tooltip
@@ -118,6 +119,7 @@ ln["seaLife_it"] = "Mondo marino";
 
 // MENU
 ln["newText_en"] = "Nex Text";
+ln["newSpeech_en"] = "Blah, blah blah...";
 ln["keyword_en"] = "Keyword";
 
 // tooltip

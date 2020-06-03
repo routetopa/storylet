@@ -4,6 +4,10 @@
     white-space: pre;
 }
 
+.text-moveable-container .inner_text {
+    height: 100%;
+}
+
 .text-moveable-container.editable {
     border: 2px dashed #4af;
     background-color: rgba(0,0,0,0.2);

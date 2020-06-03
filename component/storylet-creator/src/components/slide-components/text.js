@@ -5,6 +5,7 @@ import '../../style/slide-components/text-style.css';
 
 export default function Text({component, onClick, isEditable})
 {
+    let balloonFontSize = component.fontSize*component.w*0.002;
     const TextComponent = styled.div`
         top:                ${props => props.y+'%'};
         left:               ${props => props.x+'%'};
@@ -30,8 +31,12 @@ export default function Text({component, onClick, isEditable})
             border:             ${(isEditable ? 0.5 : 0.25)+'vw solid #212121'};
             padding:            ${(isEditable ? 0.5 : 0.25)+'vw'};
             border-radius:      ${(isEditable ? 1.5 : 0.75)+'vw'};
-            background-color:    ${props => (props.backgroundColor ? props.backgroundColor : '#fff')};
+            background-color:   ${props => (props.backgroundColor ? props.backgroundColor : '#fff')};
             overflow: visible;
+            
+            white-space: break-spaces;
+            font-size:          ${(isEditable ? balloonFontSize : balloonFontSize/2)+'vw'};
+            text-align: center
         }
         
         &.balloon:before, &.balloon:after {

@@ -319,7 +319,66 @@ export default function Properties() {
         <Form form={form} onValuesChange={onValuesChange}>
             {selectedComponent.type === 'text' ?
                 <>
-                    <Divider orientation={"left"} style={{marginTop:0}}>{translate('text', ln)}</Divider>
+                    {selectedComponent.subType === 'balloon' ?
+                        <>
+                            <Divider orientation={"left"} style={{marginTop: 0}}>{translate('balloon', ln)}</Divider>
+                            <Row>
+                                <Col span={12}>
+                                    <Form.Item labelCol={{span: 8}} wrapperCol={{span: 14}} name={"balloon"}
+                                               label={translate('balloonType', ln)}>
+                                        <Select defaultValue={'balloon speech'} size={size}>
+                                            {/*<Select.Option value={''}>{translate('noneOpt', ln)}</Select.Option>*/}
+                                            <Select.Option
+                                                value={'balloon speech'}>{translate('speechOpt', ln)}</Select.Option>
+                                            <Select.Option
+                                                value={'balloon thought'}>{translate('thoughtOpt', ln)}</Select.Option>
+                                        </Select>
+                                    </Form.Item>
+                                </Col>
+                                <Col span={12}>
+                                    <Form.Item labelCol={{span: 8}} wrapperCol={{span: 14}} name={"placement"}
+                                               label={translate('balloonPlacement', ln)}>
+                                        <Select size={size} defaultValue={'BL'}>
+                                            <Select.Option value={'BL'}>{translate('BL', ln)}</Select.Option>
+                                            <Select.Option value={'BR'}>{translate('BR', ln)}</Select.Option>
+                                            <Select.Option value={'TL'}>{translate('TL', ln)}</Select.Option>
+                                            <Select.Option value={'TR'}>{translate('TR', ln)}</Select.Option>
+                                        </Select>
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                        </>: <Divider orientation={"left"} style={{marginTop:0}}>{translate('text', ln)}</Divider>
+                    }
+                    {/*<Divider orientation={"left"} style={{marginTop:0}}>{translate('text', ln)}</Divider>*/}
+                    <Row className={"text-properties"}>
+                        <Col span={24}>
+                            <Button icon={<BoldOutlined />} size={size} onClick={()=>{setTextProperties('fontWeight')}} />
+                            <Button icon={<ItalicOutlined />} size={size} onClick={()=>{setTextProperties('fontStyle')}} />
+                            <Button icon={<UnderlineOutlined />} size={size} onClick={()=>{setTextProperties('textDecoration')}} />
+                            <Popover content={(<Form.Item name={"color"}><SketchPicker color={selectedComponent.color} /></Form.Item>)} trigger="click">
+                                <Button icon={<FontColorsOutlined />} size={size} />
+                            </Popover>
+                            <Button icon={<ClearOutlined />} size={size} onClick={()=>{setTextProperties('clear')}} />
+                            <div className={"h-divider"}> </div>
+                            {selectedComponent.subType === 'balloon' ?
+                                <>
+                                    <Button icon={<AlignLeftOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'left')}} />
+                                    <Button icon={<AlignCenterOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'center')}} />
+                                    <Button icon={<AlignRightOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'right')}} />
+                                </> : null
+                            }
+                            <Popover content={(<Form.Item name={"backgroundColor"}><SketchPicker color={selectedComponent.backgroundColor} /></Form.Item>)} trigger="click">
+                                <Button icon={<BgColorsOutlined />} size={size} />
+                            </Popover>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24}>
+                            <Form.Item name={"textValue"}>
+                                <Input.TextArea rows={4} onBlur={(e)=>{setSelectedText({startIndex: e.target.selectionStart, length: window.getSelection().toString().length})}} />
+                            </Form.Item>
+                        </Col>
+                    </Row>
                     <Row>
                         <Col span={18}>
                             <Form.Item name={"fontFamily"}>
@@ -358,53 +417,6 @@ export default function Properties() {
                                     <Select.Option value={48}>48</Select.Option>
                                     <Select.Option value={60}>60</Select.Option>
                                     <Select.Option value={72}>72</Select.Option>
-                                </Select>
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Row className={"text-properties"}>
-                        <Col span={24}>
-                            <Button icon={<BoldOutlined />} size={size} onClick={()=>{setTextProperties('fontWeight')}} />
-                            <Button icon={<ItalicOutlined />} size={size} onClick={()=>{setTextProperties('fontStyle')}} />
-                            <Button icon={<UnderlineOutlined />} size={size} onClick={()=>{setTextProperties('textDecoration')}} />
-                            <Popover content={(<Form.Item name={"color"}><SketchPicker color={selectedComponent.color} /></Form.Item>)} trigger="click">
-                                <Button icon={<FontColorsOutlined />} size={size} />
-                            </Popover>
-                            <Button icon={<ClearOutlined />} size={size} onClick={()=>{setTextProperties('clear')}} />
-                            <div className={"h-divider"}> </div>
-                            <Button icon={<AlignLeftOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'left')}} />
-                            <Button icon={<AlignCenterOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'center')}} />
-                            <Button icon={<AlignRightOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'right')}} />
-                            <Popover content={(<Form.Item name={"backgroundColor"}><SketchPicker color={selectedComponent.backgroundColor} /></Form.Item>)} trigger="click">
-                                <Button icon={<BgColorsOutlined />} size={size} />
-                            </Popover>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col span={24}>
-                            <Form.Item name={"textValue"}>
-                                <Input.TextArea rows={4} onBlur={(e)=>{setSelectedText({startIndex: e.target.selectionStart, length: window.getSelection().toString().length})}} />
-                            </Form.Item>
-                        </Col>
-                    </Row>
-                    <Divider orientation={"left"} style={{marginTop:0}}>{translate('balloon', ln)}</Divider>
-                    <Row>
-                        <Col span={12}>
-                            <Form.Item labelCol={{span:8}} wrapperCol={{span:14}} name={"balloon"} label={translate('balloonType', ln)}>
-                                <Select defaultValue={'none'} size={size}>
-                                    <Select.Option value={''}>{translate('noneOpt', ln)}</Select.Option>
-                                    <Select.Option value={'balloon speech'}>{translate('speechOpt', ln)}</Select.Option>
-                                    <Select.Option value={'balloon thought'}>{translate('thoughtOpt', ln)}</Select.Option>
-                                </Select>
-                            </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                            <Form.Item labelCol={{span:8}} wrapperCol={{span:14}} name={"placement"} label={translate('balloonPlacement', ln)}>
-                                <Select size={size} defaultValue={'BL'}>
-                                    <Select.Option value={'BL'}>{translate('BL', ln)}</Select.Option>
-                                    <Select.Option value={'BR'}>{translate('BR', ln)}</Select.Option>
-                                    <Select.Option value={'TL'}>{translate('TL', ln)}</Select.Option>
-                                    <Select.Option value={'TR'}>{translate('TR', ln)}</Select.Option>
                                 </Select>
                             </Form.Item>
                         </Col>

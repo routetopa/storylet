@@ -148,6 +148,10 @@ export default function Menu() {
         // console.log(e);
     }
 
+    function export_HTML() {
+        alert('Export HTML')
+    }
+
     return (
         <div className="menu">
             <FontAwesomeIcon icon={faBars} className="icon" onClick={toggle_sidebar} />
@@ -170,18 +174,22 @@ export default function Menu() {
                         </Select>
                     </div>
 
-                        <div className="menu-item menu-btn">
-                            <Popconfirm
-                                placement="right"
-                                title={translate('saveBeforeExit', language)}
-                                onConfirm={confirm}
-                                onCancel={cancel}
-                                okText={translate('yes', language)}
-                                cancelText={translate('no', language)}
-                            >
-                                <div className="">{translate('exit', language)}</div>
-                            </Popconfirm>
-                        </div>
+                    {/*<div className="menu-item">*/}
+                    {/*    <div onClick={()=>export_HTML()} >{translate('exportHTML', language)}</div>*/}
+                    {/*</div>*/}
+
+                    <div className="menu-item menu-btn">
+                        <Popconfirm
+                            placement="right"
+                            title={translate('saveBeforeExit', language)}
+                            onConfirm={confirm}
+                            onCancel={cancel}
+                            okText={translate('yes', language)}
+                            cancelText={translate('no', language)}
+                        >
+                            <div className="">{translate('exit', language)}</div>
+                        </Popconfirm>
+                    </div>
 
                 </div>
             </div>

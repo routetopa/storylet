@@ -6,7 +6,7 @@ import { Input } from 'antd';
 import WordContainer from './word-container'
 import ImageGallery from '../image-gallery'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLightbulb, faFileImage, faImage } from '@fortawesome/free-regular-svg-icons'
+import { faComment, faLightbulb, faFileImage, faImage } from '@fortawesome/free-regular-svg-icons'
 import { faFont, faPlusCircle, faTrashAlt, faCopy, faPlay, faArrowAltCircleUp, faArrowAltCircleDown, faUndo, faRedo } from '@fortawesome/free-solid-svg-icons'
 
 import '../../style/container/menu-container.css'
@@ -68,7 +68,7 @@ export default function MenuContainer() {
         setStartingWord([searchKey.current.value]);
     };
 
-    const add_text = () =>  {
+    const add_text = (isBalloon) =>  {
         let data = cloneDeep(slidesData);
 
         let index = data[slideIdx].components.length;
@@ -77,7 +77,8 @@ export default function MenuContainer() {
         let component = {
             "index": index,
             "type": "text",
-            "value": translate('newText', ln),
+            "subType": "balloon",
+            "value": isBalloon ? translate('newSpeech', ln) : translate('newText', ln),
             "x": 0,
             "y": 0,
             "w": 40,
@@ -89,7 +90,7 @@ export default function MenuContainer() {
             "fontSize": 24,
             "color": "#000000",
             "fontFamily": '"Helvetica Neue",Roboto,Arial,"Droid Sans",sans-serif',
-            "baloon": "",
+            "balloon": isBalloon ? "balloon speech" : "",
             "placement": 'BL',
         };
 
@@ -360,7 +361,10 @@ export default function MenuContainer() {
             <div id="menu-container">
                 <div className="component-buttons-container" >
                     <div data-tooltip={translate('addText', ln)}>
-                        <FontAwesomeIcon icon={faFont} className="icon add-text" onClick={add_text} />
+                        <FontAwesomeIcon icon={faFont} className="icon add-text" onClick={()=> {add_text(false)}} />
+                    </div>
+                    <div data-tooltip={translate('addBalloon', ln)}>
+                        <FontAwesomeIcon icon={faComment} className="icon add-balloon" onClick={()=> {add_text(true)}} />
                     </div>
                     <div data-tooltip={translate('addImage', ln)}>
                         <FontAwesomeIcon icon={faFileImage} className="icon add-image" onClick={()=>open_gallery('image')} />
