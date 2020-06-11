@@ -10,6 +10,7 @@ export function translate (text, ul) {
 let ln = [];
 
 /******** IT ********/
+
 // MENU
 ln["newText_it"] = "Nuovo testo";
 ln["newSpeech_it"] = "Bla bla bla...";
@@ -17,8 +18,10 @@ ln["keyword_it"] = "Parola chiave";
 
 // tooltip
 ln["addText_it"] = "Aggiungi testo";
+ln["addBalloon_it"] = "Aggiungi discorso";
 ln["addBackground_it"] = "Aggiungi sfondo";
 ln["addImage_it"] = "Aggiungi immagine";
+ln["addDatalet_en"] = "Aggiungi datalet";
 ln["undo_it"] = "Annulla (Ctrl+Z)";
 ln["redo_it"] = "Ripeti (Ctrl+Y)";
 ln["playStoryPreview_it"] = "Riproduci anteprima storia";
@@ -67,21 +70,21 @@ ln["snail_it"] = "chiocciola";
 ln["cube_it"] = "cubo";
 ln["autoplay_it"] = "Autoplay";
 
-ln["text_it"] = "Text";
-ln["size_it"] = "Size";
-ln["position_it"] = "Position";
-ln["scale_it"] = "Scale";
-ln["rotate_it"] = "Rotate";
-ln["balloon_it"] = "Balloon";
-ln["balloonType_it"] = "Type";
+ln["text_it"] = "Testo";
+ln["size_it"] = "Dim.";
+ln["position_it"] = "Posizione";
+ln["scale_it"] = "Scala";
+ln["rotate_it"] = "Ruota";
+ln["balloon_it"] = "Discorso";
+ln["balloonType_it"] = "Tipo";
 ln["balloonPlacement_it"] = "Pos.";
 ln["BL_it"] = "BL";
 ln["BR_it"] = "BR";
 ln["TL_it"] = "TL";
 ln["TR_it"] = "TR";
 ln["noneOpt_it"] = "No";
-ln["speechOpt_it"] = "Speech";
-ln["thoughtOpt_it"] = "Thought";
+ln["speechOpt_it"] = "Discorso";
+ln["thoughtOpt_it"] = "Pensiero";
 ln["width_it"] = "W";
 ln["height_it"] = "H";
 ln["top_it"] = "X";
@@ -92,13 +95,13 @@ ln["scaleY_it"] = "Y";
 ln["degrees_it"] = "Deg.";
 
 //buttons
-ln["delete_it"] = "Delete";
+ln["delete_it"] = "Elimina";
 
 // tooltip
-ln["keepRatio_it"] = "Keep Aspect Ratio";
-ln["bringsUp_it"] = "Brings Up";
-ln["flipH_it"] = "Flip Horizontal";
-ln["flipV_it"] = "Flip Vertical";
+ln["keepRatio_it"] = "Mantenere proporzion";
+ln["bringsUp_it"] = "Porta in primo piano";
+ln["flipH_it"] = "Capovolgi orizzontalmente";
+ln["flipV_it"] = "Flip verticalmente";
 
 // SELECT IMAGES
 ln["selectBackground_it"] = "Seleziona sfondo";
@@ -124,8 +127,10 @@ ln["keyword_en"] = "Keyword";
 
 // tooltip
 ln["addText_en"] = "Add Text";
+ln["addBalloon_en"] = "Add Speech";
 ln["addBackground_en"] = "Add Background";
 ln["addImage_en"] = "Add Image";
+ln["addDatalet_en"] = "Add Datalet";
 ln["undo_en"] = "Undo (Ctrl+Z)";
 ln["redo_en"] = "Redo (Ctrl+Y)";
 ln["playStoryPreview_en"] = "Play Story Preview";
@@ -207,6 +212,7 @@ ln["bringsUp_en"] = "Brings Up";
 ln["flipH_en"] = "Flip Horizontal";
 ln["flipV_en"] = "Flip Vertical";
 
+// SELECT IMAGES
 ln["selectBackground_en"] = "Select background";
 ln["selectImage_en"] = "Select image";
 ln["uploadImage_en"] = "Upload image";

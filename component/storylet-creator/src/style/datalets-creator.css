@@ -1,0 +1,10 @@
+.datalets-creator {
+    position: fixed;
+    z-index: 9999;
+    top: 56px;
+    left: 10vw;
+    width: 80vw;
+    height: calc(100vh - 56px - 40px - 232px - 40px);
+    background-color: #fff;
+    border: none;
+}
