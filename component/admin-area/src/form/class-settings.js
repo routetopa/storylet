@@ -3,30 +3,18 @@ import {Button, Icon, Input, Popconfirm, Upload, Row, Col} from "antd";
 import {API_CALL} from "../api/api";
 import Form from "antd/es/form";
 
-function ClassSettings({classData, form})
+function ClassSettings({classData, form, onClassSettingSubmit})
 {
     const [file, setFile] = useState(null);
     const { getFieldDecorator } = form;
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        form.validateFields( async (err, values) =>
+        form.validateFields((err, values) =>
         {
             if(!err)
             {
-                console.log(values);
-
-                const formData = new FormData();
-                file && file.forEach((f) => {
-                    formData.append('files[]', f);
-                });
-                formData.append('class', values.class);
-                formData.append('section', values.section);
-                formData.append('description', values.description);
-                formData.append('classId', classData.id);
-
-                let response = await API_CALL.post(window.API_ENDPOINT.UPDATE_CLASS, formData);
-                console.log(response);
+                onClassSettingSubmit(values, file);
             }
         });
     };

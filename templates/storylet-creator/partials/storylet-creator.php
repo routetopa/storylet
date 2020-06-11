@@ -38,6 +38,14 @@ if(!is_user_logged_in())
         EXIT_URL: '<?php echo site_url(); ?>/my-storylet'
     };
 
+    window.HISTORY = {
+        DATA: []
+    };
+
+    window.RESOURCES = {
+        IMAGES: []
+    };
+
 </script>
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.30fdea02.js"></script>
