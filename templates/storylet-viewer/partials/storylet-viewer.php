@@ -37,7 +37,7 @@ if(!is_user_logged_in())
     };
 </script>
 
-<script type="text/javascript" src="<?php echo $base_path ?>static/js/runtime-main.fe2f7310.js"></script>
-<script type="text/javascript" src="<?php echo $base_path ?>static/js/2.9dce518f.chunk.js"></script>
-<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.aeda1619.chunk.js"></script>
+<script type="text/javascript" src="<?php echo $base_path ?>static/js/runtime-main.d702a1ba.js"></script>
+<script type="text/javascript" src="<?php echo $base_path ?>static/js/2.eb131118.chunk.js"></script>
+<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.89134e2c.chunk.js"></script>
 </html>
