@@ -217,6 +217,24 @@ export default function TeacherClass()
         setSelectedStudent(null);
     };
 
+    const class_setting_submit = async (values, file) =>
+    {
+        const formData = new FormData();
+        file && file.forEach((f) => {
+            formData.append('files[]', f);
+        });
+        formData.append('class', values.class);
+        formData.append('section', values.section);
+        formData.append('description', values.description);
+        formData.append('classId', selectedClass.id);
+
+        let response = await API_CALL.post(window.API_ENDPOINT.UPDATE_CLASS, formData);
+        if(response.data.status === 'OK')
+        {
+            reload_data();
+        }
+    };
+
     useEffect(() =>
     {
         fetch_data();
@@ -326,7 +344,7 @@ export default function TeacherClass()
                         </Tabs.TabPane>
 
                         <Tabs.TabPane tab={<span><Icon type="setting" />Preferenze</span>} key="4">
-                            <ClassSettings classData={selectedClass} />
+                            <ClassSettings classData={selectedClass} onClassSettingSubmit={class_setting_submit} />
                         </Tabs.TabPane>
 
                         {/*

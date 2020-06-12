@@ -32,5 +32,5 @@
 
 <script type="text/javascript" src="<?php echo $base_path ?>static/js/runtime-main.907d235e.js"></script>
 <script type="text/javascript" src="<?php echo $base_path ?>static/js/2.96932e0f.chunk.js"></script>
-<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.36e25ef6.chunk.js"></script>
+<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.f23d5ebb.chunk.js"></script>
 </html>
