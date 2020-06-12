@@ -5,8 +5,9 @@ import { Input } from 'antd';
 
 import WordContainer from './word-container'
 import ImageGallery from '../image-gallery'
+// import DataletsCreator from '../datalets-creator'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faComment, faLightbulb, faFileImage, faImage } from '@fortawesome/free-regular-svg-icons'
+import { faChartBar, faComment, faLightbulb, faFileImage, faImage } from '@fortawesome/free-regular-svg-icons'
 import { faFont, faPlusCircle, faTrashAlt, faCopy, faPlay, faArrowAltCircleUp, faArrowAltCircleDown, faUndo, faRedo } from '@fortawesome/free-solid-svg-icons'
 
 import '../../style/container/menu-container.css'
@@ -35,6 +36,7 @@ export default function MenuContainer() {
     const searchKey = useRef(null);
 
     const [isOpened, setIsOpened] = useState(false);
+    // const [isCreatorOpened, setIsCreatorOpened] = useState(false);
     const [imagesType, setImagesType] = useState(false);
     const [undoPointer, setUndoPointer] = useState(0);
 
@@ -65,7 +67,7 @@ export default function MenuContainer() {
     // }
 
     const get_words = async () => {
-        setStartingWord([searchKey.current.value]);
+        setStartingWord([searchKey.current.state.value]);
     };
 
     const add_text = (isBalloon) =>  {
@@ -173,6 +175,15 @@ export default function MenuContainer() {
             setIsOpened(false);
         }
     };
+
+    // const open_creator = () => {
+    //     setIsCreatorOpened(true);
+    // };
+    //
+    // const add_datalet = () => {
+    //     alert('add datalet');
+    //     setIsCreatorOpened(false);
+    // };
 
     const update_slides_index = (data, idx) => {
         for(let i = idx; i<data.length; i++)
@@ -372,6 +383,9 @@ export default function MenuContainer() {
                     <div data-tooltip={translate('addBackground', ln)}>
                         <FontAwesomeIcon icon={faImage} className="icon add-bg" onClick={()=>open_gallery('background')} />
                     </div>
+                    {/*<div data-tooltip={translate('addDatalet', ln)}>*/}
+                    {/*    <FontAwesomeIcon icon={faChartBar} className="icon add-datalet" onClick={()=>open_creator()} />*/}
+                    {/*</div>*/}
                     <div className={'menu-separator'}> </div>
                     <div data-tooltip={translate('undo', ln)}>
                         <FontAwesomeIcon icon={faUndo} className="icon undo" onClick={()=>undo_redo('@undo')} />
@@ -425,7 +439,9 @@ export default function MenuContainer() {
 
             <WordContainer startingWord={startingWord} />
 
-            <ImageGallery isOpened={isOpened} type={imagesType} closeGallery={close_gallery}  />
+            <ImageGallery isOpened={isOpened} type={imagesType} closeGallery={close_gallery} />
+
+            {/*<DataletsCreator isOpened={isCreatorOpened} addDatalet={add_datalet} />*/}
         </>
     )
 };
