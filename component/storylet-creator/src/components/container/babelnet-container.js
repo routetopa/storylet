@@ -26,11 +26,11 @@ export default function BabelnetContainer({startingWord}) {
             title: translate('fullLemma', ln),
             dataIndex: 'properties.fullLemma',
             key: 'fullLemma',
-            // render: (text, record, index) => {
-            //     return (
-            //         record.properties.fullLemma + ' (' + record.properties.source + ')'
-            //     )
-            // },
+            render: (text, record, index) => {
+                return (
+                    record.properties.fullLemma + ' (' + record.properties.source + ')'
+                )
+            },
             sorter: (a, b) => a.properties.fullLemma.localeCompare(b.properties.fullLemma),
         },
         // {
@@ -109,6 +109,7 @@ export default function BabelnetContainer({startingWord}) {
                     synsetIds.push(response.data[i].properties.synsetID.id);
                     _dataSource.push(response.data[i]);
                 }
+                console.log(_dataSource)
                 setDataSource(_dataSource);
                 //todo
             }, (error) => {

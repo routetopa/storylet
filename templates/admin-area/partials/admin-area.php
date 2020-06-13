@@ -47,6 +47,6 @@ $current_user = wp_get_current_user();
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.12df12ac.js"></script>
 <script src="<?php echo $base_path ?>static/js/2.e386a147.chunk"></script>
-<script src="<?php echo $base_path ?>static/js/main.00fa5af2.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.87797e66.chunk.js"></script>
 
 </html>
