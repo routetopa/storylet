@@ -29,7 +29,7 @@ $current_user = wp_get_current_user();
         UPDATE_CLASS    : '<?php echo rest_url() ?>admin-class/v1/update-class',
         CRUD_STUDENT    : '<?php echo rest_url() ?>admin-class/v1/student',
         CRUD_STORYLET   : '<?php echo rest_url() ?>storylet/v1/storylet',
-        ADD_IMAGE       : '<?php echo rest_url() ?>storylet/v1/add-image',
+        ADD_IMAGE       : '<?php echo rest_url() ?>admin-class/v1/add-image',
         STORYLET_VIEWER : '<?php echo site_url(); ?>/storylet-viewer',
         SITE_URL        : '<?php echo $relative_path ?>/'
     };
