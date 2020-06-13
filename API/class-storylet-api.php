@@ -92,16 +92,17 @@ class Storylet_API extends WP_REST_Controller
 
     public function get_storylet_template( $request )
 	{
-		$storylet_tamplates = StoryletTemplateModel::all()->toArray();
+        $student = StudentModel::where('userId', '=', $this->get_current_user()->ID)->get();
+		$storylet_templates = StoryletTemplateModel::where('classId', '=', $student[0]->classId)->get()->toArray();
 
-		foreach ($storylet_tamplates as &$s_t)
+		foreach ($storylet_templates as &$s_t)
 		{
-			$s_t = array_merge($s_t, json_decode($s_t['settings'], true));
-			$s_t['tag'] = json_decode($s_t['tag']);
-			unset($s_t['settings']);
+            $s_t = array_merge($s_t, json_decode($s_t['settings'], true));
+            $s_t['tag'] = json_decode($s_t['tag']);
+            unset($s_t['settings']);
 		}
 
-		return rest_ensure_response(['status' => 'OK', 'data' => $storylet_tamplates]);
+		return rest_ensure_response(['status' => 'OK', 'data' => $storylet_templates]);
 	}
 
 	public function update_storylet( $request )

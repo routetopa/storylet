@@ -1,6 +1,13 @@
 <?php
 if(!is_user_logged_in())
     wp_redirect(wp_login_url());
+
+$images_array = [];
+
+foreach ($images as $image) {
+    array_push($images_array, array('_id'=>$image->id, 'type'=>'image', 'name'=>$image->name, 'path'=>$image->path));
+}
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -43,7 +50,7 @@ if(!is_user_logged_in())
     };
 
     window.RESOURCES = {
-        IMAGES: []
+        IMAGES: <?php echo json_encode($images_array) ?>
     };
 
 </script>

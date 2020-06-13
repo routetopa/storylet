@@ -77,6 +77,7 @@ class Storylet_Activator {
 			  settings varchar(255) DEFAULT '',
 			  template text DEFAULT '',
 			  metadata text DEFAULT '',
+			  classId mediumint(9) UNSIGNED,
 			  PRIMARY KEY  (id)
 			) $charset_collate;";
 

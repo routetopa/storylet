@@ -10,6 +10,10 @@
     $storylet = StoryletModel::find(intval($storylet_id));
 
     if($storylet && get_current_user_id() == $storylet->ownerId)
+    {
+        $student = StudentModel::where('userId', '=', $storylet->ownerId)->get();
+        $images  = ImageModel::where('classId', '=', $student[0]->classId)->get();
         require_once plugin_dir_path(dirname(__FILE__)) . '/storylet-creator/partials/storylet-creator.php';
-    else
-        wp_redirect( wp_login_url() . "/?redirect_to=" .  get_site_url() . "/storylet-creator");//require_once plugin_dir_path( dirname( __FILE__ ) ) . '/storylet-creator/partials/error.php';
+    } else {
+        wp_redirect(wp_login_url() . "/?redirect_to=" . get_site_url() . "/storylet-creator");//require_once plugin_dir_path( dirname( __FILE__ ) ) . '/storylet-creator/partials/error.php';
+    }
