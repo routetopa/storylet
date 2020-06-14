@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import {useSelector, useDispatch, batch} from 'react-redux'
 import cloneDeep from 'lodash/cloneDeep';
 import { Input } from 'antd';
-
+import axios from "axios";
 import WordContainer from './word-container'
 import ImageGallery from '../image-gallery'
 // import DataletsCreator from '../datalets-creator'
@@ -110,7 +110,7 @@ export default function MenuContainer() {
         setIsOpened(true);
     };
 
-    const close_gallery = (item, color, type) => {
+    const close_gallery = async (item, color, type, uploadedImg) => {
         if(item._id === '@close') {
             setIsOpened(false);
         }
@@ -129,7 +129,20 @@ export default function MenuContainer() {
         }
         else if(item._id === '@upload') {
             //todo background or image?
-            alert('Aloha Andrea!')
+            console.log(uploadedImg);
+            console.log('Aloha Andrea!');
+
+            let formData = new FormData();
+            let imagefile = uploadedImg[0].originFileObj;
+            formData.append("files", imagefile);
+            let resposne = await axios.post(window.API_ENDPOINT.ADD_STUDENT_IMAGE, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            console.log(resposne.data);
+
         }
         else if(type === 'background') {
             let data = cloneDeep(slidesData);

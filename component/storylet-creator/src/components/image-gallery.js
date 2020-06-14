@@ -435,6 +435,7 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
     const [selectedGallery, setSelectedGallery] = useState([]);
     const [selectedColor, setSelectedColor] = useState('#fafafa');
     const [selectedImg, setSelectedImg] = useState({});
+    const [uploadedImg, setUploadedImg] = useState(null);
 
     useEffect(()=>{
         if(!type)
@@ -497,11 +498,15 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
         setSelectedColor('rgba('+color.rgb.r+','+color.rgb.g+','+color.rgb.b+','+color.rgb.a+')');
     };
 
+    const onUploadChange = ({fileList}) => {
+        setUploadedImg(fileList);
+    };
+
     return (
         <Modal title={type==='image' ? translate('selectImage', ln) : translate('selectBackground', ln)}
             visible={isOpened} width={'60vw'}
             bodyStyle={{maxHeight:'60vh', overflowX:'auto', backgroundColor:'transparent', padding:8}}
-            onOk={() => closeGallery(selectedImg, selectedColor, type)}
+            onOk={() => closeGallery(selectedImg, selectedColor, type, uploadedImg)}
             onCancel={() => closeGallery({_id:'@close'})}
 
             footer={[
@@ -509,7 +514,7 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
                     {getOptions()}
                 </Select>,
                 <Button key="cancel" onClick={() => closeGallery({_id:'@close'})}>{translate('buttonCancel', ln)}</Button>,
-                <Button key="ok" type="primary" onClick={() => closeGallery(selectedImg, selectedColor, type)}>{translate('buttonOk', ln)}</Button>
+                <Button key="ok" type="primary" onClick={() => closeGallery(selectedImg, selectedColor, type, uploadedImg)}>{translate('buttonOk', ln)}</Button>
             ]}
         >
             <Row className={'ant-image-grid'} gutter={[8, 8]}>
@@ -517,7 +522,7 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
                     <div className={'upload' + (isSelected('@upload') ? ' selected' : '')}
                          onClick={()=>handleItemClick({_id:'@upload'})}
                     >
-                        <AntUpload max={1} />
+                        <AntUpload max={1} onChange={onUploadChange} />
                         <CheckOutlined className={'check'} />
                     </div>
                 </Col>

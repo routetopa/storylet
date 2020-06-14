@@ -29,6 +29,7 @@ foreach ($images as $image) {
     window.API_ENDPOINT = {
         GET_STORYLET_TEMPLATE: '<?php echo rest_url() ?>/storylet/v1/storylet-template',
         SAVE_STORYLET: '<?php echo rest_url() ?>storylet/v1/storylet',
+        ADD_STUDENT_IMAGE: '<?php echo rest_url() ?>admin-class/v1/add-student-image'
     };
 
     window.STORY = {
@@ -56,7 +57,7 @@ foreach ($images as $image) {
 </script>
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.30fdea02.js"></script>
-<script src="<?php echo $base_path ?>static/js/2.3b020a0f.chunk.js"></script>
-<script src="<?php echo $base_path ?>static/js/main.63491900.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/2.d2b89656.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.3e5faaf1.chunk.js"></script>
 </html>
 

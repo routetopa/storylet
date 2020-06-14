@@ -4,6 +4,7 @@ require_once (plugin_dir_path( __FILE__ ) . '../model/ClassModel.php');
 require_once (plugin_dir_path( __FILE__ ) . '../model/StudentModel.php');
 require_once (plugin_dir_path( __FILE__ ) . '../model/StoryletModel.php');
 require_once (plugin_dir_path( __FILE__ ) . '../model/ImageModel.php');
+require_once (plugin_dir_path( __FILE__ ) . '../model/StudentImageModel.php');
 require_once (ABSPATH.'wp-admin/includes/user.php');
 
 class AdminClass_API extends WP_REST_Controller
@@ -94,12 +95,23 @@ class AdminClass_API extends WP_REST_Controller
             ),
             'schema' => null
         ));
+
+        // HANDLE STUDENT IMAGES
+        register_rest_route($this->namespace, '/add-student-image', array(
+            array(
+                'methods'             => WP_REST_Server::EDITABLE,
+                'callback'            => array( $this, 'add_student_image' ),
+                'permission_callback' => array( $this, 'insert_class_permissions_check' ),
+                'args'                => $this->get_endpoint_args_for_item_schema( false ),
+            ),
+            'schema' => null
+        ));
     }
 
     private function get_current_user()
     {
-        return (object) array ('ID' => 100);
-        //return wp_get_current_user();
+        //return (object) array ('ID' => 100);
+        return wp_get_current_user();
     }
 
     public function create_class( $request )
@@ -315,6 +327,41 @@ class AdminClass_API extends WP_REST_Controller
                 $image->save();
 
                 return rest_ensure_response(['status' => 'OK', 'message' => 'File successfully created']);
+            }else{
+                return rest_ensure_response(['status' => 'KO', 'error' => 'Can\'t create the file']);
+            }
+        } catch (Exception $e) {
+            return rest_ensure_response(['status' => 'KO', 'error' => $e->getMessage()]);
+        }
+    }
+
+    public function add_student_image ($request)
+    {
+        try
+        {
+            if (!isset($_FILES['files']) || !isset($_FILES['files']['tmp_name'])) {
+                return rest_ensure_response(['status' => 'KO', 'error' => 'No file attached']);
+            }
+
+            $user          = $this->get_current_user();
+            $uploaddir     = plugin_dir_path(__FILE__) . '../images/custom/student/' . $user->ID . '/';
+            $userfile_tmp  = $_FILES['files']['tmp_name'];
+            $userfile_name = $_FILES['files']['name'];
+
+            if (!file_exists($uploaddir))
+                mkdir($uploaddir, 0777, true);
+
+            if (move_uploaded_file($userfile_tmp, $uploaddir . $userfile_name))
+            {
+                $image              = new StudentImageModel();
+                $image->userId      = $user->ID;
+                $image->name        = $request['name'];
+                $image->description = $request['description'];
+                $image->path        = str_replace('/API', '', plugin_dir_url( __FILE__ )) . 'images/custom/student/' . $user->ID . '/'. $userfile_name;
+
+                $image->save();
+
+                return rest_ensure_response(['status' => 'OK', 'message' => 'File successfully created', 'path' => $image->path]);
             }else{
                 return rest_ensure_response(['status' => 'KO', 'error' => 'Can\'t create the file']);
             }
