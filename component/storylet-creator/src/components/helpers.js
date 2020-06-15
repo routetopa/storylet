@@ -117,6 +117,12 @@ ln["optionBG1_it"] = "Sfondi 1";
 ln["optionBG2_it"] = "Sfondi 2";
 ln["fantasticCharacters_it"] = "Personaggi fantastici";
 ln["seaLife_it"] = "Mondo marino";
+ln["education_it"] = "Insegnamento";
+ln["video_camera_it"] = "Videocamera";
+ln["warfare_it"] = "Guerra";
+ln["home_stuff_it"] = "Casa";
+ln["music_it"] = "Musica";
+ln["gender_identity_it"] = "Identità di genere";
 
 /******** EN ********/
 
@@ -226,6 +232,12 @@ ln["optionBG1_en"] = "Backgrounds 1";
 ln["optionBG2_en"] = "Backgrounds 2";
 ln["fantasticCharacters_en"] = "Fantastic Characters";
 ln["seaLife_en"] = "Sea Life";
+ln["education_en"] = "Education";
+ln["video_camera_en"] = "Video Camera";
+ln["warfare_en"] = "Warfare";
+ln["home_stuff_en"] = "Home Stuff";
+ln["music_en"] = "Music";
+ln["gender_identity_en"] = "Gender Identity";
 
 /******** ES ********/
 

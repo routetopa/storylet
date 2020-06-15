@@ -146,11 +146,12 @@ export default function PropertiesContainer()
                 <div className="property-row">
                     <label className="template-label">{translate('title', ln)}</label>
                 </div>
-                <Input defaultValue={name} onChange={(value) => debouncedName(value)} />
+                {/*<Input defaultValue={name} onChange={(value) => debouncedName(value)} />*/}
+                <Input defaultValue={name} onChange={(e) => debouncedName(e.currentTarget.value)} />
                 <div className="property-row">
                     <label className="template-label">{translate('description', ln)}</label>
                 </div>
-                <Input.TextArea defaultValue={description} onChange={(value) => debouncedDescription(value)} />
+                <Input.TextArea defaultValue={description} onChange={(e) => debouncedDescription(e.currentTarget.value)} />
                 <div className="property-row">
                     <label className="template-label">{translate('template', ln)}</label>
                 </div>

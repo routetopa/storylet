@@ -430,6 +430,120 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
             path: window.STATIC.IMAGE_BASE_PATH + "sea-life/050-sea-urchin.png"
         }
     ];
+    const education = [
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/agenda.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+        },
+    ];
+    const video_camera = [
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+        }
+    ];
+    const warfare = [
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+        }
+    ];
+    const home_stuff = [
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+        }
+    ];
+    const music = [
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+        }
+    ];
+    const gender_identity = [
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+        }
+    ];
 
     const [images, setImages] = useState([]);
     const [selectedGallery, setSelectedGallery] = useState([]);
@@ -454,6 +568,12 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
         } else if(type === 'image') {
             images[1] = fantastic_characters;
             images[2] = sea_life;
+            images[3] = education;
+            images[4] = video_camera;
+            images[5] = warfare;
+            images[6] = home_stuff;
+            images[7] = music;
+            images[8] = gender_identity;
         }
 
         setImages(images);
@@ -474,6 +594,12 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
         } else if(type === 'image') {
             options.push(<Option key={1} value="1">{translate('fantasticCharacters', ln)}</Option>)
             options.push(<Option key={2} value="2">{translate('seaLife', ln)}</Option>)
+            options.push(<Option key={3} value="3">{translate('education', ln)}</Option>)
+            options.push(<Option key={4} value="4">{translate('video_camera', ln)}</Option>)
+            options.push(<Option key={5} value="5">{translate('warfare', ln)}</Option>)
+            options.push(<Option key={6} value="6">{translate('home_stuff', ln)}</Option>)
+            options.push(<Option key={7} value="7">{translate('music', ln)}</Option>)
+            options.push(<Option key={8} value="8">{translate('gender_identity', ln)}</Option>)
         }
         return options;
     };
