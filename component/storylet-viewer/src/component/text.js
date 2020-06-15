@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 import './slide.css';
 
-export default function Text({component, onClick, isEditable})
+export default function Text({component, onClick})
 {
     let balloonFontSize = component.fontSize*component.w*0.002;
+    let isEditable = true;
     const TextComponent = styled.div`
         top:                ${props => props.y+'%'};
         left:               ${props => props.x+'%'};

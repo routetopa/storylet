@@ -1668,7 +1668,7 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
                     return (
                         <Col key={idx} span={8}>
                             <div className={'img-preview' + (isSelected(item._id || item.path) ? ' selected' : '')}
-                                 style={{backgroundImage: 'url(' + encodeURIComponent(item.path) + ')'}}
+                                 style={{backgroundImage: 'url("' + item.path + '")'}}
                                  onClick={()=>handleItemClick(item)}
                             >
                                 {item.name ? <div className={'name'}>{item.name}</div> : ''}

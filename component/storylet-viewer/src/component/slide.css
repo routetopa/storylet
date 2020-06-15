@@ -1,3 +1,17 @@
+/* image */
+
+.image-moveable-container {
+    position: absolute;
+    overflow: hidden;
+}
+
+.image-moveable-container img {
+    width: 100%;
+    height: 100%;
+}
+
+/* text */
+
 .text-moveable-container {
     position: absolute;
     overflow: hidden;

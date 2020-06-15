@@ -360,7 +360,7 @@ export default function Properties() {
                             </Popover>
                             <Button icon={<ClearOutlined />} size={size} onClick={()=>{setTextProperties('clear')}} />
                             <div className={"h-divider"}> </div>
-                            {selectedComponent.subType === 'balloon' ?
+                            {selectedComponent.subType !== 'balloon' ?
                                 <>
                                     <Button icon={<AlignLeftOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'left')}} />
                                     <Button icon={<AlignCenterOutlined />} size={size} onClick={()=>{setTextProperties('textAlign', 'center')}} />
