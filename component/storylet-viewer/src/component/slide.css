@@ -16,6 +16,7 @@
     position: absolute;
     overflow: hidden;
     white-space: pre;
+    box-sizing: border-box;
 }
 
 .text-moveable-container .inner_text {
