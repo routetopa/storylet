@@ -57,7 +57,7 @@ foreach ($images as $image) {
 </script>
 
 <script src="<?php echo $base_path ?>static/js/runtime-main.30fdea02.js"></script>
-<script src="<?php echo $base_path ?>static/js/2.d2b89656.chunk.js"></script>
-<script src="<?php echo $base_path ?>static/js/main.3e5faaf1.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/2.d02987ee.chunk.js"></script>
+<script src="<?php echo $base_path ?>static/js/main.8c5ced01.chunk.js"></script>
 </html>
 
