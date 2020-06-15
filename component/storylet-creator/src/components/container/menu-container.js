@@ -148,6 +148,7 @@ export default function MenuContainer() {
             }
         }
 
+        // todo encodeURIComponent path ?
         if(type === 'background') {
             let data = cloneDeep(slidesData);
 

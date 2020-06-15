@@ -435,113 +435,1109 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
             path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/agenda.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/apple.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/award.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/award-1.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/award-2.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/backpack.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/bag.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/bell.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/blackboard.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/blackboard-1.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/book.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/book-1.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/book-2.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/book-3.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/book-4.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/book-5.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/building.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/bulb.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/calculator.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/calculator-1.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/calculator-2.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/calendar.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/chat.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/chat.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/counting.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/counting-1.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/diploma.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/earth-globe.svg"
         },
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/eraser.svg"
         },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/files.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/filing-cabinet.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/football.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/glasses.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/graduate.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/ink.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/lamp.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/laptop.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/letters.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/magnifying-glass.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/math.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/megaphone.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/mouse.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/music.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/note.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/notebook.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/paper.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/pen.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/pen-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/pencil.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/pencil-2.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/pencils.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/pencils-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/pendrive.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/pipette.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/printer.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/puzzle.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/ranking.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/rocket.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/rugby.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/school.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/school-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/school-2.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/school-bus.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/science.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/scissors.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/stapler.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/student.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/tablet.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/tack.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/test.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/test-tube.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/test-tube-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/test-tube-2.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/test-tube-3.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/time.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/trophy.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/watercolor.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "169148-education/svg/watercolor-1.svg"
+        }
     ];
     const video_camera = [
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/001-photo camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/002-memory card.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/003-video files.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/004-film roll.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/005-play button.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/006-panorama.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/007-video camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/008-vhs.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/009-video camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/010-film strip.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/011-full battery.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/012-pause button.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/013-flash.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/014-portrait.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/015-security camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/016-pocket camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/017-security camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/018-soft box.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/019-flash.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/020-ratio.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/021-super eight.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/022-film roll.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/023-jpg.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/024-action camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/025-webcam.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/026-auto flash.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/027-low battery.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/028-smartphone.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/029-focus.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/030-image.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/031-aperture.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/032-no camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/033-eye.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/034-video camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/035-tripod.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/036-landscape.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/037-laptop.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/038-dvd.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/039-aperture.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/040-video microphone.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/041-video camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/042-flash off.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/043-stop button.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/044-record button.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/045-camera.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/046-monitor.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/047-raw file.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "656390-video-camera/svg/048-camera.svg"
         }
     ];
     const warfare = [
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/001-crown.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/002-bunker.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/003-enlist.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/004-canon-2.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/005-revolver-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/006-shooting-target-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/007-catapult.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/008-pistol.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/009-aim.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/010-drone.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/011-shooting-target.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/012-smoke-grenade.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/013-helmet-2.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/014-machine-gun-3.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/015-explosion-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/016-chemical-weapon.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/017-bomb-9.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/018-tent.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/019-remote-control.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/020-supplies-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/021-axe-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/022-viking-helmet.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/023-armour.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/024-shield-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/025-shield.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/026-crossbow.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/027-archery.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/028-axe.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/029-sword-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/030-sword.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/031-walkie-talkie.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/032-map.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/033-hazmat.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/034-bomb-8.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/035-check-point.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/036-revolver.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/037-machine-gun-2.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/038-flame-thrower.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/039-canon-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/040-ship-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/041-barbed-wire.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/042-machine-gun-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/043-bullets.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/044-uzi.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/045-jeep-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/046-machine-gun.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/047-helmet-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/048-launcher.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/049-bazooka.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/050-army-helicopter.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/051-truck-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/052-jeep.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/053-truck.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/054-hammer.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/055-bomb-7.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/056-ship.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/057-bomb-6.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/058-mine-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/059-mine.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/060-bomb-5.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/061-plane-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/062-explosion.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/063-bullet-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/064-military-helicopter.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/065-canon.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/066-gun.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/067-plane.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/068-molotov-cocktail.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/069-knife.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/070-beret.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/071-bomb-4.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/072-compass.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/073-grenade-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/074-grenade.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/075-target.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/076-submarine.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/077-helmet.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/078-bullet.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/079-bomb-3.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/080-rank-3.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/081-jet-2.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/082-rank-2.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/083-binoculars.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/084-tank-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/085-tank.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/086-bomb-2.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/087-radio.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/088-supplies.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/089-bomb-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/090-medal.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/091-bullet-proof-vest.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/092-jet-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/093-jet.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/094-dog-tag.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/095-rank-1.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/096-rank.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/097-gas-mask.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/098-radar.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/099-bomb.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "942338-warfare/svg/100-first-aid-kit.svg"
         }
     ];
     const home_stuff = [
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/001-coffee machine.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/002-coffee cup.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/003-bed.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/004-garbage bin.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/005-phone.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/006-desk.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/007-television.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/008-toilet.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/009-hair dryer.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/009-hair dryer.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/011-armchair.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/012-furniture and household.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/013-fence.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/014-fireplace.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/015-mirror.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/016-washing machine.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/017-sink.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/018-fridge.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/019-hammer.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/020-window.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/021-door key.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/022-seat.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/023-fan.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/024-shower.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/025-roller.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/026-cutlery.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/027-alarm clock.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/028-teapot.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/029-plugging.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/030-closet.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/031-microwave.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/032-bathtub.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/033-coat stand.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/034-grill.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/035-blender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/036-lamp.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/037-apron.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/038-mixer.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/039-kitchen pack.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/040-chest.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/041-bookshelf.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/042-cradle.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/043-bed.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/044-iron.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/045-appliances.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/046-rice cooker.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/047-sewing machine.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/048-toaster.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/049-vacuum cleaner.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "1851952-home-stuff/svg/050-automation.svg"
         }
     ];
     const music = [
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/001-guitar.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/002-guitar.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/003-tambourine.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/004-record.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/005-metronome.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/006-recorder.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/007-record.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/008-gramophone.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/009-shehnai.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/010-instrument.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/011-radio.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/012-microphone.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/013-keyboard.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/014-record.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/015-score.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/016-cassette.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/017-cassette.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/018-ocarina.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/019-drum.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/020-accordion.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/021-recorder.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/022-saxophone.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/023-maracas.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/024-chimes.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/025-cymbals.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/026-stereo.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/027-piano.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/028-mandolin.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/029-disk.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/030-oscilloscope.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/031-banjo.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/032-speaker.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/033-harp.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/034-violin.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/035-glockenspiel.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/036-drum.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/037-mobile.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/038-gong.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/039-xylophone.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "2735389-music/svg/040-microphone.svg"
         }
     ];
     const gender_identity = [
         {
-            path: window.STATIC.IMAGE_BASE_PATH + "yyyyyy/svg/xxxxxx.svg"
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/001-third gender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/002-girlfriend.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/003-gay.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/004-heterosexual.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/005-biphobia.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/006-genderless.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/007-rainbow flag.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/008-epicene.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/009-man.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/010-woman.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/011-woman.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/012-transgender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/013-hermaphrodite.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/014-transgender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/015-transgender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/016-intersex.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/017-genderqueer.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/018-cisgender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/019-cisgender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/020-heterosexual.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/021-aliagender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/022-man.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/023-equality.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/024-worldwide.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/025-gender expression.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/026-tolerance.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/027-lgbtq.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/028-homophobia.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/029-pansexual.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/030-intergender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/031-male gender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/032-bisexual.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/033-travesti.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/034-tshirt.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/035-transgender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/036-lesbian.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/xxxxxxxxxxxxx"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/038-neutrois.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/039-transgender.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/040-woman.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/041-man.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/042-rainbow.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/043-heterosexual.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/044-demiboy.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/045-broken heart.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/046-demigirl.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/047-genderless.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/048-genderqueer.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/049-androgyne.svg"
+        },
+        {
+            path: window.STATIC.IMAGE_BASE_PATH + "3100882-gender-identity/svg/050-third gender.svg"
         }
     ];
 
@@ -672,7 +1668,7 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
                     return (
                         <Col key={idx} span={8}>
                             <div className={'img-preview' + (isSelected(item._id || item.path) ? ' selected' : '')}
-                                 style={{backgroundImage: 'url(' + item.path + ')'}}
+                                 style={{backgroundImage: 'url(' + encodeURIComponent(item.path) + ')'}}
                                  onClick={()=>handleItemClick(item)}
                             >
                                 {item.name ? <div className={'name'}>{item.name}</div> : ''}
