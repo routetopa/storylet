@@ -6,7 +6,7 @@ import Image from '../component/image'
 function Slide({parameters, size, navigateLink, isParent})
 {
     return (
-        <SlideStyle background={parameters.background} size={size} isParent={isParent}>
+        <SlideStyle background={parameters.background} backgroundColor={parameters.backgroundColor} size={size} isParent={isParent}>
             {(() => {
                     if (!parameters.components) return null;
                     return parameters.components.map((c, idx) => {

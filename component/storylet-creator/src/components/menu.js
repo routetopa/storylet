@@ -95,6 +95,7 @@ export default function Menu() {
     };
 
     const save_storylet = (exit=false) => {
+        debugger
         axios.put(window.API_ENDPOINT.SAVE_STORYLET, {
             storyletid: window.STORY.DATA.id,
             story     : slidesData,

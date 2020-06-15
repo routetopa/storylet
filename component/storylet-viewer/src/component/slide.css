@@ -1,0 +1,9 @@
+.text-moveable-container {
+    position: absolute;
+    overflow: hidden;
+    white-space: pre;
+}
+
+.text-moveable-container .inner_text {
+    height: 100%;
+}

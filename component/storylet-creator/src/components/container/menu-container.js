@@ -113,6 +113,7 @@ export default function MenuContainer() {
     const close_gallery = async (item, color, type, uploadedImg) => {
         if(item._id === '@close') {
             setIsOpened(false);
+            return;
         }
         else if(item._id === '@color') {
             let data = cloneDeep(slidesData);
@@ -126,25 +127,28 @@ export default function MenuContainer() {
             });
 
             setIsOpened(false);
+            return;
         }
         else if(item._id === '@upload') {
-            //todo background or image?
-            console.log(uploadedImg);
-            console.log('Aloha Andrea!');
-
             let formData = new FormData();
             let imagefile = uploadedImg[0].originFileObj;
             formData.append("files", imagefile);
-            let resposne = await axios.post(window.API_ENDPOINT.ADD_STUDENT_IMAGE, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-
-            console.log(resposne.data);
-
+            try {
+                let response = await axios.post(window.API_ENDPOINT.ADD_STUDENT_IMAGE, formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                item.path = response.data.path;
+            } catch (e) {
+                console.log(e);
+                setIsOpened(false);
+                return;
+                // item.path = 'https://picsum.photos/200';
+            }
         }
-        else if(type === 'background') {
+
+        if(type === 'background') {
             let data = cloneDeep(slidesData);
 
             data[slideIdx].background = item.path;
