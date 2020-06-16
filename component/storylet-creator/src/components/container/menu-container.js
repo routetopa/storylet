@@ -79,7 +79,7 @@ export default function MenuContainer() {
         let component = {
             "index": index,
             "type": "text",
-            "subType": "balloon",
+            "subType": isBalloon ? "balloon" : "",
             "value": isBalloon ? translate('newSpeech', ln) : translate('newText', ln),
             "x": 0,
             "y": 0,
