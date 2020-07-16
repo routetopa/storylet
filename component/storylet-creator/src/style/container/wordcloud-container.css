@@ -19,6 +19,81 @@
 }
 
 #wordcloud {
+    position: relative;
     height: calc(100% - 48px);
     border-radius: 0 0 8px 8px;
+}
+
+.wc-loader {
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+}
+
+/*.wc-hidden-loader {*/
+/*    visibility: hidden;*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background-color: transparent;*/
+/*}*/
+
+/* loader */
+
+.loader {
+    -webkit-animation: loader_animation 1.5s infinite ease-in-out, rotate 2s infinite;
+    animation: loader_animation 1.5s infinite ease-in-out, rotate 2s infinite;
+    -webkit-transform-origin: center;
+    transform-origin: center;
+}
+
+@-webkit-keyframes rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes loader_animation {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124;
+    }
+}
+@keyframes loader_animation {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35;
+    }
+    100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124;
+    }
 }

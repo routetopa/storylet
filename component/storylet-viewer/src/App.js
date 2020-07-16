@@ -44,6 +44,27 @@ function App()
         )
     };
 
+    const export_HTML = () =>
+    {
+        let html = document.documentElement.cloneNode(true);
+        html.getElementsByTagName('div')[0].innerHTML="";
+        while(html.getElementsByTagName('style').length)
+            html.getElementsByTagName('style')[0].remove()
+        html = html.outerHTML;
+        let iframe = document.createElement('iframe');
+        iframe.setAttribute("style", "width:100%;height:100%;min-height:720px;padding:0;margin:0;border:0;");
+        iframe.setAttribute("frameborder", "0");
+        iframe.setAttribute("scrolling", "no");
+        iframe.setAttribute("srcdoc", html);
+
+        let temp = document.createElement("input")
+        document.getElementsByTagName("body")[0].appendChild(temp);
+        temp.value = iframe.outerHTML;
+        temp.select();
+        document.execCommand("copy");
+        document.getElementsByTagName("body")[0].removeChild(temp);
+    }
+
     const print_impress_story = () =>
     {
         // debugger
@@ -105,6 +126,9 @@ function App()
 
     return (
         <>
+            <div onClick={()=>export_HTML()} id="btn_embed" data-balloon="Copia HTML" data-balloon-pos="right">
+                <img src="https://image.flaticon.com/icons/svg/272/272352.svg"/>
+            </div>
             {parentStory && print_parent_story() }
             {currentStory && print_impress_story() }
         </>

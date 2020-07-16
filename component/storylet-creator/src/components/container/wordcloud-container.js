@@ -17,6 +17,8 @@ export default function WordcloudContainer({startingWord}) {
     const [words, setWords] = useState([]);
     const [selectedWords, setSelectedWords] = useState(null);
     const [clickedWord, setClickedWord] = useState(null);
+    const [_loaderVisibility, setLoaderVisibility] = useState('hidden');
+    // const [_loaderCoverVisibility, setLoaderCoverVisibility] = useState('hidden');
 
     useEffect(() =>
     {
@@ -31,8 +33,6 @@ export default function WordcloudContainer({startingWord}) {
         if (!selectedWords || selectedWords.length === 0)
             return;
 
-        // console.log(selectedWords);
-
         let span = [];
         for (let i = 0; i < selectedWords.length; i++) {
             span.push( <span onClick={()=>{goToWordAssociations(i)}} key={i} >{selectedWords[i]}</span> );
@@ -46,7 +46,6 @@ export default function WordcloudContainer({startingWord}) {
     {
         if (!selectedWords || selectedWords.length === 0)
             return;
-        // console.log("clickedWord");
 
         // selectedWords.push(word.text);
         let temp = selectedWords.slice();
@@ -73,6 +72,8 @@ export default function WordcloudContainer({startingWord}) {
         // limit: '50', // max 300
         // pos: 'noun,adjective,verb,adverb',
         // indent: 'yes' // no
+        setLoaderVisibility('visible');
+        // setLoaderCoverVisibility('visible');
         axios.get('https://api.wordassociations.net/associations/v1.0/json/search?apikey=ebb2ab66-af3f-42c9-bc24-8072f0c413d5&text=' + searchKey + '&lang=' + ln + '&limit=50')
             .then((response) => {
                 let items = response.data.response[0].items;
@@ -84,7 +85,12 @@ export default function WordcloudContainer({startingWord}) {
                             color: colors[items[i].pos]
                         });
                     }
-                    setWords(words);
+                    setTimeout(()=>setLoaderVisibility('hidden'), 2000);
+                    // setTimeout(()=>setLoaderCoverVisibility('hidden'), 4000);
+                    if(words.length===0)
+                        setWords([{text: "NESSUN RISULTATO", value: 100, color: "#000"}]);//todo translate
+                    else
+                        setWords(words);
             }, (error) => {
                 console.log(error);
             });
@@ -135,6 +141,18 @@ export default function WordcloudContainer({startingWord}) {
                 {translate('path', ln)}:&nbsp;<div id="selected-words"> </div>
             </div>
             <div id="wordcloud">
+                {/*<div className={"wc-hidden-loader"} style={{visibility: _loaderCoverVisibility}}> </div>*/}
+                <div className={"wc-loader"} style={{visibility: _loaderVisibility}}>
+                    <svg>
+                        <circle
+                            className="loader"
+                            r="20" cx="50%" cy="50%"
+                            fill="none"
+                            stroke-width="4"
+                            stroke="#6BBBFA"
+                        />
+                    </svg>
+                </div>
                 <ReactWordcloud callbacks={callbacks} options={options} words={words} />
             </div>
         </>
