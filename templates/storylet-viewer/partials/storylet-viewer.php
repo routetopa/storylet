@@ -9,7 +9,7 @@ if(!is_user_logged_in())
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <base href="<?php echo $base_path ?>" />
     <title>Storylet Viewer</title>
-    <link type='text/css' media='all' href="<?php echo $base_path ?>static/css/main.68d4d702.chunk.css" rel="stylesheet">
+    <link type='text/css' media='all' href="<?php echo $base_path ?>static/css/main.38d519f9.chunk.css" rel="stylesheet">
 </head>
 <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -39,5 +39,5 @@ if(!is_user_logged_in())
 
 <script type="text/javascript" src="<?php echo $base_path ?>static/js/runtime-main.d702a1ba.js"></script>
 <script type="text/javascript" src="<?php echo $base_path ?>static/js/2.2a31b2aa.chunk.js"></script>
-<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.087e8d40.chunk.js"></script>
+<script type="text/javascript" src="<?php echo $base_path ?>static/js/main.2ab5990b.chunk.js"></script>
 </html>
