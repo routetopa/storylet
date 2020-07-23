@@ -1547,6 +1547,10 @@ export default function ImageGallery({isOpened, closeGallery, type}) {
     const [selectedImg, setSelectedImg] = useState({});
     const [uploadedImg, setUploadedImg] = useState(null);
 
+    // useEffect(()=>{
+        // alert('pippo')
+    // }, []);
+
     useEffect(()=>{
         if(!type)
             return;
