@@ -6,6 +6,7 @@
 
 .text-moveable-container .inner_text {
     height: 100%;
+    white-space: break-spaces;
 }
 
 .text-moveable-container.editable {
