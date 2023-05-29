@@ -136,6 +136,8 @@ export default function PropertiesContainer()
                             return (<Properties/>);
                         case 'image' :
                             return (<Properties/>);
+                        case 'datalet':
+                            return (<Properties />)
                         default : break;
                     }
                     return null;

@@ -5,7 +5,7 @@ import { Input } from 'antd';
 import axios from "axios";
 import WordContainer from './word-container'
 import ImageGallery from '../image-gallery'
-// import DataletsCreator from '../datalets-creator'
+import DataletsCreator from '../datalets-creator'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChartBar, faComment, faLightbulb, faFileImage, faImage } from '@fortawesome/free-regular-svg-icons'
 import { faFont, faPlusCircle, faTrashAlt, faCopy, faPlay, faArrowAltCircleUp, faArrowAltCircleDown, faUndo, faRedo } from '@fortawesome/free-solid-svg-icons'
@@ -36,7 +36,7 @@ export default function MenuContainer() {
     const searchKey = useRef(null);
 
     const [isOpened, setIsOpened] = useState(false);
-    // const [isCreatorOpened, setIsCreatorOpened] = useState(false);
+    const [isCreatorOpened, setIsCreatorOpened] = useState(false);
     const [imagesType, setImagesType] = useState(false);
     const [undoPointer, setUndoPointer] = useState(0);
 
@@ -194,14 +194,42 @@ export default function MenuContainer() {
         }
     };
 
-    // const open_creator = () => {
-    //     setIsCreatorOpened(true);
-    // };
-    //
-    // const add_datalet = () => {
-    //     alert('add datalet');
-    //     setIsCreatorOpened(false);
-    // };
+    const open_creator = () => {
+        setIsCreatorOpened(true);
+    };
+    const add_datalet = (datalet) => {
+        let data = cloneDeep(slidesData);
+        let index = data[slideIdx].components.length;
+        // setComponentIdx(index);
+        let params = ""
+        Object.keys(datalet.params).map(p =>   params +=`${p}=${datalet.params[p]} `)
+        let datalet_code = `<script src="https://deep.routetopa.eu/deep2t/COMPONENTS/datalets/${datalet.datalet}/../lib/vendors/webcomponents_lite_polyfill/webcomponents-lite.js"></script>
+           <style>html,body{margin:0;padding:0;height: 100%}</style>
+           <script type="module" src="https://deep.routetopa.eu/deep2t/COMPONENTS/datalets/${datalet.datalet}/${datalet.datalet}.js"></script>
+           <${datalet.datalet} ${params/*.replaceAll('"', "&quot;")*/} />`
+        let component = {
+            "index": index,
+            "type": "datalet",
+            "datalet" : datalet_code,
+            "x": 0,
+            "y": 0,
+            "w": 40,
+            "h": 20,
+            "scale": [1,1],
+            "rotate": 0,
+            "keepRatio": false,
+            "zIndex": 1,
+        };
+
+        data[slideIdx].components.push(component);
+
+        batch(() => {
+            dispatch(setSlidesData(data));
+            dispatch(selectSlide(data[slideIdx]));
+            dispatch(selectComponent(component));
+        });
+        setIsCreatorOpened(false);
+    };
 
     const update_slides_index = (data, idx) => {
         for(let i = idx; i<data.length; i++)
@@ -401,9 +429,9 @@ export default function MenuContainer() {
                     <div data-tooltip={translate('addBackground', ln)}>
                         <FontAwesomeIcon icon={faImage} className="icon add-bg" onClick={()=>open_gallery('background')} />
                     </div>
-                    {/*<div data-tooltip={translate('addDatalet', ln)}>*/}
-                    {/*    <FontAwesomeIcon icon={faChartBar} className="icon add-datalet" onClick={()=>open_creator()} />*/}
-                    {/*</div>*/}
+                    <div data-tooltip={translate('addDatalet', ln)}>
+                        <FontAwesomeIcon icon={faChartBar} className="icon add-datalet" onClick={()=>open_creator()} />
+                    </div>
                     <div className={'menu-separator'}> </div>
                     <div data-tooltip={translate('undo', ln)}>
                         <FontAwesomeIcon icon={faUndo} className="icon undo" onClick={()=>undo_redo('@undo')} />
@@ -459,7 +487,7 @@ export default function MenuContainer() {
 
             <ImageGallery isOpened={isOpened} type={imagesType} closeGallery={close_gallery} />
 
-            {/*<DataletsCreator isOpened={isCreatorOpened} addDatalet={add_datalet} />*/}
+            <DataletsCreator isOpened={isCreatorOpened} addDatalet={add_datalet.bind(this)} setOpened={setIsCreatorOpened}/>
         </>
     )
 };

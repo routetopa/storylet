@@ -8,14 +8,24 @@ import { AntUpload } from "./CustomFormInput/AntUpload";
 
 import '../style/datalets-creator.css'
 
-export default function DataletsCreator({isOpened, addDatalet}) {
+export default function DataletsCreator({isOpened, addDatalet, setOpened}) {
     const ln = useSelector(state => state.selectedLanguage);
+    const [datalet, setDatalet] = useState(null)
 
     // const [selectedImg, setSelectedImg] = useState({});
 
     useEffect(()=>{
+        window.addEventListener("message", function(e){
+            if(e.data.type === 'add-datalet'){
+                console.log(e);
+                setDatalet(e.data.data)
+            }
+        });
+        if(datalet){
+            addDatalet(datalet)
+        }
 
-    }, []);
+    }, [datalet]);
 
     const xxx = () => {
 
@@ -23,11 +33,16 @@ export default function DataletsCreator({isOpened, addDatalet}) {
 
     return (
         <>
-            <iframe style={{display:(isOpened ? 'block' : 'none')}} src="http://deep.routetopa.eu/deep2/COMPONENTS/creator.html" className={"datalets-creator"}> </iframe>
-            <Modal title={translate('copyDataletHTML', ln)}
-                visible={isOpened} width={'80vw'}
+            <div
+                style={{display:(isOpened ? 'block' : 'none')}}
+                 id={'close-datalet-creator'}
+                onClick={() => setOpened(false)}
+            ></div>
+            <iframe style={{display:(isOpened ? 'block' : 'none')}} src="http://deep.routetopa.eu/deep2t/COMPONENTS/creator_for_adding.html" className={"datalets-creator"}> </iframe>
+          {/*  <Modal title={translate('copyDataletHTML', ln)}
+                   visible={isOpened} width={'80vw'}
                 // bodyStyle={{maxHeight:'60vh', overflowX:'auto', backgroundColor:'transparent', padding:8}}
-                style={{position:'absolute', top:'unset', bottom:16, left:'10vw'}}
+                   style={{position:'absolute', top:'unset', bottom:16, left:'10vw'}}
                 // onOk={() => xxx()}
                 // onCancel={() => xxx}
 
@@ -40,7 +55,7 @@ export default function DataletsCreator({isOpened, addDatalet}) {
                 // ]}
             >
                 <Input.TextArea rows={3} />
-            </Modal>
+            </Modal>*/}
         </>
     )
 };

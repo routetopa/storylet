@@ -3,7 +3,7 @@ import {batch, useDispatch, useSelector} from 'react-redux'
 import axios from "axios";
 import {translate} from "../components/helpers";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 import cloneDeep from 'lodash/cloneDeep';
 
 // Style
@@ -155,7 +155,10 @@ export default function Menu() {
 
     return (
         <div className="menu">
-            <FontAwesomeIcon icon={faBars} className="icon" onClick={toggle_sidebar} />
+            <div>
+                <FontAwesomeIcon style={{position: 'relative', float: 'left', marginRight: '16px'}} icon={faBars} className="icon" onClick={toggle_sidebar} />
+                <FontAwesomeIcon style={{position: 'relative', float: 'left'}} icon={faArrowCircleLeft} className="icon" onClick={toggle_sidebar} />
+            </div>
             <div className={`sidebar ${menuStatus}`}>
                 <div className="sidebarBody">
                     <div className="menu-item menu-btn" onClick={()=>save_storylet()}>{translate('save', selectedLanguage)}</div>
