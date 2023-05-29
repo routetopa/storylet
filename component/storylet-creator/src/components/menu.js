@@ -3,7 +3,7 @@ import {batch, useDispatch, useSelector} from 'react-redux'
 import axios from "axios";
 import {translate} from "../components/helpers";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faArrowCircleLeft, faArrowCircleRight } from '@fortawesome/free-solid-svg-icons'
 import cloneDeep from 'lodash/cloneDeep';
 
 // Style
@@ -14,6 +14,7 @@ import '../style/menu.css';
 import languageSelected from "../reducer/actions/select-language";
 import setStorylet from "../reducer/actions/set-storylet";
 import { Select, Switch, notification, Popconfirm } from 'antd';
+import setViewMode from "../reducer/actions/set-view-mode";
 
 export default function Menu() {
     const dispatch = useDispatch();
@@ -21,9 +22,11 @@ export default function Menu() {
     const [menuStatus, setMenuStatus] = useState('');
     const [autosave, setAutosave] = useState(false);
     const [language, setLanguage] = useState('it');
+    const [slidesSidebarStatus, setSlidesSidebarStatus] = useState(true);
     const selectedLanguage = useSelector(state => state.selectedLanguage);
     const slidesData = useSelector(state => state.slidesData);
     const storylet = useSelector(state => state.storylet);
+    const viewMode = useSelector(state => state.viewMode);
 
     const openNotificationWithIcon = type => {
         if(type==='success')
@@ -94,6 +97,14 @@ export default function Menu() {
             setMenuStatus('');
     };
 
+    const toggle_slides_sidebar = () =>{
+        let data = cloneDeep(viewMode);
+        data.slides_sidebar = !data.slides_sidebar
+        batch(() => {
+            dispatch(setViewMode(data));
+        });
+
+    }
     const save_storylet = (exit=false) => {
         debugger
         axios.put(window.API_ENDPOINT.SAVE_STORYLET, {
@@ -157,7 +168,7 @@ export default function Menu() {
         <div className="menu">
             <div>
                 <FontAwesomeIcon style={{position: 'relative', float: 'left', marginRight: '16px'}} icon={faBars} className="icon" onClick={toggle_sidebar} />
-                <FontAwesomeIcon style={{position: 'relative', float: 'left'}} icon={faArrowCircleLeft} className="icon" onClick={toggle_sidebar} />
+                <FontAwesomeIcon style={{position: 'relative', float: 'left'}} icon={viewMode.slides_sidebar ? faArrowCircleLeft : faArrowCircleRight} className="icon" onClick={toggle_slides_sidebar} />
             </div>
             <div className={`sidebar ${menuStatus}`}>
                 <div className="sidebarBody">

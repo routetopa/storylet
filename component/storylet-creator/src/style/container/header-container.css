@@ -21,8 +21,12 @@
       width: 40%;
       height: 40px;
       margin: auto;
+      font-family: Roboto;
+      font-size: 32px;
+      font-weight: bolder;
+      color: #FFFFFF;
 
-      background: url("/images/logo-storylet.png") no-repeat;
+     /* background: url("/images/logo-storylet.png") no-repeat;
       background-size: contain;
-      background-position: center;
+      background-position: center;*/
 }

@@ -10,7 +10,7 @@ export default function HeaderContainer({hideSettings})
     return (
         <div className="header">
             <Menu />
-            <div className="logo"> </div>
+            <div className="logo">D a t a  S t o r i e s</div>
             <Info hideSettings={hideSettings} />
         </div>
     )

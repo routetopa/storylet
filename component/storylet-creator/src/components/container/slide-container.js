@@ -16,9 +16,10 @@ export default function SlideContainer()
     const dispatch = useDispatch();
     const slidesData = useSelector(state => state.slidesData);
     const selectedSlide = useSelector(state => state.selectedSlide);
+    const viewMode = useSelector(state => state.viewMode);
 
     return (
-        <div className="slide-container">
+        <div className="slide-container" style={{width : viewMode.slides_sidebar ? '25%' : '2%'}} >
             {slidesData.map((slide, idx) =>
                 <Slide selected={slide.id===selectedSlide.id} isSettingVisible={true} key={idx} parameters={slide} isEditable={false} onClick={() => { batch(() => {dispatch(componentSelected(null)); dispatch(selectSlide(slidesData[idx]))});}} />
             )}

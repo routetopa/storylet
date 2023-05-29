@@ -16,6 +16,7 @@ export default function StageContainer({isSettingVisible}) {
     const selectedSlide = useSelector(state => state.selectedSlide);
     const copiedComponent = useSelector(state => state.copiedComponent);
     const slidesData = useSelector(state => state.slidesData);
+    const viewMode = useSelector(state => state.viewMode);
 
     useEffect(()=>{
         document.removeEventListener('keydown', add_component);
@@ -50,9 +51,10 @@ export default function StageContainer({isSettingVisible}) {
     };
 
     return (
-        <div id="stage-container">
+        <div id="stage-container" style={{width : viewMode.slides_sidebar ? '50%' : '80%'}}>
             <MenuContainer />
-            <div id="slide-wrapper" onClick={(e) => {if(e.target.id === 'slide-wrapper' || e.target.id.indexOf('slide_') > -1) dispatch(componentSelected(null))}} >
+            <div id="slide-wrapper"
+                 onClick={(e) => {if(e.target.id === 'slide-wrapper' || e.target.id.indexOf('slide_') > -1) dispatch(componentSelected(null))}} >
                 {selectedSlide ? (<Slide isSettingVisible={isSettingVisible} parameters={selectedSlide} isEditable={true} />) : null}
             </div>
         </div>

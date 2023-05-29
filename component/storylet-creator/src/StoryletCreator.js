@@ -11,6 +11,7 @@ import setStorylet from './reducer/actions/set-storylet'
 import selectSlide from "./reducer/actions/select-slide";
 import './StoryletCreator.css';
 import 'antd/dist/antd.css';
+import setViewMode from "./reducer/actions/set-view-mode";
 
 function StoryletCreator()
 {
@@ -25,6 +26,7 @@ function StoryletCreator()
         dispatch(setStorylet(metadata));
         dispatch(setSlideData(story));
         dispatch(selectSlide(story[0]));
+        dispatch(setViewMode({slides_sidebar: true, component_sidebar: true}))
     }, []);
 
     const hide_settings = () => {

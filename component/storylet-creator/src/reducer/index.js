@@ -6,6 +6,7 @@ import selectedSlide from './selected-slide'
 import selectedComponent from './selected-component';
 import copiedComponent from './copied-component';
 import selectedLanguage from './selected-language';
+import viewMode from "./view-mode";
 
 const reducers = combineReducers({
     storylet : storylet,
@@ -13,7 +14,8 @@ const reducers = combineReducers({
     selectedSlide : selectedSlide,
     selectedComponent : selectedComponent,
     copiedComponent : copiedComponent,
-    selectedLanguage : selectedLanguage
+    selectedLanguage : selectedLanguage,
+    viewMode: viewMode
 });
 
 export default reducers
