@@ -22,3 +22,13 @@
 .text-moveable-container .inner_text {
     height: 100%;
 }
+
+.datalet-moveable-container {
+    position: absolute;
+    overflow: hidden;
+}
+
+.datalet-moveable-container iframe {
+    width: 100%;
+    height: 100%;
+}

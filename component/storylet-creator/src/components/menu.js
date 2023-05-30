@@ -15,6 +15,7 @@ import languageSelected from "../reducer/actions/select-language";
 import setStorylet from "../reducer/actions/set-storylet";
 import { Select, Switch, notification, Popconfirm } from 'antd';
 import setViewMode from "../reducer/actions/set-view-mode";
+import componentSelected from "../reducer/actions/select-component";
 
 export default function Menu() {
     const dispatch = useDispatch();
@@ -101,6 +102,7 @@ export default function Menu() {
         let data = cloneDeep(viewMode);
         data.slides_sidebar = !data.slides_sidebar
         batch(() => {
+            dispatch(componentSelected(null))
             dispatch(setViewMode(data));
         });
 

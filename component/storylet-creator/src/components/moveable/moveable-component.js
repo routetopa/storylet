@@ -11,6 +11,7 @@ export default function MoveableComponent() {
     const slidesData = useSelector(state => state.slidesData);
     const selectedSlide = useSelector(state => state.selectedSlide);
     const selectedComponent = useSelector(state => state.selectedComponent);
+    const viewMode = useSelector(state => state.viewMode);
 
     const [target, setTarget] = useState(null);
     const [slide, setSlide] = useState(null);
@@ -23,6 +24,8 @@ export default function MoveableComponent() {
     const [scale, setScale] = useState(null);
     const [rotate, setRotate] = useState(null);
 
+    const [slideWrapperComponent, setSlideWrapperComponent] = useState(document.documentElement)
+
     useEffect(()=>{
         setTarget(null);
         if(selectedSlide && selectedComponent) {
@@ -34,6 +37,7 @@ export default function MoveableComponent() {
             setRotate(selectedComponent.rotate);
             setSlide(document.getElementById("slide-wrapper").children[0]);
             setTimeout(()=>{setTarget(document.getElementById("component-"+selectedComponent.index));}, 0);
+            setSlideWrapperComponent(document.getElementById('slide-wrapper'))
         } else {
             setSlideIdx(null);
             setComponentIdx(null);
@@ -138,11 +142,16 @@ export default function MoveableComponent() {
 
             // SNAPPABLE
             snappable={true}
-            bounds={{ left: document.documentElement.clientWidth*0.25, top: 56, bottom: document.documentElement.clientHeight-8, right: document.documentElement.clientWidth*0.75 }}
-            verticalGuidelines={[slide ? document.documentElement.clientWidth*0.50-slide.offsetWidth/2 : null, document.documentElement.clientWidth*0.50, slide ? document.documentElement.clientWidth*0.50+slide.offsetWidth/2 : null]}
+            bounds={{ left: document.documentElement.clientWidth * (viewMode.slides_sidebar ? 0.25 : 0.02), top: 56, bottom: document.documentElement.clientHeight-8, right: document.documentElement.clientWidth *  0.75 }}
+            verticalGuidelines={[slide ? document.documentElement.clientWidth*(viewMode.slides_sidebar ? 0.50 : 0.73)-slide.offsetWidth/2 : null, document.documentElement.clientWidth * (viewMode.slides_sidebar ? 0.50 : 0.27), slide ? document.documentElement.clientWidth* 0.50+slide.offsetWidth/2 : null]}
             horizontalGuidelines={[96+48, slide ? 96+slide.offsetHeight/2 : null, slide ? 96+48+slide.offsetHeight : null]}
             snapCenter={true}
             // elementGuidelines={[document.querySelector("#stage-container .image-moveable-container")]}
         />
     )
 }
+/*
+bounds={{ left: document.documentElement - (slideWrapperComponent.clientWidth*0.25), top: 56, bottom: slideWrapperComponent.clientHeight-8, right: document.documentElement - (slideWrapperComponent.clientWidth*0.75) }}
+verticalGuidelines={[slide ? slideWrapperComponent.clientWidth*0.50-slide.offsetWidth/2 : null, slideWrapperComponent.clientWidth*0.50, slide ? slideWrapperComponent*0.50+slide.offsetWidth/2 : null]}
+horizontalGuidelines={[96+48, slide ? 96+slide.offsetHeight/2 : null, slide ? 96+48+slide.offsetHeight : null]}
+*/

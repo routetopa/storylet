@@ -2,6 +2,7 @@ import React from 'react';
 import SlideStyle from '../style/StyledSlide'
 import Text from '../component/text'
 import Image from '../component/image'
+import Datalet from "./datalet";
 
 function Slide({parameters, size, navigateLink, isParent})
 {
@@ -18,6 +19,9 @@ function Slide({parameters, size, navigateLink, isParent})
                             case 'image' :
                                 return (
                                     <Image key={idx} component={c} />
+                                );
+                            case 'datalet':
+                                return (<Datalet key={idx} component={c} />
                                 );
                         }
                     })
